@@ -855,6 +855,8 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   padding-top: calc(60px + var(--viaje-solape));
   z-index: 1;
 }
+/* Encabezado del timeline centrado (solo esta sección): "Paso a paso" + título */
+#viaje .section__head { margin-inline: auto; text-align: center; }
 .htl { position: relative; margin-top: 10px; }
 /* Avioncito que cruza la sección (izquierda → derecha) */
 .htl__sky { position: relative; height: clamp(126px, 17vw, 180px); margin: 0 0 -4px; overflow: hidden; pointer-events: none; }

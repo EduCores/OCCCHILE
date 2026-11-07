@@ -270,6 +270,7 @@ color-mix(in srgb, #0c131117 80%, transparent);
   }
 }
 .hero h1 { font-size: clamp(2.4rem, 5.4vw, 4.4rem); margin: 2px 0 2px; }
+.hero h1 .hero__word--green { color: var(--ok-ink); font-weight: 700; }
 .hero h1 em, .section__head h2 em { color: var(--red); position: relative; white-space: nowrap; }
 .hero h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .05em; height: .18em; background: var(--gold); opacity: .55; z-index: -1; border-radius: 4px;
   transform-origin: left; animation: underline 1.2s .8s var(--ease) both; }

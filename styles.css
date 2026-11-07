@@ -198,6 +198,77 @@ color-mix(in srgb, #0c131117 80%, transparent);
   border: 1px solid var(--line); font-size: .85rem; font-weight: 500; color: var(--ink-2); box-shadow: var(--shadow); }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 rgba(31,157,107,.6); animation: ping 2s infinite; display: inline-block; }
 @keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(31,157,107,0); } 100% { box-shadow: 0 0 0 0 rgba(31,157,107,0); } }
+
+/* Pill "Paso a paso" con el acabado "liquid glass" de los botones principales,
+   manteniendo su color de fondo (var(--surface)). */
+#viaje .pill {
+  --pill-hi: rgba(255, 255, 255, .9);
+  --pill-hi-soft: rgba(255, 255, 255, .5);
+  --pill-glow: rgba(40, 20, 10, .25);
+  --pill-ring-1: rgba(255, 255, 255, .95);
+  --pill-ring-2: var(--line);
+  position: relative;
+  isolation: isolate;
+  background: var(--surface);
+  color: var(--ink-2);
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, .12),
+    inset 0 -3px 4px var(--pill-hi),
+    inset 0 0 2px 3px var(--pill-hi-soft),
+    0 8px 16px -8px var(--pill-glow);
+}
+/* brillo de vidrio superior */
+#viaje .pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 32% 10%, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0) 48%);
+  opacity: .9;
+}
+/* aro giratorio del propio pill */
+@property --pill-a { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
+#viaje .pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 2px;
+  box-sizing: border-box;
+  background:
+    conic-gradient(from var(--pill-a) at 50% 50%,
+      var(--pill-ring-1), rgba(0, 0, 0, 0) 8% 42%, var(--pill-ring-2) 50%, rgba(0, 0, 0, 0) 58% 92%, var(--pill-ring-1)),
+    linear-gradient(180deg, var(--pill-ring-1), var(--pill-ring-2));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: pillRing 6s linear infinite;
+}
+@keyframes pillRing { to { --pill-a: 285deg; } }
+/* paleta del pill en tema oscuro */
+:root[data-theme="dark"] #viaje .pill {
+  --pill-hi: rgba(255, 255, 255, .22);
+  --pill-hi-soft: rgba(255, 255, 255, .10);
+  --pill-glow: rgba(0, 0, 0, .55);
+  --pill-ring-1: rgba(255, 255, 255, .75);
+  --pill-ring-2: rgba(255, 255, 255, .14);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #viaje .pill {
+    --pill-hi: rgba(255, 255, 255, .22);
+    --pill-hi-soft: rgba(255, 255, 255, .10);
+    --pill-glow: rgba(0, 0, 0, .55);
+    --pill-ring-1: rgba(255, 255, 255, .75);
+    --pill-ring-2: rgba(255, 255, 255, .14);
+  }
+}
 .hero h1 { font-size: clamp(2.4rem, 5.4vw, 4.4rem); margin: 2px 0 2px; }
 .hero h1 em, .section__head h2 em { color: var(--red); position: relative; white-space: nowrap; }
 .hero h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .05em; height: .18em; background: var(--gold); opacity: .55; z-index: -1; border-radius: 4px;
@@ -859,12 +930,12 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 /* Encabezado del timeline centrado (solo esta sección): "Paso a paso" + título */
 #viaje .section__head { margin-inline: auto; text-align: center; }
 .htl { position: relative; margin-top: 10px; }
-/* Avioncito que cruza TODA la ventana (izquierda → derecha), de borde a borde.
-   La banda mide 100vw para que el recorrido no se limite al container; #viaje la
-   recorta en sus bordes (overflow-x: clip) para no generar scroll horizontal. */
+/* Avioncito que cruza TODA la sección #viaje (izquierda → derecha), de borde a
+   borde. La banda es hija directa de la sección (fuera del .container), así el
+   recorrido usa el ancho completo de #viaje y no el del container. */
 .htl__sky { --plane-w: clamp(104px, 13vw, 156px);
-  position: relative; height: clamp(126px, 17vw, 180px); width: 100vw;
-  margin: 0 0 -4px calc(50% - 50vw); overflow: hidden; pointer-events: none; }
+  position: relative; height: clamp(126px, 17vw, 180px); width: 100%;
+  margin: 0 0 -4px; overflow: hidden; pointer-events: none; }
 /* Arranca fuera del layout por la izquierda, cruza todo el ancho y, al salir por
    la derecha, vuelve a entrar por la izquierda sin pausa (bucle continuo). */
 .htl__flight { position: absolute; bottom: 6px; left: 0; width: var(--plane-w);
@@ -873,8 +944,8 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   filter: drop-shadow(0 16px 20px rgba(60, 30, 10, .16));
   animation: htlFloat 6.5s ease-in-out infinite; }
 @keyframes htlCross {
-  from { transform: translateX(calc(-1 * var(--plane-w))); }
-  to   { transform: translateX(100vw); }
+  from { left: calc(-1 * var(--plane-w)); }
+  to   { left: 100%; }
 }
 @keyframes htlFloat {
   0%, 100% { transform: translateY(0) rotate(-1.6deg); }

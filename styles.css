@@ -927,8 +927,8 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   z-index: 1;
   overflow-x: clip;
 }
-/* Encabezado del timeline centrado (solo esta sección): "Paso a paso" + título */
-#viaje .section__head { margin-inline: auto; text-align: center; }
+/* Encabezados centrados (solo estas dos secciones): "Paso a paso" + título */
+#viaje .section__head, #tierra .section__head { margin-inline: auto; text-align: center; }
 .htl { position: relative; margin-top: 10px; }
 /* Avioncito que cruza TODA la sección #viaje (izquierda → derecha), de borde a
    borde. La banda es hija directa de la sección (fuera del .container), así el
@@ -1074,7 +1074,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   background-size: calc(100% * var(--art-scale)) auto;
   background-position: center bottom;
 }
-.last-earth p { color: #3f4b45; max-width: 620px; }
+.last-earth p { color: #3f4b45; max-width: 620px; margin-inline: auto; }
 @media (max-width: 600px) {
   /* En móvil la banda se agranda un poco para que los niños se vean. */
   .last-earth { --art-scale: 1.45; }

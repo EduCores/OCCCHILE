@@ -854,20 +854,27 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   margin-top: calc(-10px - var(--viaje-solape));
   padding-top: calc(60px + var(--viaje-solape));
   z-index: 1;
+  overflow-x: clip;
 }
 /* Encabezado del timeline centrado (solo esta sección): "Paso a paso" + título */
 #viaje .section__head { margin-inline: auto; text-align: center; }
 .htl { position: relative; margin-top: 10px; }
-/* Avioncito que cruza la sección (izquierda → derecha) */
-.htl__sky { position: relative; height: clamp(126px, 17vw, 180px); margin: 0 0 -4px; overflow: hidden; pointer-events: none; }
-.htl__flight { position: absolute; bottom: 6px; left: -22%; width: clamp(104px, 13vw, 156px);
+/* Avioncito que cruza TODA la ventana (izquierda → derecha), de borde a borde.
+   La banda mide 100vw para que el recorrido no se limite al container; #viaje la
+   recorta en sus bordes (overflow-x: clip) para no generar scroll horizontal. */
+.htl__sky { --plane-w: clamp(104px, 13vw, 156px);
+  position: relative; height: clamp(126px, 17vw, 180px); width: 100vw;
+  margin: 0 0 -4px calc(50% - 50vw); overflow: hidden; pointer-events: none; }
+/* Arranca fuera del layout por la izquierda, cruza todo el ancho y, al salir por
+   la derecha, vuelve a entrar por la izquierda sin pausa (bucle continuo). */
+.htl__flight { position: absolute; bottom: 6px; left: 0; width: var(--plane-w);
   animation: htlCross 32s linear infinite; }
 .htl__flight img { display: block; width: 100%; height: auto;
   filter: drop-shadow(0 16px 20px rgba(60, 30, 10, .16));
   animation: htlFloat 6.5s ease-in-out infinite; }
 @keyframes htlCross {
-  from { left: -22%; }
-  to   { left: 102%; }
+  from { transform: translateX(calc(-1 * var(--plane-w))); }
+  to   { transform: translateX(100vw); }
 }
 @keyframes htlFloat {
   0%, 100% { transform: translateY(0) rotate(-1.6deg); }

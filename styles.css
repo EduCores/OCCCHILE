@@ -1058,6 +1058,35 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   .htl__card { margin: 0 !important; }
 }
 
+/* ============ HASTA LO ÚLTIMO DE LA TIERRA ============ */
+/* Banda oscura con `img/norte_sur.png` como fondo de la sección: los niños
+   quedan anclados al borde inferior (ancho completo) y el texto arriba, sobre
+   el verde profundo. El padding inferior reserva exactamente el alto de la
+   imagen (2637 × 531 → 20,14 % del ancho) para que nunca tape el texto. */
+.last-earth {
+  --art-scale: 1;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(64px, 7vw, 96px) 0 calc(20.14% * var(--art-scale) + 48px);
+  color: #f3efe8;
+  background-color: #0a1f19;
+  background-image:
+    radial-gradient(900px 320px at 82% -10%, rgba(214, 31, 60, .20), transparent 68%),
+    url("img/norte_sur.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%, calc(100% * var(--art-scale)) auto;
+  background-position: center top, center bottom;
+}
+.last-earth .eyebrow { color: var(--gold); }
+.last-earth .eyebrow::before { background: var(--gold); }
+.last-earth h2 { color: #f3efe8; }
+.last-earth h2 em { color: var(--gold); }
+.last-earth p { color: rgba(243, 239, 232, .84); max-width: 620px; }
+@media (max-width: 600px) {
+  /* En móvil la banda se agranda un poco para que los niños se vean. */
+  .last-earth { --art-scale: 1.45; }
+}
+
 /* ===== Contador en vivo del hero (+5 / +10 / +50 / +100 / +1000) ===== */
 /* Rampa de color de los saltos: rojo → naranja → ámbar → oliva → verde.
    El texto/borde usan el tono profundo y el fondo la versión clara. */

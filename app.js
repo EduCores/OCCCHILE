@@ -1168,10 +1168,10 @@
     const main = $(".tierra-main");
     if (!main) return;
     const panels = [
-      { id: "norte", title: "Norte", desc: "Pueblos del altiplano y comunidades aymaras.", tx: "-171%", tz: "-34vmin", ry: "-45deg" },
-      { id: "centro", title: "Centro", desc: "Campos, cerros y sectores vulnerables urbanos.", tx: "-65%", tz: "-64vmin", ry: "-14deg" },
-      { id: "sur", title: "Sur", desc: "Comunidades mapuche, islas de Chiloé y zonas rurales.", tx: "65%", tz: "-64vmin", ry: "14deg" },
-      { id: "austral", title: "Austral", desc: "Aysén y Magallanes: fiordos, estancias y caletas.", tx: "171%", tz: "-34vmin", ry: "45deg" },
+      { id: "norte", title: "Norte", desc: "Pueblos del altiplano y comunidades aymaras.", tx: "-171%", tz: "-34vmin", ry: "45deg" },
+      { id: "centro", title: "Centro", desc: "Campos, cerros y sectores vulnerables urbanos.", tx: "-65%", tz: "-64vmin", ry: "14deg" },
+      { id: "sur", title: "Sur", desc: "Comunidades mapuche, islas de Chiloé y zonas rurales.", tx: "65%", tz: "-64vmin", ry: "-14deg" },
+      { id: "austral", title: "Austral", desc: "Aysén y Magallanes: fiordos, estancias y caletas.", tx: "171%", tz: "-34vmin", ry: "-45deg" },
     ];
     const inv = (t) => {
       if (!t) return 0;

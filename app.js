@@ -232,6 +232,7 @@
       });
       void host.offsetWidth;
       piezas.forEach((p) => { if (p.tipo === "d") p.strip.style.transition = ""; });
+      document.dispatchEvent(new CustomEvent("occ:pct", { detail: { value: decimas / 10 } }));
     };
 
     const mostrar = (nuevo) => {
@@ -239,6 +240,7 @@
       decimas = nuevo;
       const ahora = formatear(decimas);
       host.setAttribute("aria-label", ahora + "%");
+      document.dispatchEvent(new CustomEvent("occ:pct", { detail: { value: decimas / 10 } }));
       if (antes.length !== ahora.length) { montar(); return; }
       const dig = soloDigitos(ahora);
       let k = 0;
@@ -419,6 +421,9 @@
     }));
 
     const m = $("#matrix");
+    /* El bloque "Matriz esfuerzo/impacto" se quitó del HTML: si #matrix no
+       existe, salta solo esta parte (los pcards y filtros ya quedaron hechos). */
+    if (!m) return;
     PROCESSES.forEach((p, i) => {
       const d = document.createElement("span");
       d.className = "mdot";
@@ -1051,11 +1056,167 @@
     $("#archMods").innerHTML = mods.map(([k, n, ic]) => `<span><i data-lucide="${ic}"></i><b>${k}</b> ${n}</span>`).join("");
   }
 
+  /* ---------------- CENTRO DE DATOS (gráficos en vivo) ---------------- */
+  function initDatosSection() {
+    const ringFill = $('[data-ring="pct"]');
+    const pctText = $('[data-dato="pct"]');
+    const regionsHost = $("#regionsChart");
+    const liveCounter = $('[data-live="scan-datos"]');
+
+    // ---- 1. Dona: Porcentaje entregado ----
+    if (ringFill && pctText) {
+      const CIRC = 2 * Math.PI * 62; // r=62
+      const updateRing = (pct) => {
+        const v = Math.max(0, Math.min(100, pct));
+        ringFill.style.strokeDasharray = CIRC.toFixed(2);
+        ringFill.style.strokeDashoffset = (CIRC * (1 - v / 100)).toFixed(2);
+        pctText.textContent = v.toFixed(1).replace(".", ",") + "%";
+      };
+      updateRing(91.0);
+
+      document.addEventListener("occ:pct", (e) => {
+        if (e.detail && typeof e.detail.value === "number") updateRing(e.detail.value);
+      });
+    }
+
+    // ---- 2. Cajitas en vivo y columnas por región ----
+    if (regionsHost) {
+      const SHORT_CODES = ["AP", "TA", "AN", "AT", "CO", "VA", "RM", "OH", "MA", "ÑU", "BI", "AR", "LR", "LL", "AY", "MG"];
+      const vals = REGIONS.map((r) => r.b);
+      const max = () => Math.max(...vals);
+
+      const renderCols = () => {
+        const m = max();
+        regionsHost.innerHTML = REGIONS.map((r, i) => `
+          <div class="region-col" data-region="${r.n}" title="${r.n}: ${fmt(vals[i])} cajitas">
+            <div class="region-col__bar-track">
+              <div class="region-col__bar" style="height:${Math.max(6, (vals[i] / m) * 88)}%"></div>
+            </div>
+            <span class="region-col__label">${SHORT_CODES[i] || r.s.slice(0, 3)}</span>
+          </div>`).join("");
+      };
+      renderCols();
+
+      // Contador en vivo sincronizado con el hero
+      let totalCajas = 206274;
+      if (liveCounter) liveCounter.textContent = fmt(totalCajas);
+
+      let animToken = 0;
+      const animTotal = (delta) => {
+        const desde = totalCajas;
+        totalCajas += delta;
+        const hasta = totalCajas;
+        const mio = ++animToken;
+        const t0 = performance.now();
+        const dur = 550;
+        const paso = (now) => {
+          if (mio !== animToken) return;
+          const k = Math.min(1, (now - t0) / dur);
+          const eased = 1 - Math.pow(1 - k, 3);
+          if (liveCounter) liveCounter.textContent = fmt(Math.round(desde + (hasta - desde) * eased));
+          if (k < 1) requestAnimationFrame(paso);
+          else if (liveCounter) liveCounter.textContent = fmt(hasta);
+        };
+        requestAnimationFrame(paso);
+      };
+
+      const PASOS = [5, 10, 50, 100, 1000];
+      const spawnBadge = (deltaOpt) => {
+        const i = Math.floor(Math.random() * REGIONS.length);
+        const delta = deltaOpt || PASOS[Math.floor(Math.random() * PASOS.length)];
+        vals[i] += delta;
+        const col = regionsHost.children[i];
+        if (!col) return;
+        const bar = col.querySelector(".region-col__bar");
+        const m = max();
+        if (bar) {
+          bar.style.height = Math.max(6, (vals[i] / m) * 88) + "%";
+          bar.classList.add("is-bump");
+          setTimeout(() => bar.classList.remove("is-bump"), 650);
+
+          // Inserta badge flotante "+N" igual que el hero (misma rampa y animacion)
+          const badge = document.createElement("span");
+          badge.className = "region-col__badge";
+          badge.dataset.step = String(delta);
+          badge.textContent = "+" + (delta >= 1000 ? "1k" : fmt(delta));
+          bar.appendChild(badge);
+          setTimeout(() => badge.remove(), 1400);
+        }
+      };
+
+      // Reacciona al evento global del hero
+      document.addEventListener("occ:entrega", (e) => {
+        const delta = (e.detail && e.detail.delta) || 5;
+        animTotal(delta);
+        spawnBadge(delta);
+      });
+
+      // Ciclo suave autónomo para cuando la vista se enfoca aquí
+      const scheduleLocal = () => {
+        const delta = PASOS[Math.floor(Math.random() * 3)]; // saltos 5, 10 o 50
+        spawnBadge(delta);
+        animTotal(delta);
+        setTimeout(scheduleLocal, 3600 + Math.random() * 4800);
+      };
+      setTimeout(scheduleLocal, 2200);
+    }
+  }
+
   /* ---------------- BOOT ---------------- */
+  /* ---- Paneles 3D "Hasta lo último de la tierra" (solo texto, glass) ---- */
+  function initTierraPanels() {
+    const main = $(".tierra-main");
+    if (!main) return;
+    const panels = [
+      { id: "norte", title: "Norte", desc: "Pueblos del altiplano y comunidades aymaras.", tx: "-171%", tz: "-34vmin", ry: "45deg" },
+      { id: "centro", title: "Centro", desc: "Campos, cerros y sectores vulnerables urbanos.", tx: "-65%", tz: "-64vmin", ry: "14deg" },
+      { id: "sur", title: "Sur", desc: "Comunidades mapuche, islas de Chiloé y zonas rurales.", tx: "65%", tz: "-64vmin", ry: "-14deg" },
+      { id: "austral", title: "Austral", desc: "Aysén y Magallanes: fiordos, estancias y caletas.", tx: "171%", tz: "-34vmin", ry: "-45deg" },
+    ];
+    const inv = (t) => {
+      if (!t) return 0;
+      const m = String(t).match(/(-?\d+)(.*)/);
+      return m ? `${-Number(m[1])}${m[2]}` : 0;
+    };
+    const make = (p) => {
+      const h = document.createElement("h3"); h.className = "tierra-panel__title"; h.textContent = p.title;
+      const d = document.createElement("p"); d.className = "tierra-panel__desc"; d.textContent = p.desc;
+      const body = document.createElement("div"); body.className = "tierra-panel__body"; body.append(h, d);
+      const btn = document.createElement("button"); btn.type = "button"; btn.append(body);
+      const art = document.createElement("article"); art.className = "tierra-panel"; art.id = p.id;
+      art.style.transform = `translate3d(${p.tx}, 0, ${p.tz}) rotateY(${p.ry})`;
+      art.appendChild(btn);
+      return art;
+    };
+    panels.forEach((p) => main.appendChild(make(p)));
+    document.addEventListener("click", (e) => {
+      const art = e.target.closest(".tierra-panel");
+      const targetId = art && art.id;
+      let itx = "0px", itz = "0px", iry = 0;
+      if (targetId && main.dataset.focus !== targetId) {
+        const p = panels.find((x) => x.id === targetId);
+        if (p) {
+          // El tx de cada panel es % de SU ancho; al aplicarlo al contenedor hay
+          // que convertirlo a px (el % de .tierra-main es otro tamaño).
+          const w = art.offsetWidth || 260;
+          itx = `${(-parseFloat(p.tx) / 100) * w}px`;
+          itz = String(p.tz).replace(/^-/, "");
+          iry = -parseFloat(p.ry);
+        }
+        main.setAttribute("data-focus", targetId);
+      } else {
+        main.removeAttribute("data-focus");
+      }
+      main.style.transform = `rotateY(${iry}deg) translate3d(${itx}, 0, ${itz})`;
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initProcesses();
     initFlows();
     initArch();
+    initTierraPanels();
+  initDatosSection();
     initTheme();
     initNav();
     initReveal();

@@ -148,7 +148,7 @@ em { font-style: normal; }
 .nav { position: fixed; inset: 0 0 auto; z-index: 50; padding: 0px 0; transition: .35s var(--ease); }
 .nav.is-scrolled { padding: 8px 0;     background: 
 color-mix(in srgb, #0c131117 80%, transparent);
-    backdrop-filter: blur(16px) saturate(1.4);
+    backdrop-filter: blur(12px) saturate(1.4);
     border-bottom: 7px solid #24332d14;
     border-top: 7px solid #24332d14; }
 .nav__inner { display: flex; align-items: center; gap: 24px; }
@@ -270,8 +270,10 @@ color-mix(in srgb, #0c131117 80%, transparent);
   }
 }
 .hero h1 { font-size: clamp(2.4rem, 5.4vw, 4.4rem); margin: 2px 0 2px; }
-.hero h1 .hero__word--green { color: var(--ok-ink); font-weight: 700; }
+.hero h1 .hero__word--green { color: #17bc4a; font-weight: 700; }
 .hero h1 em, .section__head h2 em { color: var(--red); position: relative; white-space: nowrap; }
+/* La palabra "eterno." del slider usa un rojo propio */
+.hero h1 em { color: #ca0f30; }
 .hero h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .05em; height: .18em; background: var(--gold); opacity: .55; z-index: -1; border-radius: 4px;
   transform-origin: left; animation: underline 1.2s .8s var(--ease) both; }
 @keyframes underline { from { transform: scaleX(0); } }
@@ -312,7 +314,7 @@ color-mix(in srgb, #0c131117 80%, transparent);
 @keyframes burst { 0% { opacity: 1; transform: translate(-50%, 0) scale(.4); } 100% { opacity: 0; transform: translate(calc(-50% + var(--x)), var(--y)) scale(2) rotate(180deg); } }
 
 .glass {     background: 
-color-mix(in srgb, #141f1b08 75%, transparent); backdrop-filter: blur(3px);     border: 4px solid 
+color-mix(in srgb, #141f1b08 75%, transparent); border: 4px solid 
 color-mix(in srgb, var(--line) 16%, transparent); box-shadow: var(--shadow); }
 .float-card { --pad-x: 16px; position: absolute; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 16px; font-size: .9rem; animation: bob 6s ease-in-out infinite; }
 .float-card [data-lucide] { width: 36px; height: 36px; padding: 8px; border-radius: 10px; background: var(--red-soft); color: var(--red); }
@@ -329,7 +331,7 @@ color-mix(in srgb, var(--line) 16%, transparent); box-shadow: var(--shadow); }
 /* Stats al final de la página: reserva espacio para los botones flotantes */
 #stats { padding-block: 40px 200px; }
 @media (max-width: 600px) { #stats { padding-bottom: 160px; } }
-.stat { background: color-mix(in srgb, var(--surface) 10%, transparent); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(14px); padding: 22px 20px; text-align: center; }
+.stat { background: color-mix(in srgb, var(--surface) 10%, transparent); padding: 22px 20px; text-align: center; }
 .stat strong { display: block; width: fit-content; margin: 0 auto; padding: 10px 18px; border-radius: 999px;
   font-family: var(--display); font-size: clamp(1.6rem, 2.6vw, 2.3rem); color: #0bc54a; font-variant-numeric: tabular-nums;
   background: rgba(179, 18, 46, .10); }
@@ -431,7 +433,7 @@ color-mix(in srgb, var(--line) 16%, transparent); box-shadow: var(--shadow); }
 .ftab:hover { background: rgba(255,255,255,.05); color: #fff; }
 .ftab.is-active { background: rgba(255,255,255,.09); border-color: rgba(242,179,61,.35); color: #fff; }
 .ftab.is-active b { background: var(--gold); color: var(--pine); }
-.flows__panel { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 34px; min-height: 520px; backdrop-filter: blur(6px); }
+.flows__panel { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 34px; min-height: 520px; }
 .flows__panel.swap { animation: swap .5s var(--ease); }
 @keyframes swap { from { opacity: 0; transform: translateY(14px); } }
 .fp__top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
@@ -937,16 +939,18 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 .htl__sky { --plane-w: clamp(104px, 13vw, 156px);
   position: relative; height: clamp(126px, 17vw, 180px); width: 100%;
   margin: 0 0 -4px; overflow: hidden; pointer-events: none; }
-/* Arranca fuera del layout por la izquierda, cruza todo el ancho y, al salir por
-   la derecha, vuelve a entrar por la izquierda sin pausa (bucle continuo). */
+/* Avión del timeline: cruza con transform (translateX), NO con `left`.
+   `left` recalcule layout cada frame en el hilo principal; transform corre
+   en la GPU. Same tray: arranca fuera por la izquierda (−1 avión) y sale por
+   la derecha (100vw + 1 avión: la banda es 100% del ancho de la página). */
 .htl__flight { position: absolute; bottom: 6px; left: 0; width: var(--plane-w);
   animation: htlCross 32s linear infinite; }
 .htl__flight img { display: block; width: 100%; height: auto;
   filter: drop-shadow(0 16px 20px rgba(60, 30, 10, .16));
   animation: htlFloat 6.5s ease-in-out infinite; }
 @keyframes htlCross {
-  from { left: calc(-1 * var(--plane-w)); }
-  to   { left: 100%; }
+  from { transform: translateX(calc(-1 * var(--plane-w))); }
+  to   { transform: translateX(calc(100vw + var(--plane-w))); }
 }
 @keyframes htlFloat {
   0%, 100% { transform: translateY(0) rotate(-1.6deg); }
@@ -1060,25 +1064,168 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 }
 
 /* ============ HASTA LO ÚLTIMO DE LA TIERRA ============ */
-/* Misma banda salvia que #viaje, con `img/norte_sur.png` como fondo anclado al
-   borde inferior (ancho completo). El padding inferior reserva exactamente el
-   alto de la imagen (2637 × 531 → 20,14 % del ancho) para que nunca tape el
-   texto. Título en verde pino y párrafo oscuro fijos en ambos temas. */
+/* Banda salvia de #tierra (igual que #viaje, fija en ambos temas). La
+   ilustración `img/norte_sur.png` ahora es un <img class="tierra-art"> justo
+   bajo el texto del encabezado y antes del abanico 3D: fluye con el documento,
+   así siempre se ve debajo del párrafo. Título verde pino y párrafo oscuro. */
 .last-earth {
   --art-scale: 1;
   position: relative;
   overflow: hidden;
-  padding: clamp(64px, 7vw, 96px) 0 calc(20.14% * var(--art-scale) + 48px);
+  padding: clamp(64px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
   background-color: #b9ceb9;
-  background-image: url("img/norte_sur.png");
-  background-repeat: no-repeat;
-  background-size: calc(100% * var(--art-scale)) auto;
-  background-position: center bottom;
 }
 .last-earth p { color: #3f4b45; max-width: 620px; margin-inline: auto; }
+/* Ilustración norte–sur (2637 × 531 → 20,14% de alto sobre el ancho):
+   a lo ancho y centrada; en móvil se agranda 1.45x y queda centrada por
+   transform para que el recorte de overflow no quite a los niños. */
+.last-earth .tierra-art {
+  display: block;
+  width: calc(100% * var(--art-scale));
+  max-width: none;
+  height: auto;
+  margin: 8px 0 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 @media (max-width: 600px) {
   /* En móvil la banda se agranda un poco para que los niños se vean. */
   .last-earth { --art-scale: 1.45; }
+}
+
+/* ============ TIERRA: paneles 3D (glass transparente, solo texto) ============
+   Bloque más ancho y más abajo, apoyado sobre la banda de niños: las tarjetas
+   son texto con acabado liquid glass transparente, así se ve el fondo detrás. */
+.tierra-stage {
+  --plane-w: clamp(104px, 13vw, 156px);
+  position: relative;
+  width: 100%;
+  min-height: clamp(400px, 64vmin, 620px);
+  margin-top: 1px;
+  display: grid;
+  place-items: center;
+  perspective: 1300px;
+  overflow: visible;
+  padding: 0 0 24px;
+}
+.tierra-main {
+  position: relative;
+  transform-style: preserve-3d;
+  width: min(1180px, 96vw);
+  height: clamp(320px, 58vmin, 560px);
+  transition: transform 500ms var(--ease);
+}
+.tierra-panel {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: clamp(230px, 25vw, 470px);
+  height: calc(100% - 56px);
+  transform-style: preserve-3d;
+}
+/* Reflejo inferior en ::after con degradado fijo (compositor-friendly) en vez de
+   -webkit-box-reflect (capa extra del motor). El degradado ya termina en
+   transparente, así que el reflejo se desvanece solo. */
+.tierra-panel::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.12));
+  pointer-events: none;
+}
+.tierra-panel button {
+  --lc-hi: rgba(255, 255, 255, .60);
+  --lc-hi-soft: rgba(255, 255, 255, .28);
+  --lc-glow: rgba(15, 77, 58, .35);
+  border: 0; outline: 0; cursor: pointer;
+  width: 100%; height: 100%;
+  overflow: hidden; border-radius: 18px;
+  position: relative; isolation: isolate;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 22px 20px;
+  text-align: center;
+  background:
+    radial-gradient(90% 70% at 32% 12%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, .30), rgba(255, 255, 255, .12));
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  color: #22312b;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, .55),
+    inset 0 -3px 4px var(--lc-hi),
+    inset 0 0 2px 4px var(--lc-hi-soft),
+    0 18px 40px -18px var(--lc-glow);
+  transition: transform 300ms cubic-bezier(.4, 0, .2, 1), box-shadow 200ms ease, filter 200ms ease;
+}
+/* brillo de vidrio superior */
+.tierra-panel button::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 32% 16%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0) 48%);
+  opacity: .9;
+}
+/* aro giratorio (liquid glass) */
+@property --tierra-a { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
+.tierra-panel button::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none;
+  padding: 2px; box-sizing: border-box;
+  background:
+    conic-gradient(from var(--tierra-a) at 50% 50%,
+      rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 8% 42%, rgba(15, 77, 58, .35) 50%, rgba(255, 255, 255, 0) 58% 92%, rgba(255, 255, 255, .85));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: tierraRing 6s linear infinite;
+}
+@keyframes tierraRing { to { --tierra-a: 285deg; } }
+.tierra-panel button:focus-visible { box-shadow: 0 0 0 3px #09bf40, 0 18px 40px -18px rgba(15, 77, 58, .35); }
+.tierra-panel button:hover,
+.tierra-panel button:focus-visible { transform: scale(1.04) translateY(-4%); filter: brightness(1.04); }
+.tierra-panel__body { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.tierra-panel__title {
+  font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-weight: 700; color: #0f4d3a; margin: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+}
+.tierra-panel__desc {
+  font-size: clamp(.82rem, 1.1vw, .92rem); line-height: 1.45; color: #33463c;
+  margin: 0 !important; max-width: 26ch !important;
+}
+.tierra-hint { text-align: center; font-size: .82rem; color: #3f4b45; margin: 6px 0 0; opacity: .8; }
+@media (prefers-reduced-motion: reduce) {
+  .tierra-main, .tierra-panel button { transition: none; }
+  .tierra-panel button::after { animation: none; }
+}
+@media (max-width: 700px) {
+  /* En móvil el abanico 3D no cabe: se muestra una grilla 2×2 legible. */
+  .tierra-stage { perspective: none; min-height: 0; margin-top: clamp(44px, 9vh, 90px); padding: 0 0 16px; }
+  .tierra-main {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 16px;
+    transform: none !important;
+  }
+  .tierra-panel {
+    position: static;
+    width: auto;
+    height: 170px;
+    margin: 0;
+    transform: none !important;
+  }
+  .tierra-panel::after { display: none; }
+  .tierra-panel button { padding: 16px 14px; }
+  .tierra-panel__title { font-size: 1.15rem; }
+  .tierra-panel__desc { font-size: .8rem; max-width: none !important; }
+  .tierra-hint { display: none; }
 }
 
 /* ===== Contador en vivo del hero (+5 / +10 / +50 / +100 / +1000) ===== */
@@ -1256,6 +1403,888 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
     background-position calc(var(--lc-dur) * 1.25) var(--lc-ease),
     --lc-a2 calc(var(--lc-dur) * 1.25) var(--lc-ease);
 }
+
+/* ===== Avión decorativo de #tierra =====
+   DETRÁS de todos los paneles (z-index: -1 y primero en el DOM): el abanico 3D
+   nunca queda afectado. Tamaño original menos 15% (scale .85, proporciona al
+   propio <img>) y centrado exacto con translate(-50%, -50%).
+   Solo sube y baja + alabeo plano (rotate): rotación rígida sobre su propio
+   centro — gira hacia la derecha y hacia la izquierda SIN deformar la forma. */
+.tierra-avion {
+  position: absolute;
+  inset: 0;
+  margin: auto; /* centrado por layout: funciona con cualquier tamaño de PNG */
+  width: auto;
+  max-width: none;
+  z-index: -1;
+  pointer-events: none;
+  filter: drop-shadow(0 14px 22px rgba(0,0,0,.30));
+  animation: avionFlote 18s ease-in-out infinite;
+}
+/* Ciclo en fases (duración 18s): planea recto un rato → gira a la derecha y
+   mantiene el viraje → vuelve a planeo recto → gira a la izquierda y mantiene
+   → regresa al planeo y cierra el loop. Cada fase lleva su vaivén de flote.
+   Rotación rígida 2D sobre su centro: la forma nunca se deforma. */
+@keyframes avionFlote {
+  /* fase 1: planea recto (sin girar) */
+  0%   { transform: scale(.85) rotate(0deg) translate(0, 0); }
+  10%  { transform: scale(.85) rotate(0deg) translate(0, -18px); }
+  18%  { transform: scale(.85) rotate(0deg) translate(0, 0); }
+  /* fase 2: entran al viraje hacia la derecha y lo sostienen */
+  28%  { transform: scale(.85) rotate(12deg) translate(0, -10px); }
+  44%  { transform: scale(.85) rotate(12deg) translate(0, -18px); }
+  /* fase 3: sale del viraje y planea recto */
+  54%  { transform: scale(.85) rotate(0deg) translate(0, 0); }
+  /* fase 4: viraje hacia la izquierda, sostenido */
+  64%  { transform: scale(.85) rotate(-12deg) translate(0, -12px); }
+  80%  { transform: scale(.85) rotate(-12deg) translate(0, -18px); }
+  /* fase 5: regreso al planeo recto y cierre del ciclo */
+  92%  { transform: scale(.85) rotate(0deg) translate(0, -6px); }
+  100% { transform: scale(.85) rotate(0deg) translate(0, 0); }
+}
+
+/* ============ CENTRO DE DATOS (En vivo) ============ */
+.datos {
+  background-color: #b9ceb9;
+  position: relative;
+  z-index: 1;
+  padding: 72px 0 92px;
+}
+.datos__head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 36px;
+}
+.datos__head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.datos__head h2 {
+  margin: 0 auto 10px;
+}
+.datos__head p {
+  color: #2c4238;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  margin: 0 auto;
+}
+
+/* Escenario principal: Personajes izq + Malla gráficos der */
+.datos__stage {
+  display: grid;
+  grid-template-columns: minmax(240px, 310px) 1fr;
+  gap: 32px;
+  align-items: end;
+}
+
+/* Personajes a la izquierda (Ingenieros2) */
+.datos__chars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+.datos__chars-img {
+  width: 100%;
+  max-width: 310px;
+  height: auto;
+  max-height: 490px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 14px 26px rgba(15, 77, 58, 0.22));
+  transform-origin: bottom center;
+  transition: transform .35s var(--ease);
+}
+.datos__chars-img:hover {
+  transform: scale(1.02);
+}
+
+/* Contenedor columna de gráficos */
+.datos__charts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.datos__row-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================================================
+   SISTEMA DE GRÁFICOS GLASSMORPHING (Liquid Glass, sin fondo opaco)
+   ========================================================= */
+.chart-glass {
+  position: relative;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.05); /* translúcido, el salvia se trasluce */
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  padding: 20px 22px 22px;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.06),
+    inset 0 0 2px 3px rgba(255, 255, 255, 0.14),
+    0 12px 32px -12px rgba(15, 77, 58, 0.22);
+  overflow: hidden;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.chart-glass:hover {
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.65),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.08),
+    inset 0 0 2px 3px rgba(255, 255, 255, 0.22),
+    0 18px 40px -12px rgba(15, 77, 58, 0.3);
+}
+
+/* Brillo superior de vidrio ::before */
+.chart-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(85% 65% at 30% 12%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 65%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 45%);
+  opacity: .9;
+}
+
+/* Aro perimetral con gradiente animado ::after */
+.chart-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 1.5px;
+  box-sizing: border-box;
+  background: conic-gradient(from var(--lc-a, -75deg) at 50% 50%,
+    rgba(255, 255, 255, 0.65),
+    rgba(255, 255, 255, 0) 10% 42%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 58% 90%,
+    rgba(255, 255, 255, 0.65));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: lcRingDados 8s linear infinite;
+}
+@keyframes lcRingDados { to { --lc-a: 285deg; } }
+
+/* ============ MARCO DE VIDEO (liquid glass, estilo sitio) ============ */
+@property --lc-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+.video-frame {
+  position: relative;
+  isolation: isolate;
+  margin: 76px auto 0;
+  max-width: 900px;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.video-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 55% 22%, rgba(255, 255, 255, 0.55), transparent 48%);
+  pointer-events: none;
+  z-index: 2;
+}
+.video-frame::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--lc-a, 0deg), var(--red-2), var(--pine-2), var(--gold), var(--red-2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: lcRingVideo 6s linear infinite;
+  z-index: 3;
+}
+@keyframes lcRingVideo { to { --lc-a: 360deg; } }
+.video-frame > * { position: relative; z-index: 4; }
+
+.video-frame__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+}
+.video-frame__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--ink);
+}
+.video-frame__label i { width: 17px; height: 17px; color: var(--red); }
+.video-frame__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--red-2), var(--red));
+  padding: 4px 11px;
+  border-radius: 999px;
+  box-shadow: 0 6px 14px -3px rgba(179, 18, 46, 0.65);
+}
+.video-frame__badge i { width: 14px; height: 14px; }
+
+.video-frame__wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+.video-frame__wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .video-frame { margin: 20px auto 0; max-width: 100%; border-radius: var(--radius-sm); }
+  .video-frame__head { padding: 12px 16px; }
+  .video-frame__label { font-size: .88rem; }
+  .video-frame__badge { font-size: .72rem; padding: 3px 9px; }
+}
+
+.chart-glass > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Cabeceras de tarjeta glass */
+.chart-glass__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.chart-glass__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #0aa63a, #047526);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.18),
+    0 6px 14px -3px rgba(4, 117, 38, 0.65);
+  flex-shrink: 0;
+}
+.chart-glass__icon--pine {
+  background: linear-gradient(135deg, #1a6b52, #0f4d3a);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.2),
+    0 6px 14px -3px rgba(15, 77, 58, 0.6);
+}
+.chart-glass__icon--red {
+  background: linear-gradient(135deg, #d61f3c, #b3122e);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.2),
+    0 6px 14px -3px rgba(179, 18, 46, 0.65);
+}
+.chart-glass__icon i {
+  width: 19px;
+  height: 19px;
+}
+.chart-glass__title {
+  font-family: var(--display);
+  font-size: 1.12rem;
+  color: #0f4d3a;
+  margin: 0;
+  line-height: 1.2;
+}
+.chart-glass__badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .72rem;
+  color: #1a6b52;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-top: 2px;
+}
+.chart-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0aa63a;
+  box-shadow: 0 0 0 2px rgba(10, 166, 58, 0.25);
+  animation: pulseDot 2s infinite;
+}
+.chart-pulse-dot--ping {
+  background: #d61f3c;
+  box-shadow: 0 0 0 2px rgba(214, 31, 60, 0.25);
+}
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: .65; }
+}
+
+/* ============ 1. DONUT GLASS (Porcentaje) ============ */
+.chart-donut-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.chart-donut {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+.chart-donut__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.chart-donut__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 13;
+}
+.chart-donut__seg {
+  fill: none;
+  stroke-width: 13;
+  stroke-dasharray: 389.56;
+  transform: rotate(-90deg);
+  transform-origin: 80px 80px;
+}
+.chart-donut__seg--red {
+  stroke: url(#gradDonutRed);
+  stroke-dashoffset: 0;
+}
+.chart-donut__seg--gold {
+  stroke: url(#gradDonutGold);
+  stroke-dashoffset: 354.5;
+}
+.chart-donut__fill {
+  fill: none;
+  stroke: url(#gradDonutOk);
+  stroke-width: 13;
+  stroke-linecap: round;
+  stroke-dasharray: 389.56;
+  stroke-dashoffset: 35.06;
+  transform: rotate(-90deg);
+  transform-origin: 80px 80px;
+  filter: url(#glassGlowOk);
+  transition: stroke-dashoffset 900ms var(--ease);
+}
+.chart-donut__center {
+  position: absolute;
+  inset: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.1),
+    0 6px 16px -4px rgba(15, 77, 58, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.chart-donut__val {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #0f4d3a;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--display);
+}
+.chart-donut__lbl {
+  font-size: .68rem;
+  color: #2c4238;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-top: 2px;
+}
+.chart-donut__legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .76rem;
+  color: #2c4238;
+}
+.chart-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.chart-legend-dot--ok { background: #0aa63a; box-shadow: 0 0 6px rgba(10, 166, 58, 0.6); }
+.chart-legend-dot--gold { background: #f59e0b; box-shadow: 0 0 6px rgba(245, 158, 11, 0.6); }
+.chart-legend-dot--red { background: #d61f3c; box-shadow: 0 0 6px rgba(214, 31, 60, 0.6); }
+
+/* ============ 2. TREND GLASS (Evolución y Meta 2027) ============ */
+.chart-glass__meta-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.chart-glass__meta-num {
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: #0f4d3a;
+  font-family: var(--display);
+}
+.chart-glass__meta-stat small {
+  font-size: .75rem;
+  color: #2c4238;
+}
+.chart-trend-wrap {
+  position: relative;
+  height: 145px;
+  margin: 6px 0 10px;
+}
+.chart-trend__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+.chart-trend__area {
+  fill: url(#gradTrendArea);
+}
+.chart-trend__line {
+  fill: none;
+  stroke: #0f4d3a;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 4px rgba(15, 77, 58, 0.35));
+}
+.chart-trend__node {
+  fill: #fff;
+  stroke: #0f4d3a;
+  stroke-width: 3;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+.chart-trend__node--meta {
+  fill: #d61f3c;
+  stroke: #fff;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 8px rgba(214, 31, 60, 0.7));
+}
+.chart-trend__bars {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  align-items: end;
+  z-index: 1;
+  padding: 0 14px 22px;
+}
+.chart-trend__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+}
+.chart-trend__val {
+  font-size: .74rem;
+  font-weight: 800;
+  color: #0f4d3a;
+  margin-bottom: 4px;
+}
+.chart-trend__val--meta {
+  color: #b3122e;
+}
+.chart-trend__bar {
+  width: 100%;
+  max-width: 28px;
+  border-radius: 8px 8px 3px 3px;
+  background: linear-gradient(180deg, #1f9d6b 0%, #0f4d3a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.2),
+    0 4px 10px -2px rgba(15, 77, 58, 0.4);
+  transition: transform .3s ease, filter .3s ease;
+  position: relative;
+}
+.chart-trend__bar--meta {
+  background: linear-gradient(180deg, #d61f3c 0%, #b3122e 100%);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+    0 6px 14px -2px rgba(214, 31, 60, 0.6);
+}
+.chart-trend__meta-tag {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .52rem;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.chart-trend__yr {
+  position: absolute;
+  bottom: -20px;
+  font-size: .7rem;
+  font-weight: 700;
+  color: #2c4238;
+}
+.chart-trend__yr--meta {
+  color: #b3122e;
+}
+.chart-trend__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+.chart-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.chart-pill-badge--green {
+  background: linear-gradient(135deg, rgba(10, 166, 58, 0.2), rgba(4, 117, 38, 0.35));
+  color: #084c20;
+}
+.chart-trend__caption {
+  font-size: .72rem;
+  color: #2c4238;
+}
+
+/* ============ 3. WIDE BAR CHART (En vivo por región) ============ */
+.chart-glass__head--wide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.chart-glass__head-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chart-glass__desc {
+  font-size: .8rem;
+  color: #2c4238;
+  margin: 2px 0 0;
+}
+.chart-live-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    0 4px 12px -3px rgba(15, 77, 58, 0.2);
+  backdrop-filter: blur(6px);
+}
+.chart-live-counter__label {
+  font-size: .76rem;
+  color: #2c4238;
+}
+.chart-live-counter__num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f4d3a;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--display);
+}
+.chart-live-counter__unit {
+  font-size: .74rem;
+  color: #2c4238;
+  font-weight: 600;
+}
+
+.chart-wide-bars {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 6px;
+  align-items: end;
+  height: 165px;
+  padding: 10px 4px 24px;
+  position: relative;
+}
+.region-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+.region-col__bar-track {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.region-col__bar {
+  width: 100%;
+  border-radius: 7px 7px 2px 2px;
+  background: linear-gradient(180deg, #0aa63a 0%, #047526 100%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18),
+    0 4px 12px -2px rgba(10, 166, 58, 0.45);
+  transition: height 700ms var(--ease), box-shadow 400ms ease, background 400ms ease;
+  min-height: 8px;
+  position: relative;
+}
+.region-col:hover .region-col__bar {
+  background: linear-gradient(180deg, #25d366 0%, #0aa63a 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    0 0 16px 2px rgba(37, 211, 102, 0.7);
+  transform: scaleX(1.1);
+}
+.region-col__bar.is-bump {
+  background: linear-gradient(180deg, #25d366 0%, #0aa63a 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    0 0 18px 3px rgba(37, 211, 102, 0.85);
+}
+.region-col__label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .62rem;
+  font-weight: 700;
+  color: #2c4238;
+  white-space: nowrap;
+}
+.region-col__badge {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .02em;
+  color: var(--bump, currentColor);
+  background: var(--bump-soft, rgba(0, 0, 0, 0.10));
+  border: 2px solid var(--bump-soft, rgba(0, 0, 0, 0.12));
+  border-color: color-mix(in srgb, var(--bump, currentColor) 60%, transparent);
+  border-radius: 999px;
+  padding: 4px 9px;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  animation: bumpRise 1.35s cubic-bezier(.22, .8, .28, 1) forwards;
+}
+.chart-wide__footer {
+  margin-top: 14px;
+  text-align: center;
+}
+.chart-wide__legend-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  color: #2c4238;
+}
+.chart-wide__legend-hint i {
+  width: 14px;
+  height: 14px;
+  color: #0f4d3a;
+}
+
+/* ============ STATS EN VIVO (liquid glass, debajo de Centro de Datos) ============ */
+.stats-live { padding-block: 40px 100px; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.stat-card {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 55% 22%, rgba(255, 255, 255, 0.55), transparent 48%);
+  pointer-events: none;
+  z-index: 2;
+}
+.stat-card::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--lc-a, 0deg), var(--red-2), var(--pine-2), var(--gold), var(--red-2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: lcRingVideo 6s linear infinite;
+  z-index: 3;
+}
+.stat-card > * { position: relative; z-index: 4; }
+.stat-card__badge-wrap { position: absolute; top: -12px; right: 16px; z-index: 5; }
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .02em;
+  color: var(--bump, currentColor);
+  background: var(--bump-soft, rgba(0, 0, 0, 0.10));
+  border: 2px solid var(--bump-soft, rgba(0, 0, 0, 0.12));
+  border-color: color-mix(in srgb, var(--bump, currentColor) 60%, transparent);
+  border-radius: 999px;
+  padding: 4px 9px;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: bumpRise 1.35s cubic-bezier(.22, .8, .28, 1) forwards;
+}
+.stat-card__icon { width: 36px; height: 36px; border-radius: 10px; background: color-mix(in srgb, var(--ink) 12%, transparent); display: grid; place-items: center; }
+.stat-card__icon i { width: 20px; height: 20px; color: var(--ink-2); }
+.stat-card strong {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.stat-card .stat-label {
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 600;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stats-live { padding-block: 30px 80px; }
+}
+
+/* El bloque Centro de datos se pinta sobre la imagen decorativa
+   avion_back.png (tierra-avion, z-index 4) para que nunca tape los textos. */
+#datos {
+  padding-top: 15%;
+}
+
+/* Responsividad del Centro de Datos */
+@media (max-width: 960px) {
+  .datos__stage {
+    grid-template-columns: 230px 1fr;
+    gap: 24px;
+  }
+  .chart-wide-bars {
+    grid-template-columns: repeat(8, 1fr);
+    height: 150px;
+    gap: 8px;
+  }
+}
+@media (max-width: 780px) {
+  .datos__stage {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .datos__chars {
+    order: -1;
+  }
+  .datos__chars-img {
+    max-height: 320px;
+  }
+  .datos__row-top {
+    grid-template-columns: 1fr;
+  }
+  .chart-wide-bars {
+    grid-template-columns: repeat(8, 1fr);
+    height: 150px;
+  }
+}
+@media (max-width: 540px) {
+  .chart-wide-bars {
+    grid-template-columns: repeat(4, 1fr);
+    height: 140px;
+  }
+}
+
 .btn--lc:hover::before { background-position: 25% 50%; }
 .btn--lc:active::before { background-position: 50% 15%; --lc-a2: -15deg; }
 
@@ -1291,18 +2320,37 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
    sección, no en los títulos del hero/slider. El <em> conserva el rojo del sitio. */
 h2.section-title--pine { color: #0f4d3a; }
 
-/* Efecto "liquid glass" aplicado al texto (no al bloque) */
+/* Efecto "liquid glass" aplicado al texto (no al bloque).
+   El "borde" por letra es -webkit-text-stroke: el degradado queda por encima
+   (paint-order: stroke fill) y el trazo sobresale como aro fino alrededor. */
 .title-glass-text {
-  background: linear-gradient(135deg, #0f4d3a 0%, #047526 100%);
+  --gtx-g1: #0f4d3a;
+  --gtx-g2: #047526;
+  --gtx-stroke: rgba(11, 62, 47, .6);
+  --gtx-hi: rgba(8, 40, 31, .35);
+  --gtx-glow: rgba(4, 117, 38, .35);
+  background: linear-gradient(135deg, var(--gtx-g1) 0%, var(--gtx-g2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--gtx-stroke);
+  paint-order: stroke fill;
   filter:
-    drop-shadow(0 1px 0 rgba(255, 255, 255, .25))
-    drop-shadow(0 3px 2px rgba(4, 117, 38, .35));
+    drop-shadow(0 1px 0 var(--gtx-hi))
+    drop-shadow(0 3px 2px var(--gtx-glow));
 }
+
+/* Variante roja: palabra acento (<em>) del título de sección */
+.title-glass-text--red {
+  --gtx-g1: var(--red);
+  --gtx-g2: var(--red-2);
+  --gtx-stroke: rgba(128, 9, 23, .6);
+  --gtx-hi: rgba(84, 5, 15, .35);
+  --gtx-glow: rgba(179, 18, 46, .38);
+}
+
 @media (forced-colors: active) {
-  .title-glass-text { background: none; color: CanvasText; -webkit-text-fill-color: CanvasText; filter: none; }
+  .title-glass-text { background: none; color: CanvasText; -webkit-text-fill-color: CanvasText; -webkit-text-stroke: 0; filter: none; }
 }
 

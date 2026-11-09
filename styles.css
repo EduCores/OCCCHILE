@@ -1070,7 +1070,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
    En móvil se agranda 1.45x y queda centrada para que el recorte de overflow
    no quite a los niños. Título verde pino y párrafo oscuro. */
 .last-earth {
-  --art-scale: 1.4;
+  --art-scale: 1.5;
   position: relative;
   overflow: hidden;
   padding: clamp(64px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
@@ -1113,6 +1113,10 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   transform-style: preserve-3d;
   width: min(1180px, 96vw);
   height: calc(clamp(320px, 58vmin, 560px) + 18px);
+  /* Sube el abanico 30% de su propio alto (dos pasos de 15%). Se usa `translate`
+     (propiedad independiente) para no pisar el `transform` que app.js aplica
+     al enfocar. */
+  translate: 0 -40%;
   transition: transform 500ms var(--ease);
 }
 .tierra-panel {
@@ -1212,6 +1216,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
     gap: 12px;
     padding: 0 16px;
     transform: none !important;
+    translate: none;
   }
   .tierra-panel {
     position: static;

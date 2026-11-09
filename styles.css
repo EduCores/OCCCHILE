@@ -1077,6 +1077,16 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   background-color: #b9ceb9;
 }
 .last-earth p { color: #3f4b45; max-width: 620px; margin-inline: auto; }
+.last-earth .tierra-art {
+  display: block;
+  width: calc(100% * var(--art-scale));
+  max-width: none;
+  height: auto;
+  margin: 8px 0 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 @media (max-width: 600px) {
   /* En móvil la banda se agranda un poco para que los niños se vean. */
   .last-earth { --art-scale: 1.45; }

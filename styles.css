@@ -1113,7 +1113,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   position: relative;
   transform-style: preserve-3d;
   width: min(1180px, 96vw);
-  height: clamp(320px, 58vmin, 560px);
+  height: calc(clamp(320px, 58vmin, 560px) + 18px);
   transition: transform 500ms var(--ease);
 }
 .tierra-panel {

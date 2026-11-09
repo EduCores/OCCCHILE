@@ -2358,3 +2358,46 @@ h2.section-title--pine { color: #0f4d3a; }
   .title-glass-text { background: none; color: CanvasText; -webkit-text-fill-color: CanvasText; -webkit-text-stroke: 0; filter: none; }
 }
 
+/* ============ TIERRA PANELS (nuevo formato simplificado) ============ */
+.tierra-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  text-align: center;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.tierra-panel h3 {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+  color: var(--pine);
+  margin: 0 0 8px 0;
+}
+
+.tierra-panel p {
+  font-size: clamp(0.82rem, 1.1vw, 0.92rem);
+  line-height: 1.45;
+  color: #33463c;
+  margin: 0;
+  max-width: 26ch;
+}
+
+.tierra-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--pine-2);
+}
+
+/* Colores específicos por región */
+.tierra-panel.norte { border-left: 4px solid var(--red); }
+.tierra-panel.centro { border-left: 4px solid var(--orange-ink); }
+.tierra-panel.sur { border-left: 4px solid var(--pine); }
+.tierra-panel.austral { border-left: 4px solid var(--sky); }
+

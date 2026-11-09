@@ -345,8 +345,8 @@ color-mix(in srgb, var(--line) 16%, transparent); box-shadow: var(--shadow); }
 .marquee { background: var(--pine); color: #fff; overflow: hidden; padding: 16px 0; transform: rotate(-1.2deg); margin: 10px -10px;
   position: relative; z-index: 2; }
 .marquee__track { display: flex; width: max-content; animation: marquee 38s linear infinite; font-family: var(--display); font-size: 1.3rem; }
-.marquee__group { display: flex; gap: 28px; padding-right: 28px; }
-.marquee__track b { color: var(--gold); }
+.marquee__group { display: flex; gap: 28px; padding-right: 28px; align-items: center; }
+.marquee__group svg { color: var(--gold); fill: var(--gold); width: 22px; height: 22px; flex: 0 0 auto; }
 /* Sin pestañeo: el track son 2 grupos idénticos y -50% mide exactamente 1 grupo,
    así el reinicio del ciclo cae sobre contenido idéntico. Dirección invertida. */
 @keyframes marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
@@ -1127,6 +1127,83 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   height: calc(100% - 56px);
   transform-style: preserve-3d;
 }
+
+/* ===== Carrusel 3D de Tierra: usa el mismo contenedor `.tierra-main` ===== */
+.tierra-main--carousel {
+  translate: 0 -40%;
+  width: 100%;
+  height: auto;
+  margin-inline: 0;
+  display: grid;
+  justify-items: center;
+}
+.tierra-carousel-container {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  margin: 50px auto;
+  perspective: 1000px;
+}
+.tierra-carousel-nav {
+  --lc-hi: rgba(255, 255, 255, .60);
+  --lc-hi-soft: rgba(255, 255, 255, .28);
+  --lc-glow: rgba(15, 77, 58, .35);
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  color: #0f4d3a;
+  background:
+    radial-gradient(90% 70% at 32% 12%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, .30), rgba(255, 255, 255, .12));
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, .55),
+    inset 0 -3px 4px var(--lc-hi),
+    inset 0 0 2px 4px var(--lc-hi-soft),
+    0 12px 24px -12px var(--lc-glow);
+  transition: transform .2s ease, filter .2s ease;
+}
+.tierra-carousel-nav:hover,
+.tierra-carousel-nav:focus-visible { transform: scale(1.06); filter: brightness(1.04); }
+.tierra-carousel-nav:focus-visible { outline: 3px solid #09bf40; outline-offset: 3px; }
+.tierra-carousel-nav svg,
+.tierra-carousel-nav i { width: 24px; height: 24px; display: block; }
+.tierra-carousel-nav--prev { left: -128px; transform: translateY(-50%); }
+.tierra-carousel-nav--next { right: -128px; transform: translateY(-50%); }
+.tierra-carousel-nav--prev:hover,
+.tierra-carousel-nav--prev:focus-visible { transform: translateY(-50%) scale(1.06); }
+.tierra-carousel-nav--next:hover,
+.tierra-carousel-nav--next:focus-visible { transform: translateY(-50%) scale(1.06); }
+.tierra-carousel-3d {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.tierra-main .tierra-carousel-item {
+  inset: auto;
+  left: 10px;
+  top: 10px;
+  width: 280px;
+  height: 180px;
+  margin: 0;
+  translate: none;
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+@media (max-width: 700px) {
+  .tierra-carousel-container { margin-inline: 48px; }
+  .tierra-carousel-nav--prev { left: -42px; }
+  .tierra-carousel-nav--next { right: -42px; }
+}
 /* Reflejo inferior en ::after con degradado fijo (compositor-friendly) en vez de
    -webkit-box-reflect (capa extra del motor). El degradado ya termina en
    transparente, así que el reflejo se desvanece solo. */
@@ -1140,6 +1217,8 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   background: linear-gradient(transparent, rgba(255, 255, 255, 0.12));
   pointer-events: none;
 }
+.tierra-main--carousel .tierra-panel::after { display: none !important; }
+.tierra-main--carousel .tierra-panel { overflow: visible; }
 .tierra-panel button {
   --lc-hi: rgba(255, 255, 255, .60);
   --lc-hi-soft: rgba(255, 255, 255, .28);
@@ -1190,7 +1269,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 .tierra-panel button:focus-visible { box-shadow: 0 0 0 3px #09bf40, 0 18px 40px -18px rgba(15, 77, 58, .35); }
 .tierra-panel button:hover,
 .tierra-panel button:focus-visible { transform: scale(1.04) translateY(-4%); filter: brightness(1.04); }
-.tierra-panel__body { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.tierra-panel__body { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
 .tierra-panel__title {
   font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   font-weight: 700; color: #0f4d3a; margin: 0;
@@ -1200,9 +1279,78 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   font-size: clamp(.82rem, 1.1vw, .92rem); line-height: 1.45; color: #33463c;
   margin: 0 !important; max-width: 26ch !important;
 }
+/* El cuerpo del panel reutiliza el sistema glass de `.tierra-panel button`. */
+.tierra-main .tierra-panel__body {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 18px;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px 20px;
+  text-align: center;
+  --lc-hi: rgba(255, 255, 255, .60);
+  --lc-hi-soft: rgba(255, 255, 255, .28);
+  --lc-glow: rgba(15, 77, 58, .35);
+  background:
+    radial-gradient(90% 70% at 32% 12%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, .30), rgba(255, 255, 255, .12));
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  color: #22312b;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, .55),
+    inset 0 -3px 4px var(--lc-hi),
+    inset 0 0 2px 4px var(--lc-hi-soft),
+    0 18px 40px -18px var(--lc-glow);
+  transition: transform 300ms cubic-bezier(.4, 0, .2, 1), box-shadow 200ms ease, filter 200ms ease;
+}
+.tierra-main .tierra-panel__body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 32% 16%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0) 48%);
+  opacity: .9;
+}
+@property --tierra-b { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
+.tierra-main .tierra-panel__body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 2px;
+  box-sizing: border-box;
+  background:
+    conic-gradient(from var(--tierra-b) at 50% 50%,
+      rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 8% 42%, rgba(15, 77, 58, .35) 50%, rgba(255, 255, 255, 0) 58% 92%, rgba(255, 255, 255, .85));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: tierraPanelRing 6s linear infinite;
+}
+@keyframes tierraPanelRing { to { --tierra-b: 285deg; } }
+.tierra-main .tierra-panel__body:hover,
+.tierra-main .tierra-panel__body:focus-visible { transform: scale(1.04) translateY(-4%); filter: brightness(1.04); }
+.tierra-main .tierra-panel__body:focus-visible { box-shadow: 0 0 0 3px #09bf40, 0 18px 40px -18px rgba(15, 77, 58, .35); }
 .tierra-hint { text-align: center; font-size: .82rem; color: #3f4b45; margin: 6px 0 0; opacity: .8; }
 @media (prefers-reduced-motion: reduce) {
-  .tierra-main, .tierra-panel button { transition: none; }
+  .tierra-main, .tierra-panel button, .tierra-carousel-3d { transition: none; }
   .tierra-panel button::after { animation: none; }
 }
 @media (max-width: 700px) {
@@ -1217,6 +1365,17 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
     padding: 0 16px;
     transform: none !important;
     translate: none;
+  }
+  .tierra-main--carousel {
+    width: 100%;
+    height: auto;
+    translate: none;
+  }
+  .tierra-main--carousel .tierra-carousel-container {
+    width: 300px;
+    height: 200px;
+    margin: 50px auto;
+    max-width: calc(100vw - 48px);
   }
   .tierra-panel {
     position: static;
@@ -1409,21 +1568,31 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 }
 
 /* ===== Avión decorativo de #tierra =====
-   DETRÁS de todos los paneles (z-index: -1 y primero en el DOM): el abanico 3D
-   nunca queda afectado. Tamaño original menos 15% (scale .85, proporciona al
-   propio <img>) y centrado exacto con translate(-50%, -50%).
+   Se mantiene sobre el carrusel y también sobre `#datos`: `#tierra` queda
+   por encima de `.datos`, y el avión usa `z-index: 2147483647` para no
+   quedar atrapado por ningún stacking context intermedio.
    Solo sube y baja + alabeo plano (rotate): rotación rígida sobre su propio
    centro — gira hacia la derecha y hacia la izquierda SIN deformar la forma. */
+#tierra {
+  position: relative;
+  z-index: 99999;
+  transform: none !important;
+  overflow: visible !important;
+  isolation: isolate;
+}
+.datos { z-index: 1; }
+.tierra-stage { transform: none !important; }
 .tierra-avion {
   position: absolute;
   inset: 0;
   margin: auto; /* centrado por layout: funciona con cualquier tamaño de PNG */
   width: auto;
   max-width: none;
-  z-index: -1;
+  z-index: 2147483647;
   pointer-events: none;
   filter: drop-shadow(0 14px 22px rgba(0,0,0,.30));
   animation: avionFlote 18s ease-in-out infinite;
+  translate: 0 25%;
 }
 /* Ciclo en fases (duración 18s): planea recto un rato → gira a la derecha y
    mantiene el viraje → vuelve a planeo recto → gira a la izquierda y mantiene
@@ -2247,7 +2416,7 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 /* El bloque Centro de datos se pinta sobre la imagen decorativa
    avion_back.png (tierra-avion, z-index 4) para que nunca tape los textos. */
 #datos {
-  padding-top: 15%;
+  padding-top: 10%;
 }
 
 /* Responsividad del Centro de Datos */
@@ -2328,7 +2497,7 @@ h2.section-title--pine { color: #0f4d3a; }
    El "borde" por letra es -webkit-text-stroke: el degradado queda por encima
    (paint-order: stroke fill) y el trazo sobresale como aro fino alrededor. */
 .title-glass-text {
-  --gtx-g1: #0f4d3a;
+  --gtx-g1: #0ba74a;
   --gtx-g2: #047526;
   --gtx-stroke: rgba(11, 62, 47, .6);
   --gtx-hi: rgba(8, 40, 31, .35);
@@ -2358,8 +2527,8 @@ h2.section-title--pine { color: #0f4d3a; }
   .title-glass-text { background: none; color: CanvasText; -webkit-text-fill-color: CanvasText; -webkit-text-stroke: 0; filter: none; }
 }
 
-/* ============ TIERRA PANELS (nuevo formato simplificado) ============ */
-.tierra-panel {
+/* ============ TIERRA PANELS legacy (formato simplificado, sin pisar glass) ============ */
+.tierra-panel--legacy {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2373,7 +2542,7 @@ h2.section-title--pine { color: #0f4d3a; }
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
-.tierra-panel h3 {
+.tierra-panel--legacy h3 {
   font-family: var(--display);
   font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   font-weight: 700;
@@ -2381,7 +2550,7 @@ h2.section-title--pine { color: #0f4d3a; }
   margin: 0 0 8px 0;
 }
 
-.tierra-panel p {
+.tierra-panel--legacy p {
   font-size: clamp(0.82rem, 1.1vw, 0.92rem);
   line-height: 1.45;
   color: #33463c;
@@ -2389,7 +2558,7 @@ h2.section-title--pine { color: #0f4d3a; }
   max-width: 26ch;
 }
 
-.tierra-panel:hover {
+.tierra-panel--legacy:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--pine-2);

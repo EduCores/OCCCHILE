@@ -1163,52 +1163,32 @@
   }
 
   /* ---------------- BOOT ---------------- */
-  /* ---- Paneles 3D "Hasta lo último de la tierra" (solo texto, glass) ---- */
+  /* ---- Carrusel 3D "Hasta lo último de la tierra" ---- */
   function initTierraPanels() {
-    const main = $(".tierra-main");
-    if (!main) return;
-    const panels = [
-      { id: "norte", title: "Norte", desc: "Pueblos del altiplano y comunidades aymaras.", tx: "-171%", tz: "-34vmin", ry: "45deg" },
-      { id: "centro", title: "Centro", desc: "Campos, cerros y sectores vulnerables urbanos.", tx: "-65%", tz: "-64vmin", ry: "14deg" },
-      { id: "sur", title: "Sur", desc: "Comunidades mapuche, islas de Chiloé y zonas rurales.", tx: "65%", tz: "-64vmin", ry: "-14deg" },
-      { id: "austral", title: "Austral", desc: "Aysén y Magallanes: fiordos, estancias y caletas.", tx: "171%", tz: "-34vmin", ry: "-45deg" },
-    ];
-    const inv = (t) => {
-      if (!t) return 0;
-      const m = String(t).match(/(-?\d+)(.*)/);
-      return m ? `${-Number(m[1])}${m[2]}` : 0;
-    };
-    const make = (p) => {
-      const h = document.createElement("h3"); h.className = "tierra-panel__title"; h.textContent = p.title;
-      const d = document.createElement("p"); d.className = "tierra-panel__desc"; d.textContent = p.desc;
-      const body = document.createElement("div"); body.className = "tierra-panel__body"; body.append(h, d);
-      const btn = document.createElement("button"); btn.type = "button"; btn.append(body);
-      const art = document.createElement("article"); art.className = "tierra-panel"; art.id = p.id;
-      art.style.transform = `translate3d(${p.tx}, 0, ${p.tz}) rotateY(${p.ry})`;
-      art.appendChild(btn);
-      return art;
-    };
-    panels.forEach((p) => main.appendChild(make(p)));
-    document.addEventListener("click", (e) => {
-      const art = e.target.closest(".tierra-panel");
-      const targetId = art && art.id;
-      let itx = "0px", itz = "0px", iry = 0;
-      if (targetId && main.dataset.focus !== targetId) {
-        const p = panels.find((x) => x.id === targetId);
-        if (p) {
-          // El tx de cada panel es % de SU ancho; al aplicarlo al contenedor hay
-          // que convertirlo a px (el % de .tierra-main es otro tamaño).
-          const w = art.offsetWidth || 260;
-          itx = `${(-parseFloat(p.tx) / 100) * w}px`;
-          itz = String(p.tz).replace(/^-/, "");
-          iry = -parseFloat(p.ry);
-        }
-        main.setAttribute("data-focus", targetId);
-      } else {
-        main.removeAttribute("data-focus");
-      }
-      main.style.transform = `rotateY(${iry}deg) translate3d(${itx}, 0, ${itz})`;
+    const carousel = document.getElementById("tierraCarousel");
+    if (!carousel) return;
+
+    const items = [...carousel.querySelectorAll(".tierra-carousel-item")].slice(0, 4);
+    const prevBtn = document.getElementById("tierraPrevBtn");
+    const nextBtn = document.getElementById("tierraNextBtn");
+    if (items.length === 0) return;
+
+    const radius = 350;
+    let currAngle = 0;
+
+    const angleStep = 360 / items.length;
+    items.forEach((item, index) => {
+      const angle = angleStep * index;
+      item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
     });
+
+    function rotateCarousel(direction) {
+      currAngle += direction * angleStep;
+      carousel.style.transform = `rotateY(${currAngle * -1}deg)`;
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", () => rotateCarousel(-1));
+    if (nextBtn) nextBtn.addEventListener("click", () => rotateCarousel(1));
   }
 
   document.addEventListener("DOMContentLoaded", () => {

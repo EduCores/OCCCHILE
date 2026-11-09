@@ -1064,28 +1064,34 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
 }
 
 /* ============ HASTA LO ÚLTIMO DE LA TIERRA ============ */
-/* Banda salvia de #tierra (igual que #viaje, fija en ambos temas). La
-   ilustración `img/norte_sur.png` ahora es background-image del .last-earth:
-   anclada al borde inferior (100% auto); el padding-bottom reserva el alto
-   exacto de la imagen (20.14% del ancho × --art-scale + 48 px) para que
-   nunca tape el texto, y en ≤600 px la imagen se agranda (--art-scale: 1.45).
-   Título verde pino y párrafo oscuro. */
+/* Banda salvia de #tierra (igual que #viaje, fija en ambos temas). El
+   ilustración norte–sur (2637 × 531 → 20,14% de alto sobre el ancho): fluye
+   con el documento, debajo del párrafo "Del Altiplano...", centrada y a lo ancho.
+   En móvil se agranda 1.45x y queda centrada para que el recorte de overflow
+   no quite a los niños. Título verde pino y párrafo oscuro. */
 .last-earth {
   --art-scale: 1;
   position: relative;
   overflow: hidden;
-  padding: clamp(64px, 7vw, 96px) 0 calc(20.14% * var(--art-scale) + 48px);
+  padding: clamp(64px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
   background-color: #b9ceb9;
-  background-image: url("img/norte_sur.png");
-  background-size: 100% auto;
-  background-position: bottom center;
-  background-repeat: no-repeat;
 }
 .last-earth p { color: #3f4b45; max-width: 620px; margin-inline: auto; }
+.last-earth .tierra-art {
+  display: block;
+  width: calc(100% * var(--art-scale));
+  max-width: none;
+  height: auto;
+  margin: 8px 0 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 @media (max-width: 600px) {
   /* En móvil la banda se agranda un poco para que los niños se vean. */
   .last-earth { --art-scale: 1.45; }
 }
+.last-earth .tierra-stage { margin-top: 24px; }
 
 /* ============ TIERRA: paneles 3D (glass transparente, solo texto) ============
    Bloque más ancho y más abajo, apoyado sobre la banda de niños: las tarjetas

@@ -1070,28 +1070,17 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
    En móvil se agranda 1.45x y queda centrada para que el recorte de overflow
    no quite a los niños. Título verde pino y párrafo oscuro. */
 .last-earth {
-  --art-scale: 1;
+  --art-scale: 1.4;
   position: relative;
   overflow: hidden;
   padding: clamp(64px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
   background-color: #b9ceb9;
 }
 .last-earth p { color: #3f4b45; max-width: 620px; margin-inline: auto; }
-.last-earth .tierra-art {
-  display: block;
-  width: calc(100% * var(--art-scale));
-  max-width: none;
-  height: auto;
-  margin: 8px 0 0;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
 @media (max-width: 600px) {
   /* En móvil la banda se agranda un poco para que los niños se vean. */
   .last-earth { --art-scale: 1.45; }
 }
-.last-earth .tierra-stage { margin-top: 24px; }
 
 /* ============ TIERRA: paneles 3D (glass transparente, solo texto) ============
    Bloque más ancho y más abajo, apoyado sobre la banda de niños: las tarjetas
@@ -1101,9 +1090,10 @@ input[type="range"] { width: 100%; accent-color: var(--red); padding: 0 !importa
   position: relative;
   width: 100%;
   min-height: clamp(400px, 64vmin, 620px);
-  margin-top: 1px;
+  margin-top: 0;
   display: grid;
-  place-items: center;
+  align-items: start;
+  justify-items: center;
   perspective: 1300px;
   overflow: visible;
   padding: 0 0 24px;

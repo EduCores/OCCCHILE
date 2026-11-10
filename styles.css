@@ -3631,7 +3631,7 @@ h2.section-title--pine { color: #0f4d3a; }
   align-items: center;
   gap: 6px;
   margin-bottom: 8px;
-  color: #047526;
+  color: #b3122e;
 }
 
 .enfoque .section__head h2 {
@@ -3690,8 +3690,10 @@ h2.section-title--pine { color: #0f4d3a; }
   height: 100%;
 }
 
+.enfoque__card:nth-of-type(1),
 .enfoque__card:nth-of-type(2),
-.enfoque__card.htl__card--green {
+.enfoque__card.htl__card--green,
+.enfoque__card--green {
   --htl-g1: #0aa63a;
   --htl-g2: #047526;
   --htl-hi: rgba(52, 196, 100, .55);
@@ -3837,6 +3839,22 @@ h2.section-title--pine { color: #0f4d3a; }
   color: rgba(255, 255, 255, .92);
   line-height: 1.5;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+.enfoque__quote cite {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font);
+  font-size: .86rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #fff3d9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+.enfoque .cta__inner {
+  margin-top: 52px;
 }
 
 @media (max-width: 980px) {

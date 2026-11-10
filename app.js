@@ -1138,13 +1138,12 @@
         barEl.classList.add("is-bump");
         setTimeout(() => barEl.classList.remove("is-bump"), 650);
 
-        // Inserta badge flotante "+N" sobre la barra que sube en vivo
-        const slot = barEl.querySelector(".mx-bar__slot") || barEl;
+        // Inserta badge flotante "+N" sobre la barra que sube en vivo (fuera de la columna)
         const badge = document.createElement("span");
         badge.className = "region-col__badge";
         badge.dataset.step = String(delta);
         badge.textContent = "+" + (delta >= 1000 ? "1k" : fmt(delta));
-        slot.appendChild(badge);
+        barEl.appendChild(badge);
         setTimeout(() => badge.remove(), 1400);
 
         document.dispatchEvent(new CustomEvent("occ:bars-updated"));
@@ -1175,10 +1174,10 @@
     if (!root || !modal) return;
 
     const MX_YEARS = {
-      "27": { volume: "42", unit: "contenedores meta", delta: "+18% proyección", peak: "+18% proyección" },
-      "26": { volume: "38", unit: "contenedores anuales", delta: "+15.2% vs '25", peak: "38 contenedores ('26)" },
-      "25": { volume: "33", unit: "contenedores anuales", delta: "+17.8% vs '24", peak: "33 contenedores ('25)" },
-      "24": { volume: "28", unit: "contenedores anuales", delta: "Base histórica", peak: "28 contenedores ('24)" },
+      "27": { volume: "42", unit: "meta", fullUnit: "contenedores meta", delta: "+18% proyección", peak: "+18% proyección" },
+      "26": { volume: "38", unit: "anuales", fullUnit: "contenedores anuales", delta: "+15.2% vs '25", peak: "38 contenedores ('26)" },
+      "25": { volume: "33", unit: "anuales", fullUnit: "contenedores anuales", delta: "+17.8% vs '24", peak: "33 contenedores ('25)" },
+      "24": { volume: "28", unit: "anuales", fullUnit: "contenedores anuales", delta: "Base histórica", peak: "28 contenedores ('24)" },
     };
 
     // ---- Anillo radial: Porcentaje entregado (92,8%) ----
@@ -1207,7 +1206,16 @@
     const selectYear = (yr) => {
       const y = MX_YEARS[yr] || MX_YEARS["27"];
       if (volumeEl) volumeEl.textContent = y.volume;
-      if (unitEl) unitEl.textContent = y.unit;
+      if (unitEl) {
+        const textEl = unitEl.querySelector("[data-mx-unit-text]");
+        if (textEl) {
+          textEl.textContent = y.unit;
+        } else {
+          unitEl.innerHTML = `<i data-lucide="container" aria-hidden="true"></i> <span data-mx-unit-text>${y.unit}</span>`;
+          icons();
+        }
+        if (y.fullUnit) unitEl.setAttribute("aria-label", y.fullUnit);
+      }
       if (deltaEl) deltaEl.textContent = y.delta;
       if (peakEl) peakEl.textContent = y.peak;
       yearPills.forEach((pill) => {
@@ -1661,6 +1669,17 @@
       thumb.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+        const item = thumb.closest(".tierra-carousel-item");
+        const index = Array.from(items).indexOf(item);
+        const normAngle = ((currAngle % 360) + 360) % 360;
+        const activeIndex = Math.round(normAngle / angleStep) % items.length;
+        if (index !== -1 && index !== activeIndex) {
+          let diff = index - activeIndex;
+          if (diff > items.length / 2) diff -= items.length;
+          else if (diff < -items.length / 2) diff += items.length;
+          rotateCarousel(diff);
+          return;
+        }
         if (thumb.dataset.played === "1") return;
         thumb.dataset.played = "1";
         const videoSrc = thumb.dataset.videoSrc || "https://www.youtube.com/embed/KOKtonyYIFs?rel=0";

@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Showcase de Métricas e Interactividad</title>
+<!-- Tailwind CSS v3 con plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Configuración personalizada de Tailwind -->
+<script data-purpose="tailwind-config" id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: '#b9ceb9',
+            brand: {
+              crimsonStart: '#b3122e',
+              crimsonEnd: '#d61f3c',
+              emeraldStart: '#0ba74a',
+              emeraldEnd: '#047526',
+              amberStart: '#e89701',
+              amberEnd: '#ffaa2a',
+              blueStart: '#0284c7',
+              blueEnd: '#38bdf8',
+              purpleStart: '#7c3aed',
+              purpleEnd: '#c084fc',
+            }
+          },
+          boxShadow: {
+            'glass': '0 20px 35px -10px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.02)',
+            'glass-inset': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px 0 rgba(0, 0, 0, 0.04)',
+            'neumorph-inset': 'inset 3px 3px 6px rgba(0, 0, 0, 0.08), inset -3px -3px 6px rgba(255, 255, 255, 0.8)',
+            'neumorph-float': '4px 4px 10px rgba(0, 0, 0, 0.08), -4px -4px 10px rgba(255, 255, 255, 0.9)',
+            'pill-depth': 'inset 0 2px 5px rgba(0,0,0,0.06), 0 4px 8px rgba(0,0,0,0.04)',
+            'dot-glow': '0 4px 12px rgba(139, 92, 246, 0.45)',
+            'pill-hover': '0 10px 20px -3px rgba(0, 0, 0, 0.12), 0 0 12px rgba(255, 255, 255, 0.6)',
+            'modal-glass': '0 30px 60px -12px rgba(0, 0, 0, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Estilos base e interfaz -->
+<style data-purpose="base-layout">
+    body {
+      background-color: #b9ceb9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #1e293b;
+    }
+
+    /* Suavizado de bordes de vidrio */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .glass-modal-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .glass-modal-subcard {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .glass-pill-slot {
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    /* Microinteracción de barras píldora */
+    .interactive-pill {
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    }
+    .interactive-pill:hover {
+      transform: translateY(-5px);
+    }
+    .interactive-pill:hover .glass-pill-slot {
+      border-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    }
+    .interactive-pill:active {
+      transform: translateY(-1px);
+    }
+  </style>
+<!-- Estilos específicos para gradientes visuales -->
+<style data-purpose="custom-gradients">
+    .grad-crimson {
+      background: linear-gradient(180deg, #d61f3c 0%, #b3122e 100%);
+    }
+    .grad-purple {
+      background: linear-gradient(180deg, #c084fc 0%, #7c3aed 100%);
+    }
+    .grad-amber {
+      background: linear-gradient(180deg, #ffaa2a 0%, #e89701 100%);
+    }
+    .grad-emerald {
+      background: linear-gradient(180deg, #0ba74a 0%, #047526 100%);
+    }
+    .grad-blue {
+      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+    }
+    .grad-wave-area {
+      background: linear-gradient(180deg, rgba(168, 85, 247, 0.9) 0%, rgba(217, 70, 239, 0.85) 100%);
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head>
+<body class="p-4 sm:p-8 lg:p-12 flex flex-col justify-center items-center">
+<!-- BEGIN: MainShowcaseContainer -->
+<main class="w-full max-w-7xl mx-auto space-y-10" data-purpose="metrics-showcase-container"><div class="flex flex-col w-full">
+<!-- Encabezado de Sección -->
+<header class="text-center max-w-3xl mx-auto space-y-4 mb-6">
+<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-brand-emeraldStart animate-pulse"></span>
+<span class="text-xs uppercase tracking-wider font-semibold text-slate-800">Analítica &amp; Rendimiento en Vivo</span>
+</div>
+<h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+      Métricas Clave de Rendimiento
+    </h1>
+<p class="text-base sm:text-lg text-slate-700/80 max-w-2xl mx-auto leading-relaxed">
+      Monitoreo telemetry de ultra precisión. Visualice flujos concurrentes, disponibilidad de servicios y balance dinámico a través de todos los nodos activos de la infraestructura.
+    </p>
+</header>
+<!-- Fila Superior: Anillos Radiales & Gráfica de Onda -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full mb-8">
+<!-- Tarjeta Izquierda: Objetivos & Disponibilidad -->
+<article class="lg:col-span-6 rounded-2xl p-6 sm:p-8 glass-card shadow-glass flex flex-col justify-between cursor-pointer hover:border-white transition-all group/card" data-metric-type="radial-gauges" title="Haga clic para ver telemetría global">
+<div class="flex items-center justify-between mb-6">
+<div>
+<span class="text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1">Telemetría Operativa</span>
+<h2 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover/card:text-slate-800 transition-colors">Objetivos &amp; Disponibilidad</h2>
+</div>
+<span class="p-2 rounded-full bg-white/70 shadow-sm text-slate-700 inline-flex items-center justify-center group-hover/card:bg-white group-hover/card:rotate-180 transition-all duration-500">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</span>
+</div>
+<!-- Dos indicadores circulares con estilo neumórfico -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 my-auto py-4">
+<!-- Gauge 1: Fase Operativa (68%) -->
+<div class="flex flex-col items-center">
+<div class="relative w-44 h-44 rounded-full p-3.5 shadow-neumorph-inset bg-slate-200/40 flex items-center justify-center transition-transform group-hover/card:scale-105 duration-300">
+<!-- Anillo circular SVG -->
+<svg class="w-full h-full -rotate-90" viewbox="0 0 120 120">
+<defs>
+<lineargradient id="grad-ring-purple" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#0284c7"></stop>
+<stop offset="100%" stop-color="#38bdf8"></stop>
+</lineargradient>
+</defs>
+<circle cx="60" cy="60" fill="transparent" r="46" stroke="rgba(255,255,255,0.7)" stroke-width="10"></circle>
+<!-- 68% -> Dasharray ~ 289 -> 289*0.68=196.5 -->
+<circle class="transition-all duration-1000 ease-out" cx="60" cy="60" fill="transparent" r="46" stroke="url(#grad-ring-purple)" stroke-dasharray="289" stroke-dashoffset="92.5" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<!-- Centro Flotante -->
+<div class="absolute inset-7 rounded-full bg-white shadow-neumorph-float flex flex-col items-center justify-center text-center">
+<span class="text-xl font-bold text-slate-900 tracking-tight">68%</span>
+<span class="text-[11px] text-slate-500 font-semibold uppercase">Optimizada</span>
+</div>
+</div>
+<div class="text-center mt-4">
+<h3 class="text-sm font-bold text-slate-800">Fase Operativa</h3>
+<p class="text-xs text-slate-600">Consolidación de clusters</p>
+</div>
+</div>
+<!-- Gauge 2: Disponibilidad de Servicio (94%) -->
+<div class="flex flex-col items-center">
+<div class="relative w-44 h-44 rounded-full p-3.5 shadow-neumorph-inset bg-slate-200/40 flex items-center justify-center transition-transform group-hover/card:scale-105 duration-300">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 120 120">
+<defs>
+<lineargradient id="grad-ring-emerald" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#0ba74a"></stop>
+<stop offset="100%" stop-color="#047526"></stop>
+</lineargradient>
+</defs>
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="rgba(255,255,255,0.7)" stroke-width="5"></circle>
+<!-- 94% de 314 es offset ~ 18.8 -->
+<circle class="transition-all duration-1000 ease-out" cx="60" cy="60" fill="transparent" r="50" stroke="url(#grad-ring-emerald)" stroke-dasharray="314" stroke-dashoffset="18.8" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<!-- Centro Flotante -->
+<div class="absolute inset-7 rounded-full bg-white shadow-neumorph-float flex flex-col items-center justify-center text-center">
+<span class="text-xl font-bold text-slate-900 tracking-tight">94%</span>
+<span class="text-[11px] text-emerald-700 font-semibold uppercase">En Línea</span>
+</div>
+</div>
+<div class="text-center mt-4">
+<h3 class="text-sm font-bold text-slate-800">Disponibilidad SLA</h3>
+<p class="text-xs text-slate-600">Tolerancia activa a fallos</p>
+</div>
+</div>
+</div>
+<!-- Footer de Tarjeta -->
+<div class="pt-4 border-t border-white/50 flex items-center justify-between text-slate-700 text-xs">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-emeraldStart"></span>
+          Respaldo geo-distribuido
+        </span>
+<span class="font-semibold text-slate-800">Tasa de fallo: 0.04%</span>
+</div>
+</article>
+<!-- Tarjeta Derecha: Rendimiento Semanal / Tendencia de Flujo -->
+<article class="lg:col-span-6 rounded-2xl p-6 sm:p-8 glass-card shadow-glass flex flex-col justify-between cursor-pointer hover:border-white transition-all group/wave" data-metric-type="wave-chart" title="Haga clic para ver detalle de flujo semanal">
+<!-- Encabezado con selector de mes e importe -->
+<div class="flex items-start justify-between mb-4">
+<div>
+<span class="text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1">Volumen Procesado</span>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">$ 1,870</span>
+<span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100/90 text-emerald-800 font-semibold">
+              +14.8%
+            </span>
+</div>
+</div>
+<div class="relative" onclick="event.stopPropagation()">
+<select class="appearance-none text-xs font-semibold text-slate-800 bg-white/70 hover:bg-white/90 transition-colors pl-3.5 pr-8 py-1.5 rounded-full shadow-sm cursor-pointer outline-none border-0 focus:ring-0">
+<option selected="">Sep</option>
+<option>Ago</option>
+<option>Jul</option>
+<option>Jun</option>
+</select>
+<span class="material-symbols-outlined text-[16px] pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-600">
+            keyboard_arrow_down
+          </span>
+</div>
+</div>
+<!-- Gráfica de Onda Fluida Orgánica -->
+<div class="relative w-full h-56 my-2 flex flex-col justify-end">
+<!-- Guías de fondo horizontales con escala -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none pb-7">
+<div class="w-full flex items-center gap-3">
+<span class="text-[11px] text-slate-500/70 w-6 text-right">100</span>
+<div class="w-full h-px bg-white/50"></div>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[11px] text-slate-500/70 w-6 text-right">80</span>
+<div class="w-full h-px bg-white/40"></div>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[11px] text-slate-500/70 w-6 text-right">60</span>
+<div class="w-full h-px bg-white/35"></div>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[11px] text-slate-500/70 w-6 text-right">40</span>
+<div class="w-full h-px bg-white/30"></div>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[11px] text-slate-500/70 w-6 text-right">20</span>
+<div class="w-full h-px bg-white/20"></div>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[11px] text-slate-500/70 w-6 text-right">0</span>
+<div class="w-full h-px bg-white/40"></div>
+</div>
+</div>
+<!-- SVG de onda orgánica continua con degradado violeta/magenta -->
+<div class="relative w-full h-40 pl-9 pr-2">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 500 160">
+<defs>
+<lineargradient id="waveFill" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.9"></stop>
+<stop offset="45%" stop-color="#b5179e" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#d946ef" stop-opacity="0.25"></stop>
+</lineargradient>
+<lineargradient id="waveStroke" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#8b5cf6"></stop>
+<stop offset="50%" stop-color="#c026d3"></stop>
+<stop offset="100%" stop-color="#d946ef"></stop>
+</lineargradient>
+<filter height="200%" id="glow-pearl" width="200%" x="-50%" y="-50%">
+<fedropshadow dx="0" dy="2" flood-color="#7c3aed" flood-opacity="0.45" stddeviation="4"></fedropshadow>
+</filter>
+</defs>
+<!-- Curva spline con relleno armónico idéntico a imagen -->
+<path d="M 0 160 
+                     L 0 85 
+                     C 25 80, 40 120, 65 120 
+                     C 90 120, 115 35, 145 35 
+                     C 175 35, 195 140, 225 140 
+                     C 255 140, 275 105, 305 108 
+                     C 330 110, 345 120, 365 100 
+                     C 385 80, 395 38, 415 38 
+                     C 435 38, 455 88, 475 75 
+                     C 485 70, 495 65, 500 68 
+                     L 500 160 Z" fill="url(#waveFill)"></path>
+<path d="M 0 85 
+                     C 25 80, 40 120, 65 120 
+                     C 90 120, 115 35, 145 35 
+                     C 175 35, 195 140, 225 140 
+                     C 255 140, 275 105, 305 108 
+                     C 330 110, 345 120, 365 100 
+                     C 385 80, 395 38, 415 38 
+                     C 435 38, 455 88, 475 75 
+                     C 485 70, 495 65, 500 68" fill="none" stroke="url(#waveStroke)" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Perla Flotante Scrubber en el pico más alto (Jueves / THU en x=415, y=38) -->
+<g class="cursor-pointer group-hover/wave:scale-125 transition-transform origin-center">
+<circle cx="415" cy="38" fill="#ffffff" filter="url(#glow-pearl)" r="9"></circle>
+<circle cx="415" cy="38" fill="#8b5cf6" r="3.5"></circle>
+</g>
+</svg>
+</div>
+<!-- Eje de Días de la semana -->
+<div class="flex justify-between pl-12 pr-4 pt-2 text-xs font-semibold text-slate-600">
+<span>MON</span>
+<span>TUE</span>
+<span>WED</span>
+<span class="text-purple-600 font-bold">THU</span>
+<span>FRI</span>
+</div>
+</div>
+<div class="pt-4 border-t border-white/50 flex items-center justify-between text-slate-700 text-xs">
+<span>Pico semanal: <strong>82.4 req/s</strong></span>
+<span class="inline-flex items-center gap-1 text-purple-700 font-semibold hover:underline">
+          Analítica de flujo 
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</span>
+</div>
+</article>
+</div>
+<!-- TARJETA INFERIOR PRINCIPAL (FULL WIDTH): Distribución de 18 Barras Cápsula -->
+<section class="w-full rounded-2xl p-6 sm:p-8 lg:p-10 glass-card shadow-glass relative overflow-hidden" data-purpose="pill-bars-chart">
+<!-- Encabezado de la Sección de Cápsulas -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 text-slate-800 text-xs font-semibold mb-2 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-ping"></span>
+          18 Puntos de Control / En Vivo
+        </div>
+<h2 class="text-xl sm:text-2xl font-bold text-slate-900">
+          Distribución de Capacidad y Actividad por Canal
+        </h2>
+<p class="text-sm text-slate-700 mt-0.5">
+          Respuesta proporcional y asignación de ancho de banda por nodo en tiempo real. Haga clic en cualquier barra para ver el desglose modal.
+        </p>
+</div>
+<!-- Filtros / Píldoras de Período -->
+<div class="flex items-center gap-1.5 p-1 rounded-full bg-white/60 shadow-sm self-start md:self-auto">
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all">Tiempo Real</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors">1H</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors">24H</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors">7D</button>
+</div>
+</div>
+<!-- Contenedor Horizontal para las 18 Cápsulas / Barras lado a lado -->
+<div class="w-full overflow-x-auto pb-4 pt-2 scrollbar-none">
+<div class="flex justify-between items-end gap-2 sm:gap-3 w-full min-w-[760px] h-[260px] px-1">
+<!-- 1: Carmesí 65% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-01" data-category="Carga Crítica" data-color="#d61f3c" data-grad="grad-crimson" data-val="65%" role="button" tabindex="0" title="Ver detalle del canal C-01">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[65%] rounded-full grad-crimson shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">65%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-01</span>
+</div>
+<!-- 2: Esmeralda 28% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-02" data-category="Rendimiento Óptimo" data-color="#0ba74a" data-grad="grad-emerald" data-val="28%" role="button" tabindex="0" title="Ver detalle del canal C-02">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[28%] rounded-full grad-emerald shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">28%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-02</span>
+</div>
+<!-- 3: Ámbar 95% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-03" data-category="Umbral Alto" data-color="#ffaa2a" data-grad="grad-amber" data-val="95%" role="button" tabindex="0" title="Ver detalle del canal C-03">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[95%] rounded-full grad-amber shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">95%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-03</span>
+</div>
+<!-- 4: Púrpura 45% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-04" data-category="Procesamiento L2" data-color="#7c3aed" data-grad="grad-purple" data-val="45%" role="button" tabindex="0" title="Ver detalle del canal C-04">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[45%] rounded-full grad-purple shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">45%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-04</span>
+</div>
+<!-- 5: Azul Cian 82% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-05" data-category="Balance Concurrente" data-color="#0284c7" data-grad="grad-blue" data-val="82%" role="button" tabindex="0" title="Ver detalle del canal C-05">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[82%] rounded-full grad-blue shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">82%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-05</span>
+</div>
+<!-- 6: Carmesí 35% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-06" data-category="Carga Crítica" data-color="#d61f3c" data-grad="grad-crimson" data-val="35%" role="button" tabindex="0" title="Ver detalle del canal C-06">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[35%] rounded-full grad-crimson shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">35%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-06</span>
+</div>
+<!-- 7: Esmeralda 70% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-07" data-category="Rendimiento Óptimo" data-color="#0ba74a" data-grad="grad-emerald" data-val="70%" role="button" tabindex="0" title="Ver detalle del canal C-07">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[70%] rounded-full grad-emerald shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">70%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-07</span>
+</div>
+<!-- 8: Ámbar 90% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-08" data-category="Umbral Alto" data-color="#ffaa2a" data-grad="grad-amber" data-val="90%" role="button" tabindex="0" title="Ver detalle del canal C-08">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[90%] rounded-full grad-amber shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">90%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-08</span>
+</div>
+<!-- 9: Púrpura 50% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-09" data-category="Procesamiento L2" data-color="#7c3aed" data-grad="grad-purple" data-val="50%" role="button" tabindex="0" title="Ver detalle del canal C-09">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[50%] rounded-full grad-purple shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">50%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-09</span>
+</div>
+<!-- 10: Azul Cian 85% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-10" data-category="Balance Concurrente" data-color="#0284c7" data-grad="grad-blue" data-val="85%" role="button" tabindex="0" title="Ver detalle del canal C-10">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[85%] rounded-full grad-blue shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">85%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-10</span>
+</div>
+<!-- 11: Carmesí 30% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-11" data-category="Carga Crítica" data-color="#d61f3c" data-grad="grad-crimson" data-val="30%" role="button" tabindex="0" title="Ver detalle del canal C-11">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[30%] rounded-full grad-crimson shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">30%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-11</span>
+</div>
+<!-- 12: Esmeralda 75% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-12" data-category="Rendimiento Óptimo" data-color="#0ba74a" data-grad="grad-emerald" data-val="75%" role="button" tabindex="0" title="Ver detalle del canal C-12">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[75%] rounded-full grad-emerald shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">75%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-12</span>
+</div>
+<!-- 13: Ámbar 60% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-13" data-category="Umbral Alto" data-color="#ffaa2a" data-grad="grad-amber" data-val="60%" role="button" tabindex="0" title="Ver detalle del canal C-13">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[60%] rounded-full grad-amber shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">60%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-13</span>
+</div>
+<!-- 14: Púrpura 92% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-14" data-category="Procesamiento L2" data-color="#7c3aed" data-grad="grad-purple" data-val="92%" role="button" tabindex="0" title="Ver detalle del canal C-14">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[92%] rounded-full grad-purple shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">92%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-14</span>
+</div>
+<!-- 15: Azul Cian 40% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-15" data-category="Balance Concurrente" data-color="#0284c7" data-grad="grad-blue" data-val="40%" role="button" tabindex="0" title="Ver detalle del canal C-15">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[40%] rounded-full grad-blue shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">40%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-15</span>
+</div>
+<!-- 16: Esmeralda 88% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-16" data-category="Rendimiento Óptimo" data-color="#0ba74a" data-grad="grad-emerald" data-val="88%" role="button" tabindex="0" title="Ver detalle del canal C-16">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[88%] rounded-full grad-emerald shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">88%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-16</span>
+</div>
+<!-- 17: Ámbar 55% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-17" data-category="Umbral Alto" data-color="#ffaa2a" data-grad="grad-amber" data-val="55%" role="button" tabindex="0" title="Ver detalle del canal C-17">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[55%] rounded-full grad-amber shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">55%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-17</span>
+</div>
+<!-- 18: Azul Cian 78% -->
+<div class="flex flex-col items-center flex-1 max-w-[44px] group interactive-pill" data-bar-id="C-18" data-category="Balance Concurrente" data-color="#0284c7" data-grad="grad-blue" data-val="78%" role="button" tabindex="0" title="Ver detalle del canal C-18">
+<div class="w-full h-[200px] rounded-full glass-pill-slot shadow-pill-depth p-1 flex flex-col justify-end overflow-hidden relative">
+<div class="w-full h-[78%] rounded-full grad-blue shadow-md flex items-center justify-center transition-all duration-300 group-hover:brightness-105">
+<span class="text-[10px] sm:text-[11px] font-bold text-white drop-shadow-sm select-none">78%</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-slate-700 mt-2 text-center group-hover:text-slate-950">C-18</span>
+</div>
+</div>
+</div>
+<!-- Leyenda y Resumen Inferior -->
+<div class="mt-8 pt-6 border-t border-white/50 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-700">
+<!-- Indicadores de Paleta -->
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full grad-crimson"></span>
+<span>Carga Crítica</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full grad-emerald"></span>
+<span>Rendimiento Óptimo</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full grad-amber"></span>
+<span>Umbral Alto</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full grad-purple"></span>
+<span>Procesamiento L2</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full grad-blue"></span>
+<span>Balance Concurrente</span>
+</div>
+</div>
+<!-- Métricas agregadas rápidas -->
+<div class="flex items-center gap-4 text-xs font-medium">
+<span>Promedio Global: <strong class="text-slate-900 font-bold">68.6%</strong></span>
+<span class="text-slate-400">|</span>
+<span>Capacidad Disponible: <strong class="text-emerald-700 font-bold">31.4%</strong></span>
+</div>
+</div>
+</section>
+<!-- Barra Inferior de Acción y Estado del Sistema -->
+<footer class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-full glass-card shadow-glass">
+<div class="flex items-center gap-3 px-3">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-emeraldStart opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-brand-emeraldStart"></span>
+</span>
+<span class="text-sm text-slate-800 font-medium">
+        Infraestructura Operando al <strong class="font-bold text-emerald-700">99.98%</strong> de Eficiencia
+      </span>
+<span class="hidden md:inline text-slate-400">•</span>
+<span class="hidden md:inline text-xs text-slate-600">Última sincronización: hace 3 segundos</span>
+</div>
+<!-- Botones de Acción Glassmórficos -->
+<div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+<button class="px-5 py-2.5 rounded-full bg-white/70 hover:bg-white text-slate-800 text-xs font-semibold shadow-sm transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+        Actualizar Datos
+      </button>
+<button class="px-5 py-2.5 rounded-full bg-brand-emeraldStart hover:bg-brand-emeraldEnd text-white text-xs font-semibold shadow-md transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+        Exportar Reporte
+      </button>
+</div>
+</footer>
+</div>
+<!-- ========================================== -->
+<!-- MODAL GLASSMORPHISM: DETALLE DE MÉTRICA/NODO -->
+<!-- ========================================== -->
+<div aria-labelledby="modal-node-title" aria-modal="true" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300 ease-out" id="glass-metric-modal" role="dialog">
+<!-- Telón de Fondo Glassmorphic (Backdrop Blur) -->
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity duration-300" id="modal-backdrop"></div>
+<!-- Contenedor Principal del Diálogo -->
+<div class="relative w-full max-w-3xl glass-modal-panel shadow-modal-glass rounded-3xl p-6 sm:p-8 transform scale-95 transition-all duration-300 ease-out max-h-[92vh] overflow-y-auto" id="modal-container">
+<!-- Encabezado del Modal -->
+<div class="flex items-start justify-between pb-5 border-b border-white/70">
+<div class="space-y-1">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse shadow-sm" id="modal-status-dot"></span>
+<span class="text-xs uppercase tracking-wider font-semibold text-slate-600" id="modal-status-badge">En Línea / Óptimo</span>
+<span class="text-xs px-2.5 py-0.5 rounded-full bg-white/80 border border-white/60 font-semibold text-slate-800 shadow-xs" id="modal-badge-category">Balance Concurrente</span>
+</div>
+<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight" id="modal-node-title">
+          Detalle del Nodo: Canal C-05
+        </h2>
+<p class="text-xs sm:text-sm text-slate-600" id="modal-node-subtitle">
+          Telemetría en tiempo real y asignación dinámica de carga de clúster.
+        </p>
+</div>
+<!-- Botón de Cierre Elegante -->
+<button aria-label="Cerrar modal" class="w-9 h-9 rounded-full bg-white/80 hover:bg-white text-slate-700 hover:text-slate-900 flex items-center justify-center shadow-sm border border-white/80 transition-all hover:scale-105 active:scale-95" id="btn-close-modal">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Sección de Métricas Principales (Grid de 6 estadísticas) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5 my-6">
+<!-- Métrica 1 -->
+<div class="p-3.5 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Carga Actual</span>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-slate-900" id="modal-metric-load">82%</span>
+<span class="text-[11px] text-emerald-600 font-semibold" id="modal-metric-load-delta">+2.4%</span>
+</div>
+<span class="text-[11px] text-slate-600 mt-1">Capacidad asignada</span>
+</div>
+<!-- Métrica 2 -->
+<div class="p-3.5 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Ancho de Banda</span>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-slate-900" id="modal-metric-bandwidth">4.82</span>
+<span class="text-xs text-slate-500 font-semibold">GB/s</span>
+</div>
+<span class="text-[11px] text-slate-600 mt-1">Máx: 6.00 GB/s</span>
+</div>
+<!-- Métrica 3 -->
+<div class="p-3.5 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Latencia Actual</span>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-slate-900" id="modal-metric-latency">11.4</span>
+<span class="text-xs text-slate-500 font-semibold">ms</span>
+</div>
+<span class="text-[11px] text-emerald-600 font-semibold mt-1">Óptima (SLO &lt; 20ms)</span>
+</div>
+<!-- Métrica 4 -->
+<div class="p-3.5 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Paquetes Transmitidos</span>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-slate-900" id="modal-metric-packets">14.8M</span>
+<span class="text-xs text-slate-500 font-semibold">req</span>
+</div>
+<span class="text-[11px] text-slate-600 mt-1">Ventana de 60 min</span>
+</div>
+<!-- Métrica 5 -->
+<div class="p-3.5 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Tasa de Errores</span>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-emerald-700" id="modal-metric-error">0.01%</span>
+</div>
+<span class="text-[11px] text-slate-600 mt-1">Cluster auto-recuperado</span>
+</div>
+<!-- Métrica 6 -->
+<div class="p-3.5 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Temp. / Uptime</span>
+<div class="mt-2 flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-slate-900" id="modal-metric-temp">41°C</span>
+<span class="text-xs text-slate-500 font-semibold">/ 99.98%</span>
+</div>
+<span class="text-[11px] text-slate-600 mt-1">Refrigeración pasiva</span>
+</div>
+</div>
+<!-- Mini Gráficas Interiores Glassmórficas -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+<!-- Mini Gráfico 1: Actividad 24 Horas (Micro Sparkline de Barras) -->
+<div class="p-4 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-slate-800">Distribución de Actividad (Últimas 24H)</span>
+<span class="text-[11px] font-semibold text-slate-500">Muestreo horario</span>
+</div>
+<!-- Barras de micro-sparkline -->
+<div class="flex items-end justify-between gap-1.5 h-20 pt-2 px-1">
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[40%] hover:bg-slate-400 transition-colors" title="00:00 - 40%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[30%] hover:bg-slate-400 transition-colors" title="02:00 - 30%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[25%] hover:bg-slate-400 transition-colors" title="04:00 - 25%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[50%] hover:bg-slate-400 transition-colors" title="06:00 - 50%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[75%] hover:bg-slate-400 transition-colors" title="08:00 - 75%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[85%] hover:bg-slate-400 transition-colors" title="10:00 - 85%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[90%] hover:bg-slate-400 transition-colors" title="12:00 - 90%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[70%] hover:bg-slate-400 transition-colors" title="14:00 - 70%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[80%] hover:bg-slate-400 transition-colors" title="16:00 - 80%"></div>
+<div class="w-full bg-indigo-500/80 rounded-t-sm h-[95%] hover:bg-indigo-600 transition-colors" title="18:00 (Pico) - 95%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[65%] hover:bg-slate-400 transition-colors" title="20:00 - 65%"></div>
+<div class="w-full bg-slate-300/40 rounded-t-sm h-[55%] hover:bg-slate-400 transition-colors" title="22:00 - 55%"></div>
+</div>
+<div class="flex justify-between text-[10px] text-slate-500 font-semibold pt-1 border-t border-slate-200/50">
+<span>00:00</span>
+<span>12:00</span>
+<span>23:59</span>
+</div>
+</div>
+<!-- Mini Gráfico 2: Comparativa contra Promedio Global -->
+<div class="p-4 rounded-2xl glass-modal-subcard shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-slate-800">Comparación vs. Promedio General</span>
+<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full" id="modal-efficiency-badge">+13.4% Eficiencia</span>
+</div>
+<div class="space-y-3 my-auto py-1">
+<!-- Barra 1: Este Nodo -->
+<div>
+<div class="flex justify-between text-[11px] font-semibold text-slate-700 mb-1">
+<span id="modal-bar-label-node">Canal C-05 (Este Nodo)</span>
+<span id="modal-bar-val-node">82%</span>
+</div>
+<div class="w-full h-3 rounded-full bg-slate-200/60 p-0.5 overflow-hidden">
+<div class="h-full rounded-full transition-all duration-700 grad-blue" id="modal-bar-fill-node" style="width: 82%;"></div>
+</div>
+</div>
+<!-- Barra 2: Promedio Global (68.6%) -->
+<div>
+<div class="flex justify-between text-[11px] font-semibold text-slate-700 mb-1">
+<span>Promedio 18 Canales</span>
+<span>68.6%</span>
+</div>
+<div class="w-full h-3 rounded-full bg-slate-200/60 p-0.5 overflow-hidden">
+<div class="h-full rounded-full bg-slate-400 transition-all duration-700" style="width: 68.6%;"></div>
+</div>
+</div>
+</div>
+<span class="text-[11px] text-slate-600 mt-2 block">
+          Umbral óptimo garantizado bajo balance dinámico.
+        </span>
+</div>
+</div>
+<!-- Botones de Acción Glassmórficos del Modal -->
+<div class="pt-5 border-t border-white/70 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-full bg-white/80 hover:bg-white text-slate-800 text-xs font-semibold shadow-sm border border-white transition-all flex items-center gap-1.5" id="btn-pause-node">
+<span class="material-symbols-outlined text-[16px] text-amber-600">pause_circle</span>
+          Pausar Balanceo
+        </button>
+<button class="px-4 py-2 rounded-full bg-white/80 hover:bg-white text-slate-800 text-xs font-semibold shadow-sm border border-white transition-all flex items-center gap-1.5" id="btn-download-logs">
+<span class="material-symbols-outlined text-[16px] text-slate-700">description</span>
+          Descargar Logs
+        </button>
+</div>
+<button class="px-6 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-md transition-all ml-auto" id="btn-close-modal-alt">
+        Cerrar
+      </button>
+</div>
+</div>
+</div>
+<!-- Interactividad y Lógica del Modal -->
+<script>
+  (function() {
+    // 1. Refresco suave en botón footer existente
+    const refreshBtn = document.querySelector('footer button:first-child');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', function() {
+        const icon = this.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.classList.add('animate-spin');
+          setTimeout(() => {
+            icon.classList.remove('animate-spin');
+          }, 800);
+        }
+      });
+    }
+
+    // 2. Elementos del Modal
+    const modal = document.getElementById('glass-metric-modal');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalContainer = document.getElementById('modal-container');
+    const btnClose = document.getElementById('btn-close-modal');
+    const btnCloseAlt = document.getElementById('btn-close-modal-alt');
+
+    // Nodos dinámicos del contenido del modal
+    const modalTitle = document.getElementById('modal-node-title');
+    const modalSubtitle = document.getElementById('modal-node-subtitle');
+    const modalBadgeCategory = document.getElementById('modal-badge-category');
+    const modalStatusBadge = document.getElementById('modal-status-badge');
+    const modalStatusDot = document.getElementById('modal-status-dot');
+    const metricLoad = document.getElementById('modal-metric-load');
+    const metricLoadDelta = document.getElementById('modal-metric-load-delta');
+    const metricBandwidth = document.getElementById('modal-metric-bandwidth');
+    const metricLatency = document.getElementById('modal-metric-latency');
+    const metricPackets = document.getElementById('modal-metric-packets');
+    const metricError = document.getElementById('modal-metric-error');
+    const metricTemp = document.getElementById('modal-metric-temp');
+    const barLabelNode = document.getElementById('modal-bar-label-node');
+    const barValNode = document.getElementById('modal-bar-val-node');
+    const barFillNode = document.getElementById('modal-bar-fill-node');
+    const efficiencyBadge = document.getElementById('modal-efficiency-badge');
+
+    // Abre el modal con transición suave
+    function openModal(data) {
+      modalTitle.textContent = data.title;
+      modalSubtitle.textContent = data.subtitle || 'Telemetría en tiempo real y asignación dinámica de carga de clúster.';
+      modalBadgeCategory.textContent = data.category || 'Métrica Activa';
+      
+      metricLoad.textContent = data.val || '68%';
+      const numericVal = parseInt(data.val) || 68;
+      
+      // Color y gradiente dinámico
+      if (data.grad) {
+        barFillNode.className = 'h-full rounded-full transition-all duration-700 ' + data.grad;
+      } else {
+        barFillNode.className = 'h-full rounded-full transition-all duration-700 grad-blue';
+      }
+      barFillNode.style.width = numericVal + '%';
+      barLabelNode.textContent = (data.nodeId ? 'Canal ' + data.nodeId : data.title) + ' (Actual)';
+      barValNode.textContent = numericVal + '%';
+
+      // Cálculo de ancho de banda y latencia proporcionales simulados
+      const bw = ((numericVal / 100) * 5.8).toFixed(2);
+      metricBandwidth.textContent = bw;
+      
+      const lat = (8 + (numericVal * 0.08)).toFixed(1);
+      metricLatency.textContent = lat;
+
+      const packets = ((numericVal * 0.18) + 2.5).toFixed(1) + 'M';
+      metricPackets.textContent = packets;
+
+      // Estado condicional
+      if (numericVal >= 90) {
+        modalStatusDot.className = 'w-3 h-3 rounded-full bg-amber-500 animate-pulse shadow-sm';
+        modalStatusBadge.textContent = 'Alerta / Umbral Alto';
+        metricError.textContent = '0.04%';
+        metricError.className = 'text-2xl font-bold text-amber-600';
+        metricTemp.textContent = '49°C';
+        efficiencyBadge.textContent = '+26.4% Pico Máx';
+        efficiencyBadge.className = 'text-[11px] font-semibold text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-full';
+        metricLoadDelta.textContent = '+18.2%';
+        metricLoadDelta.className = 'text-[11px] text-amber-600 font-semibold';
+      } else if (numericVal <= 35) {
+        modalStatusDot.className = 'w-3 h-3 rounded-full bg-rose-500 animate-ping shadow-sm';
+        modalStatusBadge.textContent = 'Carga Crítica / Desbalance';
+        metricError.textContent = '0.08%';
+        metricError.className = 'text-2xl font-bold text-rose-600';
+        metricTemp.textContent = '38°C';
+        efficiencyBadge.textContent = '-33.6% Subutilizado';
+        efficiencyBadge.className = 'text-[11px] font-semibold text-rose-700 bg-rose-100/80 px-2 py-0.5 rounded-full';
+        metricLoadDelta.textContent = '-12.0%';
+        metricLoadDelta.className = 'text-[11px] text-rose-600 font-semibold';
+      } else {
+        modalStatusDot.className = 'w-3 h-3 rounded-full bg-emerald-500 animate-pulse shadow-sm';
+        modalStatusBadge.textContent = 'En Línea / Óptimo';
+        metricError.textContent = '0.01%';
+        metricError.className = 'text-2xl font-bold text-emerald-700';
+        metricTemp.textContent = '42°C';
+        efficiencyBadge.textContent = '+11.8% Eficiencia';
+        efficiencyBadge.className = 'text-[11px] font-semibold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full';
+        metricLoadDelta.textContent = '+3.5%';
+        metricLoadDelta.className = 'text-[11px] text-emerald-600 font-semibold';
+      }
+
+      // Animación de despliegue
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContainer.classList.remove('scale-95');
+      modalContainer.classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Cierra el modal con animación
+    function closeModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContainer.classList.remove('scale-100');
+      modalContainer.classList.add('scale-95');
+      document.body.style.overflow = '';
+    }
+
+    // Escuchar cierres (click afuera, botones, ESC)
+    if (btnClose) btnClose.addEventListener('click', closeModal);
+    if (btnCloseAlt) btnCloseAlt.addEventListener('click', closeModal);
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !modal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
+
+    // 3. Conectar las 18 barras interactivas
+    const pillBars = document.querySelectorAll('.interactive-pill');
+    pillBars.forEach(bar => {
+      bar.addEventListener('click', function() {
+        const id = this.getAttribute('data-bar-id');
+        const val = this.getAttribute('data-val');
+        const cat = this.getAttribute('data-category');
+        const grad = this.getAttribute('data-grad');
+
+        openModal({
+          nodeId: id,
+          title: `Detalle del Nodo: Canal ${id}`,
+          subtitle: `Telemetría individual de rendimiento para el bus balanceado ${id}.`,
+          category: cat,
+          val: val,
+          grad: grad
+        });
+      });
+
+      // Accesibilidad con teclado (Enter o Espacio)
+      bar.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // 4. Conectar también las tarjetas superiores (Anillos y Gráfica de Onda)
+    const radialCard = document.querySelector('[data-metric-type="radial-gauges"]');
+    if (radialCard) {
+      radialCard.addEventListener('click', function(e) {
+        openModal({
+          nodeId: 'GLOBAL-SLA',
+          title: 'Telemetría Operativa: Objetivos & SLA',
+          subtitle: 'Disponibilidad consolidada de todos los clusters (94%) y fase activa (68%).',
+          category: 'Disponibilidad Global',
+          val: '94%',
+          grad: 'grad-emerald'
+        });
+      });
+    }
+
+    const waveCard = document.querySelector('[data-metric-type="wave-chart"]');
+    if (waveCard) {
+      waveCard.addEventListener('click', function(e) {
+        openModal({
+          nodeId: 'FLOW-WEEKLY',
+          title: 'Volumen y Tendencia de Flujo Semanal',
+          subtitle: 'Análisis telemetry continuo. Pico registrado el Jueves con 82.4 req/s.',
+          category: 'Tendencia Semanal',
+          val: '82%',
+          grad: 'grad-purple'
+        });
+      });
+    }
+
+    // Botones adicionales dentro del modal
+    const pauseBtn = document.getElementById('btn-pause-node');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function() {
+        const isPaused = this.getAttribute('data-paused') === 'true';
+        if (!isPaused) {
+          this.setAttribute('data-paused', 'true');
+          this.innerHTML = '<span class="material-symbols-outlined text-[16px] text-emerald-600">play_circle</span> Reanudar Balanceo';
+          modalStatusBadge.textContent = 'Pausado Manualmente';
+          modalStatusDot.className = 'w-3 h-3 rounded-full bg-slate-400';
+        } else {
+          this.setAttribute('data-paused', 'false');
+          this.innerHTML = '<span class="material-symbols-outlined text-[16px] text-amber-600">pause_circle</span> Pausar Balanceo';
+          modalStatusBadge.textContent = 'En Línea / Óptimo';
+          modalStatusDot.className = 'w-3 h-3 rounded-full bg-emerald-500 animate-pulse';
+        }
+      });
+    }
+
+    const downloadBtn = document.getElementById('btn-download-logs');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function() {
+        const origText = this.innerHTML;
+        this.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">sync</span> Descargando...';
+        setTimeout(() => {
+          this.innerHTML = '<span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span> Logs Guardados';
+          setTimeout(() => {
+            this.innerHTML = origText;
+          }, 1500);
+        }, 800);
+      });
+    }
+
+  })();
+</script></main>
+<!-- END: MainShowcaseContainer -->
+</body></html>

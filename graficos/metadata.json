@@ -1,0 +1,6 @@
+{
+  "name": "Panel de Métricas y Telemetría",
+  "description": "Sección de gráficos interactivos de rendimiento, disponibilidad y distribución por canales en vivo con estética glassmorphic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

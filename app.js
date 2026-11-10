@@ -1063,42 +1063,38 @@
     const regionsHost = $("#regionsChart");
     const liveCounter = $('[data-live="scan-datos"]');
 
-    // ---- 1. Dona: Porcentaje entregado ----
+    // ---- 1. Dona: Porcentaje entregado (Sincronizado 92,8%) ----
     if (ringFill && pctText) {
-      const CIRC = 2 * Math.PI * 62; // r=62
+      const CIRC = 2 * Math.PI * 48; // r=48 -> 301.59
+      let pctActual = 92.8;
+      let lastOdoVal = null;
       const updateRing = (pct) => {
         const v = Math.max(0, Math.min(100, pct));
-        ringFill.style.strokeDasharray = CIRC.toFixed(2);
-        ringFill.style.strokeDashoffset = (CIRC * (1 - v / 100)).toFixed(2);
+        pctActual = v;
+        ringFill.style.strokeDasharray = CIRC.toFixed(1);
+        ringFill.style.strokeDashoffset = (CIRC * (1 - v / 100)).toFixed(1);
         pctText.textContent = v.toFixed(1).replace(".", ",") + "%";
       };
-      updateRing(91.0);
+      updateRing(92.8);
 
       document.addEventListener("occ:pct", (e) => {
-        if (e.detail && typeof e.detail.value === "number") updateRing(e.detail.value);
+        if (!e.detail || typeof e.detail.value !== "number") return;
+        if (lastOdoVal === null) {
+          lastOdoVal = e.detail.value;
+          return;
+        }
+        const diff = e.detail.value - lastOdoVal;
+        lastOdoVal = e.detail.value;
+        if (diff > 0) updateRing(Math.min(99.9, pctActual + diff));
       });
     }
 
-    // ---- 2. Cajitas en vivo y columnas por región ----
+    // ---- 2. Cajitas entregadas en vivo y barras cápsula por región (AP..MG) ----
     if (regionsHost) {
-      const SHORT_CODES = ["AP", "TA", "AN", "AT", "CO", "VA", "RM", "OH", "MA", "ÑU", "BI", "AR", "LR", "LL", "AY", "MG"];
-      const vals = REGIONS.map((r) => r.b);
-      const max = () => Math.max(...vals);
+      const pillBars = $$(".interactive-pill", regionsHost);
 
-      const renderCols = () => {
-        const m = max();
-        regionsHost.innerHTML = REGIONS.map((r, i) => `
-          <div class="region-col" data-region="${r.n}" title="${r.n}: ${fmt(vals[i])} cajitas">
-            <div class="region-col__bar-track">
-              <div class="region-col__bar" style="height:${Math.max(6, (vals[i] / m) * 88)}%"></div>
-            </div>
-            <span class="region-col__label">${SHORT_CODES[i] || r.s.slice(0, 3)}</span>
-          </div>`).join("");
-      };
-      renderCols();
-
-      // Contador en vivo sincronizado con el hero
-      let totalCajas = 206274;
+      // Contador en vivo sincronizado con el hero (212.429 cajitas)
+      let totalCajas = 212429;
       if (liveCounter) liveCounter.textContent = fmt(totalCajas);
 
       let animToken = 0;
@@ -1122,26 +1118,36 @@
 
       const PASOS = [5, 10, 50, 100, 1000];
       const spawnBadge = (deltaOpt) => {
-        const i = Math.floor(Math.random() * REGIONS.length);
+        if (!pillBars.length) return;
+        const i = Math.floor(Math.random() * pillBars.length);
         const delta = deltaOpt || PASOS[Math.floor(Math.random() * PASOS.length)];
-        vals[i] += delta;
-        const col = regionsHost.children[i];
-        if (!col) return;
-        const bar = col.querySelector(".region-col__bar");
-        const m = max();
-        if (bar) {
-          bar.style.height = Math.max(6, (vals[i] / m) * 88) + "%";
-          bar.classList.add("is-bump");
-          setTimeout(() => bar.classList.remove("is-bump"), 650);
+        const barEl = pillBars[i];
+        if (!barEl) return;
 
-          // Inserta badge flotante "+N" igual que el hero (misma rampa y animacion)
-          const badge = document.createElement("span");
-          badge.className = "region-col__badge";
-          badge.dataset.step = String(delta);
-          badge.textContent = "+" + (delta >= 1000 ? "1k" : fmt(delta));
-          bar.appendChild(badge);
-          setTimeout(() => badge.remove(), 1400);
-        }
+        const oldVal = parseInt(barEl.getAttribute("data-val"), 10) || 50;
+        const stepPct = delta >= 1000 ? 2 : 1;
+        const nextVal = oldVal >= 97 ? 62 : Math.min(98, oldVal + stepPct);
+        barEl.setAttribute("data-val", String(nextVal));
+
+        const fill = barEl.querySelector(".mx-bar__fill");
+        const labelSpan = fill && fill.querySelector("span");
+        if (fill) fill.style.height = nextVal + "%";
+        if (labelSpan) labelSpan.textContent = nextVal + "%";
+        barEl.title = `Ver detalle de ${barEl.dataset.barName || barEl.dataset.barId} (${barEl.dataset.barId}): ${nextVal}%`;
+
+        barEl.classList.add("is-bump");
+        setTimeout(() => barEl.classList.remove("is-bump"), 650);
+
+        // Inserta badge flotante "+N" sobre la barra que sube en vivo
+        const slot = barEl.querySelector(".mx-bar__slot") || barEl;
+        const badge = document.createElement("span");
+        badge.className = "region-col__badge";
+        badge.dataset.step = String(delta);
+        badge.textContent = "+" + (delta >= 1000 ? "1k" : fmt(delta));
+        slot.appendChild(badge);
+        setTimeout(() => badge.remove(), 1400);
+
+        document.dispatchEvent(new CustomEvent("occ:bars-updated"));
       };
 
       // Reacciona al evento global del hero
@@ -1159,6 +1165,454 @@
         setTimeout(scheduleLocal, 3600 + Math.random() * 4800);
       };
       setTimeout(scheduleLocal, 2200);
+    }
+  }
+
+  /* ---------------- CENTRO DE DATOS · panel de métricas (graficos + OCC) ---------------- */
+  function initMetricsPanel() {
+    const root = $("#datos");
+    const modal = $("#mxModal");
+    if (!root || !modal) return;
+
+    const MX_YEARS = {
+      "27": { volume: "42", unit: "contenedores meta", delta: "+18% proyección", peak: "+18% proyección" },
+      "26": { volume: "38", unit: "contenedores anuales", delta: "+15.2% vs '25", peak: "38 contenedores ('26)" },
+      "25": { volume: "33", unit: "contenedores anuales", delta: "+17.8% vs '24", peak: "33 contenedores ('25)" },
+      "24": { volume: "28", unit: "contenedores anuales", delta: "Base histórica", peak: "28 contenedores ('24)" },
+    };
+
+    // ---- Anillo radial: Porcentaje entregado (92,8%) ----
+    let currentPct = 92.8;
+    const ringFill = $('[data-ring="pct"]', root);
+    const pctText = $('[data-dato="pct"]', root);
+    const setPctRing = (value) => {
+      const v = Math.max(0, Math.min(100, Number(value) || 92.8));
+      currentPct = v;
+      const circ = 2 * Math.PI * 48; // 301.59
+      if (ringFill) {
+        ringFill.style.strokeDasharray = circ.toFixed(1);
+        ringFill.style.strokeDashoffset = (circ * (1 - v / 100)).toFixed(1);
+      }
+      if (pctText) pctText.textContent = v.toFixed(1).replace(".", ",") + "%";
+    };
+
+    // ---- Selector de año en Meta y Crecimiento ('24 - '27) ----
+    const monthSel = $("#mxMonth", root);
+    const volumeEl = $("[data-mx-volume]", root);
+    const unitEl = $("[data-mx-unit]", root);
+    const deltaEl = $("[data-mx-delta]", root);
+    const peakEl = $("[data-mx-peak]", root);
+    const yearPills = $$(".mx-year-pill", root);
+
+    const selectYear = (yr) => {
+      const y = MX_YEARS[yr] || MX_YEARS["27"];
+      if (volumeEl) volumeEl.textContent = y.volume;
+      if (unitEl) unitEl.textContent = y.unit;
+      if (deltaEl) deltaEl.textContent = y.delta;
+      if (peakEl) peakEl.textContent = y.peak;
+      yearPills.forEach((pill) => {
+        pill.classList.toggle("is-peak", pill.dataset.year === yr);
+      });
+    };
+
+    if (monthSel) {
+      monthSel.addEventListener("change", () => selectYear(monthSel.value));
+      monthSel.addEventListener("click", (e) => e.stopPropagation());
+    }
+    yearPills.forEach((pill) => {
+      pill.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const yr = pill.dataset.year || "27";
+        if (monthSel) monthSel.value = yr;
+        selectYear(yr);
+      });
+    });
+
+    // ---- Barras interactivas por región (16 regiones AP..MG) ----
+    const pillBars = root.querySelectorAll(".interactive-pill");
+    const readBars = () => Array.from(pillBars).map((el) => ({
+      el,
+      id: el.getAttribute("data-bar-id") || "",
+      name: el.getAttribute("data-bar-name") || el.getAttribute("data-bar-id") || "",
+      category: el.getAttribute("data-category") || "",
+      grad: el.getAttribute("data-grad") || "grad-blue",
+      value: parseInt(el.getAttribute("data-val"), 10) || 0,
+    }));
+    const average = () => {
+      const list = readBars();
+      return list.length ? list.reduce((sum, b) => sum + b.value, 0) / list.length : 0;
+    };
+    const renderAggregates = () => {
+      const avg = average();
+      const avgEl = $("[data-mx-avg]", root);
+      const availEl = $("[data-mx-avail]", root);
+      const avgModal = $("[data-mx-avg-modal]", modal);
+      if (avgEl) avgEl.textContent = avg.toFixed(1) + "%";
+      if (availEl) availEl.textContent = (100 - avg).toFixed(1) + "%";
+      if (avgModal) {
+        avgModal.textContent = avg.toFixed(1) + "%";
+        const compare = avgModal.closest(".mx-compare");
+        const fill = compare && compare.querySelector(".mx-compare__avg");
+        if (fill) fill.style.width = avg.toFixed(1) + "%";
+      }
+    };
+    renderAggregates();
+    document.addEventListener("occ:bars-updated", renderAggregates);
+
+    $$(".mx-tabs button", root).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        $$(".mx-tabs button", root).forEach((b) => {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
+      });
+    });
+
+    // ---- Modal de detalle (integración exacta de telemetría interactiva) ----
+    const modalContainer = document.getElementById("mxModalContainer") || $(".mx-modal__panel", modal);
+    const modalBackdrop = document.getElementById("mxModalBackdrop") || $(".mx-modal__backdrop", modal);
+    const btnClose = document.getElementById("mxBtnClose");
+    const btnCloseAlt = document.getElementById("mxBtnCloseAlt");
+    const modalStatusDot = document.getElementById("mxModalDot");
+    const modalStatusBadge = document.getElementById("mxModalStatus");
+    const modalCat = document.getElementById("mxModalCat");
+    const modalTitle = document.getElementById("mxModalTitle");
+    const modalSubtitle = document.getElementById("mxModalSubtitle");
+    const metricLoad = document.getElementById("mxMetricLoad");
+    const metricLoadDelta = document.getElementById("mxMetricLoadDelta");
+    const metricBandwidth = document.getElementById("mxMetricBandwidth");
+    const metricLatency = document.getElementById("mxMetricLatency");
+    const metricPackets = document.getElementById("mxMetricPackets");
+    const metricError = document.getElementById("mxMetricError");
+    const metricTemp = document.getElementById("mxMetricTemp");
+    const efficiencyBadge = document.getElementById("mxEfficiencyBadge");
+    const barLabelNode = document.getElementById("mxBarLabel");
+    const barValNode = document.getElementById("mxBarVal");
+    const barFillNode = document.getElementById("mxBarFill");
+    let currentData = null;
+
+    function openModal(data) {
+      currentData = data;
+      const pauseBtnEl = document.getElementById("btn-pause-node");
+      if (pauseBtnEl) {
+        pauseBtnEl.setAttribute("data-paused", "false");
+        pauseBtnEl.innerHTML = '<i data-lucide="pause"></i> Pausar Balanceo';
+      }
+
+      if (modalTitle) modalTitle.textContent = data.title || "Detalle del Nodo";
+      if (modalSubtitle) modalSubtitle.textContent = data.subtitle || "Telemetría individual de rendimiento.";
+      if (modalCat) modalCat.textContent = data.category || "Balance Concurrente";
+
+      const numericVal = parseInt(data.val, 10) || 68;
+      if (metricLoad) metricLoad.textContent = numericVal + "%";
+
+      // Color y gradiente dinámico
+      const gradClass = data.grad
+        ? (data.grad.startsWith("grad-") ? data.grad : "grad-" + data.grad)
+        : "grad-blue";
+      const mxGradClass = "mx-grad--" + gradClass.replace(/^grad-/, "");
+      if (barFillNode) {
+        barFillNode.className = "h-full rounded-full transition-all duration-700 " + gradClass + " " + mxGradClass;
+        barFillNode.style.width = numericVal + "%";
+      }
+      if (barLabelNode) {
+        barLabelNode.textContent = (data.nodeId ? "Canal " + data.nodeId : data.title) + " (Actual)";
+      }
+      if (barValNode) {
+        barValNode.textContent = numericVal + "%";
+      }
+
+      // Cálculo de ancho de banda y latencia proporcionales simulados
+      const bw = ((numericVal / 100) * 5.8).toFixed(2);
+      if (metricBandwidth) metricBandwidth.textContent = bw;
+
+      const lat = (8 + (numericVal * 0.08)).toFixed(1);
+      if (metricLatency) metricLatency.textContent = lat;
+
+      const packets = ((numericVal * 0.18) + 2.5).toFixed(1) + "M";
+      if (metricPackets) metricPackets.textContent = packets;
+
+      // Estado condicional
+      if (numericVal >= 90) {
+        if (modalStatusDot) modalStatusDot.className = "mx-dot mx-dot--warn w-3 h-3 rounded-full bg-amber-500 animate-pulse shadow-sm";
+        if (modalStatusBadge) modalStatusBadge.textContent = "Alerta / Umbral Alto";
+        if (metricError) {
+          metricError.textContent = "0.04%";
+          metricError.className = "is-warn text-2xl font-bold text-amber-600";
+        }
+        if (metricTemp) metricTemp.textContent = "49°C";
+        if (efficiencyBadge) {
+          efficiencyBadge.textContent = "+26.4% Pico Máx";
+          efficiencyBadge.className = "mx-badge-up is-warn text-[11px] font-semibold text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-full";
+        }
+        if (metricLoadDelta) {
+          metricLoadDelta.textContent = "+18.2%";
+          metricLoadDelta.className = "is-warn text-[11px] text-amber-600 font-semibold";
+        }
+      } else if (numericVal <= 35) {
+        if (modalStatusDot) modalStatusDot.className = "mx-dot mx-dot--bad w-3 h-3 rounded-full bg-rose-500 animate-ping shadow-sm";
+        if (modalStatusBadge) modalStatusBadge.textContent = "Carga Crítica / Desbalance";
+        if (metricError) {
+          metricError.textContent = "0.08%";
+          metricError.className = "is-bad text-2xl font-bold text-rose-600";
+        }
+        if (metricTemp) metricTemp.textContent = "38°C";
+        if (efficiencyBadge) {
+          efficiencyBadge.textContent = "-33.6% Subutilizado";
+          efficiencyBadge.className = "mx-badge-up is-bad text-[11px] font-semibold text-rose-700 bg-rose-100/80 px-2 py-0.5 rounded-full";
+        }
+        if (metricLoadDelta) {
+          metricLoadDelta.textContent = "-12.0%";
+          metricLoadDelta.className = "is-bad text-[11px] text-rose-600 font-semibold";
+        }
+      } else {
+        if (modalStatusDot) modalStatusDot.className = "mx-dot mx-dot--ok w-3 h-3 rounded-full bg-emerald-500 animate-pulse shadow-sm";
+        if (modalStatusBadge) modalStatusBadge.textContent = "En Línea / Óptimo";
+        if (metricError) {
+          metricError.textContent = "0.01%";
+          metricError.className = "text-2xl font-bold text-emerald-700";
+        }
+        if (metricTemp) metricTemp.textContent = "42°C";
+        if (efficiencyBadge) {
+          efficiencyBadge.textContent = "+11.8% Eficiencia";
+          efficiencyBadge.className = "mx-badge-up text-[11px] font-semibold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full";
+        }
+        if (metricLoadDelta) {
+          metricLoadDelta.textContent = "+3.5%";
+          metricLoadDelta.className = "text-[11px] text-emerald-600 font-semibold";
+        }
+      }
+
+      renderAggregates();
+      icons();
+
+      // Animación de despliegue
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      if (modalContainer) {
+        modalContainer.classList.remove("scale-95");
+        modalContainer.classList.add("scale-100");
+      }
+      document.body.style.overflow = "hidden";
+    }
+
+    // Cierra el modal con animación
+    function closeModal() {
+      modal.classList.add("opacity-0", "pointer-events-none");
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      if (modalContainer) {
+        modalContainer.classList.remove("scale-100");
+        modalContainer.classList.add("scale-95");
+      }
+      document.body.style.overflow = "";
+    }
+
+    // Escuchar cierres (click afuera, botones, ESC)
+    if (btnClose) btnClose.addEventListener("click", closeModal);
+    if (btnCloseAlt) btnCloseAlt.addEventListener("click", closeModal);
+    if (modalBackdrop) modalBackdrop.addEventListener("click", closeModal);
+
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !modal.classList.contains("pointer-events-none")) {
+        closeModal();
+      }
+    });
+
+    // 3. Conectar las 16 barras interactivas regionales
+    pillBars.forEach((bar) => {
+      bar.addEventListener("click", function () {
+        const id = this.getAttribute("data-bar-id");
+        const name = this.getAttribute("data-bar-name");
+        const val = this.getAttribute("data-val");
+        const cat = this.getAttribute("data-category");
+        const grad = this.getAttribute("data-grad");
+
+        openModal({
+          nodeId: id,
+          title: name ? `Detalle del Nodo: ${name} (${id})` : `Detalle del Nodo: Canal ${id}`,
+          subtitle: `Telemetría individual de rendimiento para el bus balanceado ${name ? name + " (" + id + ")" : id}.`,
+          category: cat,
+          val: val,
+          grad: grad,
+        });
+      });
+
+      // Accesibilidad con teclado (Enter o Espacio)
+      bar.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // 4. Conectar también las tarjetas superiores (Anillos y Gráfica de Onda)
+    const radialCard = root.querySelector('[data-metric-type="radial-gauges"]');
+    if (radialCard) {
+      radialCard.addEventListener("click", function (e) {
+        if (e.target.closest("button")) return;
+        openModal({
+          nodeId: "GLOBAL-SLA",
+          title: "Porcentaje Entregado: Objetivos & SLA",
+          subtitle: `Sincronizado (${currentPct.toFixed(1).replace(".", ",")}%) · 91% Entregado, 6% En ruta y 3% en Bodega.`,
+          category: "Disponibilidad Global",
+          val: Math.round(currentPct) + "%",
+          grad: "grad-emerald",
+        });
+      });
+      radialCard.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    }
+
+    const waveCard = root.querySelector('[data-metric-type="wave-chart"]');
+    if (waveCard) {
+      waveCard.addEventListener("click", function (e) {
+        if (e.target.closest("button, select, label, .mx-year-pill")) return;
+        openModal({
+          nodeId: "FLOW-WEEKLY",
+          title: "Meta y Crecimiento: Contenedores Anuales",
+          subtitle: "Evolución 28 ('24) → 33 ('25) → 38 ('26) → 42 Meta ('27) con +18% proyección.",
+          category: "Tendencia Anual",
+          val: "82%",
+          grad: "grad-purple",
+        });
+      });
+      waveCard.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    }
+
+    // Botones adicionales dentro del modal
+    const pauseBtn = document.getElementById("btn-pause-node");
+    if (pauseBtn) {
+      pauseBtn.addEventListener("click", function () {
+        const isPaused = this.getAttribute("data-paused") === "true";
+        if (!isPaused) {
+          this.setAttribute("data-paused", "true");
+          this.innerHTML = '<i data-lucide="play"></i> Reanudar Balanceo';
+          if (modalStatusBadge) modalStatusBadge.textContent = "Pausado Manualmente";
+          if (modalStatusDot) modalStatusDot.className = "mx-dot w-3 h-3 rounded-full bg-slate-400";
+        } else {
+          this.setAttribute("data-paused", "false");
+          this.innerHTML = '<i data-lucide="pause"></i> Pausar Balanceo';
+          if (modalStatusBadge) modalStatusBadge.textContent = "En Línea / Óptimo";
+          if (modalStatusDot) modalStatusDot.className = "mx-dot mx-dot--ok w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
+        }
+        icons();
+      });
+    }
+
+    const downloadBtn = document.getElementById("btn-download-logs");
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", function () {
+        const origText = this.innerHTML;
+        this.innerHTML = '<i data-lucide="refresh-cw"></i> Descargando...';
+        icons();
+        setTimeout(() => {
+          if (currentData) {
+            const numeric = parseInt(currentData.val, 10) || 68;
+            const lines = [
+              "--- LOG DE TELEMETRÍA OCC ---",
+              "Nodo: " + (currentData.nodeId || "N/A") + " · " + (currentData.title || ""),
+              "Fecha: " + new Date().toISOString(),
+              "Carga actual: " + numeric + "%",
+              "Ancho de banda: " + ((numeric / 100) * 5.8).toFixed(2) + " GB/s",
+              "Latencia: " + (8 + numeric * 0.08).toFixed(1) + " ms",
+              "Paquetes: " + ((numeric * 0.18) + 2.5).toFixed(1) + "M req",
+              "Categoría: " + (currentData.category || "N/A"),
+              "------------------------------",
+            ];
+            const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "telemetria-" + String(currentData.nodeId || "nodo").toLowerCase() + ".txt";
+            a.click();
+            URL.revokeObjectURL(url);
+          }
+          this.innerHTML = '<i data-lucide="check-circle-2"></i> Logs Guardados';
+          icons();
+          setTimeout(() => {
+            this.innerHTML = origText;
+            icons();
+          }, 1500);
+        }, 800);
+      });
+    }
+
+    // ---- Refresco y sincronización ----
+    let syncSec = 3;
+    const syncEl = $("[data-mx-sync]", root);
+    setInterval(() => {
+      syncSec = syncSec >= 60 ? 1 : syncSec + 1;
+      if (syncEl) syncEl.textContent = String(syncSec);
+    }, 1000);
+    const resetSync = () => {
+      syncSec = 0;
+      if (syncEl) syncEl.textContent = "0";
+    };
+
+    const refreshGaugesBtn = $("#mxRefreshGauges", root);
+    if (refreshGaugesBtn) {
+      refreshGaugesBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        refreshGaugesBtn.classList.add("is-spinning");
+        const nextPct = Math.min(96.5, Math.max(91.0, currentPct + (Math.random() * 0.8 - 0.3)));
+        setPctRing(nextPct);
+        setTimeout(() => refreshGaugesBtn.classList.remove("is-spinning"), 800);
+      });
+    }
+
+    const refreshAllBtn = $("#mxRefreshAll", root);
+    if (refreshAllBtn) {
+      refreshAllBtn.addEventListener("click", () => {
+        refreshAllBtn.classList.add("is-spinning");
+        pillBars.forEach((bar) => {
+          const old = parseInt(bar.getAttribute("data-val"), 10) || 0;
+          const next = Math.min(98, Math.max(15, old + (Math.floor(Math.random() * 11) - 5)));
+          bar.setAttribute("data-val", String(next));
+          const fill = bar.querySelector(".mx-bar__fill");
+          const label = fill && fill.querySelector("span");
+          if (fill) fill.style.height = next + "%";
+          if (label) label.textContent = next + "%";
+          bar.title = `Ver detalle de ${bar.dataset.barName || bar.dataset.barId} (${bar.dataset.barId}): ${next}%`;
+        });
+        setPctRing(Math.min(96.5, Math.max(91.0, currentPct + (Math.random() * 0.6 - 0.2))));
+        renderAggregates();
+        resetSync();
+        setTimeout(() => refreshAllBtn.classList.remove("is-spinning"), 800);
+      });
+    }
+
+    const exportBtn = $("#mxExport", root);
+    if (exportBtn) {
+      exportBtn.addEventListener("click", () => {
+        const rows = [["ID", "Region", "Carga %", "Categoria", "Gradiente"]];
+        readBars().forEach((b) => rows.push([b.id, b.name, String(b.value), b.category, b.grad]));
+        rows.push([]);
+        rows.push(["Promedio regional", average().toFixed(1) + "%"]);
+        const csv = rows.map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(",")).join("\n");
+        const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "reporte-cajitas-occ.csv";
+        a.click();
+        URL.revokeObjectURL(url);
+        toast("Reporte exportado · 16 regiones", "download");
+      });
     }
   }
 
@@ -1189,6 +1643,32 @@
 
     if (prevBtn) prevBtn.addEventListener("click", () => rotateCarousel(-1));
     if (nextBtn) nextBtn.addEventListener("click", () => rotateCarousel(1));
+
+    items.forEach((item, index) => {
+      item.addEventListener("click", (e) => {
+        if (e.target.closest(".tierra-panel__video-thumb--playing")) return;
+        const normAngle = ((currAngle % 360) + 360) % 360;
+        const activeIndex = Math.round(normAngle / angleStep) % items.length;
+        if (index === activeIndex) return; // Ya está al frente
+        let diff = index - activeIndex;
+        if (diff > items.length / 2) diff -= items.length;
+        if (diff < -items.length / 2) diff += items.length;
+        rotateCarousel(diff);
+      });
+    });
+
+    carousel.querySelectorAll(".tierra-panel__video-thumb").forEach((thumb) => {
+      thumb.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (thumb.dataset.played === "1") return;
+        thumb.dataset.played = "1";
+        const videoSrc = thumb.dataset.videoSrc || "https://www.youtube.com/embed/KOKtonyYIFs?rel=0";
+        const embedUrl = videoSrc.includes("?") ? `${videoSrc}&autoplay=1` : `${videoSrc}?autoplay=1`;
+        thumb.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="Video de Norte" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:0;border-radius:inherit;display:block;"></iframe>`;
+        thumb.classList.add("tierra-panel__video-thumb--playing");
+      });
+    });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -1196,7 +1676,8 @@
     initFlows();
     initArch();
     initTierraPanels();
-  initDatosSection();
+    initDatosSection();
+    initMetricsPanel();
     initTheme();
     initNav();
     initReveal();

@@ -1,0 +1,64 @@
+.carousel-container {
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  margin: 50px auto;
+  width: 300px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px;
+}
+.carousel-3d {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.item {
+  position: absolute;
+  width: 280px;
+  height: 180px;
+  left: 10px;
+  top: 10px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  font-weight: 800;
+  border: 4px solid #fff;
+  opacity: 0.9;
+}
+.item:nth-child(1) { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.item:nth-child(2) { background: linear-gradient(135deg, #ec4899, #db2777); }
+.item:nth-child(3) { background: linear-gradient(135deg, #10b981, #059669); }
+.item:nth-child(4) { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.item:nth-child(5) { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.item:nth-child(6) { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.controls {
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.controls button {
+  padding: 12px 30px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s;
+  font-size: 1rem;
+}
+.controls button:hover {
+  transform: scale(1.05);
+  background: #000;
+}

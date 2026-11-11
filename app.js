@@ -906,18 +906,21 @@
       }));
       icons();
     }
-    $("#engage").innerHTML = VOLS.map(([n, r, d, c]) => {
-      const st = d > 20 ? "inactive" : d > 7 ? "risk" : "";
-      const col = d > 20 ? "var(--bad)" : d > 7 ? "var(--warn)" : "var(--ok)";
-      return `<div class="vol ${st}"><span class="av" style="background:${c}">${n.split(" ").map((x) => x[0]).join("")}</span>
+    const elEngage = $("#engage");
+    if (elEngage) {
+      elEngage.innerHTML = VOLS.map(([n, r, d, c]) => {
+        const st = d > 20 ? "inactive" : d > 7 ? "risk" : "";
+        const col = d > 20 ? "var(--bad)" : d > 7 ? "var(--warn)" : "var(--ok)";
+        return `<div class="vol ${st}"><span class="av" style="background:${c}">${n.split(" ").map((x) => x[0]).join("")}</span>
         <div><strong>${n}</strong><small>${r} · ${d === 1 ? "activo hoy" : `hace ${d} días`}</small>${st ? `<br><button data-n="${n}">Enviar recordatorio</button>` : ""}</div>
         <span class="st" style="background:${col}"></span></div>`;
-    }).join("");
-    $("#engage").addEventListener("click", (e) => {
-      const b = e.target.closest("button"); if (!b) return;
-      b.textContent = "✓ Enviado"; b.disabled = true; b.style.background = "var(--ok)";
-      toast(`Recordatorio personalizado enviado a ${b.dataset.n} por WhatsApp`, "send");
-    });
+      }).join("");
+      elEngage.addEventListener("click", (e) => {
+        const b = e.target.closest("button"); if (!b) return;
+        b.textContent = "✓ Enviado"; b.disabled = true; b.style.background = "var(--ok)";
+        toast(`Recordatorio personalizado enviado a ${b.dataset.n} por WhatsApp`, "send");
+      });
+    }
     render();
   }
 

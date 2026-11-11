@@ -6,7 +6,7 @@
 (() => {
   "use strict";
 
-  const LANG = (document.documentElement.lang === "en" || location.pathname.includes("index-en")) ? "en" : (document.documentElement.lang === "pt" || location.pathname.includes("index-pt")) ? "pt" : "es";
+  let LANG = "es";
   const IS_EN = LANG === "en";
   const IS_PT = LANG === "pt";
 
@@ -201,21 +201,15 @@
     }
 
     $(".lang-switch .lang").forEach((b) => b.addEventListener("click", (e) => {
-      const target = b.dataset.lang;
-      const currentLang = LANG;
-      if (target === currentLang) {
-        e.preventDefault();
-        return;
-      }
       e.preventDefault();
-      try { sessionStorage.setItem("occ-lang-switch", "1"); } catch (_) {}
-      if (target === "en") {
-        location.href = "index-en.html";
-      } else if (target === "pt") {
-        location.href = "index-pt.html";
-      } else {
-        location.href = "index.html";
-      }
+      const target = b.dataset.lang || "es";
+      LANG = target;
+      $(".lang-switch .lang").forEach((x) => {
+        x.classList.remove("is-active");
+        x.setAttribute("aria-pressed", "false");
+      });
+      b.classList.add("is-active");
+      b.setAttribute("aria-pressed", "true");
     }));
   }
 

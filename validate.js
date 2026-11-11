@@ -125,34 +125,29 @@ function validateCss(filename) {
   }
 }
 
-// 5. Validador de Cache Busting sincronizado
+// 5. Validador de Cache Busting
 function validateCacheBusting() {
   const es = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const en = fs.readFileSync(path.join(root, 'index-en.html'), 'utf8');
 
   const esCss = (es.match(/styles\.css\?v=(\d+)/) || [])[1];
   const esJs = (es.match(/app\.js\?v=(\d+)/) || [])[1];
-  const enCss = (en.match(/styles\.css\?v=(\d+)/) || [])[1];
-  const enJs = (en.match(/app\.js\?v=(\d+)/) || [])[1];
 
-  if (esCss !== enCss) {
-    error(`Versión de styles.css dispar: ES tiene v=${esCss}, EN tiene v=${enCss}`);
+  if (!esCss) {
+    error("styles.css en index.html no tiene versión de cache busting (?v=N)");
   } else {
-    success(`Cache busting styles.css sincronizado: v=${esCss}`);
+    success(`Cache busting styles.css activo: v=${esCss}`);
   }
 
-  if (esJs !== enJs) {
-    error(`Versión de app.js dispar: ES tiene v=${esJs}, EN tiene v=${enJs}`);
+  if (!esJs) {
+    error("app.js en index.html no tiene versión de cache busting (?v=N)");
   } else {
-    success(`Cache busting app.js sincronizado: v=${esJs}`);
+    success(`Cache busting app.js activo: v=${esJs}`);
   }
 }
 
 console.log("=== OCC CHILE · TEST DE INTEGRIDAD Y PREVENCIÓN ===");
 validateHtmlTree('index.html');
-validateHtmlTree('index-en.html');
-validateHtmlTree('index-pt.html');
-validateEncoding(['index.html', 'index-en.html', 'index-pt.html', 'styles.css', 'app.js']);
+validateEncoding(['index.html', 'styles.css', 'app.js']);
 validateJsSyntax('app.js');
 validateCss('styles.css');
 validateCacheBusting();

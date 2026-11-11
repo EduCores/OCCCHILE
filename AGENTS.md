@@ -7,8 +7,6 @@ Sitio estático de una sola página (prototipo conceptual). Sin build, sin frame
 | Archivo | Rol |
 |---|---|
 | `index.html` | Todo el markup en español. Una sola página con secciones por ancla (`#inicio`, `#viaje`, `#tierra`, `#testimonios`, `#enfoque`, `#datos`, `#postular`, `#organigrama`, `#cta`). |
-| `index-en.html` | Versión oficial en inglés de la plataforma (`lang="en"`), conectada mediante el selector `.lang-switch`. |
-| `index-pt.html` | Versión oficial en portugués de la plataforma (`lang="pt"`), conectada mediante el selector `.lang-switch`. |
 | `styles.css` | Todos los estilos, incluidos temas claro/oscuro y responsive. |
 | `app.js` | Interacciones: hero, contadores, odómetro, tema, reveal, demos y lógica trilingüe (ES/EN/PT). |
 | `validate.js` | Script de guardia e integridad: valida etiquetas HTML, sintaxis JS/CSS, UTF-8 y cache-busting. |

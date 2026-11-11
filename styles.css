@@ -1234,13 +1234,37 @@ em {
 
 /* ============ MARQUEE CTA ============ */
 .marquee--cta {
-  /* Personalizaciones para la huincha sobre #cta */
+  background: var(--pine);
+  color: #fff;
+  overflow: hidden;
+  padding: 16px 0;
+  transform: rotate(-1.2deg);
+  margin: calc(-1 * calc(14px + 1.05vw)) -10px 10px;
+  position: relative;
+  z-index: 3;
 }
 
 .marquee__track--cta {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  font-family: var(--display);
+  font-size: 1.3rem;
 }
 
 .marquee__group--cta {
+  display: flex;
+  gap: 28px;
+  padding-right: 28px;
+  align-items: center;
+}
+
+.marquee__group--cta svg {
+  color: var(--gold);
+  fill: var(--gold);
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
 }
 
 /* ============ SECTIONS ============ */
@@ -4043,25 +4067,19 @@ input[type="range"] {
 /* ============ CTA / FOOTER ============ */
 /* ============ CTA / FOOTER ============ */
 .cta {
+  --cta-solape: calc(14px + 1.05vw);
+  margin-top: calc(-10px - var(--cta-solape));
+  padding-top: calc(60px + var(--cta-solape));
   position: relative;
-  z-index: 5;
-  padding: calc(clamp(36px, 8.4vw, 130px) + 50px) 0 100px;
+  z-index: 1;
+  padding-bottom: 100px;
   background: #115d28;
   overflow-x: clip;
 }
 
 /* Transición diagonal salvia (#b9ceb9) -> oscuro con pendiente idéntica a diseño */
 .cta::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 100%;
-  height: clamp(36px, 8.4vw, 130px);
-  background-color: #b9ceb9;
-  clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 .cta__inner {
@@ -10971,7 +10989,7 @@ h2.section-title--pine {
 /* ============ ORGANIGRAMA DE CHILE (LIQUID GLASS) ============ */
 .organigrama {
   position: relative;
-  padding: 84px 0 100px;
+  padding: 84px 0 180px;
   background-color: #b9ceb9 !important;
   color: #1e293b;
   color-scheme: light;

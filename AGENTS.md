@@ -7,6 +7,9 @@ Sitio estático de una sola página (prototipo conceptual). Sin build, sin frame
 | Archivo | Rol |
 |---|---|
 | `index.html` | Todo el markup en español. Una sola página con secciones por ancla (`#inicio`, `#viaje`, `#tierra`, `#testimonios`, `#enfoque`, `#datos`, `#postular`, `#organigrama`, `#cta`). |
+| `admin.html` | Panel de administración y automatizaciones IA (mockup funcional). Conectado bidireccionalmente con `index.html`. |
+| `admin.css` | Estilos dedicados del panel de administración, adaptados a la paleta oficial (Dark/Pine/Sage/Red/Gold). |
+| `admin.js` | Interactividad del panel admin: tabs, simulación OCR, bodega visión, rutas, automatizaciones y asistente. |
 | `styles.css` | Todos los estilos, incluidos temas claro/oscuro y responsive. |
 | `app.js` | Interacciones: hero, contadores, odómetro, tema, reveal, demos y lógica trilingüe (ES/EN/PT). |
 | `validate.js` | Script de guardia e integridad: valida etiquetas HTML, sintaxis JS/CSS, UTF-8 y cache-busting. |

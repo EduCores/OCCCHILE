@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCC Chile · Panel de Administración & Automatizaciones IA</title>
+  <meta name="description"
+    content="Panel de administración y control operativo para la plataforma de Operación Niño de la Navidad Chile. Gestión de iglesias, voluntarios, OCR y automatizaciones." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css?v=257" />
+  <link rel="stylesheet" href="admin.css?v=1" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
+</head>
+
+<body class="admin-body">
+
+  <!-- ============ TOPBAR ============ -->
+  <header class="admin-topbar">
+    <div class="admin-topbar__brand">
+      <a href="index.html" aria-label="Ir al sitio web">
+        <img src="img/occchile-logo.png" alt="OCC Chile" class="admin-topbar__logo" />
+      </a>
+      <span class="admin-topbar__pill">
+        <i data-lucide="shield-check"></i> Panel de Control IA
+      </span>
+      <div class="admin-topbar__status">
+        <span class="admin-status-dot"></span>
+        <span>16 Regiones en línea · Latencia 24ms</span>
+      </div>
+    </div>
+
+    <div class="admin-topbar__actions">
+      <a href="index.html" class="btn btn--ghost btn--sm btn--lc">
+        <i data-lucide="external-link"></i> Ver sitio web
+      </a>
+      <div class="admin-user">
+        <div class="admin-user__avatar">ENL</div>
+        <span>Coordinador Nacional</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ LAYOUT ============ -->
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <span class="admin-nav-group-title">Operaciones</span>
+
+      <button type="button" class="admin-nav-item is-active" data-view="dashboard">
+        <i data-lucide="layout-dashboard"></i>
+        <span>Dashboard Nacional</span>
+      </button>
+
+      <button type="button" class="admin-nav-item" data-view="iglesias">
+        <i data-lucide="church"></i>
+        <span>Iglesias & Cupos</span>
+        <span class="badge-count">126</span>
+      </button>
+
+      <button type="button" class="admin-nav-item" data-view="voluntarios">
+        <i data-lucide="users"></i>
+        <span>Voluntarios & Roles</span>
+      </button>
+
+      <span class="admin-nav-group-title">Evidencia & Logística</span>
+
+      <button type="button" class="admin-nav-item" data-view="ocr">
+        <i data-lucide="scan-text"></i>
+        <span>Auditoría OCR</span>
+      </button>
+
+      <button type="button" class="admin-nav-item" data-view="logistica">
+        <i data-lucide="truck"></i>
+        <span>Logística & Bodega</span>
+      </button>
+
+      <span class="admin-nav-group-title">Inteligencia Artificial</span>
+
+      <button type="button" class="admin-nav-item" data-view="automatizaciones">
+        <i data-lucide="cpu"></i>
+        <span>Automatizaciones</span>
+        <span class="badge-count" style="background:rgba(16,185,129,0.25); color:#6ee7b7; border-color:rgba(16,185,129,0.4);">4</span>
+      </button>
+
+      <button type="button" class="admin-nav-item" data-view="asistente">
+        <i data-lucide="sparkles"></i>
+        <span>Consola Asistente IA</span>
+      </button>
+    </aside>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="admin-main">
+
+      <!-- ================= 1. VIEW: DASHBOARD ================= -->
+      <section class="admin-view is-active" id="view-dashboard">
+        <div class="admin-view-header">
+          <div>
+            <h2>Dashboard Nacional de Operaciones</h2>
+            <p>Métricas de distribución y cobertura en tiempo real para las 16 regiones de Chile.</p>
+          </div>
+          <button type="button" class="btn btn--primary btn--sm btn--lc" onclick="location.reload()">
+            <i data-lucide="refresh-cw"></i> Actualizar datos
+          </button>
+        </div>
+
+        <!-- KPIs -->
+        <div class="admin-kpis">
+          <div class="admin-kpi">
+            <div class="admin-kpi__top">
+              <span class="admin-kpi__label">Cajas Recibidas</span>
+              <div class="admin-kpi__icon"><i data-lucide="package"></i></div>
+            </div>
+            <div class="admin-kpi__num">228.024</div>
+            <span class="admin-kpi__delta up"><i data-lucide="trending-up"></i> +4,2% vs 2025</span>
+          </div>
+
+          <div class="admin-kpi admin-kpi--pine">
+            <div class="admin-kpi__top">
+              <span class="admin-kpi__label">Distribuidas a Iglesias</span>
+              <div class="admin-kpi__icon"><i data-lucide="package-check"></i></div>
+            </div>
+            <div class="admin-kpi__num">90,5%</div>
+            <span class="admin-kpi__delta up"><i data-lucide="check"></i> 206.274 cajas entregadas</span>
+          </div>
+
+          <div class="admin-kpi admin-kpi--ok">
+            <div class="admin-kpi__top">
+              <span class="admin-kpi__label">Contenedores 2027</span>
+              <div class="admin-kpi__icon"><i data-lucide="container"></i></div>
+            </div>
+            <div class="admin-kpi__num">31 / 42</div>
+            <span class="admin-kpi__delta up"><i data-lucide="sparkles"></i> Predicción: 43 contenedores</span>
+          </div>
+
+          <div class="admin-kpi">
+            <div class="admin-kpi__top">
+              <span class="admin-kpi__label">Iglesias Auditadas</span>
+              <div class="admin-kpi__icon"><i data-lucide="file-check"></i></div>
+            </div>
+            <div class="admin-kpi__num">842</div>
+            <span class="admin-kpi__delta up"><i data-lucide="shield-check"></i> 98% con acta OCR conforme</span>
+          </div>
+        </div>
+
+        <!-- Grilla de distribución regional y alertas -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+          <div class="admin-card">
+            <div class="admin-card__head">
+              <h3><i data-lucide="bar-chart-3"></i> Avance por Región (Chile)</h3>
+              <span class="badge-tag badge-tag--ia">16 Regiones</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px; font-size:0.86rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Metropolitana</span><b>95,8%</b>
+                </div>
+                <div style="height:8px; border-radius:999px; background:var(--admin-surface-3); overflow:hidden;">
+                  <div style="width:95.8%; height:100%; background:linear-gradient(90deg, var(--admin-pine-light), var(--admin-ok));"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Valparaíso</span><b>94,2%</b>
+                </div>
+                <div style="height:8px; border-radius:999px; background:var(--admin-surface-3); overflow:hidden;">
+                  <div style="width:94.2%; height:100%; background:linear-gradient(90deg, var(--admin-pine-light), var(--admin-ok));"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Biobío</span><b>92,4%</b>
+                </div>
+                <div style="height:8px; border-radius:999px; background:var(--admin-surface-3); overflow:hidden;">
+                  <div style="width:92.4%; height:100%; background:linear-gradient(90deg, var(--admin-pine-light), var(--admin-ok));"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Araucanía</span><b>90,1%</b>
+                </div>
+                <div style="height:8px; border-radius:999px; background:var(--admin-surface-3); overflow:hidden;">
+                  <div style="width:90.1%; height:100%; background:linear-gradient(90deg, var(--admin-pine-light), var(--admin-ok));"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Los Lagos</span><b>89,3%</b>
+                </div>
+                <div style="height:8px; border-radius:999px; background:var(--admin-surface-3); overflow:hidden;">
+                  <div style="width:89.3%; height:100%; background:linear-gradient(90deg, var(--admin-pine-light), var(--admin-warn));"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Antofagasta (Paso fronterizo)</span><b>76,2%</b>
+                </div>
+                <div style="height:8px; border-radius:999px; background:var(--admin-surface-3); overflow:hidden;">
+                  <div style="width:76.2%; height:100%; background:linear-gradient(90deg, var(--admin-warn), var(--admin-bad));"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card__head">
+              <h3><i data-lucide="sparkles"></i> Resumen Ejecutivo IA</h3>
+              <span class="badge-tag badge-tag--ok"><i data-lucide="bot"></i> Generado hoy</span>
+            </div>
+            <div style="color:var(--admin-text-muted); font-size:0.88rem; line-height:1.6; display:flex; flex-direction:column; gap:12px;">
+              <p>
+                <strong>Estado Global:</strong> La campaña de distribución nacional avanza a un ritmo <strong>+4,2% superior al período 2025</strong>. El 90,5% de las cajitas programadas ya han sido entregadas y rendidas mediante el módulo OCR.
+              </p>
+              <p>
+                <strong>Atención Logística:</strong> La Región de Antofagasta experimenta una demora estimada de 48 horas en el tramo Calama por mantenimiento vial. La IA ha redistribuido las rutas secundarias sin afectar fechas de eventos.
+              </p>
+              <div style="background:var(--admin-surface-2); border:1px solid var(--admin-border); padding:12px 16px; border-radius:12px; display:flex; align-items:center; justify-content:space-between;">
+                <span>Discipulado "La Gran Aventura": <strong>68.420 niños inscritos</strong></span>
+                <span class="badge-tag badge-tag--ia">Meta superada</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2. VIEW: IGLESIAS & CUPOS ================= -->
+      <section class="admin-view" id="view-iglesias">
+        <div class="admin-view-header">
+          <div>
+            <h2>Gestión de Iglesias & Postulaciones</h2>
+            <p>Revisión de solicitudes para Compañeros de Ministerio y cálculo predictivo de cupos.</p>
+          </div>
+          <button type="button" class="btn btn--primary btn--sm btn--lc">
+            <i data-lucide="plus"></i> Nueva postulación
+          </button>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-toolbar">
+            <div class="admin-search">
+              <i data-lucide="search" style="color:var(--admin-text-dim);"></i>
+              <input type="text" id="churchSearch" placeholder="Buscar por iglesia, pastor o comuna..." />
+            </div>
+            <div class="admin-filter-group">
+              <select class="admin-select" id="churchFilter">
+                <option value="all">Todos los estados</option>
+                <option value="aprobada">Aprobadas</option>
+                <option value="pendiente">Pendientes</option>
+                <option value="revision">Requiere revisión</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table" id="churchesTable">
+              <thead>
+                <tr>
+                  <th>Iglesia / Congregación</th>
+                  <th>Ubicación</th>
+                  <th>Pastor / Contacto</th>
+                  <th>Cupo Solicitado</th>
+                  <th>Sugerencia IA</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-status="aprobada">
+                  <td>
+                    <strong>Comunidad Cristiana Esperanza</strong><br />
+                    <small style="color:var(--admin-text-dim);">ID: CL-IG-8941</small>
+                  </td>
+                  <td>Calama, Antofagasta</td>
+                  <td>Pr. Marcos Rojas</td>
+                  <td>200 cajas</td>
+                  <td><span class="badge-tag badge-tag--ia">250 cajas</span></td>
+                  <td><span class="badge-tag badge-tag--ok">Aprobada</span></td>
+                  <td>
+                    <button type="button" class="btn btn--ghost btn--sm btn--lc" style="padding:4px 10px; font-size:0.75rem;">Ver Ficha</button>
+                  </td>
+                </tr>
+
+                <tr data-status="pendiente">
+                  <td>
+                    <strong>Iglesia Bautista Gracia & Paz</strong><br />
+                    <small style="color:var(--admin-text-dim);">ID: CL-IG-8942</small>
+                  </td>
+                  <td>Talcahuano, Biobío</td>
+                  <td>Pra. Elena Morales</td>
+                  <td>150 cajas</td>
+                  <td><span class="badge-tag badge-tag--ia">150 cajas</span></td>
+                  <td><span class="badge-tag badge-tag--warn">Pendiente</span></td>
+                  <td>
+                    <button type="button" class="btn btn--primary btn--sm btn--lc btn-approve-church" style="padding:4px 10px; font-size:0.75rem;">Aprobar con IA</button>
+                  </td>
+                </tr>
+
+                <tr data-status="aprobada">
+                  <td>
+                    <strong>Misión Alianza Evangélica</strong><br />
+                    <small style="color:var(--admin-text-dim);">ID: CL-IG-8943</small>
+                  </td>
+                  <td>Temuco, Araucanía</td>
+                  <td>Pr. Samuel Huilcamán</td>
+                  <td>300 cajas</td>
+                  <td><span class="badge-tag badge-tag--ia">320 cajas</span></td>
+                  <td><span class="badge-tag badge-tag--ok">Aprobada</span></td>
+                  <td>
+                    <button type="button" class="btn btn--ghost btn--sm btn--lc" style="padding:4px 10px; font-size:0.75rem;">Ver Ficha</button>
+                  </td>
+                </tr>
+
+                <tr data-status="revision">
+                  <td>
+                    <strong>Centro Cristiano El Renuevo</strong><br />
+                    <small style="color:var(--admin-text-dim);">ID: CL-IG-8944</small>
+                  </td>
+                  <td>La Pintana, RM</td>
+                  <td>Pr. David Soto</td>
+                  <td>500 cajas</td>
+                  <td><span class="badge-tag badge-tag--warn">350 cajas (Capacidad)</span></td>
+                  <td><span class="badge-tag badge-tag--bad">Requiere revisión</span></td>
+                  <td>
+                    <button type="button" class="btn btn--ghost btn--sm btn--lc" style="padding:4px 10px; font-size:0.75rem;">Revisar Cupo</button>
+                  </td>
+                </tr>
+
+                <tr data-status="aprobada">
+                  <td>
+                    <strong>Iglesia Presbiteriana Puerto Montt</strong><br />
+                    <small style="color:var(--admin-text-dim);">ID: CL-IG-8945</small>
+                  </td>
+                  <td>Puerto Montt, Los Lagos</td>
+                  <td>Pr. Andrés Valenzuela</td>
+                  <td>180 cajas</td>
+                  <td><span class="badge-tag badge-tag--ia">180 cajas</span></td>
+                  <td><span class="badge-tag badge-tag--ok">Aprobada</span></td>
+                  <td>
+                    <button type="button" class="btn btn--ghost btn--sm btn--lc" style="padding:4px 10px; font-size:0.75rem;">Ver Ficha</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. VIEW: VOLUNTARIOS ================= -->
+      <section class="admin-view" id="view-voluntarios">
+        <div class="admin-view-header">
+          <div>
+            <h2>Gestión de Voluntarios & Roles IA</h2>
+            <p>Matching de perfiles y seguimiento del estado de participación regional.</p>
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm btn--lc">
+            <i data-lucide="download"></i> Exportar nómina
+          </button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:18px;">
+          <!-- Card Voluntario 1 -->
+          <div class="admin-card" style="margin-bottom:0;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+              <div style="display:flex; gap:12px; align-items:center;">
+                <div style="width:42px; height:42px; border-radius:50%; background:#d61f3c; color:#fff; display:grid; place-items:center; font-weight:800;">CS</div>
+                <div>
+                  <strong>Camila Santander</strong><br />
+                  <small style="color:var(--admin-text-dim);">Valparaíso · Activa hace 2 días</small>
+                </div>
+              </div>
+              <span class="badge-tag badge-tag--ok">Activa</span>
+            </div>
+            <div style="font-size:0.84rem; background:var(--admin-surface-2); padding:10px 14px; border-radius:10px; margin-bottom:14px;">
+              <span style="color:var(--admin-text-dim);">Rol sugerido por IA:</span><br />
+              <strong style="color:var(--admin-gold);"><i data-lucide="award"></i> Maestra "La Gran Aventura"</strong>
+            </div>
+            <button type="button" class="btn btn--ghost btn--sm btn--lc btn-wa-remind" data-name="Camila Santander" style="width:100%;">
+              <i data-lucide="message-circle"></i> Enviar inducción por WhatsApp
+            </button>
+          </div>
+
+          <!-- Card Voluntario 2 -->
+          <div class="admin-card" style="margin-bottom:0;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+              <div style="display:flex; gap:12px; align-items:center;">
+                <div style="width:42px; height:42px; border-radius:50%; background:#1a6b52; color:#fff; display:grid; place-items:center; font-weight:800;">JP</div>
+                <div>
+                  <strong>Joaquín Peña</strong><br />
+                  <small style="color:var(--admin-text-dim);">Biobío · Hace 9 días sin actividad</small>
+                </div>
+              </div>
+              <span class="badge-tag badge-tag--warn">En riesgo</span>
+            </div>
+            <div style="font-size:0.84rem; background:var(--admin-surface-2); padding:10px 14px; border-radius:10px; margin-bottom:14px;">
+              <span style="color:var(--admin-text-dim);">Rol sugerido por IA:</span><br />
+              <strong style="color:var(--admin-sage);"><i data-lucide="truck"></i> Coordinador de Cajas & Despacho</strong>
+            </div>
+            <button type="button" class="btn btn--primary btn--sm btn--lc btn-wa-remind" data-name="Joaquín Peña" style="width:100%;">
+              <i data-lucide="bell"></i> Enviar recordatorio WhatsApp
+            </button>
+          </div>
+
+          <!-- Card Voluntario 3 -->
+          <div class="admin-card" style="margin-bottom:0;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+              <div style="display:flex; gap:12px; align-items:center;">
+                <div style="width:42px; height:42px; border-radius:50%; background:#2f6fdb; color:#fff; display:grid; place-items:center; font-weight:800;">DA</div>
+                <div>
+                  <strong>Diego Araya</strong><br />
+                  <small style="color:var(--admin-text-dim);">Antofagasta · Hace 23 días</small>
+                </div>
+              </div>
+              <span class="badge-tag badge-tag--bad">Inactivo</span>
+            </div>
+            <div style="font-size:0.84rem; background:var(--admin-surface-2); padding:10px 14px; border-radius:10px; margin-bottom:14px;">
+              <span style="color:var(--admin-text-dim);">Rol sugerido por IA:</span><br />
+              <strong style="color:var(--admin-text-muted);"><i data-lucide="heart"></i> Equipo de Oración & Acogida</strong>
+            </div>
+            <button type="button" class="btn btn--ghost btn--sm btn--lc btn-wa-remind" data-name="Diego Araya" style="width:100%;">
+              <i data-lucide="refresh-cw"></i> Re-vincular por WhatsApp
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 4. VIEW: AUDITORÍA OCR ================= -->
+      <section class="admin-view" id="view-ocr">
+        <div class="admin-view-header">
+          <div>
+            <h2>Auditoría & OCR de Comprobantes</h2>
+            <p>Extracción automatizada de actas de entrega para verificación de asistencia y rendición.</p>
+          </div>
+          <span class="badge-tag badge-tag--ia"><i data-lucide="sparkles"></i> Modelo Vision v2.4</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:24px;">
+          <!-- Card 1: Escáner visual -->
+          <div class="admin-card">
+            <div class="admin-card__head">
+              <h3><i data-lucide="camera"></i> Escaneo de Planilla Oficial</h3>
+              <span class="badge-tag badge-tag--ok">Comprobante Físico</span>
+            </div>
+
+            <div class="ocr-stage" id="ocrStage" style="position:relative; border-radius:14px; overflow:hidden; background: repeating-linear-gradient(45deg, #141f1a, #141f1a 10px, #1a2822 10px, #1a2822 20px); padding:24px; min-height:320px; display:grid; place-items:center;">
+              <div class="doc" style="position:relative; width:100%; max-width:340px; background:#fffef8; color:#1e293b; padding:18px; border-radius:6px; box-shadow:0 15px 30px rgba(0,0,0,0.5); font-family:var(--font); font-size:0.85rem;">
+                <div style="font-weight:800; font-size:0.9rem; border-bottom:2px solid #0f4d3a; padding-bottom:6px; margin-bottom:10px; color:#0f4d3a;">
+                  PLANILLA DE RENDICIÓN · EVENTO OCC
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="color:#64748b;">Iglesia:</span>
+                  <strong>Comunidad Cristiana Esperanza</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="color:#64748b;">Ciudad:</span>
+                  <strong>Calama</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="color:#64748b;">Fecha:</span>
+                  <strong>14-12-2026</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="color:#64748b;">Niños asistentes:</span>
+                  <strong>184</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="color:#64748b;">Cajas entregadas:</span>
+                  <strong>197</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="color:#64748b;">Inscritos Discipulado:</span>
+                  <strong>63</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:8px; border-top:1px dashed #cbd5e1; padding-top:6px;">
+                  <span style="color:#64748b;">Firma Responsable:</span>
+                  <em style="font-family:cursive; color:#0f4d3a;">M. Rojas</em>
+                </div>
+              </div>
+              <div id="ocrBoxes" style="position:absolute; inset:0; pointer-events:none;"></div>
+            </div>
+
+            <div style="display:flex; gap:12px; margin-top:16px;">
+              <button type="button" class="btn btn--primary btn--lc" id="runOcr">
+                <i data-lucide="scan-text"></i> Procesar con OCR
+              </button>
+              <label class="btn btn--ghost btn--lc" style="cursor:pointer;">
+                <i data-lucide="upload"></i> Subir otra acta
+                <input type="file" accept="image/*" id="ocrFile" hidden />
+              </label>
+            </div>
+          </div>
+
+          <!-- Card 2: Resultados IA -->
+          <div class="admin-card">
+            <div class="admin-card__head">
+              <h3><i data-lucide="file-check-2"></i> Datos Extraídos & Auditoría</h3>
+              <span class="badge-tag badge-tag--ia"><i data-lucide="sparkles"></i> Validación IA</span>
+            </div>
+
+            <div class="admin-table-wrap" style="margin-bottom:16px;">
+              <table class="admin-table" id="ocrTable">
+                <thead>
+                  <tr>
+                    <th>Campo Detectado</th>
+                    <th>Valor Extraído</th>
+                    <th>Confianza</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="3" style="text-align:center; padding:24px; color:var(--admin-text-dim);">
+                      Presiona "Procesar con OCR" para iniciar el análisis del comprobante.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div id="ocrFlags"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5. VIEW: LOGÍSTICA & BODEGA ================= -->
+      <section class="admin-view" id="view-logistica">
+        <div class="admin-view-header">
+          <div>
+            <h2>Centro Logístico, Rutas & Bodega</h2>
+            <p>Conteo en tiempo real por visión artificial y optimización de despachos a lo largo de Chile.</p>
+          </div>
+          <span class="badge-tag badge-tag--ok"><i data-lucide="radio"></i> Sensores Activos</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:24px;">
+          <!-- Cinta transportadora con visión -->
+          <div class="admin-card">
+            <div class="admin-card__head">
+              <h3><i data-lucide="cctv"></i> Conteo en Bodega Central (Visión IA)</h3>
+              <span class="badge-tag badge-tag--ok">CAM-02 Santiago</span>
+            </div>
+
+            <div class="conveyor" id="conveyor" style="position:relative; height:200px; border-radius:14px; overflow:hidden; background:linear-gradient(180deg, #1c2822, #101915); display:grid; place-items:center;">
+              <div style="position:absolute; top:12px; left:14px; font-size:0.75rem; font-family:monospace; color:#6ee7b7; z-index:4;">
+                CAM-02 · LÍNEA DESPACHO NORTE / SUR
+              </div>
+              <div style="position:absolute; left:0; right:0; bottom:36px; height:24px; background:repeating-linear-gradient(90deg, #2a3a32 0 20px, #1f2b25 20px 40px);"></div>
+              <div style="padding:14px 22px; background:rgba(20,29,26,0.85); border:1px solid rgba(52,196,100,0.4); border-radius:12px; text-align:center;">
+                <span style="font-size:0.78rem; color:var(--admin-text-muted);">Sensor Láser Óptico</span><br />
+                <strong style="color:var(--admin-gold); font-size:1.15rem;">Cajitas en Movimiento Continuo</strong>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:16px; text-align:center;">
+              <div style="background:var(--admin-surface-2); padding:10px; border-radius:10px; border:1px solid var(--admin-border-subtle);">
+                <small style="color:var(--admin-text-dim);">Detectadas hoy</small><br />
+                <strong id="cvCount" style="font-size:1.2rem; color:#fff;">24.120</strong>
+              </div>
+              <div style="background:var(--admin-surface-2); padding:10px; border-radius:10px; border:1px solid var(--admin-border-subtle);">
+                <small style="color:var(--admin-text-dim);">Último Tag</small><br />
+                <strong id="cvTag" style="font-size:1.1rem; color:var(--admin-gold);">CL-84912</strong>
+              </div>
+              <div style="background:var(--admin-surface-2); padding:10px; border-radius:10px; border:1px solid var(--admin-border-subtle);">
+                <small style="color:var(--admin-text-dim);">Confianza Visión</small><br />
+                <strong id="cvConf" style="font-size:1.1rem; color:var(--admin-ok);">98,8%</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rutas seguras -->
+          <div class="admin-card">
+            <div class="admin-card__head">
+              <h3><i data-lucide="route"></i> Optimización de Rutas Carretera</h3>
+              <span class="badge-tag badge-tag--ia">Ruta 5 Norte/Sur</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px; font-size:0.86rem; color:var(--admin-text-muted);">
+              <div style="background:var(--admin-surface-2); border:1px solid var(--admin-border); padding:14px; border-radius:12px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <strong style="color:#fff;">Tramo Santiago → La Serena</strong>
+                  <span class="badge-tag badge-tag--ok">Despachado</span>
+                </div>
+                <p>Camión 04 con 6.200 cajitas. Tiempo de viaje estimado: 6 h 15 min. Clima despejado.</p>
+              </div>
+
+              <div style="background:var(--admin-surface-2); border:1px solid var(--admin-border); padding:14px; border-radius:12px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <strong style="color:#fff;">Tramo Concepción → Temuco → Valdivia</strong>
+                  <span class="badge-tag badge-tag--ok">En Tránsito</span>
+                </div>
+                <p>Camión 02 con 8.400 cajitas. Optimización de entrega completada con ahorro de 142 km.</p>
+              </div>
+
+              <div style="background:var(--admin-surface-2); border:1px solid rgba(245,158,11,0.3); padding:14px; border-radius:12px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                  <strong style="color:var(--admin-warn);">Carretera Austral (Pto. Montt → Coyhaique)</strong>
+                  <span class="badge-tag badge-tag--warn">Bimodal Activo</span>
+                </div>
+                <p>Coordinación marítima con Navimag para traslado de contenedores. Arribo programado viernes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6. VIEW: AUTOMATIZACIONES ================= -->
+      <section class="admin-view" id="view-automatizaciones">
+        <div class="admin-view-header">
+          <div>
+            <h2>Gestión de Automatizaciones IA</h2>
+            <p>Configuración de flujos automatizados, alertas inteligentes y registro de eventos.</p>
+          </div>
+          <span class="badge-tag badge-tag--ok"><i data-lucide="check-circle-2"></i> Motor de Reglas Activo</span>
+        </div>
+
+        <div class="admin-automations-grid">
+          <!-- Switch 1 -->
+          <div class="admin-auto-card">
+            <div class="admin-auto-card__header">
+              <span class="admin-auto-card__title">
+                <i data-lucide="scan-text" style="color:var(--admin-gold);"></i> OCR Automático de Actas
+              </span>
+              <label class="admin-switch">
+                <input type="checkbox" checked data-auto="OCR Automático de Actas" />
+                <span class="admin-slider"></span>
+              </label>
+            </div>
+            <p class="admin-auto-card__desc">
+              Procesa de forma inmediata cualquier foto de planilla enviada por los pastores vía WhatsApp, extrayendo los números de asistencia y cajas entregadas.
+            </p>
+            <div class="admin-auto-card__stats">
+              <span>Ejecuciones: <strong>842</strong></span>
+              <span>Acierto: <strong>98,4%</strong></span>
+            </div>
+          </div>
+
+          <!-- Switch 2 -->
+          <div class="admin-auto-card">
+            <div class="admin-auto-card__header">
+              <span class="admin-auto-card__title">
+                <i data-lucide="message-square" style="color:var(--admin-ok);"></i> Re-engagement Voluntarios
+              </span>
+              <label class="admin-switch">
+                <input type="checkbox" checked data-auto="Re-engagement Voluntarios" />
+                <span class="admin-slider"></span>
+              </label>
+            </div>
+            <p class="admin-auto-card__desc">
+              Envía recordatorios amables y recursos de inducción por WhatsApp a los voluntarios que no han reportado actividad en más de 7 días.
+            </p>
+            <div class="admin-auto-card__stats">
+              <span>Enviados este mes: <strong>154</strong></span>
+              <span>Respuesta: <strong>72%</strong></span>
+            </div>
+          </div>
+
+          <!-- Switch 3 -->
+          <div class="admin-auto-card">
+            <div class="admin-auto-card__header">
+              <span class="admin-auto-card__title">
+                <i data-lucide="alert-triangle" style="color:var(--admin-warn);"></i> Alertas de Quiebre de Stock
+              </span>
+              <label class="admin-switch">
+                <input type="checkbox" checked data-auto="Alertas de Quiebre de Stock" />
+                <span class="admin-slider"></span>
+              </label>
+            </div>
+            <p class="admin-auto-card__desc">
+              Emite alertas tempranas al equipo regional ERLE cuando una comuna supera el 85% de las cajas asignadas sin haber cubierto todos los eventos.
+            </p>
+            <div class="admin-auto-card__stats">
+              <span>Alertas disparadas: <strong>3</strong></span>
+              <span>Estado: <strong>Resuelto</strong></span>
+            </div>
+          </div>
+
+          <!-- Switch 4 -->
+          <div class="admin-auto-card">
+            <div class="admin-auto-card__header">
+              <span class="admin-auto-card__title">
+                <i data-lucide="globe" style="color:var(--admin-sage);"></i> Sincronización Global
+              </span>
+              <label class="admin-switch">
+                <input type="checkbox" checked data-auto="Sincronización Global Samaritan's Purse" />
+                <span class="admin-slider"></span>
+              </label>
+            </div>
+            <p class="admin-auto-card__desc">
+              Sincroniza cada 6 horas el odómetro nacional con la base de datos central de Samaritan's Purse en Boone, Carolina del Norte.
+            </p>
+            <div class="admin-auto-card__stats">
+              <span>Último sync: <strong>Hace 18 min</strong></span>
+              <span>Latencia: <strong>84ms</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal de logs en vivo -->
+        <div class="admin-card">
+          <div class="admin-card__head">
+            <h3><i data-lucide="terminal"></i> Registro de Eventos Automatizados en Vivo</h3>
+            <button type="button" class="btn btn--ghost btn--sm btn--lc" onclick="document.getElementById('adminLogFeed').innerHTML=''">
+              <i data-lucide="trash-2"></i> Limpiar log
+            </button>
+          </div>
+          <div class="admin-log-feed" id="adminLogFeed">
+            <div class="admin-log-entry">
+              <span class="admin-log-time">[18:52:14]</span>
+              <span class="admin-log-action">OCR Automático:</span>
+              <span class="admin-log-detail">Acta de entrega CL-IG-8941 procesada y verificada (Comunidad Cristiana Esperanza)</span>
+            </div>
+            <div class="admin-log-entry">
+              <span class="admin-log-time">[18:47:02]</span>
+              <span class="admin-log-action">WhatsApp Bot:</span>
+              <span class="admin-log-detail">Recordatorio de inducción enviado a Camila Santander (Valparaíso)</span>
+            </div>
+            <div class="admin-log-entry">
+              <span class="admin-log-time">[18:30:19]</span>
+              <span class="admin-log-action">Sync Global:</span>
+              <span class="admin-log-detail">228.024 cajitas reportadas a Samaritan's Purse International HQ</span>
+            </div>
+            <div class="admin-log-entry">
+              <span class="admin-log-time">[18:15:40]</span>
+              <span class="admin-log-action">IA Logistics:</span>
+              <span class="admin-log-detail">Ruta optimizada para Camión 02 (Tramo Concepción-Temuco) · Ahorro: 142 km</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 7. VIEW: ASISTENTE IA ================= -->
+      <section class="admin-view" id="view-asistente">
+        <div class="admin-view-header">
+          <div>
+            <h2>Consola Asistente IA · OCC Admin</h2>
+            <p>Consultas operativas en lenguaje natural y asistencia para toma de decisiones nacionales.</p>
+          </div>
+          <span class="badge-tag badge-tag--ia"><i data-lucide="sparkles"></i> RAG Especializado Chile</span>
+        </div>
+
+        <div class="admin-chat-grid">
+          <div class="admin-card" style="margin-bottom:0;">
+            <div class="admin-chat-messages" id="adminChatMessages">
+              <div class="admin-chat-bubble admin-chat-bubble--ai">
+                ¡Hola, Administrador! Soy el asistente inteligente de la plataforma OCC Chile. Puedes consultarme por stock regional, actas OCR pendientes, estado de camiones o pedirme que redacte un reporte.
+              </div>
+            </div>
+
+            <div class="admin-chat-input-row">
+              <input type="text" class="admin-chat-input" id="adminChatInput" placeholder="Pregunta sobre stock, iglesias, actas o camiones..." />
+              <button type="button" class="btn btn--primary btn--lc" id="adminChatSend">
+                <i data-lucide="send"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-card" style="margin-bottom:0;">
+            <div class="admin-card__head">
+              <h3><i data-lucide="lightbulb"></i> Consultas Rápidas</h3>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <button type="button" class="btn btn--ghost btn--sm btn--lc admin-quick-prompt" data-prompt="¿Cuántas cajitas faltan por distribuir a nivel nacional?">
+                ¿Cuántas cajitas faltan por distribuir?
+              </button>
+              <button type="button" class="btn btn--ghost btn--sm btn--lc admin-quick-prompt" data-prompt="¿Qué región tiene el menor avance en actas de entrega?">
+                ¿Qué región tiene menor avance?
+              </button>
+              <button type="button" class="btn btn--ghost btn--sm btn--lc admin-quick-prompt" data-prompt="¿Cuántas actas pendientes de auditoría OCR tenemos?">
+                ¿Cuántas actas pendientes tenemos?
+              </button>
+              <button type="button" class="btn btn--ghost btn--sm btn--lc admin-quick-prompt" data-prompt="Generar resumen de situación para el Equipo Nacional">
+                Generar resumen para el equipo
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="admin.js?v=1"></script>
+</body>
+
+</html>

@@ -21,7 +21,7 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=224" />
+  <link rel="stylesheet" href="styles.css?v=252" />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
 
@@ -101,6 +101,7 @@
           <div class="lang-switch" role="group" aria-label="Site language">
             <a href="index.html" class="lang" data-lang="es" aria-pressed="false">ES</a>
             <button type="button" class="lang is-active" data-lang="en" aria-pressed="true">EN</button>
+            <a href="index-pt.html" class="lang" data-lang="pt" aria-pressed="false">PT</a>
           </div>
 
         </div>
@@ -742,8 +743,8 @@
 
         <div class="testimonios__grid">
           <!-- Story 1: Agustin -->
-          <a aria-label="Read story: A Transformed Family" class="testimonio-card reveal"
-            href="https://www.occchile.com/testimonios" target="_blank" rel="noopener noreferrer">
+          <article class="testimonio-card reveal">
+
             <div class="testimonio-card__media">
               <img alt="Daniel, Carol, and family giving thanks for the gift shoebox Agustin received." loading="lazy"
                 src="img/testimonio_agustin.jpg">
@@ -761,11 +762,12 @@
                 <i data-lucide="arrow-right" aria-hidden="true"></i>
               </span>
             </div>
-          </a>
+
+          </article>
 
           <!-- Story 2: Johan -->
-          <a aria-label="Read story: Gift Boxes Share God's Love in Chile" class="testimonio-card reveal"
-            href="https://www.occchile.com/testimonios" target="_blank" rel="noopener noreferrer">
+          <article class="testimonio-card reveal">
+
             <div class="testimonio-card__media">
               <img alt="Johan received a shoebox at age twelve and now shares the Gospel with other children."
                 loading="lazy" src="img/testimonio_johan.jpg">
@@ -783,11 +785,12 @@
                 <i data-lucide="arrow-right" aria-hidden="true"></i>
               </span>
             </div>
-          </a>
+
+          </article>
 
           <!-- Story 3: Gaspar -->
-          <a aria-label="Read story: Blessing Children in Chile" class="testimonio-card reveal"
-            href="https://www.occchile.com/testimonios" target="_blank" rel="noopener noreferrer">
+          <article class="testimonio-card reveal">
+
             <div class="testimonio-card__media">
               <img alt="Gaspar's story shows the blessing of a gift shoebox packed with prayer." loading="lazy"
                 src="img/testimonio_gaspar.jpg">
@@ -805,12 +808,12 @@
                 <i data-lucide="arrow-right" aria-hidden="true"></i>
               </span>
             </div>
-          </a>
+
+          </article>
         </div>
 
         <div class="testimonios__cta reveal">
-          <a href="https://www.occchile.com/contacto" target="_blank" rel="noopener noreferrer"
-            class="btn btn--primary btn--lc">
+          <a href="#postular" class="btn btn--primary btn--lc">
             <i data-lucide="heart-handshake" aria-hidden="true"></i>
             <span>Share my testimony</span>
           </a>
@@ -1112,7 +1115,7 @@
                 <div class="mx-live-counter" aria-live="polite">
                   <span class="mx-ping"></span>
                   <span class="mx-live-counter__label">Total entregando:</span>
-                  <strong class="mx-live-counter__num" data-live="scan-datos">212.429</strong>
+                  <strong class="mx-live-counter__num" data-live="scan-datos">206.274</strong>
                   <span class="mx-live-counter__unit">cajitas</span>
                 </div>
                 <div class="mx-tabs" role="tablist" aria-label="Periodo de los datos">
@@ -1391,7 +1394,7 @@
       </div>
     </div>
 
-<!-- ============ SECCIÓN POSTULACIÓN: ¿TU IGLESIA QUIERE SER PARTE? ============ -->
+    <!-- ============ SECCIÓN POSTULACIÓN: ¿TU IGLESIA QUIERE SER PARTE? ============ -->
     <section class="section postular" id="postular">
       <div class="container">
         <header class="section__head reveal">
@@ -1402,7 +1405,7 @@
               parte?</span>
           </h2>
           <p>
-            Completa la postulación de tu congregación en 3 sencillos pasos. Nuestra IA clasifica en tiempo real,
+            Completa la postulación de tu congregación en 4 sencillos pasos. Nuestra IA clasifica en tiempo real,
             verifica duplicados y asigna de inmediato tu equipo regional.
           </p>
         </header>
@@ -1847,15 +1850,311 @@
 
         </div>
       </div>
+    </section>
 
-      <div class="container cta__inner reveal">
-        <div class="cta__boxes" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
+
+    <!-- ============ ORGANIGRAMA DE CHILE ============ -->
+    <section class="section organigrama" id="organigrama">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow"><i data-lucide="network"></i> Leadership Teams</span>
+          <h2 class="section-title--pine reveal">
+            <span class="title-glass-text">Chile Organizational</span> <span
+              class="title-glass-text title-glass-text--red">Structure</span>
+          </h2>
+          <p class="reveal">National, regional, and local structure of Operation Christmas Child in Chile</p>
+        </header>
+
+        <div class="organigrama__root-wrap reveal">
+          <div class="organigrama__node organigrama__node--root btn--lc" aria-label="National Leadership Team Chile">
+            <span class="organigrama__badge organigrama__badge--enl">ENL</span>
+            <span class="organigrama__title">Chile</span>
+          </div>
+          <div class="organigrama__stem"></div>
+          <div class="organigrama__trunk-bar"></div>
         </div>
+
+        <div class="organigrama__grid reveal">
+          <div class="organigrama__col">
+            <div class="organigrama__col-pin"></div>
+            <div class="organigrama__node organigrama__node--erle btn--lc btn--ghost">
+              <span class="organigrama__badge organigrama__badge--erle">ERLE</span>
+              <span class="organigrama__title">Metronorte</span>
+            </div>
+            <ul class="organigrama__branch">
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Santiago Norponiente</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">O’Higgins</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl organigrama__node--dashed">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">ERL Nuevo</span>
+                  <span class="organigrama__sub">To be confirmed according to strategy</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="organigrama__col">
+            <div class="organigrama__col-pin"></div>
+            <div class="organigrama__node organigrama__node--erle btn--lc btn--ghost">
+              <span class="organigrama__badge organigrama__badge--erle">ERLE</span>
+              <span class="organigrama__title">Metrosur</span>
+            </div>
+            <ul class="organigrama__branch">
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Santiago Central</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Santiago Costa</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl organigrama__node--dashed">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Santiago Suroriente</span>
+                  <span class="organigrama__sub">To be confirmed according to strategy</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="organigrama__col">
+            <div class="organigrama__col-pin"></div>
+            <div class="organigrama__node organigrama__node--erle btn--lc btn--ghost">
+              <span class="organigrama__badge organigrama__badge--erle">ERLE</span>
+              <span class="organigrama__title">V Región</span>
+            </div>
+            <ul class="organigrama__branch">
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Cordillera</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">V Norte</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="organigrama__col">
+            <div class="organigrama__col-pin"></div>
+            <div class="organigrama__node organigrama__node--erle btn--lc btn--ghost">
+              <span class="organigrama__badge organigrama__badge--erle">ERLE</span>
+              <span class="organigrama__title">Los Lagos</span>
+            </div>
+            <ul class="organigrama__branch">
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Los Ríos</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">La Araucanía</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="organigrama__col">
+            <div class="organigrama__col-pin"></div>
+            <div class="organigrama__node organigrama__node--erle btn--lc btn--ghost">
+              <span class="organigrama__badge organigrama__badge--erle">ERLE</span>
+              <span class="organigrama__title">Concepción</span>
+            </div>
+            <ul class="organigrama__branch">
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Los Ángeles</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Ñuble</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Maule</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="organigrama__col">
+            <div class="organigrama__col-pin"></div>
+            <div class="organigrama__node organigrama__node--erle btn--lc btn--ghost">
+              <span class="organigrama__badge organigrama__badge--erle">ERLE</span>
+              <span class="organigrama__title">Coquimbo</span>
+            </div>
+            <ul class="organigrama__branch">
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Atacama</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Antofagasta</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Tarapacá</span>
+                </div>
+              </li>
+              <li class="organigrama__branch-item">
+                <div class="organigrama__node organigrama__node--erl">
+                  <span class="organigrama__badge organigrama__badge--erl">ERL</span>
+                  <span class="organigrama__title">Arica</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <!-- ============ MARQUEE CTA ============ -->
+    <div class="marquee marquee--cta" aria-hidden="true">
+
+      <div class="marquee__track marquee__track--cta">
+
+        <div class="marquee__group marquee__group--cta">
+
+          <span>Multiplication</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Discipleship</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Evangelism</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Hope</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Teams</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Shoeboxes</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Logistics</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Volunteers</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+        </div>
+
+        <div class="marquee__group marquee__group--cta">
+
+          <span>Multiplication</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Discipleship</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Evangelism</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Hope</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Teams</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Shoeboxes</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Logistics</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+          <span>Volunteers</span>
+
+          <i data-lucide="sparkle"></i>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============ CTA ============ -->
+    <section class="section cta" id="cta">
+      <div class="container cta__inner reveal">
         <h2>¿Tu iglesia quiere ser Compañero de Ministerio?</h2>
-        <p>Comencemos con un piloto de 6 semanas en una región: formulario inteligente + asistente RAG + dashboard.</p>
         <div class="hero__cta">
           <a href="#demos" class="btn btn--light btn--lc">
             <i data-lucide="play"></i> Explore Demos
@@ -1865,1330 +2164,9 @@
           </a>
         </div>
       </div>
-    </section>
-
-
-    <section class="section" id="procesos">
-
-      <div class="container">
-
-        <header class="section__head">
-
-          <span class="eyebrow">04 · Process Map</span>
-
-          <h2 class="reveal">Del dolor actual a la
-
-            <em class="title-glass-text title-glass-text--red">solución con IA
-
-            </em>
-
-          </h2>
-
-          <p class="reveal">Nueve procesos críticos de la obra, priorizados por impacto. Toca una tarjeta para ver el
-            antes y el después.
-
-          </p>
-
-        </header>
-
-        <div class="filters reveal" id="impactFilters" role="tablist">
-
-          <button class="chip is-active" data-filter="all">Todos
-
-            <span>9
-
-            </span>
-
-          </button>
-
-          <button class="chip" data-filter="alto">
-
-            <i class="lvl lvl--alto">
-
-            </i> Alto
-
-          </button>
-
-          <button class="chip" data-filter="medio-alto">
-
-            <i class="lvl lvl--medio-alto">
-
-            </i> Medio-Alto
-
-          </button>
-
-          <button class="chip" data-filter="medio">
-
-            <i class="lvl lvl--medio">
-
-            </i> Medio
-
-          </button>
-
-          <button class="chip" data-filter="bajo-medio">
-
-            <i class="lvl lvl--bajo-medio">
-
-            </i> Bajo-Medio
-
-          </button>
-
-        </div>
-
-        <div class="process-grid" id="processGrid">
-
-        </div> >
-
+      <div class="cta-jesus" aria-hidden="true">
+        <img src="img/jesus.png" alt="Jesus" class="cta-jesus__img" loading="lazy">
       </div>
-
-    </section>
-    <!-- ============ FLUJOS ============ -->
-
-    <section class="section section--dark" id="flujos">
-
-      <div class="container">
-
-        <header class="section__head">
-
-          <span class="eyebrow">05 · Workflows</span>
-
-          <h2 class="reveal">Ocho flujos,
-
-            <em>rediseñados
-
-            </em> de punta a punta
-
-          </h2>
-
-          <p class="reveal">Cada flujo muestra cómo se trabaja hoy, qué hará la IA y qué resultado medimos.
-
-          </p>
-
-        </header>
-
-        <div class="flows">
-
-          <div class="flows__tabs" id="flowTabs" role="tablist">
-
-          </div>
-
-          <article class="flows__panel" id="flowPanel" aria-live="polite">
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-    <!-- ============ DEMOS ============ -->
-
-    <section class="section" id="demos">
-
-      <div class="container">
-
-        <header class="section__head">
-
-          <span class="eyebrow">Interactive Prototypes</span>
-
-          <h2 class="reveal">La IA,
-
-            <em class="title-glass-text title-glass-text--red">funcionando
-
-            </em> en tu navegador
-
-          </h2>
-
-          <p class="reveal">Simulaciones con datos de demostración. Cada una corresponde a un módulo de la plataforma.
-
-          </p>
-
-        </header>
-
-        <div class="demo-tabs reveal" id="demoTabs" role="tablist">
-          <button class="demo-tab is-active" data-demo="ocr">
-            <i data-lucide="scan-text"></i>
-            <span>
-              <b>A</b> OCR evidencia
-            </span>
-          </button>
-          <button class="demo-tab" data-demo="logi">
-            <i data-lucide="truck"></i>
-            <span>
-              <b>B</b> Logística
-            </span>
-          </button>
-          <button class="demo-tab" data-demo="dash">
-            <i data-lucide="layout-dashboard"></i>
-            <span>
-              <b>C</b> Dashboard
-            </span>
-          </button>
-          <button class="demo-tab" data-demo="chat">
-            <i data-lucide="message-circle-heart"></i>
-            <span>
-              <b>D</b> Asistente
-            </span>
-          </button>
-        </div>
-        <!-- C · OCR -->
-
-        <div class="demo" id="demo-ocr">
-
-          <div class="demo__grid">
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="camera"></i> Evidence Photo
-
-                </h3>
-
-              </div>
-
-              <div class="ocr-stage" id="ocrStage">
-
-                <div class="doc">
-
-                  <div class="doc__title">Attendance Sheet — Distribution Event
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>Church:</span>
-
-                    <em>Comunidad Cristiana Esperanza
-
-                    </em>
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>City:</span>
-
-                    <em>Calama
-
-                    </em>
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>Date:</span>
-
-                    <em>14/12/2026
-
-                    </em>
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>Attending Children:</span>
-
-                    <em>184
-
-                    </em>
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>Shoeboxes Delivered:</span>
-
-                    <em>197
-
-                    </em>
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>Inscritos El Gran Viaje:
-
-                    </span>
-
-                    <em>63
-
-                    </em>
-
-                  </div>
-
-                  <div class="doc__row">
-
-                    <span>Firma responsable:
-
-                    </span>
-
-                    <em class="sig">M. Rojas
-
-                    </em>
-
-                  </div>
-
-                </div>
-
-                <div class="scanline">
-
-                </div>
-
-                <div class="boxes" id="ocrBoxes">
-
-                </div>
-
-              </div>
-
-              <div class="ocr-actions">
-
-                <button class="btn btn--primary btn--lc" id="runOcr">
-
-                  <i data-lucide="scan-text">
-
-                  </i> Procesar con OCR
-
-                </button>
-
-                <label class="btn btn--ghost btn--lc">
-
-                  <i data-lucide="upload"></i> Upload Photo
-                  <input type="file" accept="image/*" id="ocrFile" hidden />
-
-                </label>
-
-              </div>
-
-            </div>
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="file-check-2">
-
-                  </i> Datos extraídos
-
-                </h3>
-
-                <span class="ai-badge">
-
-                  <i data-lucide="sparkles">
-
-                  </i> Validación IA
-
-                </span>
-
-              </div>
-
-              <table class="ocr-table" id="ocrTable">
-
-                <tbody>
-
-                  <tr>
-
-                    <td class="muted" colspan="3">Presiona “Procesar con OCR”.
-
-                    </td>
-
-                  </tr>
-
-                </tbody>
-
-              </table>
-
-              <div id="ocrFlags" class="flags">
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-        <!-- D · LOGISTICA -->
-
-        <div class="demo" id="demo-logi">
-
-          <div class="demo__grid">
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="cctv">
-
-                  </i> Conteo en bodega (visión)
-
-                </h3>
-
-                <span class="live">
-
-                  <i>
-
-                  </i> EN VIVO
-
-                </span>
-
-              </div>
-
-              <div class="conveyor" id="conveyor">
-
-                <div class="cam-frame">
-
-                  <span>CAM-02 · Bodega Santiago
-
-                  </span>
-
-                </div>
-
-                <div class="belt">
-
-                </div>
-
-                <div class="gate">
-
-                </div>
-
-              </div>
-
-              <div class="counter-row">
-
-                <div>
-
-                  <small>Detectadas
-
-                  </small>
-
-                  <strong id="cvCount">0
-
-                  </strong>
-
-                </div>
-
-                <div>
-
-                  <small>Etiqueta OCR
-
-                  </small>
-
-                  <strong id="cvTag">—
-
-                  </strong>
-
-                </div>
-
-                <div>
-
-                  <small>Confianza
-
-                  </small>
-
-                  <strong id="cvConf">—
-
-                  </strong>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="route">
-
-                  </i> Optimización de rutas
-
-                </h3>
-
-                <button class="btn btn--ghost btn--sm btn--lc" id="reroute">
-
-                  <i data-lucide="refresh-cw">
-
-                  </i> Nuevos puntos
-
-                </button>
-
-              </div>
-
-              <svg class="routes" id="routes" viewBox="0 0 400 300" role="img" aria-label="Rutas">
-
-              </svg>
-
-              <div class="route-legend">
-
-                <span>
-
-                  <i class="sw sw--naive">
-
-                  </i> Ruta manual:
-
-                  <b id="dNaive">0
-
-                  </b> km
-
-                </span>
-
-                <span>
-
-                  <i class="sw sw--opt">
-
-                  </i> Optimizada:
-
-                  <b id="dOpt">0
-
-                  </b> km
-
-                </span>
-
-                <span class="save" id="dSave">—
-
-                </span>
-
-              </div>
-
-            </div>
-
-            <div class="card card--span">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="trending-up">
-
-                  </i> Predicción de demanda 2027 por región
-
-                </h3>
-
-                <small class="muted">Modelo sobre históricos (demo)
-
-                </small>
-
-              </div>
-
-              <div class="demand" id="demand">
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-        <!-- E · DASHBOARD -->
-
-        <div class="demo" id="demo-dash">
-
-          <div class="dash">
-
-            <div class="kpis">
-
-              <div class="kpi">
-
-                <i data-lucide="package">
-
-                </i>
-
-                <small>Cajas recibidas
-
-                </small>
-
-                <strong id="kTotal">228.024
-
-                </strong>
-
-                <em class="up">+4,2% vs 2025
-
-                </em>
-
-              </div>
-
-              <div class="kpi">
-
-                <i data-lucide="package-check">
-
-                </i>
-
-                <small>Distribuidas
-
-                </small>
-
-                <strong id="kDist">90,5%
-
-                </strong>
-
-                <div class="ring" id="ringDist">
-
-                </div>
-
-              </div>
-
-              <div class="kpi">
-
-                <i data-lucide="container">
-
-                </i>
-
-                <small>Contenedores 2027
-
-                </small>
-
-                <strong id="kCont">31 / 42
-
-                </strong>
-
-                <em id="kContEta">Predicción: 43 ™“
-
-                </em>
-
-              </div>
-
-              <div class="kpi">
-
-                <i data-lucide="bell-ring">
-
-                </i>
-
-                <small>Alertas activas
-
-                </small>
-
-                <strong id="kAlerts">0
-
-                </strong>
-
-                <em class="down">regiones &lt; 80%
-
-                </em>
-
-              </div>
-
-            </div>
-
-            <div class="dash__grid">
-
-              <div class="card">
-
-                <div class="card__head">
-
-                  <h3>
-
-                    <i data-lucide="bar-chart-3">
-
-                    </i> % distribución por región
-
-                  </h3>
-
-                  <div class="seg" id="sortSeg">
-
-                    <button class="is-on" data-s="geo">N’’S
-
-                    </button>
-
-                    <button data-s="pct">%
-
-                    </button>
-
-                  </div>
-
-                </div>
-
-                <div class="bars" id="bars">
-
-                </div>
-
-              </div>
-
-              <div class="card">
-
-                <div class="card__head">
-
-                  <h3>
-
-                    <i data-lucide="siren">
-
-                    </i> Alertas automáticas
-
-                  </h3>
-
-                </div>
-
-                <ul class="alerts" id="alerts">
-
-                </ul>
-
-                <div class="card__head mt">
-
-                  <h3>
-
-                    <i data-lucide="file-text">
-
-                    </i> Resumen ejecutivo IA
-
-                  </h3>
-
-                  <button class="btn btn--ghost btn--sm btn--lc" id="regen">
-
-                    <i data-lucide="sparkles">
-
-                    </i> Generar
-
-                  </button>
-
-                </div>
-
-                <div class="summary" id="summary">
-
-                </div>
-
-              </div>
-
-              <div class="card card--span">
-
-                <div class="card__head">
-
-                  <h3>
-
-                    <i data-lucide="line-chart">
-
-                    </i> Proyección de meta 2027 (contenedores)
-
-                  </h3>
-
-                  <small class="muted">Real vs predicción
-
-                  </small>
-
-                </div>
-
-                <svg class="forecast" id="forecast" viewBox="0 0 800 220" preserveAspectRatio="none">
-
-                </svg>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-        <!-- H · CHAT -->
-
-        <div class="demo" id="demo-chat">
-
-          <div class="demo__grid demo__grid--chat">
-
-            <div class="card chat">
-
-              <div class="chat__head">
-
-                <div class="avatar">
-
-                  <i data-lucide="gift">
-
-                  </i>
-
-                </div>
-
-                <div>
-
-                  <strong>Asistente OCC
-
-                  </strong>
-
-                  <small>
-
-                    <span class="dot">
-
-                    </span> RAG sobre manuales y FAQs
-
-                  </small>
-
-                </div>
-
-                <select id="lang" aria-label="Idioma">
-
-                  <option value="es">ES
-
-                  </option>
-
-                  <option value="en">EN
-
-                  </option>
-
-                  <option value="pt">PT
-
-                  </option>
-
-                </select>
-
-              </div>
-
-              <div class="chat__body" id="chatBody">
-
-              </div>
-
-              <div class="chat__chips" id="chatChips">
-
-              </div>
-
-              <form class="chat__input" id="chatForm">
-
-                <input id="chatIn" placeholder="Ask about reports, shoeboxes, volunteering…" autocomplete="off" />
-
-                <button class="btn btn--primary btn--icon btn--lc" aria-label="Send">
-
-                  <i data-lucide="send">
-
-                  </i>
-
-                </button>
-
-              </form>
-
-            </div>
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="database">
-
-                  </i> ¿Cómo responde?
-
-                </h3>
-
-              </div>
-
-              <ol class="rag-steps" id="ragSteps">
-
-                <li>
-
-                  <b>1</b>
-
-                  <div>
-
-                    <strong>Clasifica la consulta
-
-                    </strong>
-
-                    <span id="rCat">—
-
-                    </span>
-
-                  </div>
-
-                </li>
-
-                <li>
-
-                  <b>2</b>
-
-                  <div>
-
-                    <strong>Recupera documentos
-
-                    </strong>
-
-                    <span id="rDocs">—
-
-                    </span>
-
-                  </div>
-
-                </li>
-
-                <li>
-
-                  <b>3</b>
-
-                  <div>
-
-                    <strong>Genera respuesta citada
-
-                    </strong>
-
-                    <span id="rGen">—
-
-                    </span>
-
-                  </div>
-
-                </li>
-
-                <li>
-
-                  <b>4</b>
-
-                  <div>
-
-                    <strong>Enruta si es necesario
-
-                    </strong>
-
-                    <span id="rRoute">—
-
-                    </span>
-
-                  </div>
-
-                </li>
-
-              </ol>
-
-              <div class="topics">
-
-                <h4>Temas recurrentes (semana)
-
-                </h4>
-
-                <div id="topics">
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-    <!-- ============ ARQUITECTURA ============ -->
-
-    <section class="section section--soft" id="arquitectura">
-
-      <div class="container">
-
-        <header class="section__head">
-
-          <span class="eyebrow">Arquitectura
-
-          </span>
-
-          <h2 class="reveal">One platform, <em class="title-glass-text title-glass-text--red">eight modules</em></h2>
-
-          <p class="reveal">Engineered to scale from client-side JS to Next.js + React without rewriting business logic.
-
-          </p>
-
-        </header>
-
-        <div class="arch">
-
-          <div class="arch__layer reveal">
-
-            <span class="arch__tag">Channels</span>
-
-            <div class="arch__items">
-
-              <span>
-
-                <i data-lucide="globe">
-
-                </i> Web
-
-              </span>
-
-              <span>
-
-                <i data-lucide="smartphone">
-
-                </i> PWA móvil
-
-              </span>
-
-              <span>
-
-                <i data-lucide="message-square">
-
-                </i> WhatsApp
-
-              </span>
-
-              <span>
-
-                <i data-lucide="mail">
-
-                </i> Email
-
-              </span>
-
-              <span>
-
-                <i data-lucide="instagram">
-
-                </i> Redes
-
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="arch__layer reveal">
-
-            <span class="arch__tag">Módulos
-
-            </span>
-
-            <div class="arch__items arch__items--mods" id="archMods">
-
-            </div>
-
-          </div>
-
-          <div class="arch__layer reveal">
-
-            <span class="arch__tag">Servicios IA
-
-            </span>
-
-            <div class="arch__items">
-
-              <span>
-
-                <i data-lucide="brain">
-
-                </i> LLM + RAG
-
-              </span>
-
-              <span>
-
-                <i data-lucide="scan-eye">
-
-                </i> Visión / OCR
-
-              </span>
-
-              <span>
-
-                <i data-lucide="git-compare">
-
-                </i> Fuzzy matching
-
-              </span>
-
-              <span>
-
-                <i data-lucide="trending-up">
-
-                </i> Forecasting
-
-              </span>
-
-              <span>
-
-                <i data-lucide="route">
-
-                </i> OR-Tools
-
-              </span>
-
-              <span>
-
-                <i data-lucide="languages">
-
-                </i> Traducción
-
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="arch__layer reveal">
-
-            <span class="arch__tag">Datos
-
-            </span>
-
-            <div class="arch__items">
-
-              <span>
-
-                <i data-lucide="database">
-
-                </i> PostgreSQL
-
-              </span>
-
-              <span>
-
-                <i data-lucide="boxes">
-
-                </i> Vector DB
-
-              </span>
-
-              <span>
-
-                <i data-lucide="hard-drive">
-
-                </i> Storage de evidencias
-
-              </span>
-
-              <span>
-
-                <i data-lucide="lock">
-
-                </i> Auth + roles
-
-              </span>
-
-              <span>
-
-                <i data-lucide="file-lock-2">
-
-                </i> Auditoría
-
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="stack reveal">
-
-          <div>
-
-            <h4>Hoy
-
-            </h4>
-
-            <p>HTML · CSS · JavaScript vanilla — prototipo navegable.
-
-            </p>
-
-          </div>
-
-          <i data-lucide="arrow-right">
-
-          </i>
-
-          <div>
-
-            <h4>Mañana
-
-            </h4>
-
-            <p>Next.js · React · TypeScript · API Routes · Edge.
-
-            </p>
-
-          </div>
-
-          <i data-lucide="arrow-right">
-
-          </i>
-
-          <div>
-
-            <h4>Escala
-
-            </h4>
-
-            <p>Workers de IA · colas · cámaras en bodegas · BI.
-
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-    <!-- ============ ROADMAP ============ -->
-
-    <section class="section" id="roadmap">
-
-      <div class="container">
-
-        <header class="section__head">
-
-          <span class="eyebrow">Roadmap
-
-          </span>
-
-          <h2 class="reveal">On the road to <em class="title-glass-text title-glass-text--red">42 containers</em></h2>
-
-        </header>
-
-        <ol class="timeline" id="timeline">
-
-          <li class="reveal">
-
-            <span class="tl__dot">
-
-            </span>
-
-            <div class="tl__card">
-
-              <small>Phase 1 · Nov–Dec 2026</small>
-
-              <h3>Foundations</h3>
-
-              <p>Smart church application form, RAG FAQ chatbot, native mobile reporting forms.
-
-              </p>
-
-              <div class="tags">
-
-                <span>A
-
-                </span>
-
-                <span>C
-
-                </span>
-
-                <span>H
-
-                </span>
-
-              </div>
-
-            </div>
-
-          </li>
-
-          <li class="reveal">
-
-            <span class="tl__dot">
-
-            </span>
-
-            <div class="tl__card">
-
-              <small>Phase 2 · Jan–Mar 2027</small>
-
-              <h3>Equipos y evidencia
-
-              </h3>
-
-              <p>Onboarding de voluntarios, matching por habilidades, OCR de evidencias, dashboard v1.
-
-              </p>
-
-              <div class="tags">
-
-                <span>B
-
-                </span>
-
-                <span>C
-
-                </span>
-
-                <span>E
-
-                </span>
-
-              </div>
-
-            </div>
-
-          </li>
-
-          <li class="reveal">
-
-            <span class="tl__dot">
-
-            </span>
-
-            <div class="tl__card">
-
-              <small>Fase 3 · Abr–Jul 2027
-
-              </small>
-
-              <h3>Logí­stica inteligente
-
-              </h3>
-
-              <p>Visión en bodegas, OCR de etiquetas, predicción de demanda y optimización de rutas.
-
-              </p>
-
-              <div class="tags">
-
-                <span>D
-
-                </span>
-
-                <span>E
-
-                </span>
-
-              </div>
-
-            </div>
-
-          </li>
-
-          <li class="reveal">
-
-            <span class="tl__dot">
-
-            </span>
-
-            <div class="tl__card">
-
-              <small>Fase 4 · Ago–Dic 2027
-
-              </small>
-
-              <h3>Multiplicación
-
-              </h3>
-
-              <p>Capacitación con IA, contenido para redes, traducción y resúmenes ejecutivos automáticos.
-
-              </p>
-
-              <div class="tags">
-
-                <span>F
-
-                </span>
-
-                <span>G
-
-                </span>
-
-              </div>
-
-            </div>
-
-          </li>
-
-        </ol>
-
-      </div>
-
     </section>
   </main>
 
@@ -3198,34 +2176,9 @@
 
       <div class="footer__brand">
 
-        <div class="brand">
-
-          <span class="brand__mark" aria-hidden="true">
-
-            <svg viewBox="0 0 40 40">
-              <rect x="6" y="16" width="28" height="19" rx="4" class="bm-box" />
-              <rect x="3" y="10" width="34" height="8" rx="3" class="bm-lid" />
-              <rect x="18" y="10" width="4" height="25" class="bm-ribbon" />
-              <path d="M20 10c-3-6-10-6-9-1 1 3 6 2 9 1zm0 0c3-6 10-6 9-1-1 3-6 2-9 1z" class="bm-bow" />
-
-            </svg>
-
-          </span>
-
-          <span class="brand__text">
-
-            <strong>OCC Chile
-
-            </strong>
-
-            <small>Plataforma IA
-
-            </small>
-
-          </span>
-
-        </div>
-
+        <a href="#inicio" class="brand" aria-label="Home">
+          <img src="img/occchile-logo.png" alt="OCC Chile · AI Platform" class="brand__logo">
+        </a>
         <p>An AI-powered platform to ensure every shoebox reaches its destination and every child hears the Good News.
 
         </p>
@@ -3235,17 +2188,12 @@
       <nav class="footer__cols" aria-label="Enlaces del sitio">
 
         <div class="footer__col">
-
           <h4>Platform</h4>
-
-          <a href="#procesos">Process Map</a>
-
-          <a href="#flujos">Redesigned Workflows</a>
-
-          <a href="#demos">Interactive Demos</a>
-
-          <a href="#arquitectura">Architecture</a>
-
+          <a href="#organigrama">Organizational Chart</a>
+          <a href="#datos">Data Center</a>
+          <a href="#testimonios">Testimonies</a>
+          <a href="#viaje">Step by Step</a>
+          <a href="#tierra">North to South</a>
         </div>
 
         <div class="footer__col">
@@ -3254,7 +2202,7 @@
 
           <a href="#viaje">The Journey of a Shoebox</a>
 
-          <a href="#stats">Impact</a>
+          <a href="#datos">Impact</a>
 
           <a href="#roadmap">Roadmap</a>
 
@@ -3305,32 +2253,6 @@
 
 
   <!-- Estadísticas de impacto integradas (fuente y estilo de la sección) -->
-  <div class="stats stats--glass" id="stats" aria-label="Impact Statistics">
-    <div class="stat stat--glass reveal">
-      <strong data-count="228024">228.024</strong>
-      <span>shoeboxes received · 2026</span>
-    </div>
-    <div class="stat stat--glass reveal" style="transition-delay:.06s">
-      <strong data-count="206274">206.274</strong>
-      <span>distributed (90.5%)</span>
-    </div>
-    <div class="stat stat--glass reveal" style="transition-delay:.12s">
-      <strong data-count="1081">1.081</strong>
-      <span>ministry partners</span>
-    </div>
-    <div class="stat stat--glass reveal" style="transition-delay:.18s">
-      <strong data-count="120">120</strong>
-      <span>active volunteers</span>
-    </div>
-    <div class="stat stat--glass reveal" style="transition-delay:.24s">
-      <strong data-count="22">22</strong>
-      <span>regional teams</span>
-    </div>
-    <div class="stat stat--glass reveal" style="transition-delay:.3s">
-      <strong data-count="42">42</strong>
-      <span>containers · 2027 goal</span>
-    </div>
-  </div>
 
 
 
@@ -3383,12 +2305,13 @@
 
   <div class="fabs" aria-label="Ayuda y contacto">
 
-    <button type="button" class="fab fab--agent" id="fabAgent"
-      aria-label="Open OCC Assistant" aria-expanded="false" aria-controls="chatWidget">
+    <button type="button" class="fab fab--agent" id="fabAgent" aria-label="Open OCC Assistant" aria-expanded="false"
+      aria-controls="chatWidget">
       <i data-lucide="bot"></i>
     </button>
 
-    <a href="https://wa.me/56937479835" class="fab fab--wa" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp (+56 9 37479835)">
+    <a href="https://wa.me/56937479835" class="fab fab--wa" target="_blank" rel="noopener noreferrer"
+      aria-label="Contact via WhatsApp (+56 9 37479835)">
 
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path
@@ -3404,7 +2327,7 @@
 
   </script>
 
-  <script src="app.js?v=49">
+  <script src="app.js?v=59">
 
   </script>
 

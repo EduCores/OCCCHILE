@@ -6,7 +6,9 @@
 (() => {
   "use strict";
 
-  const IS_EN = document.documentElement.lang === "en" || location.pathname.includes("index-en");
+  const LANG = (document.documentElement.lang === "en" || location.pathname.includes("index-en")) ? "en" : (document.documentElement.lang === "pt" || location.pathname.includes("index-pt")) ? "pt" : "es";
+  const IS_EN = LANG === "en";
+  const IS_PT = LANG === "pt";
 
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -187,19 +189,32 @@
     try { localStorage.setItem("occ-theme", "dark"); } catch (_) {}
   }
 
-  /* ---------------- LANGUAGE SWITCH (ES/EN) ---------------- */
+  /* ---------------- LANGUAGE SWITCH (ES/EN/PT) ---------------- */
   function initLangSwitch() {
-    $$(".lang-switch .lang").forEach((b) => b.addEventListener("click", (e) => {
+    if (sessionStorage.getItem("occ-lang-switch")) {
+      sessionStorage.removeItem("occ-lang-switch");
+      if ("scrollRestoration" in history) {
+        try { history.scrollRestoration = "manual"; } catch (_) {}
+      }
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => window.scrollTo(0, 0));
+    }
+
+    $(".lang-switch .lang").forEach((b) => b.addEventListener("click", (e) => {
       const target = b.dataset.lang;
-      const isEn = document.documentElement.lang === "en" || location.pathname.includes("index-en");
-      if (target === "en" && !isEn) {
+      const currentLang = LANG;
+      if (target === currentLang) {
         e.preventDefault();
-        const hash = location.hash || "";
-        location.href = "index-en.html" + hash;
-      } else if (target === "es" && isEn) {
-        e.preventDefault();
-        const hash = location.hash || "";
-        location.href = "index.html" + hash;
+        return;
+      }
+      e.preventDefault();
+      try { sessionStorage.setItem("occ-lang-switch", "1"); } catch (_) {}
+      if (target === "en") {
+        location.href = "index-en.html";
+      } else if (target === "pt") {
+        location.href = "index-pt.html";
+      } else {
+        location.href = "index.html";
       }
     }));
   }
@@ -214,12 +229,25 @@
     };
     addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    $("#burger").addEventListener("click", () => {
-      $("#navLinks2").classList.toggle("is-open");
-    });
-    links.forEach((a) => a.addEventListener("click", () => {
-      $("#navLinks2").classList.remove("is-open");
-    }));
+    const burger = $("#burger");
+    const navMenu = $("#navMenu") || $(".nav__links-wrap");
+    if (burger && navMenu) {
+      burger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = navMenu.classList.toggle("is-open");
+        burger.setAttribute("aria-expanded", String(isOpen));
+      });
+      $("a", navMenu).forEach((a) => a.addEventListener("click", () => {
+        navMenu.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
+      }));
+      document.addEventListener("click", (e) => {
+        if (navMenu.classList.contains("is-open") && !navMenu.contains(e.target) && !burger.contains(e.target)) {
+          navMenu.classList.remove("is-open");
+          burger.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) links.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
     }), { rootMargin: "-45% 0px -50% 0px" });
@@ -269,7 +297,7 @@
     const host = $('[data-odo="pct"]');
     if (!host) return;
     const MS_RODILLO = 900;
-    let decimas = 910;         // 91,0 %
+    let decimas = 905;         // 91,0 %
     const piezas = [];         // columnas de dígitos y separadores
 
     const formatear = (v) => (v / 10).toFixed(1).replace(".", ",");
@@ -423,7 +451,7 @@
         setTimeout(() => badge.remove(), 1400);
 
         // avisa al odómetro del % entregado para que reaccione
-        document.dispatchEvent(new CustomEvent("occ:entrega", { detail: { delta: p.d } }));
+        document.dispatchEvent(new CustomEvent("occ:entrega", { detail: { delta: p.d, total: hasta } }));
 
         // conteo ascendente suave hasta el nuevo total
         const t0 = performance.now();
@@ -473,6 +501,7 @@
   /* ---------------- PROCESS MAP ---------------- */
   function initProcesses() {
     const grid = $("#processGrid");
+    if (!grid) return;
     grid.innerHTML = PROCESSES.map((p, i) => `
       <article class="pcard reveal" data-imp="${p.imp}" tabindex="0" aria-label="${p.t}">
         <div class="pcard__inner">
@@ -527,6 +556,7 @@
   /* ---------------- FLOWS ---------------- */
   function initFlows() {
     const tabs = $("#flowTabs"), panel = $("#flowPanel");
+    if (!tabs || !panel) return;
     tabs.innerHTML = FLOWS.map((f, i) => `<button class="ftab${i ? "" : " is-active"}" role="tab" data-i="${i}"><b>${f.k}</b><span>${f.t}</span></button>`).join("");
     const render = (i) => {
       const f = FLOWS[i];
@@ -554,7 +584,9 @@
   /* ---------------- DEMO TABS ---------------- */
   const demoHooks = {};
   function initDemoTabs() {
-    $("#demoTabs").addEventListener("click", (e) => {
+    const demoTabs = $("#demoTabs");
+    if (!demoTabs) return;
+    demoTabs.addEventListener("click", (e) => {
       const b = e.target.closest(".demo-tab"); if (!b) return;
       $$(".demo-tab").forEach((x) => x.classList.toggle("is-active", x === b));
       $$(".demo").forEach((d) => d.classList.toggle("is-active", d.id === "demo-" + b.dataset.demo));
@@ -897,7 +929,9 @@
 
   /* ---------------- C · OCR ---------------- */
   function initOCR() {
-    const stage = $("#ocrStage"), boxes = $("#ocrBoxes"), tbl = $("#ocrTable tbody"), flags = $("#ocrFlags");
+    const stage = $("#ocrStage");
+    if (!stage) return;
+    const boxes = $("#ocrBoxes"), tbl = $("#ocrTable tbody"), flags = $("#ocrFlags");
     let busy = false, userImg = false;
     const FIELDS = [
       ["Iglesia", "Comunidad Cristiana Esperanza", 97], ["Ciudad", "Calama → Antofagasta", 99], ["Fecha", "14-12-2026", 95],
@@ -947,6 +981,7 @@
   function initLogistics() {
     // conteo por visión
     const conv = $("#conveyor");
+    if (!conv) return;
     let count = 0;
     setInterval(() => {
       if (!isDemoOn("logi")) return;
@@ -1346,7 +1381,9 @@
     },
   };
   function initChat() {
-    const body = $("#chatBody"), form = $("#chatForm"), input = $("#chatIn"), langSel = $("#lang");
+    const body = $("#chatBody"), form = $("#chatForm");
+    if (!body || !form) return;
+    const input = $("#chatIn"), langSel = $("#lang");
     let lang = "es", busy = false;
     const add = (html, who) => {
       const m = document.createElement("div"); m.className = "msg msg--" + who; m.innerHTML = html; body.appendChild(m);
@@ -1404,7 +1441,7 @@
 
     if (!widget || !fab) return;
 
-    let lang = IS_EN ? "en" : "es", busy = false, initialized = false;
+    let lang = LANG, busy = false, initialized = false;
 
     const add = (html, who) => {
       const m = document.createElement("div");
@@ -1557,6 +1594,8 @@
 
   /* ---------------- ARQUITECTURA ---------------- */
   function initArch() {
+    const matrix = $("#matrix");
+    if (!matrix) return;
     const mods = [["A", "Iglesias", "church"], ["B", "Voluntarios", "users"], ["C", "Reportes", "clipboard-check"], ["D", "Logística", "truck"],
       ["E", "Métricas", "layout-dashboard"], ["F", "Capacitación", "graduation-cap"], ["G", "Comunicación", "megaphone"], ["H", "Soporte", "life-buoy"]];
     $("#archMods").innerHTML = mods.map(([k, n, ic]) => `<span><i data-lucide="${ic}"></i><b>${k}</b> ${n}</span>`).join("");
@@ -1569,11 +1608,10 @@
     const regionsHost = $("#regionsChart");
     const liveCounter = $('[data-live="scan-datos"]');
 
-    // ---- 1. Dona: Porcentaje entregado (Sincronizado 92,8%) ----
+    // ---- 1. Dona: Porcentaje entregado (Sincronizado 90,5%) ----
     if (ringFill && pctText) {
       const CIRC = 2 * Math.PI * 48; // r=48 -> 301.59
-      let pctActual = 92.8;
-      let lastOdoVal = null;
+      let pctActual = 90.5;
       const updateRing = (pct) => {
         const v = Math.max(0, Math.min(100, pct));
         pctActual = v;
@@ -1581,17 +1619,11 @@
         ringFill.style.strokeDashoffset = (CIRC * (1 - v / 100)).toFixed(1);
         pctText.textContent = v.toFixed(1).replace(".", ",") + "%";
       };
-      updateRing(92.8);
+      updateRing(90.5);
 
       document.addEventListener("occ:pct", (e) => {
         if (!e.detail || typeof e.detail.value !== "number") return;
-        if (lastOdoVal === null) {
-          lastOdoVal = e.detail.value;
-          return;
-        }
-        const diff = e.detail.value - lastOdoVal;
-        lastOdoVal = e.detail.value;
-        if (diff > 0) updateRing(Math.min(99.9, pctActual + diff));
+        updateRing(e.detail.value);
       });
     }
 
@@ -1599,14 +1631,14 @@
     if (regionsHost) {
       const pillBars = $$(".interactive-pill", regionsHost);
 
-      // Contador en vivo sincronizado con el hero (212.429 cajitas)
-      let totalCajas = 212429;
+      // Contador en vivo sincronizado con el hero (206.274 cajitas)
+      let totalCajas = 206274;
       if (liveCounter) liveCounter.textContent = fmt(totalCajas);
 
       let animToken = 0;
-      const animTotal = (delta) => {
+      const animTotalTo = (nuevoTotal) => {
         const desde = totalCajas;
-        totalCajas += delta;
+        totalCajas = nuevoTotal;
         const hasta = totalCajas;
         const mio = ++animToken;
         const t0 = performance.now();
@@ -1655,21 +1687,13 @@
         document.dispatchEvent(new CustomEvent("occ:bars-updated"));
       };
 
-      // Reacciona al evento global del hero
+      // Reacciona al evento global sincronizado del hero
       document.addEventListener("occ:entrega", (e) => {
         const delta = (e.detail && e.detail.delta) || 5;
-        animTotal(delta);
+        const targetTotal = (e.detail && e.detail.total) || (totalCajas + delta);
+        animTotalTo(targetTotal);
         spawnBadge(delta);
       });
-
-      // Ciclo suave autónomo para cuando la vista se enfoca aquí
-      const scheduleLocal = () => {
-        const delta = PASOS[Math.floor(Math.random() * 3)]; // saltos 5, 10 o 50
-        spawnBadge(delta);
-        animTotal(delta);
-        setTimeout(scheduleLocal, 3600 + Math.random() * 4800);
-      };
-      setTimeout(scheduleLocal, 2200);
     }
   }
 
@@ -1687,11 +1711,11 @@
     };
 
     // ---- Anillo radial: Porcentaje entregado (92,8%) ----
-    let currentPct = 92.8;
+    let currentPct = 90.5;
     const ringFill = $('[data-ring="pct"]', root);
     const pctText = $('[data-dato="pct"]', root);
     const setPctRing = (value) => {
-      const v = Math.max(0, Math.min(100, Number(value) || 92.8));
+      const v = Math.max(0, Math.min(100, Number(value) || 90.5));
       currentPct = v;
       const circ = 2 * Math.PI * 48; // 301.59
       if (ringFill) {

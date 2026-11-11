@@ -151,7 +151,8 @@ function validateCacheBusting() {
 console.log("=== OCC CHILE · TEST DE INTEGRIDAD Y PREVENCIÓN ===");
 validateHtmlTree('index.html');
 validateHtmlTree('index-en.html');
-validateEncoding(['index.html', 'index-en.html', 'styles.css', 'app.js']);
+validateHtmlTree('index-pt.html');
+validateEncoding(['index.html', 'index-en.html', 'index-pt.html', 'styles.css', 'app.js']);
 validateJsSyntax('app.js');
 validateCss('styles.css');
 validateCacheBusting();

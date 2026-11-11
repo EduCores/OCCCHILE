@@ -1,19 +1,11 @@
 /* ==========================================================================
    OCC CHILE · PLATAFORMA IA — ESTILOS DEL PANEL DE ADMINISTRACIÓN (admin.css)
-   Alineado exactamente al estilo de "Centro de datos" (#datos) y "Postulación" (#postular):
-   Fondo Verde Salvia (#b9ceb9), Vidrio Líquido Glassmorphing blanco de alto contraste,
-   Tipografías Philosopher + DM Sans, Degradados text-glass verdes y rojos.
+   Alineado exactamente al sistema .mx-card (Liquid Glass) de "Centro de datos" (#datos)
+   y "Postulación" (#postular) en https://educores.github.io/OCCCHILE/
    ========================================================================== */
 
 :root {
   --admin-bg: #b9ceb9;
-  --admin-surface: rgba(255, 255, 255, 0.45);
-  --admin-surface-card: rgba(255, 255, 255, 0.55);
-  --admin-surface-card-hover: rgba(255, 255, 255, 0.7);
-  --admin-surface-input: rgba(255, 255, 255, 0.88);
-  --admin-border: rgba(255, 255, 255, 0.75);
-  --admin-border-subtle: rgba(15, 77, 58, 0.12);
-  --admin-border-hi: rgba(255, 255, 255, 0.95);
   --admin-text: #1e293b;
   --admin-text-muted: #3f4b45;
   --admin-text-dim: #5a6e64;
@@ -45,8 +37,8 @@ body.admin-body {
   flex-direction: column;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(1000px 500px at 15% 10%, rgba(255, 255, 255, 0.4), transparent 75%),
-    radial-gradient(900px 600px at 85% 85%, rgba(15, 77, 58, 0.1), transparent 70%);
+    radial-gradient(1000px 500px at 15% 10%, rgba(255, 255, 255, 0.45), transparent 75%),
+    radial-gradient(900px 600px at 85% 85%, rgba(15, 77, 58, 0.12), transparent 70%);
   background-attachment: fixed;
 }
 
@@ -316,160 +308,50 @@ body.admin-body {
   max-width: 720px;
 }
 
-/* ---------------- Tarjetas Glassmorphing (Estilo .chart-glass) ---------------- */
-.admin-card {
-  position: relative;
-  isolation: isolate;
-  background: var(--admin-surface-card);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  backdrop-filter: blur(16px) saturate(1.2);
-  border: 1.5px solid var(--admin-border);
-  border-radius: 20px;
-  padding: 26px;
-  margin-bottom: 26px;
+/* ---------------- .mx-card Adapters & KPI Grid ---------------- */
+.admin-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.admin-main .mx-card {
+  max-width: none;
+  margin-left: 0;
+  margin-bottom: 24px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
   box-shadow:
     inset 0 2px 3px rgba(255, 255, 255, 0.7),
     inset 0 -3px 4px rgba(0, 0, 0, 0.04),
-    inset 0 0 2px 3px rgba(255, 255, 255, 0.15),
-    0 14px 34px -12px rgba(15, 77, 58, 0.18);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    0 16px 36px -18px rgba(15, 77, 58, 0.28);
 }
 
-.admin-card:hover {
+.admin-main .mx-card:hover {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: rgba(255, 255, 255, 0.95);
   box-shadow:
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85),
     inset 0 -3px 4px rgba(0, 0, 0, 0.05),
-    0 20px 42px -12px rgba(15, 77, 58, 0.24);
+    0 22px 44px -18px rgba(15, 77, 58, 0.35);
 }
 
-.admin-card__head {
+.admin-kpis .mx-card {
+  margin-bottom: 0;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--admin-border-subtle);
-  flex-wrap: wrap;
 }
-
-.admin-card__head h3 {
-  font-family: var(--display, 'Philosopher', serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--admin-pine);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.admin-card__head h3 i, .admin-card__head h3 svg {
-  color: var(--admin-red);
-  width: 22px;
-  height: 22px;
-}
-
-/* ---------------- KPI Grid ---------------- */
-.admin-kpis {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  margin-bottom: 26px;
-}
-
-.admin-kpi {
-  background: rgba(255, 255, 255, 0.65);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  border-radius: 18px;
-  padding: 22px;
-  position: relative;
-  overflow: hidden;
-  box-shadow:
-    inset 0 2px 3px rgba(255, 255, 255, 0.75),
-    0 10px 24px -10px rgba(15, 77, 58, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.admin-kpi:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    0 16px 32px -10px rgba(15, 77, 58, 0.22);
-}
-
-.admin-kpi::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--admin-gold), var(--admin-red));
-}
-
-.admin-kpi--pine::before {
-  background: linear-gradient(90deg, var(--admin-pine), var(--admin-ok));
-}
-
-.admin-kpi--ok::before {
-  background: linear-gradient(90deg, var(--admin-ok), var(--admin-pine-light));
-}
-
-.admin-kpi__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.admin-kpi__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: rgba(15, 77, 58, 0.08);
-  border: 1px solid rgba(15, 77, 58, 0.15);
-  display: grid;
-  place-items: center;
-  color: var(--admin-pine);
-}
-
-.admin-kpi__num {
-  font-size: 2.1rem;
-  font-weight: 800;
-  color: var(--admin-pine);
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-  font-family: var(--font);
-}
-
-.admin-kpi__label {
-  font-size: 0.86rem;
-  color: var(--admin-text-muted);
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.admin-kpi__delta {
-  font-size: 0.78rem;
-  font-weight: 800;
-  margin-top: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.admin-kpi__delta.up { color: var(--admin-ok); }
-.admin-kpi__delta.down { color: var(--admin-bad); }
 
 /* ---------------- Tablas de Contenido ---------------- */
 .admin-table-wrap {
   width: 100%;
   overflow-x: auto;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
@@ -550,7 +432,7 @@ body.admin-body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--admin-surface-input);
+  background: rgba(255, 255, 255, 0.88);
   border: 1.5px solid rgba(15, 77, 58, 0.25);
   border-radius: 12px;
   padding: 9px 16px;
@@ -580,7 +462,7 @@ body.admin-body {
 }
 
 .admin-select {
-  background: var(--admin-surface-input);
+  background: rgba(255, 255, 255, 0.88);
   border: 1.5px solid rgba(15, 77, 58, 0.25);
   border-radius: 12px;
   padding: 9px 16px;
@@ -593,7 +475,7 @@ body.admin-body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-/* ---------------- Tarjetas de Automatización ---------------- */
+/* ---------------- Grid de Automatizaciones ---------------- */
 .admin-automations-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -601,29 +483,8 @@ body.admin-body {
   margin-bottom: 26px;
 }
 
-.admin-auto-card {
-  background: rgba(255, 255, 255, 0.6);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  border-radius: 18px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  box-shadow:
-    inset 0 2px 3px rgba(255, 255, 255, 0.7),
-    0 10px 24px -10px rgba(15, 77, 58, 0.12);
-  transition: all 0.22s ease;
-}
-
-.admin-auto-card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(255, 255, 255, 0.95);
-  box-shadow:
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    0 16px 32px -10px rgba(15, 77, 58, 0.18);
+.admin-automations-grid .mx-card {
+  margin-bottom: 0;
 }
 
 .admin-auto-card__header {
@@ -631,6 +492,7 @@ body.admin-body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+  margin-bottom: 12px;
 }
 
 .admin-auto-card__title {
@@ -646,6 +508,7 @@ body.admin-body {
   font-size: 0.88rem;
   color: var(--admin-text-muted);
   line-height: 1.5;
+  margin-bottom: 14px;
 }
 
 .admin-auto-card__stats {

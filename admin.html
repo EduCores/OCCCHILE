@@ -15,7 +15,7 @@
     rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css?v=257" />
-  <link rel="stylesheet" href="admin.css?v=2" />
+  <link rel="stylesheet" href="admin.css?v=3" />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
 </head>
@@ -116,110 +116,283 @@
           </button>
         </div>
 
-        <!-- KPIs Glassmorphing -->
+        <!-- ============ KPIS (.mx-card EXACTAS A https://educores.github.io/OCCCHILE/) ============ -->
         <div class="admin-kpis">
-          <div class="admin-kpi">
-            <div class="admin-kpi__top">
-              <span class="admin-kpi__label">Cajas Recibidas</span>
-              <div class="admin-kpi__icon"><i data-lucide="package"></i></div>
-            </div>
-            <div class="admin-kpi__num">228.024</div>
-            <span class="admin-kpi__delta up"><i data-lucide="trending-up"></i> +4,2% vs 2025</span>
-          </div>
 
-          <div class="admin-kpi admin-kpi--pine">
-            <div class="admin-kpi__top">
-              <span class="admin-kpi__label">Distribuidas a Iglesias</span>
-              <div class="admin-kpi__icon"><i data-lucide="package-check"></i></div>
-            </div>
-            <div class="admin-kpi__num">90,5%</div>
-            <span class="admin-kpi__delta up"><i data-lucide="check"></i> 206.274 cajas entregadas</span>
-          </div>
+          <!-- KPI 1: Porcentaje entregado (.mx-card--gauges radial donut) -->
+          <article class="mx-card mx-card--gauges" data-metric-type="radial-gauges" role="button" tabindex="0"
+            title="Ver detalle de porcentaje entregado">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Sincronizado</span>
+                <h3 class="mx-title">Porcentaje entregado</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Actualizar indicadores">
+                <i data-lucide="refresh-cw"></i>
+              </button>
+            </header>
 
-          <div class="admin-kpi admin-kpi--ok">
-            <div class="admin-kpi__top">
-              <span class="admin-kpi__label">Contenedores 2027</span>
-              <div class="admin-kpi__icon"><i data-lucide="container"></i></div>
-            </div>
-            <div class="admin-kpi__num">31 / 42</div>
-            <span class="admin-kpi__delta up"><i data-lucide="sparkles"></i> Predicción: 43 contenedores</span>
-          </div>
+            <div class="mx-gauges mx-gauges--donut">
+              <div class="mx-gauge">
+                <div class="mx-gauge__dial mx-gauge__dial--lg">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="mxAdminGradDonut" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#0ba74a"></stop>
+                        <stop offset="50%" stop-color="#f2b33d"></stop>
+                        <stop offset="100%" stop-color="#d61f3c"></stop>
+                      </linearGradient>
+                    </defs>
+                    <circle class="mx-gauge__track" cx="60" cy="60" r="48"></circle>
+                    <circle class="mx-gauge__fill" cx="60" cy="60" r="48" stroke="url(#mxAdminGradDonut)"
+                      stroke-dasharray="301.6" stroke-dashoffset="28.6">
+                    </circle>
+                  </svg>
+                  <div class="mx-gauge__center">
+                    <strong style="color:var(--admin-pine);">90,5%</strong>
+                    <span class="mx-gauge__center--ok">entregado</span>
+                  </div>
+                </div>
+              </div>
 
-          <div class="admin-kpi">
-            <div class="admin-kpi__top">
-              <span class="admin-kpi__label">Iglesias Auditadas</span>
-              <div class="admin-kpi__icon"><i data-lucide="file-check"></i></div>
+              <div class="mx-breakdown" aria-label="Desglose de estado de cajitas">
+                <div class="mx-breakdown__item">
+                  <div class="mx-breakdown__row">
+                    <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>91%</b> Entregado</span>
+                    <span class="mx-breakdown__tag mx-breakdown__tag--ok">En destino</span>
+                  </div>
+                  <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:91%"></i></div>
+                </div>
+
+                <div class="mx-breakdown__item">
+                  <div class="mx-breakdown__row">
+                    <span class="mx-breakdown__label"><i class="mx-dot mx-dot--warn"></i> <b>6%</b> En ruta</span>
+                    <span class="mx-breakdown__tag mx-breakdown__tag--warn">Tránsito activo</span>
+                  </div>
+                  <div class="mx-breakdown__track"><i class="mx-grad--amber" style="width:6%"></i></div>
+                </div>
+
+                <div class="mx-breakdown__item">
+                  <div class="mx-breakdown__row">
+                    <span class="mx-breakdown__label"><i class="mx-dot mx-dot--bad"></i> <b>3%</b> Bodega</span>
+                    <span class="mx-breakdown__tag mx-breakdown__tag--bad">Centro acopio</span>
+                  </div>
+                  <div class="mx-breakdown__track"><i class="mx-grad--crimson" style="width:3%"></i></div>
+                </div>
+              </div>
             </div>
-            <div class="admin-kpi__num">842</div>
-            <span class="admin-kpi__delta up"><i data-lucide="shield-check"></i> 98% con acta OCR conforme</span>
-          </div>
+
+            <footer class="mx-card__foot">
+              <div class="mx-donut-pills">
+                <span><i class="mx-dot mx-dot--ok"></i> <b>91%</b> Entregado</span>
+                <span><i class="mx-dot mx-dot--warn"></i> <b>6%</b> En ruta</span>
+                <span><i class="mx-dot mx-dot--bad"></i> <b>3%</b> Bodega</span>
+              </div>
+              <strong>Sincronizado en vivo</strong>
+            </footer>
+          </article>
+
+          <!-- KPI 2: Cajas Recibidas (.mx-card con live counter) -->
+          <article class="mx-card" data-metric-type="counter" role="button" tabindex="0" title="Ver detalle de cajas recibidas">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> En vivo</span>
+                <h3 class="mx-title">Cajas Recibidas</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono paquete">
+                <i data-lucide="package"></i>
+              </button>
+            </header>
+
+            <div style="padding: 10px 0;">
+              <div style="display:flex; align-items:baseline; gap:8px;">
+                <strong class="mx-live-counter__num" style="font-size:2.8rem; color:#09983f; line-height:1;">228.024</strong>
+                <span style="font-size:0.9rem; font-weight:700; color:var(--admin-pine);">unidades</span>
+              </div>
+              <div style="margin-top: 14px;">
+                <span class="mx-live-pill"><i class="mx-dot mx-dot--ok"></i> <b>+4,2%</b> vs campaña 2025</span>
+              </div>
+            </div>
+
+            <div class="mx-breakdown" style="margin-top: 10px;">
+              <div class="mx-breakdown__item">
+                <div class="mx-breakdown__row">
+                  <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>206.274</b> asignadas a eventos</span>
+                  <span class="mx-breakdown__tag mx-breakdown__tag--ok">90,5% meta</span>
+                </div>
+                <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:90.5%"></i></div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <span class="mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> 16 Regiones de Chile</span>
+              <strong>Meta superada</strong>
+            </footer>
+          </article>
+
+          <!-- KPI 3: Meta & Crecimiento (.mx-card mx-card--wave) -->
+          <article class="mx-card mx-card--wave" data-metric-type="wave" role="button" tabindex="0" title="Ver proyección de contenedores">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow" style="color:var(--admin-red);"><i class="mx-dot mx-dot--warn"></i> Meta & Crecimiento</span>
+                <h3 class="mx-title">Contenedores 2027</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono contenedor">
+                <i data-lucide="container"></i>
+              </button>
+            </header>
+
+            <div style="padding: 10px 0;">
+              <div style="display:flex; align-items:baseline; gap:10px;">
+                <strong class="mx-live-counter__num" style="font-size:2.8rem; color:#0f172a; line-height:1;">31 / 42</strong>
+                <span class="mx-live-pill" style="color:#047526; background:rgba(16,185,129,0.18);"><b>+18%</b> proyección</span>
+              </div>
+              <p class="mx-sub" style="margin-top:10px;">Predicción del modelo IA: <strong>43 contenedores</strong> totales esperados para la temporada.</p>
+            </div>
+
+            <div class="mx-breakdown" style="margin-top: 10px;">
+              <div class="mx-breakdown__item">
+                <div class="mx-breakdown__row">
+                  <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>73,8%</b> Arribado a Puerto San Antonio</span>
+                  <span class="mx-breakdown__tag mx-breakdown__tag--ok">En aduana</span>
+                </div>
+                <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:73.8%"></i></div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <span>Arribo San Antonio</span>
+              <strong>ETA Nov 2026</strong>
+            </footer>
+          </article>
+
+          <!-- KPI 4: Iglesias Auditadas (.mx-card con status OCR) -->
+          <article class="mx-card" data-metric-type="audit" role="button" tabindex="0" title="Ver auditorías OCR">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Verificación IA</span>
+                <h3 class="mx-title">Iglesias Auditadas</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono escudo">
+                <i data-lucide="shield-check"></i>
+              </button>
+            </header>
+
+            <div style="padding: 10px 0;">
+              <div style="display:flex; align-items:baseline; gap:8px;">
+                <strong class="mx-live-counter__num" style="font-size:2.8rem; color:#09983f; line-height:1;">842</strong>
+                <span style="font-size:0.9rem; font-weight:700; color:var(--admin-pine);">iglesias</span>
+              </div>
+              <div style="margin-top: 14px;">
+                <span class="mx-live-pill" style="color:#047526; background:rgba(16,185,129,0.18);"><i class="mx-dot mx-dot--ok"></i> <b>98%</b> con acta OCR conforme</span>
+              </div>
+            </div>
+
+            <div class="mx-breakdown" style="margin-top: 10px;">
+              <div class="mx-breakdown__item">
+                <div class="mx-breakdown__row">
+                  <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>825</b> Validadas / <b>17</b> En revisión</span>
+                  <span class="mx-breakdown__tag mx-breakdown__tag--ok">0 alertas críticas</span>
+                </div>
+                <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:98%"></i></div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <span>Comprobantes procesados</span>
+              <strong>100% Auditado</strong>
+            </footer>
+          </article>
+
         </div>
 
-        <!-- Grilla de distribución regional y alertas -->
+        <!-- Grilla de distribución regional y alertas (.mx-card) -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 26px;">
-          <div class="admin-card">
-            <div class="admin-card__head">
-              <h3><i data-lucide="bar-chart-3"></i> Avance por Región (Chile)</h3>
+          <!-- Card Avance Regional -->
+          <article class="mx-card" role="region" aria-label="Avance regional">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow"><i data-lucide="map-pin"></i> Cobertura Nacional</span>
+                <h3 class="mx-title">Avance por Región (Chile)</h3>
+              </div>
               <span class="badge-tag badge-tag--ia">16 Regiones</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:14px; font-size:0.9rem;">
+            </header>
+
+            <div style="display:flex; flex-direction:column; gap:14px; font-size:0.9rem; margin-top:8px;">
               <div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                   <span style="font-weight:700; color:#1e293b;">Metropolitana</span><b style="color:var(--admin-pine);">95,8%</b>
                 </div>
-                <div style="height:10px; border-radius:999px; background:rgba(15, 77, 58, 0.12); overflow:hidden;">
-                  <div style="width:95.8%; height:100%; background:linear-gradient(90deg, #0ba74a, #047526);"></div>
+                <div class="mx-bar-wrap">
+                  <div class="mx-bar mx-bar--ok" style="width: 95.8%;"></div>
                 </div>
               </div>
+
               <div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                   <span style="font-weight:700; color:#1e293b;">Valparaíso</span><b style="color:var(--admin-pine);">94,2%</b>
                 </div>
-                <div style="height:10px; border-radius:999px; background:rgba(15, 77, 58, 0.12); overflow:hidden;">
-                  <div style="width:94.2%; height:100%; background:linear-gradient(90deg, #0ba74a, #047526);"></div>
+                <div class="mx-bar-wrap">
+                  <div class="mx-bar mx-bar--ok" style="width: 94.2%;"></div>
                 </div>
               </div>
+
               <div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                   <span style="font-weight:700; color:#1e293b;">Biobío</span><b style="color:var(--admin-pine);">92,4%</b>
                 </div>
-                <div style="height:10px; border-radius:999px; background:rgba(15, 77, 58, 0.12); overflow:hidden;">
-                  <div style="width:92.4%; height:100%; background:linear-gradient(90deg, #0ba74a, #047526);"></div>
+                <div class="mx-bar-wrap">
+                  <div class="mx-bar mx-bar--ok" style="width: 92.4%;"></div>
                 </div>
               </div>
+
               <div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                   <span style="font-weight:700; color:#1e293b;">Araucanía</span><b style="color:var(--admin-pine);">90,1%</b>
                 </div>
-                <div style="height:10px; border-radius:999px; background:rgba(15, 77, 58, 0.12); overflow:hidden;">
-                  <div style="width:90.1%; height:100%; background:linear-gradient(90deg, #0ba74a, #047526);"></div>
+                <div class="mx-bar-wrap">
+                  <div class="mx-bar mx-bar--ok" style="width: 90.1%;"></div>
                 </div>
               </div>
+
               <div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                   <span style="font-weight:700; color:#1e293b;">Los Lagos</span><b style="color:var(--admin-warn);">89,3%</b>
                 </div>
-                <div style="height:10px; border-radius:999px; background:rgba(15, 77, 58, 0.12); overflow:hidden;">
-                  <div style="width:89.3%; height:100%; background:linear-gradient(90deg, var(--admin-warn), var(--admin-gold));"></div>
+                <div class="mx-bar-wrap">
+                  <div class="mx-bar mx-bar--warn" style="width: 89.3%;"></div>
                 </div>
               </div>
+
               <div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                   <span style="font-weight:700; color:#1e293b;">Antofagasta (Paso fronterizo)</span><b style="color:var(--admin-bad);">76,2%</b>
                 </div>
-                <div style="height:10px; border-radius:999px; background:rgba(15, 77, 58, 0.12); overflow:hidden;">
-                  <div style="width:76.2%; height:100%; background:linear-gradient(90deg, var(--admin-bad), var(--admin-warn));"></div>
+                <div class="mx-bar-wrap">
+                  <div class="mx-bar mx-bar--bad" style="width: 76.2%;"></div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="admin-card">
-            <div class="admin-card__head">
-              <h3><i data-lucide="sparkles"></i> Resumen Ejecutivo IA</h3>
-              <span class="badge-tag badge-tag--ok"><i data-lucide="bot"></i> Generado hoy</span>
-            </div>
-            <div style="color:var(--admin-text-muted); font-size:0.92rem; line-height:1.65; display:flex; flex-direction:column; gap:14px;">
+            <footer class="mx-card__foot">
+              <span>Actualizado hace 15 min</span>
+              <strong>16 / 16 Conectadas</strong>
+            </footer>
+          </article>
+
+          <!-- Card Resumen Ejecutivo -->
+          <article class="mx-card" role="region" aria-label="Resumen ejecutivo">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> IA en línea</span>
+                <h3 class="mx-title">Resumen Ejecutivo IA</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono bot">
+                <i data-lucide="bot"></i>
+              </button>
+            </header>
+
+            <div style="color:var(--admin-text-muted); font-size:0.92rem; line-height:1.65; display:flex; flex-direction:column; gap:14px; margin-top:8px;">
               <p>
                 <strong style="color:var(--admin-pine);">Estado Global:</strong> La campaña de distribución nacional avanza a un ritmo <strong>+4,2% superior al período 2025</strong>. El 90,5% de las cajitas programadas ya han sido entregadas y rendidas mediante el módulo OCR.
               </p>
@@ -231,11 +404,16 @@
                 <span class="badge-tag badge-tag--ia">Meta superada</span>
               </div>
             </div>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Modelo Gemini Pro Vision</span>
+              <strong>Informe conforme</strong>
+            </footer>
+          </article>
         </div>
       </section>
 
-      <!-- ================= 2. VIEW: IGLESIAS & CUPOS ================= -->
+      <!-- ================= 2. VIEW: IGLESIAS & CUPOS (.mx-card) ================= -->
       <section class="admin-view" id="view-iglesias">
         <div class="admin-view-header">
           <div>
@@ -252,8 +430,16 @@
           </button>
         </div>
 
-        <div class="admin-card">
-          <div class="admin-toolbar">
+        <article class="mx-card">
+          <header class="mx-card__head">
+            <div>
+              <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Gestión Central</span>
+              <h3 class="mx-title">Registro Nacional de Iglesias Socias</h3>
+            </div>
+            <span class="badge-tag badge-tag--ia">Filtro predictivo</span>
+          </header>
+
+          <div class="admin-toolbar" style="margin-top:10px;">
             <div class="admin-search">
               <i data-lucide="search" style="color:#64748b;"></i>
               <input type="text" id="churchSearch" placeholder="Buscar por iglesia, pastor o comuna..." />
@@ -359,10 +545,15 @@
               </tbody>
             </table>
           </div>
-        </div>
+
+          <footer class="mx-card__foot">
+            <span>Mostrando 5 de 126 postulaciones</span>
+            <strong>Página 1 de 26</strong>
+          </footer>
+        </article>
       </section>
 
-      <!-- ================= 3. VIEW: VOLUNTARIOS ================= -->
+      <!-- ================= 3. VIEW: VOLUNTARIOS (.mx-card) ================= -->
       <section class="admin-view" id="view-voluntarios">
         <div class="admin-view-header">
           <div>
@@ -380,71 +571,92 @@
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(310px, 1fr)); gap:22px;">
           <!-- Card Voluntario 1 -->
-          <div class="admin-card" style="margin-bottom:0;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <article class="mx-card" role="button" tabindex="0">
+            <header class="mx-card__head">
               <div style="display:flex; gap:12px; align-items:center;">
                 <div style="width:44px; height:44px; border-radius:50%; background:#d61f3c; color:#fff; display:grid; place-items:center; font-weight:800; box-shadow:0 3px 8px rgba(214,31,60,0.35);">CS</div>
                 <div>
-                  <strong style="font-size:1.05rem; color:#1e293b;">Camila Santander</strong><br />
+                  <h3 class="mx-title">Camila Santander</h3>
                   <small style="color:var(--admin-text-dim); font-weight:600;">Valparaíso · Activa hace 2 días</small>
                 </div>
               </div>
               <span class="badge-tag badge-tag--ok">Activa</span>
-            </div>
-            <div style="font-size:0.88rem; background:rgba(255, 255, 255, 0.7); border:1px solid rgba(15, 77, 58, 0.15); padding:12px 16px; border-radius:12px; margin-bottom:16px;">
+            </header>
+
+            <div style="font-size:0.88rem; background:rgba(255, 255, 255, 0.7); border:1px solid rgba(15, 77, 58, 0.15); padding:12px 16px; border-radius:14px; margin-bottom:16px;">
               <span style="color:var(--admin-text-dim); font-weight:600;">Rol sugerido por IA:</span><br />
               <strong style="color:var(--admin-pine);"><i data-lucide="award"></i> Maestra "La Gran Aventura"</strong>
             </div>
+
             <button type="button" class="btn btn--ghost btn--sm btn--lc btn-wa-remind" data-name="Camila Santander" style="width:100%;">
               <i data-lucide="message-circle"></i> Enviar inducción por WhatsApp
             </button>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Matching de habilidades: 94%</span>
+              <strong>Capacitada</strong>
+            </footer>
+          </article>
 
           <!-- Card Voluntario 2 -->
-          <div class="admin-card" style="margin-bottom:0;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <article class="mx-card" role="button" tabindex="0">
+            <header class="mx-card__head">
               <div style="display:flex; gap:12px; align-items:center;">
                 <div style="width:44px; height:44px; border-radius:50%; background:#1a6b52; color:#fff; display:grid; place-items:center; font-weight:800; box-shadow:0 3px 8px rgba(26,107,82,0.35);">JP</div>
                 <div>
-                  <strong style="font-size:1.05rem; color:#1e293b;">Joaquín Peña</strong><br />
+                  <h3 class="mx-title">Joaquín Peña</h3>
                   <small style="color:var(--admin-text-dim); font-weight:600;">Biobío · Hace 9 días sin actividad</small>
                 </div>
               </div>
               <span class="badge-tag badge-tag--warn">En riesgo</span>
-            </div>
-            <div style="font-size:0.88rem; background:rgba(255, 255, 255, 0.7); border:1px solid rgba(15, 77, 58, 0.15); padding:12px 16px; border-radius:12px; margin-bottom:16px;">
+            </header>
+
+            <div style="font-size:0.88rem; background:rgba(255, 255, 255, 0.7); border:1px solid rgba(15, 77, 58, 0.15); padding:12px 16px; border-radius:14px; margin-bottom:16px;">
               <span style="color:var(--admin-text-dim); font-weight:600;">Rol sugerido por IA:</span><br />
               <strong style="color:var(--admin-red);"><i data-lucide="truck"></i> Coordinador de Cajas & Despacho</strong>
             </div>
+
             <button type="button" class="btn btn--primary btn--sm btn--lc btn-wa-remind" data-name="Joaquín Peña" style="width:100%;">
               <i data-lucide="bell"></i> Enviar recordatorio WhatsApp
             </button>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Alerta de inactividad activa</span>
+              <strong>Pendiente contacto</strong>
+            </footer>
+          </article>
 
           <!-- Card Voluntario 3 -->
-          <div class="admin-card" style="margin-bottom:0;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+          <article class="mx-card" role="button" tabindex="0">
+            <header class="mx-card__head">
               <div style="display:flex; gap:12px; align-items:center;">
                 <div style="width:44px; height:44px; border-radius:50%; background:#2f6fdb; color:#fff; display:grid; place-items:center; font-weight:800; box-shadow:0 3px 8px rgba(47,111,219,0.35);">DA</div>
                 <div>
-                  <strong style="font-size:1.05rem; color:#1e293b;">Diego Araya</strong><br />
+                  <h3 class="mx-title">Diego Araya</h3>
                   <small style="color:var(--admin-text-dim); font-weight:600;">Antofagasta · Hace 23 días</small>
                 </div>
               </div>
               <span class="badge-tag badge-tag--bad">Inactivo</span>
-            </div>
-            <div style="font-size:0.88rem; background:rgba(255, 255, 255, 0.7); border:1px solid rgba(15, 77, 58, 0.15); padding:12px 16px; border-radius:12px; margin-bottom:16px;">
+            </header>
+
+            <div style="font-size:0.88rem; background:rgba(255, 255, 255, 0.7); border:1px solid rgba(15, 77, 58, 0.15); padding:12px 16px; border-radius:14px; margin-bottom:16px;">
               <span style="color:var(--admin-text-dim); font-weight:600;">Rol sugerido por IA:</span><br />
               <strong style="color:#64748b;"><i data-lucide="heart"></i> Equipo de Oración & Acogida</strong>
             </div>
+
             <button type="button" class="btn btn--ghost btn--sm btn--lc btn-wa-remind" data-name="Diego Araya" style="width:100%;">
               <i data-lucide="refresh-cw"></i> Re-vincular por WhatsApp
             </button>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Contacto automatizado programado</span>
+              <strong>Inactivo</strong>
+            </footer>
+          </article>
         </div>
       </section>
 
-      <!-- ================= 4. VIEW: AUDITORÍA OCR ================= -->
+      <!-- ================= 4. VIEW: AUDITORÍA OCR (.mx-card) ================= -->
       <section class="admin-view" id="view-ocr">
         <div class="admin-view-header">
           <div>
@@ -459,12 +671,17 @@
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:26px;">
-          <!-- Card 1: Escáner visual -->
-          <div class="admin-card">
-            <div class="admin-card__head">
-              <h3><i data-lucide="camera"></i> Escaneo de Planilla Oficial</h3>
-              <span class="badge-tag badge-tag--ok">Comprobante Físico</span>
-            </div>
+          <!-- Card 1: Escáner visual (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Comprobante Físico</span>
+                <h3 class="mx-title">Escaneo de Planilla Oficial</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono cámara">
+                <i data-lucide="camera"></i>
+              </button>
+            </header>
 
             <div class="ocr-stage" id="ocrStage" style="position:relative; border-radius:16px; overflow:hidden; background: repeating-linear-gradient(45deg, rgba(15, 77, 58, 0.08), rgba(15, 77, 58, 0.08) 12px, rgba(15, 77, 58, 0.14) 12px, rgba(15, 77, 58, 0.14) 24px); border: 1.5px solid rgba(255, 255, 255, 0.85); padding:26px; min-height:340px; display:grid; place-items:center;">
               <div class="doc" style="position:relative; width:100%; max-width:350px; background:#ffffff; color:#1e293b; padding:22px; border-radius:8px; border:1px solid rgba(15, 77, 58, 0.15); box-shadow:0 18px 40px -10px rgba(15, 77, 58, 0.28); font-family:var(--font); font-size:0.88rem;">
@@ -512,14 +729,24 @@
                 <input type="file" accept="image/*" id="ocrFile" hidden />
               </label>
             </div>
-          </div>
 
-          <!-- Card 2: Resultados IA -->
-          <div class="admin-card">
-            <div class="admin-card__head">
-              <h3><i data-lucide="file-check-2"></i> Datos Extraídos & Auditoría</h3>
-              <span class="badge-tag badge-tag--ia"><i data-lucide="sparkles"></i> Validación IA</span>
-            </div>
+            <footer class="mx-card__foot">
+              <span>Resolución: 300 DPI</span>
+              <strong>Captura conforme</strong>
+            </footer>
+          </article>
+
+          <!-- Card 2: Resultados IA (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Validación IA</span>
+                <h3 class="mx-title">Datos Extraídos & Auditoría</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono archivo">
+                <i data-lucide="file-check-2"></i>
+              </button>
+            </header>
 
             <div class="admin-table-wrap" style="margin-bottom:18px;">
               <table class="admin-table" id="ocrTable">
@@ -541,11 +768,16 @@
             </div>
 
             <div id="ocrFlags"></div>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Auditoría cruzada con registro ERL</span>
+              <strong>Sin inconsistencias</strong>
+            </footer>
+          </article>
         </div>
       </section>
 
-      <!-- ================= 5. VIEW: LOGÍSTICA & BODEGA ================= -->
+      <!-- ================= 5. VIEW: LOGÍSTICA & BODEGA (.mx-card) ================= -->
       <section class="admin-view" id="view-logistica">
         <div class="admin-view-header">
           <div>
@@ -560,12 +792,17 @@
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:26px;">
-          <!-- Cinta transportadora con visión -->
-          <div class="admin-card">
-            <div class="admin-card__head">
-              <h3><i data-lucide="cctv"></i> Conteo en Bodega Central (Visión IA)</h3>
-              <span class="badge-tag badge-tag--ok">CAM-02 Santiago</span>
-            </div>
+          <!-- Cinta transportadora con visión (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> CAM-02 Santiago</span>
+                <h3 class="mx-title">Conteo en Bodega (Visión IA)</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono cámara">
+                <i data-lucide="cctv"></i>
+              </button>
+            </header>
 
             <div class="conveyor" id="conveyor" style="position:relative; height:200px; border-radius:16px; overflow:hidden; background:linear-gradient(180deg, #163629, #0c231a); display:grid; place-items:center; box-shadow:inset 0 2px 8px rgba(0,0,0,0.3);">
               <div style="position:absolute; top:12px; left:16px; font-size:0.75rem; font-family:monospace; color:#8be4b8; z-index:4;">
@@ -592,14 +829,24 @@
                 <strong id="cvConf" style="font-size:1.15rem; color:var(--admin-ok);">98,8%</strong>
               </div>
             </div>
-          </div>
 
-          <!-- Rutas seguras -->
-          <div class="admin-card">
-            <div class="admin-card__head">
-              <h3><i data-lucide="route"></i> Optimización de Rutas Carretera</h3>
-              <span class="badge-tag badge-tag--ia">Ruta 5 Norte/Sur</span>
-            </div>
+            <footer class="mx-card__foot">
+              <span>Balanza y OCR sincronizados</span>
+              <strong>Velocidad: 1,4 m/s</strong>
+            </footer>
+          </article>
+
+          <!-- Rutas seguras (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Ruta 5 Norte/Sur</span>
+                <h3 class="mx-title">Optimización de Rutas Carretera</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono ruta">
+                <i data-lucide="route"></i>
+              </button>
+            </header>
 
             <div style="display:flex; flex-direction:column; gap:14px; font-size:0.9rem; color:var(--admin-text-muted);">
               <div style="background:rgba(255, 255, 255, 0.7); border:1.5px solid rgba(255, 255, 255, 0.9); padding:16px; border-radius:14px; box-shadow:0 2px 8px rgba(15, 77, 58, 0.06);">
@@ -626,11 +873,16 @@
                 <p>Coordinación marítima con Navimag para traslado de contenedores. Arribo programado viernes.</p>
               </div>
             </div>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Ahorro total estimado: 384 km</span>
+              <strong>Flota en ruta</strong>
+            </footer>
+          </article>
         </div>
       </section>
 
-      <!-- ================= 6. VIEW: AUTOMATIZACIONES ================= -->
+      <!-- ================= 6. VIEW: AUTOMATIZACIONES (.mx-card) ================= -->
       <section class="admin-view" id="view-automatizaciones">
         <div class="admin-view-header">
           <div>
@@ -645,17 +897,18 @@
         </div>
 
         <div class="admin-automations-grid">
-          <!-- Switch 1 -->
-          <div class="admin-auto-card">
-            <div class="admin-auto-card__header">
-              <span class="admin-auto-card__title">
-                <i data-lucide="scan-text" style="color:var(--admin-red);"></i> OCR Automático de Actas
-              </span>
+          <!-- Switch 1 (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Flujo Activo</span>
+                <h3 class="mx-title">OCR Automático de Actas</h3>
+              </div>
               <label class="admin-switch">
                 <input type="checkbox" checked data-auto="OCR Automático de Actas" />
                 <span class="admin-slider"></span>
               </label>
-            </div>
+            </header>
             <p class="admin-auto-card__desc">
               Procesa de forma inmediata cualquier foto de planilla enviada por los pastores vía WhatsApp, extrayendo los números de asistencia y cajas entregadas.
             </p>
@@ -663,19 +916,24 @@
               <span>Ejecuciones: <strong>842</strong></span>
               <span>Acierto: <strong>98,4%</strong></span>
             </div>
-          </div>
+            <footer class="mx-card__foot">
+              <span>Disparador: webhook WhatsApp</span>
+              <strong>Activo 24/7</strong>
+            </footer>
+          </article>
 
-          <!-- Switch 2 -->
-          <div class="admin-auto-card">
-            <div class="admin-auto-card__header">
-              <span class="admin-auto-card__title">
-                <i data-lucide="message-square" style="color:var(--admin-ok);"></i> Re-engagement Voluntarios
-              </span>
+          <!-- Switch 2 (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Flujo Activo</span>
+                <h3 class="mx-title">Re-engagement Voluntarios</h3>
+              </div>
               <label class="admin-switch">
                 <input type="checkbox" checked data-auto="Re-engagement Voluntarios" />
                 <span class="admin-slider"></span>
               </label>
-            </div>
+            </header>
             <p class="admin-auto-card__desc">
               Envía recordatorios amables y recursos de inducción por WhatsApp a los voluntarios que no han reportado actividad en más de 7 días.
             </p>
@@ -683,19 +941,24 @@
               <span>Enviados este mes: <strong>154</strong></span>
               <span>Respuesta: <strong>72%</strong></span>
             </div>
-          </div>
+            <footer class="mx-card__foot">
+              <span>Disparador: inactividad > 7d</span>
+              <strong>Activo 24/7</strong>
+            </footer>
+          </article>
 
-          <!-- Switch 3 -->
-          <div class="admin-auto-card">
-            <div class="admin-auto-card__header">
-              <span class="admin-auto-card__title">
-                <i data-lucide="alert-triangle" style="color:var(--admin-warn);"></i> Alertas de Quiebre de Stock
-              </span>
+          <!-- Switch 3 (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow" style="color:var(--admin-red);"><i class="mx-dot mx-dot--warn"></i> Alerta Preventiva</span>
+                <h3 class="mx-title">Alertas de Quiebre de Stock</h3>
+              </div>
               <label class="admin-switch">
                 <input type="checkbox" checked data-auto="Alertas de Quiebre de Stock" />
                 <span class="admin-slider"></span>
               </label>
-            </div>
+            </header>
             <p class="admin-auto-card__desc">
               Emite alertas tempranas al equipo regional ERLE cuando una comuna supera el 85% de las cajas asignadas sin haber cubierto todos los eventos.
             </p>
@@ -703,19 +966,24 @@
               <span>Alertas disparadas: <strong>3</strong></span>
               <span>Estado: <strong>Resuelto</strong></span>
             </div>
-          </div>
+            <footer class="mx-card__foot">
+              <span>Umbral: 85% capacidad</span>
+              <strong>Monitoreo continuo</strong>
+            </footer>
+          </article>
 
-          <!-- Switch 4 -->
-          <div class="admin-auto-card">
-            <div class="admin-auto-card__header">
-              <span class="admin-auto-card__title">
-                <i data-lucide="globe" style="color:var(--admin-pine);"></i> Sincronización Global
-              </span>
+          <!-- Switch 4 (.mx-card) -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Internacional</span>
+                <h3 class="mx-title">Sincronización Global</h3>
+              </div>
               <label class="admin-switch">
                 <input type="checkbox" checked data-auto="Sincronización Global Samaritan's Purse" />
                 <span class="admin-slider"></span>
               </label>
-            </div>
+            </header>
             <p class="admin-auto-card__desc">
               Sincroniza cada 6 horas el odómetro nacional con la base de datos central de Samaritan's Purse en Boone, Carolina del Norte.
             </p>
@@ -723,17 +991,25 @@
               <span>Último sync: <strong>Hace 18 min</strong></span>
               <span>Latencia: <strong>84ms</strong></span>
             </div>
-          </div>
+            <footer class="mx-card__foot">
+              <span>Endpoint: api.samaritanspurse.org</span>
+              <strong>Sincronizado</strong>
+            </footer>
+          </article>
         </div>
 
-        <!-- Terminal de logs en vivo -->
-        <div class="admin-card">
-          <div class="admin-card__head">
-            <h3><i data-lucide="terminal"></i> Registro de Eventos Automatizados en Vivo</h3>
+        <!-- Terminal de logs en vivo (.mx-card) -->
+        <article class="mx-card" style="margin-top:24px;">
+          <header class="mx-card__head">
+            <div>
+              <span class="mx-eyebrow"><i data-lucide="terminal"></i> Monitoreo en Vivo</span>
+              <h3 class="mx-title">Registro de Eventos Automatizados</h3>
+            </div>
             <button type="button" class="btn btn--ghost btn--sm btn--lc" onclick="document.getElementById('adminLogFeed').innerHTML=''">
               <i data-lucide="trash-2"></i> Limpiar log
             </button>
-          </div>
+          </header>
+
           <div class="admin-log-feed" id="adminLogFeed">
             <div class="admin-log-entry">
               <span class="admin-log-time">[18:52:14]</span>
@@ -756,10 +1032,15 @@
               <span class="admin-log-detail">Ruta optimizada para Camión 02 (Tramo Concepción-Temuco) · Ahorro: 142 km</span>
             </div>
           </div>
-        </div>
+
+          <footer class="mx-card__foot">
+            <span>Buffer de eventos: 500 registros</span>
+            <strong>Stream activo</strong>
+          </footer>
+        </article>
       </section>
 
-      <!-- ================= 7. VIEW: ASISTENTE IA ================= -->
+      <!-- ================= 7. VIEW: ASISTENTE IA (.mx-card) ================= -->
       <section class="admin-view" id="view-asistente">
         <div class="admin-view-header">
           <div>
@@ -774,7 +1055,17 @@
         </div>
 
         <div class="admin-chat-grid">
-          <div class="admin-card" style="margin-bottom:0;">
+          <article class="mx-card" style="margin-bottom:0;">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Conversación Activa</span>
+                <h3 class="mx-title">Terminal de Asistencia RAG</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono asistente">
+                <i data-lucide="bot"></i>
+              </button>
+            </header>
+
             <div class="admin-chat-messages" id="adminChatMessages">
               <div class="admin-chat-bubble admin-chat-bubble--ai">
                 ¡Hola, Administrador! Soy el asistente inteligente de la plataforma OCC Chile. Puedes consultarme por stock regional, actas OCR pendientes, estado de camiones o pedirme que redacte un reporte.
@@ -787,13 +1078,23 @@
                 <i data-lucide="send"></i>
               </button>
             </div>
-          </div>
 
-          <div class="admin-card" style="margin-bottom:0;">
-            <div class="admin-card__head">
-              <h3><i data-lucide="lightbulb"></i> Consultas Rápidas</h3>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:12px;">
+            <footer class="mx-card__foot">
+              <span>Motor de embeddings conectado</span>
+              <strong>Listo para responder</strong>
+            </footer>
+          </article>
+
+          <article class="mx-card" style="margin-bottom:0;">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow" style="color:var(--admin-red);"><i data-lucide="lightbulb"></i> Atajos</span>
+                <h3 class="mx-title">Consultas Rápidas</h3>
+              </div>
+              <span class="badge-tag badge-tag--ia">1-Clic</span>
+            </header>
+
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
               <button type="button" class="btn btn--ghost btn--sm btn--lc admin-quick-prompt" data-prompt="¿Cuántas cajitas faltan por distribuir a nivel nacional?">
                 ¿Cuántas cajitas faltan por distribuir?
               </button>
@@ -807,7 +1108,12 @@
                 Generar resumen para el equipo
               </button>
             </div>
-          </div>
+
+            <footer class="mx-card__foot">
+              <span>Prompts preconfigurados</span>
+              <strong>Respuestas inmediatas</strong>
+            </footer>
+          </article>
         </div>
       </section>
 

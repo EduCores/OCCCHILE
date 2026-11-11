@@ -6,6 +6,8 @@
 (() => {
   "use strict";
 
+  const IS_EN = document.documentElement.lang === "en" || location.pathname.includes("index-en");
+
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const icons = () => window.lucide && window.lucide.createIcons();
@@ -47,7 +49,7 @@
   ];
   REGIONS.forEach((r, i) => (r.i = i));
 
-  const PROCESSES = [
+  const PROCESSES_ES = [
     { t: "Captación de iglesias", pain: "Email manual con 7 campos", sol: "Formulario inteligente + clasificación automática", imp: "alto", ic: "church", m: "A", e: 24, v: 94,
       b: ["Autocompletado de direcciones", "Clasificación por región/tamaño", "Deduplicación fuzzy"] },
     { t: "Onboarding de voluntarios", pain: "Manual, sin seguimiento", sol: "Chatbot + flujo automatizado + recordatorios", imp: "alto", ic: "user-plus", m: "B", e: 40, v: 76,
@@ -67,10 +69,32 @@
     { t: "Traducción / localización", pain: "Proceso manual", sol: "IA multilingüe", imp: "bajo-medio", ic: "languages", m: "F", e: 18, v: 32,
       b: ["Materiales ES/EN/PT", "Revisión humana", "Glosario de la obra"] },
   ];
+
+  const PROCESSES_EN = [
+    { t: "Church Application & Intake", pain: "Manual emails with 7 disconnected fields", sol: "Smart form + automated routing & classification", imp: "alto", ic: "church", m: "A", e: 24, v: 94,
+      b: ["Address autocomplete", "Region & size tier classification", "Fuzzy deduplication"] },
+    { t: "Volunteer Onboarding", pain: "Manual tracking with high drop-off", sol: "Chatbot + automated pathways + reminders", imp: "alto", ic: "user-plus", m: "B", e: 40, v: 76,
+      b: ["Role-specific checklists", "Skill-based AI matching", "Inactivity alerts"] },
+    { t: "Teacher & Distribution Reports", pain: "Bulky Google Forms embedded in iframes", sol: "Native mobile forms + AI validation", imp: "alto", ic: "clipboard-check", m: "C", e: 46, v: 92,
+      b: ["Step-by-step mobile UX", "Data inconsistency detection", "Offline mode (PWA)"] },
+    { t: "Physical Evidence OCR", pain: "Unclear photos, manual transcription", sol: "Vision AI OCR + assisted verification", imp: "medio-alto", ic: "scan", m: "C", e: 32, v: 88,
+      b: ["Key data & date extraction", "Roster normalization", "Secure cloud storage"] },
+    { t: "Last-Mile Logistics & Routing", pain: "Manual routing, elevated freight costs", sol: "Cluster optimization + geocoding", imp: "alto", ic: "truck", m: "D", e: 55, v: 82,
+      b: ["Cubic volume calculations", "Multi-stop routing", "Local carrier integration"] },
+    { t: "Teacher Training", pain: "100% in-person, limited reach", sol: "Micro-learning platform + dynamic quizzes", imp: "medio", ic: "graduation-cap", m: "E", e: 18, v: 70,
+      b: ["Short videos <5 min", "Downloadable progress", "Automated certificates"] },
+    { t: "Material Translation", pain: "Slow and costly manual translations", sol: "Generative AI + human editorial review", imp: "bajo-medio", ic: "languages", m: "F", e: 18, v: 32,
+      b: ["EN/ES/PT curriculum", "Human oversight", "Theological glossaries"] },
+    { t: "Donor Impact Dashboard", pain: "Quarterly static PDF reports", sol: "Real-time portal with multimedia storytelling", imp: "medio-alto", ic: "bar-chart-3", m: "G", e: 30, v: 65,
+      b: ["Live delivery metrics", "Geolocated photos", "Verified impact stories"] },
+    { t: "RAG Inquiry Support", pain: "Overcrowded inboxes, repetitive questions", sol: "RAG Assistant trained on official manuals", imp: "alto", ic: "message-square", m: "H", e: 38, v: 90,
+      b: ["Manuals vector embeddings", "Grounded citations", "Seamless human handoff"] },
+  ];
+  const PROCESSES = IS_EN ? PROCESSES_EN : PROCESSES_ES;
   const IMP_LABEL = { alto: "Alto", "medio-alto": "Medio-Alto", medio: "Medio", "bajo-medio": "Bajo-Medio" };
   const IMP_COLOR = { alto: "var(--red)", "medio-alto": "#e5662b", medio: "#d49112", "bajo-medio": "var(--pine-2)" };
 
-  const FLOWS = [
+  const FLOWS_ES = [
     { k: "A", t: "Captación y onboarding de iglesias", ic: "church",
       before: "La iglesia envía un email a contacto con 7 datos (nombre, contacto, dirección postal, dirección de distribución, niños por rango etario, email, celular). El equipo procesa todo a mano.",
       after: "Formulario guiado o chatbot que valida, clasifica y asigna la postulación al equipo regional en segundos.",
@@ -113,25 +137,72 @@
       kpi: [["Primera respuesta", "< 5 segundos"], ["Consultas resueltas", "~70% sin intervención"]] },
   ];
 
-  /* ---------------- THEME ---------------- */
+  const FLOWS_EN = [
+    { k: "A", t: "Church Outreach & Onboarding", ic: "church",
+      before: "The church emails contact info with 7 fields (name, contact, postal address, delivery venue, children by age, email, phone). The team processes everything by hand.",
+      after: "Guided smart form or chatbot that validates, classifies, and routes applications to regional teams in seconds.",
+      items: ["Real-time validated web form", "Address autocomplete (Google Maps API)", "AI classification by region, size, and urgency", "Chatbot on 'Want to Join?'", "Fuzzy deduplication for church names and addresses", "Instant automated reply with next steps and materials"],
+      kpi: [["Response Time", "Days → minutes"], ["Conversion", "↑ complete applications"]] },
+    { k: "B", t: "Volunteer Onboarding & Leadership Matching", ic: "users",
+      before: "27 new volunteers and regional teams across 6 roles coordinated through loose emails and social messaging without follow-up.",
+      after: "AI assistant that guides volunteers by role and proactively flags inactive members.",
+      items: ["Role-specific checklists, handbooks, and trainings", "AI skill and location matching to ministry roles", "Automated task reminders", "Engagement analytics with early-warning alerts", "Personalized badges and service certificates"],
+      kpi: [["Activation", "7-day full onboarding"], ["Retention", "↓ volunteer drop-off"]] },
+    { k: "C", t: "Teacher & Post-Distribution Reporting", ic: "clipboard-check",
+      before: "Oversized Google Forms embedded in iframes, manual entry, and error-prone spreadsheet consolidation.",
+      after: "Native mobile step-by-step forms that validate, read photo rosters via OCR, and auto-consolidate data.",
+      items: ["Step-by-step mobile UX", "Smart range and consistency validation", "Vision OCR on attendance photos", "Anomaly detection (duplicate reports, undistributed boxes)", "Instant automated regional executive summaries"],
+      kpi: [["Error Reduction", "↓ 70% invalid entries"], ["Consolidation", "Manual → instantaneous"]] },
+    { k: "D", t: "Shoebox Logistics & Regional Distribution", ic: "truck",
+      before: "Manual intake, counting, and routing of 228,024 shoeboxes toward a 42-container goal in 2027.",
+      after: "Every shoebox verified and tracked by computer vision, with routes and inventory optimized by region.",
+      items: ["Automated camera tallying in warehouse docks", "Route optimization (OR-Tools + AI)", "Regional demand forecasting", "Real-time inventory alerts", "Label OCR for full supply-chain traceability"],
+      kpi: [["Count Accuracy", "> 99%"], ["Mileage / Freight", "↓ 15–25%"]] },
+    { k: "E", t: "Metrics, Real-time Monitoring & Decision Intelligence", ic: "layout-dashboard",
+      before: "Metrics compiled into manual PowerPoint presentations (228k boxes, 90.5% distributed).",
+      after: "Live interactive dashboard with smart anomaly alerts and auto-generated executive briefs.",
+      items: ["Real-time national and regional KPIs", "Alerts when a region drops below 80% coverage", "42-container predictive milestone tracking", "Monthly/quarterly automated AI executive reports", "Feedback sentiment and prayer request analysis"],
+      kpi: [["Visibility", "Weekly → real-time"], ["Report Preparation", "Hours → seconds"]] },
+    { k: "F", t: "Training & Discipleship Microlearning", ic: "graduation-cap",
+      before: "Strictly in-person workshops (Valparaíso 105, Santiago 190 attendees) with static paper materials.",
+      after: "Continuous 24/7 role-based learning accessible from any smartphone in multiple languages.",
+      items: ["Role-specific micro-guides (AI + human review)", "Operational support chatbot", "Interactive quizzes with instant feedback", "Automated curriculum translation", "Automated meeting minutes and action items"],
+      kpi: [["Reach", "Unlimited workshop capacity"], ["Records", "100% automated"]] },
+    { k: "G", t: "Digital Communication & Ministry Storytelling", ic: "megaphone",
+      before: "Social channels and web updated manually without a structured editorial calendar.",
+      after: "AI-assisted editorial calendar aligned with regional distribution milestones.",
+      items: ["Posts, stories, and reel scripts tailored to milestones (Calama, Punta Arenas, Puerto Natales)", "Automated scheduling integrations", "Instant FAQ responses to direct messages", "Personalized regional newsletters", "Technical SEO and speed optimization"],
+      kpi: [["Publishing Frequency", "Consistent weekly schedule"], ["Organic Reach", "↑ technical SEO"]] },
+    { k: "H", t: "Inquiry Support & Grounded RAG Copilot", ic: "life-buoy",
+      before: "Standard contact form with delayed manual email responses.",
+      after: "RAG Assistant that answers with verified manual citations and escalates when needed.",
+      items: ["RAG chatbot trained on official OCC Chile FAQs and handbooks", "Smart routing (volunteers, donations, churches, press)", "Suggested drafted replies for staff", "Recurring question trend analysis"],
+      kpi: [["First Response", "< 5 seconds"], ["Resolution Rate", "~70% autonomous"]] },
+  ];
+  const FLOWS = IS_EN ? FLOWS_EN : FLOWS_ES;
+
+  /* ---------------- THEME (Dark por defecto permanente) ---------------- */
   function initTheme() {
-    const root = document.documentElement;
-    const saved = store.get("occ-theme");
-    if (saved) root.dataset.theme = saved;
-    const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-    const paint = () => { $("#themeToggle").innerHTML = `<i data-lucide="${isDark() ? "sun" : "moon"}"></i>`; icons(); };
-    $("#themeToggle").addEventListener("click", () => {
-      root.dataset.theme = isDark() ? "light" : "dark";
-      store.set("occ-theme", root.dataset.theme);
-      paint();
-    });
-    paint();
+    document.documentElement.dataset.theme = "dark";
+    try { localStorage.setItem("occ-theme", "dark"); } catch (_) {}
   }
 
-  /* ---------------- LANGUAGE SWITCH (ES/EN · mock) ---------------- */
-  $$(".lang-switch .lang").forEach((b) => b.addEventListener("click", () => {
-    $$(".lang-switch .lang").forEach((x) => x.classList.toggle("is-active", x === b));
-  }));
+  /* ---------------- LANGUAGE SWITCH (ES/EN) ---------------- */
+  function initLangSwitch() {
+    $$(".lang-switch .lang").forEach((b) => b.addEventListener("click", (e) => {
+      const target = b.dataset.lang;
+      const isEn = document.documentElement.lang === "en" || location.pathname.includes("index-en");
+      if (target === "en" && !isEn) {
+        e.preventDefault();
+        const hash = location.hash || "";
+        location.href = "index-en.html" + hash;
+      } else if (target === "es" && isEn) {
+        e.preventDefault();
+        const hash = location.hash || "";
+        location.href = "index.html" + hash;
+      }
+    }));
+  }
 
   /* ---------------- NAV / SCROLL ---------------- */
   function initNav() {
@@ -152,7 +223,10 @@
     const io = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) links.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
     }), { rootMargin: "-45% 0px -50% 0px" });
-    ["procesos", "flujos", "demos", "arquitectura", "roadmap"].forEach((id) => io.observe(document.getElementById(id)));
+    ["procesos", "flujos", "demos", "arquitectura", "roadmap"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
   }
 
   function initReveal() {
@@ -160,6 +234,14 @@
       if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
     }), { threshold: 0.12 });
     $$(".reveal").forEach((el, i) => { el.style.transitionDelay = (i % 5) * 70 + "ms"; io.observe(el); });
+
+    // Fallback de seguridad: por si algún elemento no intersecta o el navegador falla
+    setTimeout(() => {
+      $$(".reveal:not(.is-in)").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 100) el.classList.add("is-in");
+      });
+    }, 1200);
   }
 
   function animateCount(el, to, dec = 0, suffix = "", dur = 1800) {
@@ -638,15 +720,40 @@
     }
 
     // pasos
-    const stepFields = [["name", "contact", "email", "phone"], ["addr"], []];
+    const stepFields = [["name", "contact", "email", "phone"], ["addr"], [], []];
+    const gridEl = $("#postularGrid") || $(".postular__grid");
     const go = (n) => {
       step = n;
       $$(".fstep", f).forEach((s) => s.classList.toggle("is-active", +s.dataset.step === n));
       $$("#formSteps span").forEach((s, i) => s.classList.toggle("is-on", i <= n));
       $("#prevStep").disabled = n === 0;
-      $("#nextStep").innerHTML = n === 2 ? `<i data-lucide="send"></i> Enviar postulación` : `Siguiente <i data-lucide="arrow-right"></i>`;
+
+      // Al llegar al paso 4 (índice 3), expande para ocupar ambos paneles
+      if (gridEl) {
+        gridEl.classList.toggle("is-step-vol", n === 3);
+      }
+
+      if (n === 3) {
+        $("#nextStep").innerHTML = IS_EN ? `<i data-lucide="send"></i> Submit Application` : `<i data-lucide="send"></i> Finalizar postulación`;
+        // Si hay una región detectada en el paso 2, sincronizarla con el selector de voluntarios
+        const vReg = $("#vRegion");
+        if (vReg && region && vReg.value !== region) {
+          vReg.value = region;
+          vReg.dispatchEvent(new Event("change"));
+        }
+      } else {
+        $("#nextStep").innerHTML = IS_EN ? `Next <i data-lucide="arrow-right"></i>` : `Siguiente <i data-lucide="arrow-right"></i>`;
+      }
       icons();
     };
+
+    // Permitir navegar a pasos previos haciendo click en los indicadores
+    $$("#formSteps span").forEach((s, i) => {
+      s.addEventListener("click", () => {
+        if (i < step) go(i);
+      });
+    });
+
     $("#prevStep").addEventListener("click", () => go(Math.max(0, step - 1)));
     $("#nextStep").addEventListener("click", () => {
       const bad = stepFields[step].filter((k) => !check(k));
@@ -654,8 +761,10 @@
         bad.forEach((k) => { F[k].classList.add("err"); const h = $(`.hint[data-for="${F[k].id}"]`); if (!F[k].value) { h.textContent = "Campo requerido"; h.className = "hint err"; } });
         F[bad[0]].focus(); return;
       }
-      if (step < 2) return go(step + 1);
-      if (!kids().reduce((a, b) => a + b, 0)) { $("#kidsHint").textContent = "Indica al menos un niño."; $("#kidsHint").className = "hint err"; return; }
+      if (step === 2) {
+        if (!kids().reduce((a, b) => a + b, 0)) { $("#kidsHint").textContent = "Indica al menos un niño para continuar."; $("#kidsHint").className = "hint err"; return; }
+      }
+      if (step < 3) return go(step + 1);
       submit();
     });
     function submit() {
@@ -664,14 +773,21 @@
       const r = $("#autoReply");
       const total = kids().reduce((a, b) => a + b, 0);
       const first = F.contact.value.trim().split(" ")[0];
-      r.hidden = false;
-      r.innerHTML = `<h4><i data-lucide="mail-check"></i> Respuesta automática generada</h4>
-        <p>Hola ${first}, ¡gracias por sumar a <b>${F.name.value.trim()}</b>! 🎁</p>
-        <p>Tu postulación para <b>${fmt(total)} niños</b> fue asignada al <b>${$("#cTeam").textContent}</b>. En las próximas 48 h te contactarán para coordinar la entrega.</p>
-        <p><b>Próximos pasos:</b> 1) Ver video de bienvenida · 2) Descargar guía de distribución · 3) Agendar capacitación de El Gran Viaje.</p>`;
+      const hours = $("#vHours") ? $("#vHours").value : 8;
+      const reg = region || ($("#vRegion") ? $("#vRegion").value : "tu región");
+
+      if (r) {
+        r.hidden = false;
+        r.innerHTML = `<h4><i data-lucide="mail-check"></i> Postulación y Equipo Asignado</h4>
+          <p>Hola ${first}, ¡gracias por sumar a <b>${F.name.value.trim()}</b>! 🎁</p>
+          <p>Tu postulación para <b>${fmt(total)} niños</b> fue asignada al <b>${$("#cTeam").textContent || ("Equipo " + reg)}</b> con compromiso de <b>${hours} h/sem</b> de voluntariado local.</p>
+          <p><b>Próximos pasos:</b> 1) Ver video de bienvenida · 2) Descargar guía de distribución · 3) Agendar capacitación de El Gran Viaje.</p>`;
+      }
+
+      toast("¡Postulación y roles de voluntarios enviados con éxito! 🏅", "award");
+      $("#nextStep").innerHTML = `<i data-lucide="check"></i> Postulación enviada`;
+      $("#nextStep").disabled = true;
       icons();
-      toast("Postulación clasificada y asignada en 0,8 s");
-      $("#nextStep").innerHTML = `<i data-lucide="check"></i> Enviada`; $("#nextStep").disabled = true; icons();
     }
     $("#fillDemo").addEventListener("click", async () => {
       const typeIn = async (el, txt) => { el.value = ""; for (const ch of txt) { el.value += ch; el.dispatchEvent(new Event("input")); await sleep(14); } el.dispatchEvent(new Event("blur")); };
@@ -685,6 +801,24 @@
       await sleep(400); pick(ADDRESSES[0]);
       await sleep(350); go(2);
       $("#k1").value = 45; $("#k2").value = 92; $("#k3").value = 60; update();
+      await sleep(400);
+      // Avanzar al paso 4 (Voluntarios) en pantalla completa
+      go(3);
+      const skillBtns = $$("#skills .skill");
+      if (skillBtns.length >= 4) {
+        skillBtns[0].classList.add("is-on");
+        skillBtns[1].classList.add("is-on");
+        skillBtns[3].classList.add("is-on");
+        skillBtns[6].classList.add("is-on");
+      }
+      if ($("#vHours")) {
+        $("#vHours").value = 10;
+        $("#vHours").dispatchEvent(new Event("input"));
+      }
+      await sleep(300);
+      const firstCheck = $("#checklist li");
+      if (firstCheck) firstCheck.classList.add("done");
+      toast("¡Demo de 4 pasos completada en vivo! ✨", "sparkles");
     });
     go(0); update();
   }
@@ -712,6 +846,7 @@
   ];
   function initVolunteers() {
     const sel = $("#vRegion");
+    if (!sel) return;
     sel.innerHTML = REGIONS.map((r) => `<option ${r.n === "Valparaíso" ? "selected" : ""}>${r.n}</option>`).join("");
     const on = new Set(["Logística", "Conducción"]);
     $("#skills").innerHTML = SKILLS.map((s) => `<button type="button" class="skill${on.has(s) ? " is-on" : ""}">${s}</button>`).join("");
@@ -1009,7 +1144,7 @@
         pt: "Para entrevistas ou material de imprensa, conecto você à equipe de comunicação." } },
   ];
   const UI = {
-    es: { hi: "¡Hola! 👋 Soy el asistente de OCC Chile. Respondo con información de manuales y FAQs oficiales. ¿En qué te ayudo?", miss: "No encontré eso en los documentos. Derivé tu consulta a una persona del equipo, que te responderá pronto. 🙏", chips: ["¿Cómo postula mi iglesia?", "¿Qué pongo en una caja?", "¿Cómo hago el reporte?", "Quiero ser voluntario", "¿Qué es El Gran Viaje?"] },
+    es: { hi: "¡Hola! 👋 Soy el asistente de OCC Chile. ¿En qué te ayudo?", miss: "No encontré eso en los documentos. Derivé tu consulta a una persona del equipo, que te responderá pronto. 🙏", chips: ["¿Cómo postula mi iglesia?", "¿Qué pongo en una caja?", "¿Cómo hago el reporte?", "Quiero ser voluntario", "¿Qué es El Gran Viaje?"] },
     en: { hi: "Hi! 👋 I'm the OCC Chile assistant. I answer from official manuals and FAQs. How can I help?", miss: "I couldn't find that in our documents. I've routed your question to a team member. 🙏", chips: ["How can my church join?", "What goes in a box?", "How do I report?", "I want to volunteer"] },
     pt: { hi: "Olá! 👋 Sou o assistente da OCC Chile. Respondo com base nos manuais e FAQs oficiais. Como posso ajudar?", miss: "Não encontrei isso nos documentos. Encaminhei sua pergunta para a equipe. 🙏", chips: ["Como minha igreja participa?", "O que vai na caixa?", "Quero ser voluntário"] },
   };
@@ -1047,6 +1182,163 @@
 
     const topics = [["Armado de cajas", 34], ["Fechas de recolección", 26], ["Postulación de iglesias", 18], ["Reportes", 12], ["Voluntariado", 10]];
     $("#topics").innerHTML = topics.map(([n, v]) => `<div class="topic"><span>${n}</span><b>${v}%</b><i style="--w:${v * 2.5}%"></i></div>`).join("");
+  }
+
+  /* ---------------- WIDGET FLOTANTE ASISTENTE OCC (IA) ---------------- */
+  function initChatWidget() {
+    const widget = $("#chatWidget"),
+      fab = $("#fabAgent"),
+      body = $("#widgetChatBody"),
+      form = $("#widgetChatForm"),
+      input = $("#widgetChatIn"),
+      langSel = $("#widgetLang"),
+      closeBtn = $("#widgetClose"),
+      expandBtn = $("#widgetExpand");
+
+    if (!widget || !fab) return;
+
+    let lang = IS_EN ? "en" : "es", busy = false, initialized = false;
+
+    const add = (html, who) => {
+      const m = document.createElement("div");
+      m.className = "msg msg--" + who;
+      m.innerHTML = html;
+      body.appendChild(m);
+      body.scrollTop = body.scrollHeight;
+      icons();
+      return m;
+    };
+
+    const chips = () => {
+      const cWrap = $("#widgetChatChips");
+      if (!cWrap) return;
+      cWrap.innerHTML = (UI[lang]?.chips || UI.es.chips)
+        .map((c) => `<button type="button">${c}</button>`)
+        .join("");
+    };
+
+    function startConversation() {
+      if (initialized) return;
+      initialized = true;
+      add(UI[lang].hi, "bot");
+      chips();
+    }
+
+    async function askWidget(q) {
+      if (busy || !q.trim()) return;
+      busy = true;
+      add(q.replace(/</g, "&lt;"), "user");
+      const t = add(`<span class="typing"><i></i><i></i><i></i></span>`, "bot");
+      const nq = norm(q);
+      const scored = KB.map((k) => ({
+        k,
+        s: k.kw.reduce((a, w) => a + (nq.includes(norm(w)) ? w.length : 0), 0),
+      })).sort((a, b) => b.s - a.s);
+      const hit = scored[0].s > 0 ? scored[0].k : null;
+
+      await sleep(550);
+      t.remove();
+
+      if (hit) {
+        add(
+          `${hit.a[lang]}<div class="src">${hit.src
+            .map(
+              (s) =>
+                `<span><i data-lucide="file-text" style="width:12px;height:12px"></i>${s}</span>`
+            )
+            .join("")}</div>`,
+          "bot"
+        );
+      } else {
+        add(UI[lang].miss, "bot");
+      }
+      busy = false;
+    }
+
+    function openWidget() {
+      widget.classList.add("is-open");
+      widget.setAttribute("aria-hidden", "false");
+      fab.classList.add("is-active");
+      fab.setAttribute("aria-expanded", "true");
+      startConversation();
+      setTimeout(() => input?.focus(), 150);
+    }
+
+    function closeWidget() {
+      widget.classList.remove("is-open");
+      widget.setAttribute("aria-hidden", "true");
+      fab.classList.remove("is-active");
+      fab.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleWidget() {
+      if (widget.classList.contains("is-open")) {
+        closeWidget();
+      } else {
+        openWidget();
+      }
+    }
+
+    fab.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleWidget();
+    });
+
+    closeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeWidget();
+    });
+
+    expandBtn?.addEventListener("click", (e) => {
+      closeWidget();
+      const chatTab = document.querySelector('.demo-tab[data-demo="chat"]');
+      if (chatTab) {
+        chatTab.click();
+        const demoChatEl = document.getElementById("demo-chat");
+        if (demoChatEl) {
+          demoChatEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    });
+
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = input.value;
+      input.value = "";
+      askWidget(q);
+    });
+
+    $("#widgetChatChips")?.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (b) askWidget(b.textContent);
+    });
+
+    langSel?.addEventListener("change", () => {
+      lang = langSel.value;
+      chips();
+      add(UI[lang].hi, "bot");
+      toast("Idioma cambiado · traducción con IA", "languages");
+      const mainLang = $("#lang");
+      if (mainLang && mainLang.value !== lang) {
+        mainLang.value = lang;
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && widget.classList.contains("is-open")) {
+        closeWidget();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        widget.classList.contains("is-open") &&
+        !widget.contains(e.target) &&
+        !fab.contains(e.target)
+      ) {
+        closeWidget();
+      }
+    });
   }
 
   /* ---------------- ARQUITECTURA ---------------- */
@@ -1691,25 +1983,35 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    initProcesses();
-    initFlows();
-    initArch();
-    initTierraPanels();
-    initDatosSection();
-    initMetricsPanel();
-    initTheme();
-    initNav();
-    initReveal();
-    initCounters();
-    initHero();
-    initOdometer();
-    initDemoTabs();
-    initForm();
-    initVolunteers();
-    initOCR();
-    initLogistics();
-    initDashboard();
-    initChat();
-    icons();
+    const safeRun = (name, fn) => {
+      try {
+        fn();
+      } catch (err) {
+        console.warn(`[OCC Chile] Módulo no crítico '${name}' con aviso:`, err);
+      }
+    };
+
+    safeRun("theme", initTheme);
+    safeRun("langSwitch", initLangSwitch);
+    safeRun("reveal", initReveal);
+    safeRun("nav", initNav);
+    safeRun("hero", initHero);
+    safeRun("processes", initProcesses);
+    safeRun("flows", initFlows);
+    safeRun("arch", initArch);
+    safeRun("tierraPanels", initTierraPanels);
+    safeRun("datosSection", initDatosSection);
+    safeRun("metricsPanel", initMetricsPanel);
+    safeRun("counters", initCounters);
+    safeRun("odometer", initOdometer);
+    safeRun("demoTabs", initDemoTabs);
+    safeRun("form", initForm);
+    safeRun("volunteers", initVolunteers);
+    safeRun("ocr", initOCR);
+    safeRun("logistics", initLogistics);
+    safeRun("dashboard", initDashboard);
+    safeRun("chat", initChat);
+    safeRun("chatWidget", initChatWidget);
+    safeRun("icons", icons);
   });
 })();

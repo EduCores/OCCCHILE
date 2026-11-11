@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="es">
+<html lang="es" data-theme="dark">
 
 <head>
 
@@ -23,7 +23,7 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=204" />
+  <link rel="stylesheet" href="styles.css?v=220" />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
 
@@ -101,24 +101,9 @@
         <div class="topbar__extras">
 
           <div class="lang-switch" role="group" aria-label="Idioma del sitio">
-
-            <button type="button" class="lang is-active" data-lang="es" aria-pressed="true">ES
-
-            </button>
-
-            <button type="button" class="lang" data-lang="en" aria-pressed="false">EN
-
-            </button>
-
+            <button type="button" class="lang is-active" data-lang="es" aria-pressed="true">ES</button>
+            <a href="index-en.html" class="lang" data-lang="en" aria-pressed="false">EN</a>
           </div>
-
-          <button class="icon-btn" id="themeToggle" aria-label="Cambiar tema">
-
-            <i data-lucide="moon">
-
-            </i>
-
-          </button>
 
         </div>
 
@@ -150,7 +135,7 @@
 
           </a>
 
-          <a href="#">Testimonios
+          <a href="#testimonios">Testimonios
 
           </a>
 
@@ -610,7 +595,7 @@
 
                 </h3>
 
-                <p>Niños y familias llenan una cajita con útiles escolares, juguetes, artà­culos de higiene, ropa y una
+                <p>Niños y familias llenan una cajita con útiles escolares, juguetes, artículos de higiene, ropa y una
                   nota personal.
 
                 </p>
@@ -639,7 +624,7 @@
 
                 </h3>
 
-                <p>Las cajitas se envà­an a más de 100 paí­ses, pasan por aduana y se distribuyen en todo el paí­s
+                <p>Las cajitas se envían a más de 100 paí­ses, pasan por aduana y se distribuyen en todo el paí­s
                   gracias al equipo de logística.
 
                 </p>
@@ -845,6 +830,87 @@
       </div>
 
     </section>
+
+    <!-- ============ TESTIMONIOS ============ -->
+    <section class="section testimonios" id="testimonios">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow">Testimonios</span>
+          <h2 class="section-title--pine">
+            <span class="title-glass-text">Historias reales del</span>
+            <em class="title-glass-text title-glass-text--red">amor de Dios</em>
+          </h2>
+          <p>Una cajita, una iglesia y vidas transformadas en Chile.</p>
+        </header>
+
+        <div class="testimonios__grid">
+          <!-- Historia 1: Agustin -->
+          <a aria-label="Leer historia: Una familia transformada" class="testimonio-card reveal" href="https://www.occchile.com/testimonios" target="_blank" rel="noopener noreferrer">
+            <div class="testimonio-card__media">
+              <img alt="Daniel, Carol y su familia agradecen la cajita de regalos que recibió Agustin." loading="lazy" src="img/testimonio_agustin.jpg">
+              <span class="testimonio-card__badge-video" aria-label="Incluye video">
+                <i data-lucide="play" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="testimonio-card__body">
+              <p class="testimonio-card__loc">Santiago, Chile</p>
+              <h3 class="testimonio-card__title">Una familia transformada</h3>
+              <p class="testimonio-card__desc">Una cajita recibida por Agustin abrió el camino para que su familia conociera a Jesús y comenzara una nueva vida junto a la iglesia local.</p>
+              <span class="testimonio-card__link">
+                <span>Leer historia</span>
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- Historia 2: Johan -->
+          <a aria-label="Leer historia: Las cajas de regalos comunican el amor de Dios en Chile" class="testimonio-card reveal" href="https://www.occchile.com/testimonios" target="_blank" rel="noopener noreferrer">
+            <div class="testimonio-card__media">
+              <img alt="Johan recibió una cajita a los doce años y ahora comparte el Evangelio con otros niños." loading="lazy" src="img/testimonio_johan.jpg">
+              <span class="testimonio-card__badge-video" aria-label="Incluye video">
+                <i data-lucide="play" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="testimonio-card__body">
+              <p class="testimonio-card__loc">Viña del Mar, Chile</p>
+              <h3 class="testimonio-card__title">Las cajas de regalos comunican el amor de Dios en Chile</h3>
+              <p class="testimonio-card__desc">Johan recibió una cajita a los doce años, después de emigrar de Colombia. Hoy sirve con su iglesia para que otros niños conozcan el amor de Dios.</p>
+              <span class="testimonio-card__link">
+                <span>Leer historia</span>
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- Historia 3: Gaspar -->
+          <a aria-label="Leer historia: Bendecimos a los niños en Chile" class="testimonio-card reveal" href="https://www.occchile.com/testimonios" target="_blank" rel="noopener noreferrer">
+            <div class="testimonio-card__media">
+              <img alt="La historia de Gaspar muestra la bendición de una cajita preparada con oración." loading="lazy" src="img/testimonio_gaspar.jpg">
+              <span class="testimonio-card__badge-video" aria-label="Incluye video">
+                <i data-lucide="play" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="testimonio-card__body">
+              <p class="testimonio-card__loc">Santiago, Chile</p>
+              <h3 class="testimonio-card__title">Bendecimos a los niños en Chile</h3>
+              <p class="testimonio-card__desc">Una cajita preparada con oración fue una bendición para Gaspar y su familia. Su historia muestra cómo las iglesias locales comparten el amor de Dios.</p>
+              <span class="testimonio-card__link">
+                <span>Leer historia</span>
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <div class="testimonios__cta reveal">
+          <a href="https://www.occchile.com/contacto" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lc">
+            <i data-lucide="heart-handshake" aria-hidden="true"></i>
+            <span>Compartir mi testimonio</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CENTRO DE DATOS ============ -->
 
     <section class="section datos" id="datos">
@@ -1416,6 +1482,490 @@
           </blockquote>
         </div>
       </div>
+    </section>
+
+    <!-- ============ SECCIÓN POSTULACIÓN: ¿TU IGLESIA QUIERE SER PARTE? ============ -->
+    <section class="section postular" id="postular">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow">Postulación de iglesias</span>
+          <h2 class="section-title--pine">
+            <span class="title-glass-text">¿Tu </span><em
+              class="title-glass-text title-glass-text--red">Iglesia</em><span class="title-glass-text"> quiere ser
+              parte?</span>
+          </h2>
+          <p>
+            Completa la postulación de tu congregación en 3 sencillos pasos. Nuestra IA clasifica en tiempo real,
+            verifica duplicados y asigna de inmediato tu equipo regional.
+          </p>
+        </header>
+
+        <div class="demo__grid demo__grid--form">
+
+          <form class="card smart-form" id="churchForm" novalidate>
+
+            <div class="card__head">
+
+              <h3>
+
+                <i data-lucide="church">
+
+                </i> Formulario iglesias
+
+              </h3>
+
+              <div class="steps" id="formSteps">
+                  <span class="is-on" title="Paso 1: Tu iglesia"></span>
+                  <span title="Paso 2: Direcciones"></span>
+                  <span title="Paso 3: Niños"></span>
+                  <span title="Paso 4: Voluntarios"></span>
+                </div>
+
+            </div>
+
+            <fieldset class="fstep is-active" data-step="0">
+
+              <legend>1 · Tu iglesia
+
+              </legend>
+
+              <div class="field">
+
+                <label for="fName">Nombre de la iglesia o ministerio
+
+                </label>
+
+                <input id="fName" name="name" autocomplete="off" placeholder="Ej: Iglesia Evangélica Luz del Valle"
+                  required minlength="4" />
+
+                <small class="hint" data-for="fName">
+
+                </small>
+
+              </div>
+
+              <div class="field">
+
+                <label for="fContact">Persona de contacto
+
+                </label>
+
+                <input id="fContact" name="contact" placeholder="Nombre y apellido" required minlength="5" />
+
+                <small class="hint" data-for="fContact">
+
+                </small>
+
+              </div>
+
+              <div class="row2">
+
+                <div class="field">
+
+                  <label for="fEmail">Email
+
+                  </label>
+
+                  <input id="fEmail" name="email" type="email" placeholder="pastor@iglesia.cl" required />
+
+                  <small class="hint" data-for="fEmail">
+
+                  </small>
+
+                </div>
+
+                <div class="field">
+
+                  <label for="fPhone">Celular
+
+                  </label>
+
+                  <input id="fPhone" name="phone" inputmode="tel" placeholder="+56 9 1234 5678" required />
+
+                  <small class="hint" data-for="fPhone">
+
+                  </small>
+
+                </div>
+
+              </div>
+
+            </fieldset>
+
+            <fieldset class="fstep" data-step="1">
+
+              <legend>2 · Direcciones
+
+              </legend>
+
+              <div class="field field--ac">
+
+                <label for="fAddr">Dirección postal
+
+                </label>
+
+                <div class="input-icon">
+
+                  <i data-lucide="map-pin">
+
+                  </i>
+                  <input id="fAddr" name="addr" autocomplete="off"
+                    placeholder="Empieza a escribir… (ej: Calama, Valparaíso)" required />
+
+                </div>
+
+                <ul class="ac" id="acList" role="listbox">
+
+                </ul>
+
+                <small class="hint" data-for="fAddr">Autocompletado tipo Google Maps (simulado)
+
+                </small>
+
+              </div>
+
+              <label class="toggle">
+
+                <input type="checkbox" id="sameAddr" checked />
+
+                <span>
+
+                </span> La distribución es en la misma dirección
+
+              </label>
+
+              <div class="field" id="distField" hidden>
+
+                <label for="fDist">Dirección de distribución
+
+                </label>
+
+                <input id="fDist" name="dist" placeholder="Lugar del evento de entrega" />
+
+              </div>
+
+            </fieldset>
+
+            <fieldset class="fstep" data-step="2">
+
+              <legend>3 · Niños por rango etario
+
+              </legend>
+
+              <div class="kids">
+
+                <div class="kid">
+
+                  <span>2–4 años
+
+                  </span>
+
+                  <div class="stepper">
+
+                    <button type="button" data-k="k1" data-d="-5">−
+
+                    </button>
+                    <input id="k1" type="number" min="0" value="0" />
+
+                    <button type="button" data-k="k1" data-d="5">+
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <div class="kid">
+
+                  <span>5–9 años
+
+                  </span>
+
+                  <div class="stepper">
+
+                    <button type="button" data-k="k2" data-d="-5">−
+
+                    </button>
+                    <input id="k2" type="number" min="0" value="0" />
+
+                    <button type="button" data-k="k2" data-d="5">+
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <div class="kid">
+
+                  <span>10–14 años
+
+                  </span>
+
+                  <div class="stepper">
+
+                    <button type="button" data-k="k3" data-d="-5">−
+
+                    </button>
+                    <input id="k3" type="number" min="0" value="0" />
+
+                    <button type="button" data-k="k3" data-d="5">+
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="kids-total">
+
+                <span>Total estimado
+
+                </span>
+
+                <strong id="kidsTotal">0
+
+                </strong>
+
+                <span>niños
+
+                </span>
+
+              </div>
+
+              <small class="hint" id="kidsHint">
+
+              </small>
+
+            </fieldset>
+
+            
+              <fieldset class="fstep fstep--vol" data-step="3">
+                <legend><i data-lucide="users"></i> 4 · Equipo de voluntarios y roles recomendados</legend>
+                <p class="vol-lead">
+                  Conecta a los líderes de tu congregación con el equipo regional. La IA asigna roles según habilidades y disponibilidad estimada.
+                </p>
+
+                <div class="vol-fusion-grid">
+                  <!-- Sub-panel 1: Perfil de Voluntariado -->
+                  <div class="vol-fusion-card">
+                    <div class="vol-card__head">
+                      <h4>
+                        <i data-lucide="user-plus"></i> Perfil del equipo local
+                      </h4>
+                      <span class="ai-badge-sm">
+                        <i class="chart-pulse-dot"></i> En vivo
+                      </span>
+                    </div>
+
+                    <div class="field">
+                      <label for="vRegion">Región asignada</label>
+                      <select id="vRegion" class="glass-select"></select>
+                    </div>
+
+                    <label class="lbl">Habilidades del equipo</label>
+                    <div class="skills" id="skills"></div>
+
+                    <div class="field" style="margin-top: 14px;">
+                      <label for="vHours">
+                        Horas disponibles por semana: <b id="vHoursOut">8</b> h
+                      </label>
+                      <input type="range" id="vHours" min="1" max="20" value="8" />
+                    </div>
+                  </div>
+
+                  <!-- Sub-panel 2: Matching de Roles con IA -->
+                  <div class="vol-fusion-card">
+                    <div class="vol-card__head">
+                      <h4>
+                        <i data-lucide="target"></i> Roles recomendados
+                      </h4>
+                      <span class="ai-badge">
+                        <i data-lucide="sparkles"></i> Matching IA
+                      </span>
+                    </div>
+
+                    <ol class="matches" id="matches"></ol>
+
+                    <div class="onboard">
+                      <h4>
+                        <i data-lucide="list-checks"></i> Checklist de preparación
+                      </h4>
+                      <ul id="checklist"></ul>
+                    </div>
+                  </div>
+
+                  <!-- Sub-panel 3: Red Regional Activa -->
+                  <div class="vol-fusion-card vol-fusion-card--span">
+                    <div class="vol-card__head">
+                      <h4>
+                        <i data-lucide="activity"></i> Red regional de apoyo
+                      </h4>
+                      <small class="muted">Voluntarios coordinados en tu zona</small>
+                    </div>
+                    <div class="engage" id="engage"></div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="form-nav">
+
+              <button type="button" class="btn btn--ghost btn--lc" id="prevStep" disabled>
+
+                <i data-lucide="arrow-left">
+
+                </i> Atrás
+
+              </button>
+
+              <button type="button" class="btn btn--ghost btn--sm btn--lc" id="fillDemo">
+
+                <i data-lucide="wand-2">
+
+                </i> Autollenar demo
+
+              </button>
+
+              <button type="button" class="btn btn--primary btn--lc" id="nextStep">Siguiente
+
+                <i data-lucide="arrow-right">
+
+                </i>
+
+              </button>
+
+            </div>
+
+          </form>
+
+          <aside class="card ai-panel">
+
+            <div class="ai-panel__head">
+
+              <span class="ai-badge">
+
+                <i data-lucide="sparkles">
+
+                </i> IA en vivo
+
+              </span>
+
+              <small>Se actualiza mientras escribes
+
+              </small>
+
+            </div>
+
+            <div class="ai-block">
+
+              <h4>Clasificación automática
+
+              </h4>
+
+              <dl class="cls">
+
+                <div>
+
+                  <dt>Región
+
+                  </dt>
+
+                  <dd id="cRegion">—
+
+                  </dd>
+
+                </div>
+
+                <div>
+
+                  <dt>Tamaño
+
+                  </dt>
+
+                  <dd id="cSize">—
+
+                  </dd>
+
+                </div>
+
+                <div>
+
+                  <dt>Urgencia
+
+                  </dt>
+
+                  <dd id="cUrg">—
+
+                  </dd>
+
+                </div>
+
+                <div>
+
+                  <dt>Equipo asignado
+
+                  </dt>
+
+                  <dd id="cTeam">—
+
+                  </dd>
+
+                </div>
+
+              </dl>
+
+            </div>
+
+            <div class="ai-block">
+
+              <h4>Deduplicación (fuzzy matching)
+
+              </h4>
+
+              <div id="dedup" class="dedup">
+
+                <p class="muted">Escribe el nombre de la iglesia…
+
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="ai-block">
+
+              <h4>Calidad de la postulación
+
+              </h4>
+
+              <div class="quality">
+
+                <div class="quality__bar">
+
+                  <span id="qBar">
+
+                  </span>
+
+                </div>
+
+                <strong id="qPct">0%
+
+                </strong>
+
+              </div>
+
+            </div>
+
+            <div class="ai-block reply" id="autoReply" hidden>
+
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
 
       <div class="container cta__inner reveal">
         <div class="cta__boxes" aria-hidden="true">
@@ -1436,6 +1986,7 @@
       </div>
     </section>
 
+
     <section class="section" id="procesos">
 
       <div class="container">
@@ -1454,7 +2005,7 @@
 
           </h2>
 
-          <p class="reveal">Nueve procesos crà­ticos de la obra, priorizados por impacto. Toca una tarjeta para ver el
+          <p class="reveal">Nueve procesos críticos de la obra, priorizados por impacto. Toca una tarjeta para ver el
             antes y el después.
 
           </p>
@@ -1580,629 +2131,30 @@
         </header>
 
         <div class="demo-tabs reveal" id="demoTabs" role="tablist">
-
-          <button class="demo-tab is-active" data-demo="form">
-
-            <i data-lucide="church">
-
-            </i>
-
+          <button class="demo-tab is-active" data-demo="ocr">
+            <i data-lucide="scan-text"></i>
             <span>
-
-              <b>A</b> Postulación
-
+              <b>A</b> OCR evidencia
             </span>
-
           </button>
-
-          <button class="demo-tab" data-demo="vol">
-
-            <i data-lucide="users">
-
-            </i>
-
-            <span>
-
-              <b>B</b> Voluntarios
-
-            </span>
-
-          </button>
-
-          <button class="demo-tab" data-demo="ocr">
-
-            <i data-lucide="scan-text">
-
-            </i>
-
-            <span>
-
-              <b>C</b> OCR evidencia
-
-            </span>
-
-          </button>
-
           <button class="demo-tab" data-demo="logi">
-
-            <i data-lucide="truck">
-
-            </i>
-
+            <i data-lucide="truck"></i>
             <span>
-
-              <b>D</b> Logí­stica
-
+              <b>B</b> Logística
             </span>
-
           </button>
-
           <button class="demo-tab" data-demo="dash">
-
-            <i data-lucide="layout-dashboard">
-
-            </i>
-
+            <i data-lucide="layout-dashboard"></i>
             <span>
-
-              <b>E</b> Dashboard
-
+              <b>C</b> Dashboard
             </span>
-
           </button>
-
           <button class="demo-tab" data-demo="chat">
-
-            <i data-lucide="message-circle-heart">
-
-            </i>
-
+            <i data-lucide="message-circle-heart"></i>
             <span>
-
-              <b>H</b> Asistente
-
+              <b>D</b> Asistente
             </span>
-
           </button>
-
-        </div>
-        <!-- A · FORM -->
-
-        <div class="demo is-active" id="demo-form">
-
-          <div class="demo__grid demo__grid--form">
-
-            <form class="card smart-form" id="churchForm" novalidate>
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="church">
-
-                  </i> ¿Tu iglesia quiere ser parte?
-
-                </h3>
-
-                <div class="steps" id="formSteps">
-
-                  <span class="is-on">
-
-                  </span>
-
-                  <span>
-
-                  </span>
-
-                  <span>
-
-                  </span>
-
-                </div>
-
-              </div>
-
-              <fieldset class="fstep is-active" data-step="0">
-
-                <legend>1 · Tu iglesia
-
-                </legend>
-
-                <div class="field">
-
-                  <label for="fName">Nombre de la iglesia o ministerio
-
-                  </label>
-
-                  <input id="fName" name="name" autocomplete="off" placeholder="Ej: Iglesia Evangélica Luz del Valle"
-                    required minlength="4" />
-
-                  <small class="hint" data-for="fName">
-
-                  </small>
-
-                </div>
-
-                <div class="field">
-
-                  <label for="fContact">Persona de contacto
-
-                  </label>
-
-                  <input id="fContact" name="contact" placeholder="Nombre y apellido" required minlength="5" />
-
-                  <small class="hint" data-for="fContact">
-
-                  </small>
-
-                </div>
-
-                <div class="row2">
-
-                  <div class="field">
-
-                    <label for="fEmail">Email
-
-                    </label>
-
-                    <input id="fEmail" name="email" type="email" placeholder="pastor@iglesia.cl" required />
-
-                    <small class="hint" data-for="fEmail">
-
-                    </small>
-
-                  </div>
-
-                  <div class="field">
-
-                    <label for="fPhone">Celular
-
-                    </label>
-
-                    <input id="fPhone" name="phone" inputmode="tel" placeholder="+56 9 1234 5678" required />
-
-                    <small class="hint" data-for="fPhone">
-
-                    </small>
-
-                  </div>
-
-                </div>
-
-              </fieldset>
-
-              <fieldset class="fstep" data-step="1">
-
-                <legend>2 · Direcciones
-
-                </legend>
-
-                <div class="field field--ac">
-
-                  <label for="fAddr">Dirección postal
-
-                  </label>
-
-                  <div class="input-icon">
-
-                    <i data-lucide="map-pin">
-
-                    </i>
-                    <input id="fAddr" name="addr" autocomplete="off"
-                      placeholder="Empieza a escribir… (ej: Calama, Valparaà­so)" required />
-
-                  </div>
-
-                  <ul class="ac" id="acList" role="listbox">
-
-                  </ul>
-
-                  <small class="hint" data-for="fAddr">Autocompletado tipo Google Maps (simulado)
-
-                  </small>
-
-                </div>
-
-                <label class="toggle">
-
-                  <input type="checkbox" id="sameAddr" checked />
-
-                  <span>
-
-                  </span> La distribución es en la misma dirección
-
-                </label>
-
-                <div class="field" id="distField" hidden>
-
-                  <label for="fDist">Dirección de distribución
-
-                  </label>
-
-                  <input id="fDist" name="dist" placeholder="Lugar del evento de entrega" />
-
-                </div>
-
-              </fieldset>
-
-              <fieldset class="fstep" data-step="2">
-
-                <legend>3 · Niños por rango etario
-
-                </legend>
-
-                <div class="kids">
-
-                  <div class="kid">
-
-                    <span>2–4 años
-
-                    </span>
-
-                    <div class="stepper">
-
-                      <button type="button" data-k="k1" data-d="-5">−
-
-                      </button>
-                      <input id="k1" type="number" min="0" value="0" />
-
-                      <button type="button" data-k="k1" data-d="5">+
-
-                      </button>
-
-                    </div>
-
-                  </div>
-
-                  <div class="kid">
-
-                    <span>5–9 años
-
-                    </span>
-
-                    <div class="stepper">
-
-                      <button type="button" data-k="k2" data-d="-5">−
-
-                      </button>
-                      <input id="k2" type="number" min="0" value="0" />
-
-                      <button type="button" data-k="k2" data-d="5">+
-
-                      </button>
-
-                    </div>
-
-                  </div>
-
-                  <div class="kid">
-
-                    <span>10–14 años
-
-                    </span>
-
-                    <div class="stepper">
-
-                      <button type="button" data-k="k3" data-d="-5">−
-
-                      </button>
-                      <input id="k3" type="number" min="0" value="0" />
-
-                      <button type="button" data-k="k3" data-d="5">+
-
-                      </button>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-                <div class="kids-total">
-
-                  <span>Total estimado
-
-                  </span>
-
-                  <strong id="kidsTotal">0
-
-                  </strong>
-
-                  <span>niños
-
-                  </span>
-
-                </div>
-
-                <small class="hint" id="kidsHint">
-
-                </small>
-
-              </fieldset>
-
-              <div class="form-nav">
-
-                <button type="button" class="btn btn--ghost btn--lc" id="prevStep" disabled>
-
-                  <i data-lucide="arrow-left">
-
-                  </i> Atrás
-
-                </button>
-
-                <button type="button" class="btn btn--ghost btn--sm btn--lc" id="fillDemo">
-
-                  <i data-lucide="wand-2">
-
-                  </i> Autollenar demo
-
-                </button>
-
-                <button type="button" class="btn btn--primary btn--lc" id="nextStep">Siguiente
-
-                  <i data-lucide="arrow-right">
-
-                  </i>
-
-                </button>
-
-              </div>
-
-            </form>
-
-            <aside class="card ai-panel">
-
-              <div class="ai-panel__head">
-
-                <span class="ai-badge">
-
-                  <i data-lucide="sparkles">
-
-                  </i> IA en vivo
-
-                </span>
-
-                <small>Se actualiza mientras escribes
-
-                </small>
-
-              </div>
-
-              <div class="ai-block">
-
-                <h4>Clasificación automática
-
-                </h4>
-
-                <dl class="cls">
-
-                  <div>
-
-                    <dt>Región
-
-                    </dt>
-
-                    <dd id="cRegion">—
-
-                    </dd>
-
-                  </div>
-
-                  <div>
-
-                    <dt>Tamaño
-
-                    </dt>
-
-                    <dd id="cSize">—
-
-                    </dd>
-
-                  </div>
-
-                  <div>
-
-                    <dt>Urgencia
-
-                    </dt>
-
-                    <dd id="cUrg">—
-
-                    </dd>
-
-                  </div>
-
-                  <div>
-
-                    <dt>Equipo asignado
-
-                    </dt>
-
-                    <dd id="cTeam">—
-
-                    </dd>
-
-                  </div>
-
-                </dl>
-
-              </div>
-
-              <div class="ai-block">
-
-                <h4>Deduplicación (fuzzy matching)
-
-                </h4>
-
-                <div id="dedup" class="dedup">
-
-                  <p class="muted">Escribe el nombre de la iglesia…
-
-                  </p>
-
-                </div>
-
-              </div>
-
-              <div class="ai-block">
-
-                <h4>Calidad de la postulación
-
-                </h4>
-
-                <div class="quality">
-
-                  <div class="quality__bar">
-
-                    <span id="qBar">
-
-                    </span>
-
-                  </div>
-
-                  <strong id="qPct">0%
-
-                  </strong>
-
-                </div>
-
-              </div>
-
-              <div class="ai-block reply" id="autoReply" hidden>
-
-              </div>
-
-            </aside>
-
-          </div>
-
-        </div>
-        <!-- B · VOLUNTARIOS -->
-
-        <div class="demo" id="demo-vol">
-
-          <div class="demo__grid">
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="user-plus">
-
-                  </i> Perfil del voluntario
-
-                </h3>
-
-              </div>
-
-              <div class="field">
-
-                <label for="vRegion">Región
-
-                </label>
-
-                <select id="vRegion">
-
-                </select>
-
-              </div>
-
-              <label class="lbl">Habilidades
-
-              </label>
-
-              <div class="skills" id="skills">
-
-              </div>
-
-              <div class="field">
-
-                <label for="vHours">Horas disponibles por semana:
-
-                  <b id="vHoursOut">6
-
-                  </b>
-
-                </label>
-
-                <input type="range" id="vHours" min="1" max="20" value="6" />
-
-              </div>
-
-            </div>
-
-            <div class="card">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="target">
-
-                  </i> Roles recomendados
-
-                </h3>
-
-                <span class="ai-badge">
-
-                  <i data-lucide="sparkles">
-
-                  </i> Matching IA
-
-                </span>
-
-              </div>
-
-              <ol class="matches" id="matches">
-
-              </ol>
-
-              <div class="onboard">
-
-                <h4>
-
-                  <i data-lucide="list-checks">
-
-                  </i> Checklist de onboarding
-
-                </h4>
-
-                <ul id="checklist">
-
-                </ul>
-
-              </div>
-
-            </div>
-
-            <div class="card card--span">
-
-              <div class="card__head">
-
-                <h3>
-
-                  <i data-lucide="activity">
-
-                  </i> Engagement del equipo
-
-                </h3>
-
-                <small class="muted">Alertas proactivas
-
-                </small>
-
-              </div>
-
-              <div class="engage" id="engage">
-
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
         <!-- C · OCR -->
 
@@ -2359,7 +2311,7 @@
 
                   <i data-lucide="file-check-2">
 
-                  </i> Datos extraà­dos
+                  </i> Datos extraídos
 
                 </h3>
 
@@ -3155,7 +3107,7 @@
 
                 <i data-lucide="file-lock-2">
 
-                </i> Auditorà­a
+                </i> Auditoría
 
               </span>
 
@@ -3397,60 +3349,6 @@
       </div>
 
     </section>
-    <!-- ============ CTA ============ -->
-
-    <section class="cta" id="contacto">
-
-      <div class="container cta__inner reveal">
-
-        <div class="cta__boxes" aria-hidden="true">
-
-          <span>
-
-          </span>
-
-          <span>
-
-          </span>
-
-          <span>
-
-          </span>
-
-        </div>
-
-        <h2>Menos planillas. Más niños alcanzados.
-
-        </h2>
-
-        <p>Comencemos con un piloto de 6 semanas en una región: formulario inteligente + asistente RAG + dashboard.
-
-        </p>
-
-        <div class="hero__cta">
-
-          <a href="#demos" class="btn btn--light btn--lc">
-
-            <i data-lucide="play">
-
-            </i> Recorrer demos
-
-          </a>
-
-          <a href="#roadmap" class="btn btn--outline-light btn--lc">
-
-            <i data-lucide="calendar">
-
-            </i> Ver fases
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
   </main>
 
   <footer class="footer">
@@ -3553,7 +3451,7 @@
 
           </a>
 
-          <a href="#contacto">Ser parte
+          <a href="#postular">Ser parte
 
           </a>
 
@@ -3629,17 +3527,54 @@
   </div>
   <!-- Botones flotantes: WhatsApp + Asistente (mock — funcionalidad por definir) -->
 
+  <!-- ============ WIDGET FLOTANTE: ASISTENTE OCC (IA) ============ -->
+  <aside class="chat-widget" id="chatWidget" aria-hidden="true" role="dialog" aria-labelledby="chatWidgetTitle">
+    <div class="chat-widget__head">
+      <div class="chat-widget__title" id="chatWidgetTitle">
+        <div class="avatar avatar--sm">
+          <i data-lucide="gift"></i>
+        </div>
+        <div>
+          <strong>Asistente OCC <span class="chat-widget__badge">IA</span></strong>
+          <small><span class="dot"></span> En línea · RAG en vivo</small>
+        </div>
+      </div>
+      <div class="chat-widget__actions">
+        <select id="widgetLang" aria-label="Idioma" class="chat-widget__lang">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+          <option value="pt">PT</option>
+        </select>
+        <a href="#demo-chat" class="chat-widget__btn-icon" id="widgetExpand" title="Ver en prototipo interactivo"
+          aria-label="Ver demo completa">
+          <i data-lucide="maximize-2"></i>
+        </a>
+        <button type="button" class="chat-widget__btn-icon" id="widgetClose" aria-label="Cerrar asistente">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-widget__body" id="widgetChatBody"></div>
+
+    <div class="chat-widget__chips" id="widgetChatChips"></div>
+
+    <form class="chat-widget__input" id="widgetChatForm">
+      <input id="widgetChatIn" placeholder="Pregunta sobre cajas, iglesias, voluntariado…" autocomplete="off" />
+      <button class="btn btn--primary btn--icon btn--lc" aria-label="Enviar">
+        <i data-lucide="send"></i>
+      </button>
+    </form>
+  </aside>
+
   <div class="fabs" aria-label="Ayuda y contacto">
 
-    <button type="button" class="fab fab--agent" data-tip="Asistente OCC · Próximamente" aria-label="Asistente OCC">
-
-      <i data-lucide="bot">
-
-      </i>
-
+    <button type="button" class="fab fab--agent" id="fabAgent" data-tip="Asistente OCC (IA)"
+      aria-label="Abrir Asistente OCC" aria-expanded="false" aria-controls="chatWidget">
+      <i data-lucide="bot"></i>
     </button>
 
-    <button type="button" class="fab fab--wa" data-tip="Escrà­benos por WhatsApp · Próximamente" aria-label="WhatsApp">
+    <button type="button" class="fab fab--wa" data-tip="Escríbenos por WhatsApp · Próximamente" aria-label="WhatsApp">
 
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path
@@ -3655,7 +3590,7 @@
 
   </script>
 
-  <script src="app.js?v=40">
+  <script src="app.js?v=47">
 
   </script>
 

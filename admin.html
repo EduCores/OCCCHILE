@@ -15,7 +15,7 @@
     rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css?v=258" />
-  <link rel="stylesheet" href="admin.css?v=5" />
+  <link rel="stylesheet" href="admin.css?v=6" />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
 </head>
@@ -1155,48 +1155,71 @@
             </form>
 
             <div style="margin-top:24px; border-top:1px dashed rgba(15,77,58,0.22); padding-top:18px;">
-              <h4 style="font-size:0.88rem; font-weight:800; color:var(--admin-pine); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+              <h4 style="font-size:0.88rem; font-weight:800; color:var(--admin-pine); margin-bottom:14px; display:flex; align-items:center; gap:8px;">
                 <i data-lucide="files"></i> Informes Clave Disponibles Inmediatamente:
               </h4>
-              <div style="display:flex; flex-direction:column; gap:8px;">
-                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.9); border-radius:12px; padding:10px 14px;">
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <i data-lucide="file-text" style="color:var(--admin-red); width:20px; height:20px;"></i>
-                    <div>
-                      <strong style="display:block; font-size:0.84rem; color:var(--admin-pine);">Informe_Ejecutivo_OCC_Chile_2026.pdf</strong>
-                      <small style="color:#64748b; font-size:0.74rem;">3.4 MB · Sellado 11-Nov-2026 · Certificación SP-Intl</small>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+
+                <!-- Informe 1: Botón debajo de su contenido -->
+                <div class="rep-doc-card">
+                  <div class="rep-doc-card__top">
+                    <div class="rep-doc-card__icon-wrap rep-doc-card__icon-wrap--red">
+                      <i data-lucide="file-text"></i>
+                    </div>
+                    <div class="rep-doc-card__info">
+                      <strong class="rep-doc-card__title">Informe_Ejecutivo_OCC_Chile_2026.pdf</strong>
+                      <div class="rep-doc-card__meta">
+                        <span class="rep-badge-chip">3.4 MB</span>
+                        <span class="rep-badge-chip">Sellado 11-Nov-2026</span>
+                        <span class="rep-badge-chip rep-badge-chip--ok">Certificación SP-Intl</span>
+                      </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl" style="flex-shrink:0; white-space:nowrap;" data-file="Informe_Ejecutivo_OCC_Chile_2026.csv" title="Descargar">
-                    <i data-lucide="download"></i> Descargar
+                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl rep-btn-full" data-file="Informe_Ejecutivo_OCC_Chile_2026.csv">
+                    <i data-lucide="download"></i> Descargar Documento Oficial
                   </button>
                 </div>
 
-                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.9); border-radius:12px; padding:10px 14px;">
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <i data-lucide="table" style="color:#0ba74a; width:20px; height:20px;"></i>
-                    <div>
-                      <strong style="display:block; font-size:0.84rem; color:var(--admin-pine);">Matriz_Nacional_Distribucion_842_Iglesias.xlsx</strong>
-                      <small style="color:#64748b; font-size:0.74rem;">1.8 MB · 228.024 cajitas asignadas · Detalle 16 regiones</small>
+                <!-- Informe 2: Botón debajo de su contenido -->
+                <div class="rep-doc-card">
+                  <div class="rep-doc-card__top">
+                    <div class="rep-doc-card__icon-wrap rep-doc-card__icon-wrap--green">
+                      <i data-lucide="table"></i>
+                    </div>
+                    <div class="rep-doc-card__info">
+                      <strong class="rep-doc-card__title">Matriz_Nacional_Distribucion_842_Iglesias.xlsx</strong>
+                      <div class="rep-doc-card__meta">
+                        <span class="rep-badge-chip">1.8 MB</span>
+                        <span class="rep-badge-chip">228.024 cajitas asignadas</span>
+                        <span class="rep-badge-chip rep-badge-chip--ok">16 Regiones</span>
+                      </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl" style="flex-shrink:0; white-space:nowrap;" data-file="Matriz_Nacional_Distribucion_842_Iglesias.csv" title="Descargar">
-                    <i data-lucide="download"></i> Descargar
+                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl rep-btn-full" data-file="Matriz_Nacional_Distribucion_842_Iglesias.csv">
+                    <i data-lucide="download"></i> Descargar Documento Oficial
                   </button>
                 </div>
 
-                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.9); border-radius:12px; padding:10px 14px;">
-                  <div style="display:flex; align-items:center; gap:10px;">
-                    <i data-lucide="shield-alert" style="color:#f2b33d; width:20px; height:20px;"></i>
-                    <div>
-                      <strong style="display:block; font-size:0.84rem; color:var(--admin-pine);">Auditoria_OCR_Evidencias_Firmadas.csv</strong>
-                      <small style="color:#64748b; font-size:0.74rem;">640 KB · 100% actas sin duplicados ni adulteraciones</small>
+                <!-- Informe 3: Botón debajo de su contenido -->
+                <div class="rep-doc-card">
+                  <div class="rep-doc-card__top">
+                    <div class="rep-doc-card__icon-wrap rep-doc-card__icon-wrap--gold">
+                      <i data-lucide="shield-alert"></i>
+                    </div>
+                    <div class="rep-doc-card__info">
+                      <strong class="rep-doc-card__title">Auditoria_OCR_Evidencias_Firmadas.csv</strong>
+                      <div class="rep-doc-card__meta">
+                        <span class="rep-badge-chip">640 KB</span>
+                        <span class="rep-badge-chip">100% Actas Verificadas</span>
+                        <span class="rep-badge-chip rep-badge-chip--ok">Sin Duplicados</span>
+                      </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl" style="flex-shrink:0; white-space:nowrap;" data-file="Auditoria_OCR_Evidencias_Firmadas.csv" title="Descargar">
-                    <i data-lucide="download"></i> Descargar
+                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl rep-btn-full" data-file="Auditoria_OCR_Evidencias_Firmadas.csv">
+                    <i data-lucide="download"></i> Descargar Documento Oficial
                   </button>
                 </div>
+
               </div>
             </div>
           </article>
@@ -1257,18 +1280,18 @@
                   <textarea class="admin-chat-input" id="repNotaEnvio" rows="2" style="width:100%; border-radius:10px; padding:10px; resize:vertical;" placeholder="Ej: Se adjunta informe de cierre de campaña con 100% de actas escaneadas y validadas con firma digital."></textarea>
                 </div>
 
-                <button type="button" class="btn btn--primary btn--lc" id="btnEnviarAhora" style="width:100%; justify-content:center;">
+                <div style="background:rgba(214,31,60,0.06); border:1px solid rgba(214,31,60,0.2); border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px;">
+                  <i data-lucide="info" style="color:var(--admin-red); flex-shrink:0;"></i>
+                  <small style="color:var(--admin-pine); font-size:0.78rem; line-height:1.4;">
+                    Cada despacho genera un <strong>acuse de recibo inmutable</strong> con sello de tiempo del servidor y queda registrado en la bitácora pública de transparencia de OCC Chile.
+                  </small>
+                </div>
+
+                <button type="button" class="btn btn--primary btn--lc rep-btn-full" id="btnEnviarAhora">
                   <i data-lucide="send"></i> Despachar Informe con Certificación Digital
                 </button>
               </div>
             </form>
-
-            <div style="margin-top:20px; background:rgba(214,31,60,0.06); border:1px solid rgba(214,31,60,0.2); border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px;">
-              <i data-lucide="info" style="color:var(--admin-red); flex-shrink:0;"></i>
-              <small style="color:var(--admin-pine); font-size:0.78rem; line-height:1.4;">
-                Cada despacho genera un <strong>acuse de recibo inmutable</strong> con sello de tiempo del servidor y queda registrado en la bitácora pública de transparencia de OCC Chile.
-              </small>
-            </div>
           </article>
         </div>
 

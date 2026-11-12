@@ -746,3 +746,99 @@ input:checked + .admin-slider:before {
   background: rgba(59, 130, 246, 0.15);
   border: 1px solid rgba(59, 130, 246, 0.3);
 }
+
+/* ---------------- Tarjetas de Informes (Botones Debajo) ---------------- */
+.rep-doc-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(15, 77, 58, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rep-doc-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 6px 16px rgba(15, 77, 58, 0.12);
+}
+
+.rep-doc-card__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.rep-doc-card__icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.rep-doc-card__icon-wrap--red {
+  background: rgba(214, 31, 60, 0.12);
+  color: var(--admin-red);
+}
+
+.rep-doc-card__icon-wrap--green {
+  background: rgba(11, 167, 74, 0.12);
+  color: #0ba74a;
+}
+
+.rep-doc-card__icon-wrap--gold {
+  background: rgba(242, 179, 61, 0.18);
+  color: #d97706;
+}
+
+.rep-doc-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rep-doc-card__title {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--admin-pine);
+  line-height: 1.35;
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+.rep-doc-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.rep-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(203, 213, 225, 0.55);
+  color: #334155;
+}
+
+.rep-badge-chip--ok {
+  background: rgba(16, 185, 129, 0.16);
+  color: #047526;
+}
+
+.rep-btn-full {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 9px 16px !important;
+  font-size: 0.84rem !important;
+}

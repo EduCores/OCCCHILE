@@ -14,8 +14,8 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=257" />
-  <link rel="stylesheet" href="admin.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=258" />
+  <link rel="stylesheet" href="admin.css?v=4" />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
 </head>
@@ -81,6 +81,12 @@
       <button type="button" class="admin-nav-item" data-view="logistica">
         <i data-lucide="truck"></i>
         <span>Logística & Bodega</span>
+      </button>
+
+      <button type="button" class="admin-nav-item" data-view="reportes">
+        <i data-lucide="file-check-2"></i>
+        <span>Descargas & Informes</span>
+        <span class="badge-count" style="background:rgba(214,31,60,0.15); color:var(--admin-red); border-color:rgba(214,31,60,0.3);">18</span>
       </button>
 
       <span class="admin-nav-group-title">Inteligencia Artificial</span>
@@ -882,6 +888,430 @@
         </div>
       </section>
 
+
+      <!-- ================= 6. VIEW: DESCARGAS Y ENVÍO DE INFORMES (TRANSPARENCIA) ================= -->
+      <section class="admin-view" id="view-reportes">
+        <div class="admin-view-header">
+          <div>
+            <span class="eyebrow"><i data-lucide="shield-check"></i> Transparencia Activa & Rendición de Cuentas</span>
+            <h2 class="section-title--pine">
+              <span class="title-glass-text">Descargas & Envío de</span>
+              <em class="title-glass-text title-glass-text--red">Informes Oficiales</em>
+            </h2>
+            <p>Generación de reportes certificados, trazabilidad criptográfica SHA-256 y despacho multicanal a coordinaciones y autoridades.</p>
+          </div>
+          <button type="button" class="btn btn--primary btn--sm btn--lc" id="btnGenerarConsolidado">
+            <i data-lucide="file-plus"></i> Generar Consolidado 2026
+          </button>
+        </div>
+
+        <!-- KPIS DE INFORMES & TRANSPARENCIA -->
+        <div class="admin-kpis">
+          <!-- KPI 1: Tasa de Transparencia Certificada (donut radial) -->
+          <article class="mx-card mx-card--gauges" data-metric-type="radial-gauges" role="button" tabindex="0" title="Ver índice de transparencia">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Auditado por IA</span>
+                <h3 class="mx-title">Trazabilidad Total</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Actualizar métricas">
+                <i data-lucide="refresh-cw"></i>
+              </button>
+            </header>
+
+            <div class="mx-gauges mx-gauges--donut">
+              <div class="mx-gauge">
+                <div class="mx-gauge__dial mx-gauge__dial--lg">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="mxRepGradDonut" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#0ba74a"></stop>
+                        <stop offset="50%" stop-color="#f2b33d"></stop>
+                        <stop offset="100%" stop-color="#d61f3c"></stop>
+                      </linearGradient>
+                    </defs>
+                    <circle class="mx-gauge__track" cx="60" cy="60" r="48"></circle>
+                    <circle class="mx-gauge__fill" cx="60" cy="60" r="48" stroke="url(#mxRepGradDonut)"
+                      stroke-dasharray="301.6" stroke-dashoffset="6.0">
+                    </circle>
+                  </svg>
+                  <div class="mx-gauge__center">
+                    <strong style="color:var(--admin-pine);">98%</strong>
+                    <span class="mx-gauge__center--ok">certificado</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mx-breakdown" aria-label="Desglose de transparencia">
+                <div class="mx-breakdown__item">
+                  <div class="mx-breakdown__row">
+                    <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>100%</b> Actas con Firma</span>
+                    <span class="mx-breakdown__tag mx-breakdown__tag--ok">Verificado</span>
+                  </div>
+                  <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:100%"></i></div>
+                </div>
+                <div class="mx-breakdown__item">
+                  <div class="mx-breakdown__row">
+                    <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>99,1%</b> Hash SHA-256</span>
+                    <span class="mx-breakdown__tag mx-breakdown__tag--ok">Inmutable</span>
+                  </div>
+                  <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:99.1%"></i></div>
+                </div>
+                <div class="mx-breakdown__item">
+                  <div class="mx-breakdown__row">
+                    <span class="mx-breakdown__label"><i class="mx-dot mx-dot--warn"></i> <b>0,9%</b> En validación</span>
+                    <span class="mx-breakdown__tag mx-breakdown__tag--warn">Auditoría</span>
+                  </div>
+                  <div class="mx-breakdown__track"><i class="mx-grad--amber" style="width:0.9%"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <div class="mx-donut-pills">
+                <span><i class="mx-dot mx-dot--ok"></i> <b>842</b> Actas</span>
+                <span><i class="mx-dot mx-dot--ok"></i> <b>100%</b> Conformes</span>
+              </div>
+              <strong>Sin reparos</strong>
+            </footer>
+          </article>
+
+          <!-- KPI 2: Informes Disponibles para Descarga -->
+          <article class="mx-card" role="button" tabindex="0" title="Informes disponibles">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Repositorio Abierto</span>
+                <h3 class="mx-title">Informes Disponibles</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono descarga">
+                <i data-lucide="download-cloud"></i>
+              </button>
+            </header>
+
+            <div style="padding: 10px 0;">
+              <div style="display:flex; align-items:baseline; gap:8px;">
+                <strong class="mx-live-counter__num" style="font-size:2.8rem; color:#09983f; line-height:1;">18</strong>
+                <span style="font-size:0.9rem; font-weight:700; color:var(--admin-pine);">documentos certificados</span>
+              </div>
+              <div style="margin-top: 14px;">
+                <span class="mx-live-pill"><i class="mx-dot mx-dot--ok"></i> <b>100%</b> listos para descarga inmediata</span>
+              </div>
+            </div>
+
+            <div class="mx-breakdown" style="margin-top: 10px;">
+              <div class="mx-breakdown__item">
+                <div class="mx-breakdown__row">
+                  <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>Formatos:</b> PDF Certificado, XLSX y CSV</span>
+                  <span class="mx-breakdown__tag mx-breakdown__tag--ok">Estándar ISO</span>
+                </div>
+                <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:100%"></i></div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <span class="mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Actualizado al minuto</span>
+              <strong>Exportación instantánea</strong>
+            </footer>
+          </article>
+
+          <!-- KPI 3: Despachos y Envíos Institucionales -->
+          <article class="mx-card mx-card--wave" role="button" tabindex="0" title="Envíos a directiva">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow" style="color:var(--admin-red);"><i class="mx-dot mx-dot--warn"></i> Despachos Multicanal</span>
+                <h3 class="mx-title">Informes Enviados</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono envio">
+                <i data-lucide="send"></i>
+              </button>
+            </header>
+
+            <div style="padding: 10px 0;">
+              <div style="display:flex; align-items:baseline; gap:10px;">
+                <strong class="mx-live-counter__num" style="font-size:2.8rem; color:#0f172a; line-height:1;">142</strong>
+                <span class="mx-live-pill" style="color:#047526; background:rgba(16,185,129,0.18);"><b>100%</b> acuse recibido</span>
+              </div>
+              <p class="mx-sub" style="margin-top:10px;">Enviados a Samaritan's Purse Intl, directiva ENL, 16 coordinadores ERLE y auditores.</p>
+            </div>
+
+            <div class="mx-breakdown" style="margin-top: 10px;">
+              <div class="mx-breakdown__item">
+                <div class="mx-breakdown__row">
+                  <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>Tiempo de entrega medio:</b> 1,8 segundos</span>
+                  <span class="mx-breakdown__tag mx-breakdown__tag--ok">Tiempo real</span>
+                </div>
+                <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:100%"></i></div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <span>Canales: Email PGP, API & WhatsApp</span>
+              <strong>Despacho Seguro</strong>
+            </footer>
+          </article>
+
+          <!-- KPI 4: Integridad Criptográfica -->
+          <article class="mx-card" role="button" tabindex="0" title="Sellado criptográfico">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Seguridad Criptográfica</span>
+                <h3 class="mx-title">Sello de Tiempo & Hash</h3>
+              </div>
+              <button type="button" class="mx-iconbtn" aria-label="Icono llave">
+                <i data-lucide="key-round"></i>
+              </button>
+            </header>
+
+            <div style="padding: 10px 0;">
+              <div style="display:flex; align-items:baseline; gap:8px;">
+                <strong class="mx-live-counter__num" style="font-size:2.4rem; color:#09983f; line-height:1;">SHA-256</strong>
+                <span style="font-size:0.9rem; font-weight:700; color:var(--admin-pine);">inviolable</span>
+              </div>
+              <div style="margin-top: 14px;">
+                <span class="mx-live-pill" style="color:#047526; background:rgba(16,185,129,0.18);"><i class="mx-dot mx-dot--ok"></i> <b>0</b> alteraciones detectadas</span>
+              </div>
+            </div>
+
+            <div class="mx-breakdown" style="margin-top: 10px;">
+              <div class="mx-breakdown__item">
+                <div class="mx-breakdown__row">
+                  <span class="mx-breakdown__label"><i class="mx-dot mx-dot--ok"></i> <b>Bloque actual:</b> #2026-CHL-842</span>
+                  <span class="mx-breakdown__tag mx-breakdown__tag--ok">Válido</span>
+                </div>
+                <div class="mx-breakdown__track"><i class="mx-grad--emerald" style="width:100%"></i></div>
+              </div>
+            </div>
+
+            <footer class="mx-card__foot">
+              <span class="mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Auditoría Pública</span>
+              <strong>Transparencia 100%</strong>
+            </footer>
+          </article>
+        </div>
+
+        <!-- DOS PANELES: 1. GENERADOR Y DESCARGA / 2. FORMULARIO DE ENVÍO -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap:24px; margin-bottom:28px;">
+          <!-- Panel Izquierdo: Generador y Descargas de Informes -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Descarga Certificada</span>
+                <h3 class="mx-title">Descarga Directa de Informes</h3>
+              </div>
+              <span class="mx-live-pill"><i data-lucide="file-check"></i> Oficiales</span>
+            </header>
+
+            <form id="formDescargarInforme" style="margin-top:16px;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <div>
+                  <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Seleccionar Tipo de Informe:</label>
+                  <select class="admin-select" id="repTipoDescarga" style="width:100%; padding:10px 14px;">
+                    <option value="consolidado_nacional">1. Consolidado Nacional de Distribución 2026 (General)</option>
+                    <option value="auditoria_ocr">2. Auditoría Forense de Actas y Firmas OCR (Transparencia)</option>
+                    <option value="logistica_aduanas">3. Trazabilidad de Contenedores y Rutas Aduaneras</option>
+                    <option value="padron_iglesias">4. Padrón Auditado de Iglesias Compañeras y Asignaciones</option>
+                    <option value="merma_cero">5. Certificado Internacional de Merma Cero (Samaritan's Purse)</option>
+                  </select>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                  <div>
+                    <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Región / Alcance:</label>
+                    <select class="admin-select" id="repRegionDescarga" style="width:100%; padding:10px 14px;">
+                      <option value="nacional">Todas las Regiones (Nacional)</option>
+                      <option value="metronorte">ERLE Metronorte</option>
+                      <option value="metrosur">ERLE Metrosur</option>
+                      <option value="v_region">ERLE V Región Valparaíso</option>
+                      <option value="concepcion">ERLE Concepción / Biobío</option>
+                      <option value="los_lagos">ERLE Los Lagos</option>
+                      <option value="coquimbo">ERLE Coquimbo</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Formato de Archivo:</label>
+                    <select class="admin-select" id="repFormatoDescarga" style="width:100%; padding:10px 14px;">
+                      <option value="csv">CSV Estructurado (Datos Abiertos)</option>
+                      <option value="pdf">PDF Foliado con Certificado SHA</option>
+                      <option value="xlsx">Excel Auditado con Tablas Dinámicas</option>
+                      <option value="json">JSON API Schema para Desarrolladores</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.7); border:1px solid rgba(15,77,58,0.18); border-radius:14px; padding:14px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <span style="font-size:0.84rem; font-weight:700; color:var(--admin-pine);">Sello Criptográfico Generado:</span>
+                    <span style="font-size:0.75rem; background:rgba(4,117,38,0.15); color:#047526; padding:2px 8px; border-radius:999px; font-weight:800;">SHA-256 Verificado</span>
+                  </div>
+                  <code id="repHashPreview" style="display:block; font-size:0.75rem; color:#475569; word-break:break-all; font-family:monospace; background:#fff; padding:6px 10px; border-radius:8px; border:1px solid #cbd5e1;">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
+                </div>
+
+                <button type="button" class="btn btn--primary btn--lc" id="btnDescargarAhora" style="width:100%; justify-content:center;">
+                  <i data-lucide="download"></i> Generar & Descargar Archivo Oficial
+                </button>
+              </div>
+            </form>
+
+            <div style="margin-top:24px; border-top:1px dashed rgba(15,77,58,0.22); padding-top:18px;">
+              <h4 style="font-size:0.88rem; font-weight:800; color:var(--admin-pine); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                <i data-lucide="files"></i> Informes Clave Disponibles Inmediatamente:
+              </h4>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.9); border-radius:12px; padding:10px 14px;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <i data-lucide="file-text" style="color:var(--admin-red); width:20px; height:20px;"></i>
+                    <div>
+                      <strong style="display:block; font-size:0.84rem; color:var(--admin-pine);">Informe_Ejecutivo_OCC_Chile_2026.pdf</strong>
+                      <small style="color:#64748b; font-size:0.74rem;">3.4 MB · Sellado 11-Nov-2026 · Certificación SP-Intl</small>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl" style="flex-shrink:0; white-space:nowrap;" data-file="Informe_Ejecutivo_OCC_Chile_2026.csv" title="Descargar">
+                    <i data-lucide="download"></i> Descargar
+                  </button>
+                </div>
+
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.9); border-radius:12px; padding:10px 14px;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <i data-lucide="table" style="color:#0ba74a; width:20px; height:20px;"></i>
+                    <div>
+                      <strong style="display:block; font-size:0.84rem; color:var(--admin-pine);">Matriz_Nacional_Distribucion_842_Iglesias.xlsx</strong>
+                      <small style="color:#64748b; font-size:0.74rem;">1.8 MB · 228.024 cajitas asignadas · Detalle 16 regiones</small>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl" style="flex-shrink:0; white-space:nowrap;" data-file="Matriz_Nacional_Distribucion_842_Iglesias.csv" title="Descargar">
+                    <i data-lucide="download"></i> Descargar
+                  </button>
+                </div>
+
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.9); border-radius:12px; padding:10px 14px;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <i data-lucide="shield-alert" style="color:#f2b33d; width:20px; height:20px;"></i>
+                    <div>
+                      <strong style="display:block; font-size:0.84rem; color:var(--admin-pine);">Auditoria_OCR_Evidencias_Firmadas.csv</strong>
+                      <small style="color:#64748b; font-size:0.74rem;">640 KB · 100% actas sin duplicados ni adulteraciones</small>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn--ghost btn--sm btn--lc btn-quick-dl" style="flex-shrink:0; white-space:nowrap;" data-file="Auditoria_OCR_Evidencias_Firmadas.csv" title="Descargar">
+                    <i data-lucide="download"></i> Descargar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Panel Derecho: Envío Oficial y Notificaciones Multicanal -->
+          <article class="mx-card">
+            <header class="mx-card__head">
+              <div>
+                <span class="mx-eyebrow" style="color:var(--admin-red);"><i class="mx-dot mx-dot--warn"></i> Despacho Directo</span>
+                <h3 class="mx-title">Envío de Informes a Autoridades</h3>
+              </div>
+              <span class="mx-live-pill" style="color:#047526; background:rgba(16,185,129,0.18);"><i data-lucide="send"></i> Multicanal</span>
+            </header>
+
+            <form id="formEnviarInforme" style="margin-top:16px;">
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <div>
+                  <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Destinatario Institucional:</label>
+                  <select class="admin-select" id="repDestinatario" style="width:100%; padding:10px 14px;">
+                    <option value="sp_intl">Samaritan's Purse International HQ (Boone, NC)</option>
+                    <option value="enl_chile">Coordinación Nacional ENL Chile (Liderazgo País)</option>
+                    <option value="erle_todos">Todos los Equipos Regionales ERLE (16 Regiones)</option>
+                    <option value="auditoria_externa">Comisión de Auditoría Externa y Transparencia</option>
+                    <option value="pastores_chile">Red de Pastores de Iglesias Compañeras</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Informe a Despachar:</label>
+                  <select class="admin-select" id="repInformeAdjunto" style="width:100%; padding:10px 14px;">
+                    <option value="inf_completo">Informe Consolidado Oficial de Transparencia 2026</option>
+                    <option value="inf_ocr">Acta Notarial de Auditoría OCR & Trazabilidad de Cajitas</option>
+                    <option value="inf_logistica">Reporte de Despacho Logístico & Control de Aduanas</option>
+                    <option value="inf_financiero">Certificado de Cumplimiento de Normas Internacionales</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Canales de Transmisión:</label>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; background:rgba(255,255,255,0.65); border:1px solid rgba(15,77,58,0.18); border-radius:12px; padding:12px;">
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; color:var(--admin-pine); cursor:pointer;">
+                      <input type="checkbox" id="chkCanalEmail" checked style="accent-color:var(--admin-pine);"> Email Seguro PGP
+                    </label>
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; color:var(--admin-pine); cursor:pointer;">
+                      <input type="checkbox" id="chkCanalApi" checked style="accent-color:var(--admin-pine);"> Webhook / API REST
+                    </label>
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; color:var(--admin-pine); cursor:pointer;">
+                      <input type="checkbox" id="chkCanalWa" style="accent-color:var(--admin-pine);"> Alerta WhatsApp
+                    </label>
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; color:var(--admin-pine); cursor:pointer;">
+                      <input type="checkbox" id="chkCanalSftp" checked style="accent-color:var(--admin-pine);"> Bóveda Cloud SFTP
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label style="display:block; font-size:0.82rem; font-weight:700; color:var(--admin-pine); margin-bottom:6px;">Nota / Observaciones de Envío (Opcional):</label>
+                  <textarea class="admin-chat-input" id="repNotaEnvio" rows="2" style="width:100%; border-radius:10px; padding:10px; resize:vertical;" placeholder="Ej: Se adjunta informe de cierre de campaña con 100% de actas escaneadas y validadas con firma digital."></textarea>
+                </div>
+
+                <button type="button" class="btn btn--primary btn--lc" id="btnEnviarAhora" style="width:100%; justify-content:center;">
+                  <i data-lucide="send"></i> Despachar Informe con Certificación Digital
+                </button>
+              </div>
+            </form>
+
+            <div style="margin-top:20px; background:rgba(214,31,60,0.06); border:1px solid rgba(214,31,60,0.2); border-radius:12px; padding:12px; display:flex; align-items:center; gap:10px;">
+              <i data-lucide="info" style="color:var(--admin-red); flex-shrink:0;"></i>
+              <small style="color:var(--admin-pine); font-size:0.78rem; line-height:1.4;">
+                Cada despacho genera un <strong>acuse de recibo inmutable</strong> con sello de tiempo del servidor y queda registrado en la bitácora pública de transparencia de OCC Chile.
+              </small>
+            </div>
+          </article>
+        </div>
+
+        <!-- TABLA HISTORIAL DE INFORMES Y TRAZABILIDAD PÚBLICA -->
+        <article class="mx-card">
+          <header class="mx-card__head">
+            <div>
+              <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Bitácora en Vivo</span>
+              <h3 class="mx-title">Historial de Informes Generados, Descargados y Enviados</h3>
+            </div>
+            <div class="admin-toolbar" style="margin:0;">
+              <div class="admin-search">
+                <i data-lucide="search"></i>
+                <input type="text" id="repSearchInput" placeholder="Buscar por código, destinatario o tipo..." />
+              </div>
+            </div>
+          </header>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table" id="tablaHistorialReportes">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Tipo de Informe</th>
+                  <th>Fecha & Hora</th>
+                  <th>Destinatario / Canal</th>
+                  <th>Formato</th>
+                  <th>Hash Criptográfico</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="repTableBody">
+                <!-- Se alimenta dinámicamente y con datos semilla de transparencia -->
+              </tbody>
+            </table>
+          </div>
+
+          <footer class="mx-card__foot">
+            <span class="mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> 100% de informes auditados con respaldo inmutable</span>
+            <strong id="repCounterBadge">Mostrando 6 registros oficiales</strong>
+          </footer>
+        </article>
+      </section>
+
       <!-- ================= 6. VIEW: AUTOMATIZACIONES (.mx-card) ================= -->
       <section class="admin-view" id="view-automatizaciones">
         <div class="admin-view-header">
@@ -1121,7 +1551,7 @@
   </div>
 
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="admin.js?v=2"></script>
+  <script src="admin.js?v=3"></script>
 </body>
 
 </html>

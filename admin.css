@@ -701,3 +701,40 @@ input:checked + .admin-slider:before {
     padding: 22px 18px;
   }
 }
+
+/* ---------------- Informes & Transparencia ---------------- */
+.rep-hash-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 77, 58, 0.15);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #334155;
+  word-break: break-all;
+}
+
+.rep-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.rep-status-badge--ok {
+  color: #047526;
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rep-status-badge--sent {
+  color: #1e40af;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}

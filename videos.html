@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Videos · OCC Chile · Plataforma IA</title>
+  <meta name="description"
+    content="Videos oficiales de Operación Niño de la Navidad Chile (Samaritan's Purse): reseña 2026, testimonios e historias de impacto." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=266" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <div class="topbar__contact">
+          <a href="https://facebook.com/occ.en.chile" target="_blank" rel="noopener" aria-label="Facebook">
+            <i data-lucide="facebook"></i>
+          </a>
+          <a href="https://instagram.com/occchile" target="_blank" rel="noopener" aria-label="Instagram">
+            <i data-lucide="instagram"></i>
+          </a>
+          <a href="tel:+56912345678">
+            <i data-lucide="phone"></i> +56 9 1234 5678
+          </a>
+          <a href="mailto:contacto@occchile.cl">
+            <i data-lucide="mail"></i> contacto@occchile.cl
+          </a>
+        </div>
+
+        <nav class="topbar__links">
+          <a href="quienes-somos.html">Quiénes Somos</a>
+          <a href="mision-e-historia.html">Misión e Historia</a>
+          <a href="index.html#postular">Contacto</a>
+        </nav>
+
+        <div class="topbar__extras">
+          <div class="lang-switch" role="group" aria-label="Idioma del sitio">
+            <button type="button" class="lang is-active" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" class="lang" data-lang="en" aria-pressed="false">EN</button>
+            <button type="button" class="lang" data-lang="pt" aria-pressed="false">PT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container nav__inner">
+      <a href="index.html#inicio" class="brand" aria-label="Inicio">
+        <img src="img/occchile-logo.png" alt="OCC Chile · Plataforma IA" class="brand__logo">
+      </a>
+
+      <div class="nav__links-wrap">
+        <nav class="nav__links nav__links--secondary" id="navLinks2">
+          <a href="index.html#viaje">El viaje de una cajita</a>
+          <a href="index.html#tierra">Hasta lo último de la tierra</a>
+          <a href="index.html#enfoque">Evangelismo y discipulado</a>
+          <a href="index.html#testimonios">Testimonios</a>
+          <a href="videos.html" class="is-active" aria-current="page">Videos</a>
+        </nav>
+      </div>
+
+      <div class="nav__actions">
+        <a class="btn btn--primary btn--sm btn--lc" href="admin.html" title="Panel de Administración">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="heart-handshake" aria-hidden="true" class="lucide lucide-heart-handshake">
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+            </path>
+            <path
+              d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66">
+            </path>
+            <path d="m18 15-2-2"></path>
+            <path d="m15 18-2-2"></path>
+          </svg> Reportes
+        </a>
+
+        <button class="icon-btn nav__burger" id="burger" aria-label="Menú">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO: VIDEOS ============ -->
+    <section class="hero hero--subpage" id="inicio">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__bg-img hero__bg-img--videos"></div>
+        <div class="aurora a1"></div>
+        <div class="aurora a2"></div>
+        <div class="aurora a3"></div>
+        <canvas id="snow"></canvas>
+      </div>
+
+      <div class="container">
+        <div class="hero__copy">
+          <p class="eyebrow reveal">Operación Niño de la Navidad · Samaritan's Purse</p>
+          <h1 class="reveal">Historias y <span class="hero__word--green">testimonios</span><br>en <em>video.</em></h1>
+          <p class="lead reveal">Descubre cómo las cajitas de regalos llevan evangelismo, discipulado y esperanza a
+            millones de niños y familias en Chile y el mundo.</p>
+
+          <div class="hero__cta reveal">
+            <a href="#video-principal" class="btn btn--primary btn--lc">
+              <i data-lucide="play"></i> Ver video principal
+            </a>
+            <a href="#mas-videos" class="btn btn--ghost btn--lc">
+              <i data-lucide="film"></i> Explorar 5 videos
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="#video-principal" class="scroll-cue" aria-label="Bajar a Video principal">
+        <i data-lucide="chevrons-down"></i>
+      </a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Reseña 2026</span>
+          <i data-lucide="sparkle"></i>
+          <span>Samaritan's Purse</span>
+          <i data-lucide="sparkle"></i>
+          <span>Chile · Valparaíso &amp; Santiago</span>
+          <i data-lucide="sparkle"></i>
+          <span>Evangelismo</span>
+          <i data-lucide="sparkle"></i>
+          <span>Discipulado</span>
+          <i data-lucide="sparkle"></i>
+          <span>Multiplicación</span>
+          <i data-lucide="sparkle"></i>
+          <span>Esperanza</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+        <div class="marquee__group">
+          <span>Reseña 2026</span>
+          <i data-lucide="sparkle"></i>
+          <span>Samaritan's Purse</span>
+          <i data-lucide="sparkle"></i>
+          <span>Chile · Valparaíso &amp; Santiago</span>
+          <i data-lucide="sparkle"></i>
+          <span>Evangelismo</span>
+          <i data-lucide="sparkle"></i>
+          <span>Discipulado</span>
+          <i data-lucide="sparkle"></i>
+          <span>Multiplicación</span>
+          <i data-lucide="sparkle"></i>
+          <span>Esperanza</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BLOQUE 1: VIDEO PRINCIPAL ============ -->
+    <section class="section vid-featured" id="video-principal">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow"><i data-lucide="tv"></i> Video principal</span>
+          <h2 class="section-title--pine">
+            <span class="title-glass-text">Reseña de</span>
+            <em class="title-glass-text title-glass-text--red">Operation Christmas Child</em>
+          </h2>
+          <p>El impacto global de cada cajita de regalo en la vida de millones de niños cada año.</p>
+        </header>
+
+        <article class="mx-card vid-stage reveal">
+          <div class="vid-stage__frame">
+            <iframe src="https://players.sardius.media/82aD088d0aAbEF4/dvr/asset/1B84fb7E5A882fA653EF6C8ADEa8"
+              title="Reseña de Operation Christmas Child"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+
+          <div class="vid-stage__info">
+            <span class="vid-lang-pill"><i data-lucide="languages" style="width:14px;height:14px;"></i> Español</span>
+            <h3>Reseña de Operation Christmas Child</h3>
+            <p>Las cajas de regalos de Operation Christmas Child siguen llevando evangelismo, discipulado y la
+              multiplicación de creyentes e iglesias por todo el mundo. Descubre por qué apoyarnos deja un impacto
+              positivo en las vidas de millones de niños cada año.</p>
+
+            <div class="vid-stage__actions">
+              <a href="https://video.samaritanspurse.org/resena-de-operation-christmas-child-2026-promo/"
+                target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm btn--lc">
+                <i data-lucide="external-link"></i> Ver en Samaritan’s Purse
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BLOQUE 2: MÁS VIDEOS (5 VIDEOS) ============ -->
+    <section class="section vid-catalog" id="mas-videos">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow"><i data-lucide="film"></i> Samaritan’s Purse · 5 videos</span>
+          <h2 class="section-title--pine">
+            <span class="title-glass-text">Más</span>
+            <em class="title-glass-text title-glass-text--red">videos</em>
+          </h2>
+          <p>Haz clic en cualquier video para reproducirlo directamente aquí o abrir su ficha oficial en Samaritan’s
+            Purse.</p>
+        </header>
+
+        <div class="vid-filters reveal" role="group" aria-label="Filtrar videos por idioma">
+          <button type="button" class="vid-filter-btn is-active" data-filter="all">Todos (5)</button>
+          <button type="button" class="vid-filter-btn" data-filter="Español">Español (2)</button>
+          <button type="button" class="vid-filter-btn" data-filter="Inglés">Inglés (3)</button>
+        </div>
+
+        <div class="vid-grid">
+          <!-- Video 1: Prepara una caja y comparte el amor de Cristo -->
+          <article class="mx-card vid-card reveal" data-lang="Español">
+            <div class="vid-card__media"
+              data-embed="https://players.sardius.media/82aD088d0aAbEF4/dvr/asset/6895B8BA4544307284F2A37B8510"
+              data-title="Prepara una caja y comparte el amor de Cristo" role="button" tabindex="0"
+              aria-label="Reproducir: Prepara una caja y comparte el amor de Cristo">
+              <img src="img/journey.jpg" alt="Prepara una caja y comparte el amor de Cristo" loading="lazy">
+              <span class="vid-lang-pill vid-card__lang-badge">Español</span>
+              <span class="testimonio-card__badge-video vid-card__play" aria-hidden="true">
+                <i data-lucide="play"></i>
+              </span>
+            </div>
+            <div class="vid-card__body">
+              <h3>Prepara una caja y comparte el amor de Cristo</h3>
+              <p class="vid-card__desc">Voluntarios e iglesias colaboran para llevar cajitas a más de cien países y
+                compartir las buenas nuevas de Jesucristo con los niños.</p>
+              <div class="vid-card__foot">
+                <button type="button" class="btn btn--ghost btn--sm btn--lc vid-play-trigger">
+                  <i data-lucide="play"></i> Reproducir
+                </button>
+                <a href="https://video.samaritanspurse.org/prepara-una-caja-y-comparte-el-amor-de-cristo/"
+                  target="_blank" rel="noopener noreferrer" class="vid-card__ext">
+                  Fuente oficial <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Video 2: El impacto de una caja de regalos -->
+          <article class="mx-card vid-card reveal" data-lang="Español">
+            <div class="vid-card__media"
+              data-embed="https://players.sardius.media/82aD088d0aAbEF4/dvr/asset/6336635200112"
+              data-title="El impacto de una caja de regalos" role="button" tabindex="0"
+              aria-label="Reproducir: El impacto de una caja de regalos">
+              <img src="img/discipleship.jpg" alt="El impacto de una caja de regalos" loading="lazy">
+              <span class="vid-lang-pill vid-card__lang-badge">Español</span>
+              <span class="testimonio-card__badge-video vid-card__play" aria-hidden="true">
+                <i data-lucide="play"></i>
+              </span>
+            </div>
+            <div class="vid-card__body">
+              <h3>El impacto de una caja de regalos</h3>
+              <p class="vid-card__desc">Artistas y pastores hispanos comparten el impacto del discipulado de Operación
+                Niño de la Navidad en sus congregaciones y en comunidades de otros países.</p>
+              <div class="vid-card__foot">
+                <button type="button" class="btn btn--ghost btn--sm btn--lc vid-play-trigger">
+                  <i data-lucide="play"></i> Reproducir
+                </button>
+                <a href="https://video.samaritanspurse.org/el-impacto-de-una-caja-de-regalos-2/" target="_blank"
+                  rel="noopener noreferrer" class="vid-card__ext">
+                  Fuente oficial <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Video 3: Una cajita lleva alegría a una familia que lo perdió todo -->
+          <article class="mx-card vid-card reveal" data-lang="Inglés">
+            <div class="vid-card__media"
+              data-embed="https://players.sardius.media/82aD088d0aAbEF4/dvr/asset/0BcEA7A00686A0560Fa233fB7d3D"
+              data-title="Una cajita lleva alegría a una familia que lo perdió todo" role="button" tabindex="0"
+              aria-label="Reproducir: Una cajita lleva alegría a una familia que lo perdió todo">
+              <img src="img/chile1.jpg" alt="Una cajita lleva alegría a una familia que lo perdió todo" loading="lazy">
+              <span class="vid-lang-pill vid-lang-pill--en vid-card__lang-badge">Inglés</span>
+              <span class="testimonio-card__badge-video vid-card__play" aria-hidden="true">
+                <i data-lucide="play"></i>
+              </span>
+            </div>
+            <div class="vid-card__body">
+              <h3>Una cajita lleva alegría a una familia que lo perdió todo</h3>
+              <p class="vid-card__orig">When A Shoebox Brings Great Joy To A Family Who Lost Everything</p>
+              <p class="vid-card__desc">Tras el incendio que destruyó su hogar en Valparaíso, Fernanda recibió una
+                cajita en un encuentro organizado por la iglesia local. El regalo llevó esperanza y alegría a su
+                familia.</p>
+              <div class="vid-card__foot">
+                <button type="button" class="btn btn--ghost btn--sm btn--lc vid-play-trigger">
+                  <i data-lucide="play"></i> Reproducir
+                </button>
+                <a href="https://video.samaritanspurse.org/when-a-shoebox-brings-great-joy-to-a-family-who-lost-everything/"
+                  target="_blank" rel="noopener noreferrer" class="vid-card__ext">
+                  Fuente oficial <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Video 4: Un niño recibe su cajita de regalos perfecta -->
+          <article class="mx-card vid-card reveal" data-lang="Inglés">
+            <div class="vid-card__media"
+              data-embed="https://players.sardius.media/82aD088d0aAbEF4/dvr/asset/e39a164620A1CB16817DfBE45EbA"
+              data-title="Un niño recibe su cajita de regalos perfecta" role="button" tabindex="0"
+              aria-label="Reproducir: Un niño recibe su cajita de regalos perfecta">
+              <img src="img/testimonio_gaspar.jpg" alt="Un niño recibe su cajita de regalos perfecta" loading="lazy">
+              <span class="vid-lang-pill vid-lang-pill--en vid-card__lang-badge">Inglés</span>
+              <span class="testimonio-card__badge-video vid-card__play" aria-hidden="true">
+                <i data-lucide="play"></i>
+              </span>
+            </div>
+            <div class="vid-card__body">
+              <h3>Un niño recibe su cajita de regalos perfecta</h3>
+              <p class="vid-card__orig">A Child Receives Their Perfect Shoebox Gift</p>
+              <p class="vid-card__desc">Gaspar recibió una cajita en un evento de una iglesia de Santiago. Cada regalo
+                fue especial para él y una oportunidad de conocer el mensaje del Evangelio.</p>
+              <div class="vid-card__foot">
+                <button type="button" class="btn btn--ghost btn--sm btn--lc vid-play-trigger">
+                  <i data-lucide="play"></i> Reproducir
+                </button>
+                <a href="https://video.samaritanspurse.org/a-child-receives-their-perfect-shoebox-gift/"
+                  target="_blank" rel="noopener noreferrer" class="vid-card__ext">
+                  Fuente oficial <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Video 5: Por qué Adryana prepara cajitas cada año -->
+          <article class="mx-card vid-card reveal" data-lang="Inglés">
+            <div class="vid-card__media"
+              data-embed="https://players.sardius.media/82aD088d0aAbEF4/dvr/asset/C9e7deFa1182E63aA227Bdb07432"
+              data-title="Por qué Adryana prepara cajitas cada año" role="button" tabindex="0"
+              aria-label="Reproducir: Por qué Adryana prepara cajitas cada año">
+              <img src="img/Pack-50-Cajitas-ONN-5-scaled-2.jpg" alt="Por qué Adryana prepara cajitas cada año"
+                loading="lazy">
+              <span class="vid-lang-pill vid-lang-pill--en vid-card__lang-badge">Inglés</span>
+              <span class="testimonio-card__badge-video vid-card__play" aria-hidden="true">
+                <i data-lucide="play"></i>
+              </span>
+            </div>
+            <div class="vid-card__body">
+              <h3>Por qué Adryana prepara cajitas cada año</h3>
+              <p class="vid-card__orig">Why Adryana Packs Shoeboxes And Helps Kids In Need Every Year</p>
+              <p class="vid-card__desc">Adryana se propuso preparar 1.000 cajitas en 2025. A pesar de las dificultades de
+                salud, su familia logró reunir más de 1.700 regalos para compartir el amor de Dios con los niños.</p>
+              <div class="vid-card__foot">
+                <button type="button" class="btn btn--ghost btn--sm btn--lc vid-play-trigger">
+                  <i data-lucide="play"></i> Reproducir
+                </button>
+                <a href="https://video.samaritanspurse.org/why-adryana-packs-shoeboxes-and-helps-kids-in-need-every-year/"
+                  target="_blank" rel="noopener noreferrer" class="vid-card__ext">
+                  Fuente oficial <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="vid-credits">Videos y fotografías: Samaritan’s Purse.</p>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE CTA ============ -->
+    <div class="marquee marquee--cta" aria-hidden="true">
+      <div class="marquee__track marquee__track--cta">
+        <div class="marquee__group marquee__group--cta">
+          <span>Multiplicación</span>
+          <i data-lucide="sparkle"></i>
+          <span>Discipulado</span>
+          <i data-lucide="sparkle"></i>
+          <span>Evangelismo</span>
+          <i data-lucide="sparkle"></i>
+          <span>Esperanza</span>
+          <i data-lucide="sparkle"></i>
+          <span>Equipos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Regalos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Logística</span>
+          <i data-lucide="sparkle"></i>
+          <span>Voluntarios</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+        <div class="marquee__group marquee__group--cta">
+          <span>Multiplicación</span>
+          <i data-lucide="sparkle"></i>
+          <span>Discipulado</span>
+          <i data-lucide="sparkle"></i>
+          <span>Evangelismo</span>
+          <i data-lucide="sparkle"></i>
+          <span>Esperanza</span>
+          <i data-lucide="sparkle"></i>
+          <span>Equipos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Regalos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Logística</span>
+          <i data-lucide="sparkle"></i>
+          <span>Voluntarios</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CTA ============ -->
+    <section class="section cta" id="cta">
+      <div class="container cta__inner reveal">
+        <h2>¿Tu iglesia quiere ser Compañero de Ministerio?</h2>
+        <div class="hero__cta">
+          <a href="index.html#postular" class="btn btn--light btn--lc">
+            <i data-lucide="play"></i> Quiero Participar
+          </a>
+          <a href="index.html#viaje" class="btn btn--outline-light btn--lc">
+            <i data-lucide="calendar"></i> Ver el viaje
+          </a>
+        </div>
+      </div>
+      <div class="cta-jesus" aria-hidden="true">
+        <img src="img/jesus.png" alt="Jesús" class="cta-jesus__img" loading="lazy">
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__main">
+      <div class="footer__brand">
+        <a href="index.html#inicio" class="brand" aria-label="Inicio">
+          <img src="img/occchile-logo.png" alt="OCC Chile · Plataforma IA" class="brand__logo">
+        </a>
+        <p>Para que cada cajita llegue a su destino y cada niño escuche las Buenas Nuevas.</p>
+      </div>
+
+      <nav class="footer__cols" aria-label="Enlaces del sitio">
+        <div class="footer__col">
+          <h4>Plataforma</h4>
+          <a href="admin.html">Panel Admin &amp; IA</a>
+          <a href="quienes-somos.html">Quiénes Somos</a>
+          <a href="mision-e-historia.html">Misión e Historia</a>
+          <a href="videos.html">Videos</a>
+          <a href="index.html#organigrama">Organigrama</a>
+          <a href="index.html#datos">Centro de datos</a>
+          <a href="index.html#testimonios">Testimonios</a>
+          <a href="index.html#viaje">Paso a paso</a>
+          <a href="index.html#tierra">Norte a Sur</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>El viaje</h4>
+          <a href="index.html#viaje">El viaje de una cajita</a>
+          <a href="index.html#datos">Impacto</a>
+          <a href="index.html#enfoque">Evangelismo y discipulado</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Participa</h4>
+          <a href="index.html#postular">Quiero participar</a>
+          <a href="index.html#postular">Ser parte</a>
+          <a href="index.html#organigrama">Equipos de liderazgo</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <div class="container footer__bar-inner">
+        <p>© 2026 OCC Chile · Plataforma IA</p>
+        <a href="#inicio">Volver arriba <i data-lucide="arrow-up"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- ============ WIDGET FLOTANTE: ASISTENTE OCC (IA) ============ -->
+  <aside class="chat-widget" id="chatWidget" aria-hidden="true" role="dialog" aria-labelledby="chatWidgetTitle">
+    <div class="chat-widget__head">
+      <div class="chat-widget__title" id="chatWidgetTitle">
+        <div class="avatar avatar--sm">
+          <i data-lucide="gift"></i>
+        </div>
+        <div>
+          <strong>Asistente OCC <span class="chat-widget__badge">IA</span></strong>
+          <small><span class="dot"></span> En línea · RAG en vivo</small>
+        </div>
+      </div>
+      <div class="chat-widget__actions">
+        <select id="widgetLang" aria-label="Idioma" class="chat-widget__lang">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+          <option value="pt">PT</option>
+        </select>
+        <a href="index.html#postular" class="chat-widget__btn-icon" id="widgetExpand"
+          title="Ver en prototipo interactivo" aria-label="Ver demo completa">
+          <i data-lucide="maximize-2"></i>
+        </a>
+        <button type="button" class="chat-widget__btn-icon" id="widgetClose" aria-label="Cerrar asistente">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-widget__body" id="widgetChatBody"></div>
+    <div class="chat-widget__chips" id="widgetChatChips"></div>
+
+    <form class="chat-widget__input" id="widgetChatForm">
+      <input id="widgetChatIn" placeholder="Pregunta sobre cajas, iglesias, voluntariado…" autocomplete="off" />
+      <button class="btn btn--primary btn--icon btn--lc" aria-label="Enviar">
+        <i data-lucide="send"></i>
+      </button>
+    </form>
+  </aside>
+
+  <div class="fabs" aria-label="Ayuda y contacto">
+    <button type="button" class="fab fab--agent" id="fabAgent" aria-label="Abrir Asistente OCC" aria-expanded="false"
+      aria-controls="chatWidget">
+      <i data-lucide="bot"></i>
+    </button>
+
+    <a href="https://wa.me/56937479835" class="fab fab--wa" target="_blank" rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp (+56 9 37479835)">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+      </svg>
+    </a>
+  </div>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="app.js?v=61"></script>
+  <script>
+    (() => {
+      const mountPlayer = (media) => {
+        if (!media || media.classList.contains("is-playing")) return;
+        const src = media.dataset.embed;
+        if (!src) return;
+        media.classList.add("is-playing");
+        const sep = src.includes("?") ? "&" : "?";
+        media.innerHTML = `<iframe src="${src}${sep}autoplay=1" title="${media.dataset.title || "Video OCC"}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      };
+
+      document.querySelectorAll(".vid-card").forEach((card) => {
+        const media = card.querySelector(".vid-card__media");
+        const btn = card.querySelector(".vid-play-trigger");
+        if (media) {
+          media.addEventListener("click", () => mountPlayer(media));
+          media.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              mountPlayer(media);
+            }
+          });
+        }
+        if (btn && media) {
+          btn.addEventListener("click", () => mountPlayer(media));
+        }
+      });
+
+      const filterBtns = document.querySelectorAll(".vid-filter-btn");
+      const cards = document.querySelectorAll(".vid-card");
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const lang = btn.dataset.filter;
+          filterBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+          cards.forEach((c) => {
+            c.classList.toggle("is-hidden", lang !== "all" && c.dataset.lang !== lang);
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
+

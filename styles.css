@@ -12361,3 +12361,37 @@ h2.section-title--pine {
     padding: 20px 0 96px;
   }
 }
+
+/* Contacto y dirección en .footer__brand */
+.footer__contact {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__contact-item {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 9px;
+  width: fit-content;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #c6b6af;
+  text-decoration: none;
+  transition: color .2s var(--ease), transform .2s var(--ease);
+}
+
+.footer__contact-item:hover {
+  color: var(--gold, #f2b33d);
+  transform: translateX(3px);
+}
+
+.footer__contact-item svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--gold, #f2b33d);
+}

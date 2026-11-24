@@ -12395,3 +12395,60 @@ h2.section-title--pine {
   margin-top: 3px;
   color: var(--gold, #f2b33d);
 }
+
+/* Enlaces interactivos dentro de respuestas del Asistente OCC (.chat-widget) */
+.chat-links {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0f4d3a;
+  background: rgba(10, 166, 58, .10);
+  border: 1px solid rgba(10, 166, 58, .28);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .18s var(--ease), background .2s var(--ease), color .2s var(--ease), border-color .2s, box-shadow .2s;
+}
+
+.chat-widget .msg .src a.chat-src-link,
+.msg .src a.chat-src-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .72rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(10, 166, 58, .12);
+  color: #047526;
+  border: 1px solid rgba(10, 166, 58, .25);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .18s var(--ease), background .2s var(--ease), color .2s var(--ease), border-color .2s, box-shadow .2s;
+}
+
+.chat-link:hover,
+.chat-widget .msg .src a.chat-src-link:hover,
+.msg .src a.chat-src-link:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #0aa63a, #047526);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, .6);
+  box-shadow: 0 4px 12px rgba(10, 166, 58, .35);
+}
+
+.chat-link svg,
+.chat-src-link svg {
+  flex: 0 0 auto;
+}

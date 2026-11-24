@@ -1137,7 +1137,7 @@
     render();
   }
 
-  /* ---------------- H · CHAT RAG ---------------- */
+  /* ---------------- H · CHAT RAG (ENTRENADO CON TODO EL SITIO) ---------------- */
   const KB = [
     {
       cat: "Saludos",
@@ -1148,11 +1148,20 @@
         "hi", "hello", "hey", "how are you", "good morning", "good evening",
         "ola", "oi", "bom dia", "boa tarde", "boa noite"
       ],
-      src: ["Asistente OCC Chile", "Atención al usuario"],
+      src: [
+        { label: "Inicio OCC Chile", href: "index.html#inicio" },
+        { label: "El viaje de una cajita", href: "index.html#viaje" }
+      ],
+      links: [
+        { label: "Quiénes Somos", href: "quienes-somos.html", icon: "users" },
+        { label: "Misión e Historia", href: "mision-e-historia.html", icon: "book-open" },
+        { label: "Ver Videos", href: "videos.html", icon: "play" },
+        { label: "Postular iglesia", href: "index.html#postular", icon: "church" }
+      ],
       a: {
-        es: "¡Hola! Bendiciones 🙏 Qué alegría saludarte. Soy el asistente inteligente de OCC Chile. Estoy aquí para orientarte sobre el armado de cajitas, postulación de iglesias, fechas, voluntariado o reportes. ¿En qué te puedo ayudar hoy?",
-        en: "Hello! Blessings 🙏 Great to connect with you. I'm the OCC Chile smart assistant. I'm here to help with packing shoeboxes, church applications, key dates, volunteering, or reports. How can I assist you today?",
-        pt: "Olá! Bênçãos 🙏 Que alegria falar com você! Sou o assistente inteligente da OCC Chile. Como posso te ajudar hoje?"
+        es: "¡Hola! Bendiciones 🙏 Qué alegría saludarte. Soy el asistente de OCC Chile. Puedo orientarte sobre quiénes somos, nuestra misión e historia, videos, armado de cajitas, postulación de iglesias, equipo nacional o dónde estamos ubicados. ¿En qué te ayudo hoy?",
+        en: "Hello! Blessings 🙏 Great to connect with you. I'm the OCC Chile assistant. I can guide you on who we are, our mission & history, videos, shoebox packing, church applications, national leadership, or location. How can I help?",
+        pt: "Olá! Bênçãos 🙏 Sou o assistente da OCC Chile. Posso ajudar sobre quem somos, missão e história, vídeos, caixas de presente, inscrição de igrejas e localização. Como posso ajudar?"
       }
     },
     {
@@ -1162,11 +1171,18 @@
         "bendiciones", "dios te bendiga", "dios los bendiga", "que dios te bendiga",
         "paz de dios", "paz del senor", "amen", "gloria a dios", "shalom", "god bless", "blessings"
       ],
-      src: ["Comunidad de fe", "OCC Chile"],
+      src: [
+        { label: "Evangelismo y Discipulado", href: "index.html#enfoque" },
+        { label: "OCC Chile", href: "quienes-somos.html" }
+      ],
+      links: [
+        { label: "Quiénes Somos", href: "quienes-somos.html", icon: "globe-2" },
+        { label: "Postular iglesia", href: "index.html#postular", icon: "church" }
+      ],
       a: {
-        es: "¡Amén! Muchas bendiciones para ti y tu comunidad. 🙏 Es un privilegio servir juntos en esta misión de llevar el amor de Dios y alegría a los niños de Chile. ¿Tienes alguna pregunta sobre el proceso o tu iglesia?",
-        en: "Amen! Many blessings to you and your community. 🙏 It is a privilege to serve together in sharing God's love and joy with children in Chile. How can I assist you today?",
-        pt: "Amém! Muitas bênçãos para você e sua comunidade. 🙏 É um privilégio servir juntos. Em que posso te ajudar hoje?"
+        es: "¡Amén! Muchas bendiciones para ti y tu comunidad. 🙏 Es un privilegio servir juntos para llevar el amor de Dios y las Buenas Nuevas a los niños de Chile. ¿Tienes alguna consulta sobre el ministerio o tu iglesia?",
+        en: "Amen! Many blessings to you and your community. 🙏 It is a privilege to serve together in sharing God's love with children in Chile. How can I assist you?",
+        pt: "Amém! Muitas bênçãos para você e sua comunidade. 🙏 Em que posso ajudar hoje?"
       }
     },
     {
@@ -1177,74 +1193,243 @@
         "chao", "adios", "hasta luego", "nos vemos", "que estes bien",
         "thanks", "thank you", "bye", "see you", "obrigado", "obrigada", "valeu"
       ],
-      src: ["Atención al usuario", "OCC Chile"],
+      src: [
+        { label: "WhatsApp Oficial", href: "https://wa.me/56937479835", ext: true },
+        { label: "Inicio OCC Chile", href: "index.html#inicio" }
+      ],
+      links: [
+        { label: "Volver al inicio", href: "index.html#inicio", icon: "home" },
+        { label: "Ver Videos", href: "videos.html", icon: "play" }
+      ],
       a: {
-        es: "¡De nada! Que Dios te bendiga mucho. Si necesitas algo más sobre el proceso de las cajitas o tu iglesia, aquí estaré siempre disponible. ¡Hasta pronto! 👋✨",
-        en: "You're very welcome! God bless you. If you need anything else about shoeboxes or your church, I'm always here. See you soon! 👋✨",
+        es: "¡De nada! Que Dios te bendiga mucho. Si necesitas más información o enlaces del sitio, aquí estaré disponible. ¡Hasta pronto! 👋✨",
+        en: "You're very welcome! God bless you. Whenever you need site links or info about OCC Chile, I'm here. See you soon! 👋✨",
         pt: "De nada! Deus te abençoe muito. Estou sempre por aqui se precisar de algo mais. Até logo! 👋✨"
       }
     },
     {
-      cat: "Identidad",
-      route: "Misión y Visión",
+      cat: "Quiénes Somos",
+      route: "Página Quiénes Somos",
       kw: [
-        "quien eres", "quien sos", "que haces", "como te llamas", "que es occ",
-        "que es operacion nino de la navidad", "que es samaritan", "samaritans purse",
-        "mision", "proposito", "quienes son", "what is occ", "who are you"
+        "quienes somos", "quienes son", "que es occ", "que es operacion nino de la navidad",
+        "operation christmas child", "samaritan", "samaritans purse", "brazo", "ministerio",
+        "que hacen", "about", "who are you", "quem somos"
       ],
-      src: ["Misión y Visión OCC Chile", "Samaritan's Purse International"],
+      src: [
+        { label: "Página Quiénes Somos", href: "quienes-somos.html" },
+        { label: "Samaritan's Purse Intl", href: "https://www.samaritanspurse.org/what-we-do/operation-christmas-child/", ext: true }
+      ],
+      links: [
+        { label: "Ir a Quiénes Somos", href: "quienes-somos.html", icon: "globe-2" },
+        { label: "Conocer Equipo Nacional", href: "quienes-somos.html#equipo-nacional", icon: "users" }
+      ],
       a: {
-        es: "Operación Niño de la Navidad (OCC) es un ministerio de Samaritan's Purse que colabora con iglesias locales en Chile y más de 170 países para entregar cajitas llenas de regalos a niños en situación de vulnerabilidad, compartiendo el mensaje del Evangelio y el programa de discipulado 'El Gran Viaje'. En Chile llegamos desde el Altiplano hasta la Patagonia.",
-        en: "Operation Christmas Child (OCC) is a ministry of Samaritan's Purse partnering with local churches in Chile and over 170 countries to deliver gift-filled shoeboxes to children in need, sharing the Gospel and The Greatest Journey discipleship program.",
-        pt: "Operação Natal de Jesus (OCC) é um ministério de Samaritan's Purse em parceria com igrejas locais para levar caixas de presentes e o Evangelho a crianças vulneráveis."
+        es: "<strong>OCC Chile</strong> es un ministerio usado por Dios como herramienta para ayudar a las iglesias chilenas en su tarea evangelística infantil. Es brazo de <strong>Operation Christmas Child International</strong> (Samaritan's Purse), presente en <strong>más de 100 países</strong> con más de <strong>100 millones de cajitas</strong> distribuidas y más de 7 años sirviendo en Chile junto a todas las iglesias cristianas.",
+        en: "<strong>OCC Chile</strong> is a ministry used by God to equip Chilean churches in children's evangelism. As part of <strong>Operation Christmas Child International</strong> (Samaritan's Purse), we serve across <strong>100+ countries</strong> with over <strong>100 million shoeboxes</strong> delivered.",
+        pt: "<strong>OCC Chile</strong> é um braço da Operation Christmas Child International (Samaritan's Purse), presente em mais de 100 países com mais de 100 milhões de caixas distribuídas junto às igrejas locais."
+      }
+    },
+    {
+      cat: "Equipo Nacional",
+      route: "Liderazgo Nacional",
+      kw: [
+        "equipo nacional", "quien dirige", "quienes dirigen", "coordinador nacional",
+        "ramon mercado", "carolina nunez", "esmeralda munoz", "mireya inostroza",
+        "sandra valdivia", "marcelo herrera", "directiva", "lideres nacionales", "national team"
+      ],
+      src: [
+        { label: "Equipo Nacional · Quiénes Somos", href: "quienes-somos.html#equipo-nacional" },
+        { label: "Organigrama OCC Chile", href: "index.html#organigrama" }
+      ],
+      links: [
+        { label: "Ver Equipo Nacional", href: "quienes-somos.html#equipo-nacional", icon: "users" },
+        { label: "Postular a equipo regional", href: "index.html#postular", icon: "user-plus" }
+      ],
+      a: {
+        es: "El <strong>Equipo Nacional de OCC Chile</strong> está integrado por: <strong>Ramón Mercado</strong> (Coordinador Nacional), <strong>Carolina Núñez</strong> (Recursos), <strong>Esmeralda Muñoz</strong> (Discipulado), <strong>Mireya Inostroza</strong> (Logística), <strong>Sandra Valdivia</strong> (Oración) y <strong>Marcelo Herrera</strong> (Movilización).",
+        en: "The <strong>OCC Chile National Team</strong> includes: <strong>Ramón Mercado</strong> (National Coordinator), <strong>Carolina Núñez</strong> (Resources), <strong>Esmeralda Muñoz</strong> (Discipleship), <strong>Mireya Inostroza</strong> (Logistics), <strong>Sandra Valdivia</strong> (Prayer) and <strong>Marcelo Herrera</strong> (Mobilization).",
+        pt: "A <strong>Equipe Nacional da OCC Chile</strong> é formada por Ramón Mercado, Carolina Núñez, Esmeralda Muñoz, Mireya Inostroza, Sandra Valdivia e Marcelo Herrera."
+      }
+    },
+    {
+      cat: "Misión e Historia",
+      route: "Página Misión e Historia",
+      kw: [
+        "mision", "historia", "como comenzo", "como empezo", "origen", "fundacion",
+        "dave cooke", "rumania", "1990", "1970", "camiones", "orfanatos",
+        "mision en tres partes", "demostrar", "juntos", "compartir", "juan 3 16", "proposito",
+        "mission", "history", "missao"
+      ],
+      src: [
+        { label: "Misión e Historia · Cómo comenzó", href: "mision-e-historia.html#como-comenzo" },
+        { label: "Nuestra misión en tres partes", href: "mision-e-historia.html#mision-tres-partes" }
+      ],
+      links: [
+        { label: "Cómo comenzó (1990)", href: "mision-e-historia.html#como-comenzo", icon: "history" },
+        { label: "Misión en tres partes", href: "mision-e-historia.html#mision-tres-partes", icon: "compass" }
+      ],
+      a: {
+        es: "La obra comenzó en <strong>octubre de 1990</strong> cuando <strong>Dave Cooke</strong> organizó en Reino Unido una caravana de 9 camiones y 17 voluntarios hacia Rumania (Samaritan's Purse nació en 1970). Nuestra misión se resume en tres partes: <strong>01 Demostrar</strong> el amor de Dios, <strong>02 Juntos</strong> con la iglesia local y <strong>03 Compartir</strong> el Evangelio (Juan 3:16).",
+        en: "It began in <strong>October 1990</strong> when <strong>Dave Cooke</strong> led 9 trucks and 17 volunteers from the UK to Romania (Samaritan's Purse started in 1970). Our 3-part mission: <strong>01 Demonstrate</strong> God's love, <strong>02 Together</strong> with local churches, and <strong>03 Share</strong> the Gospel (John 3:16).",
+        pt: "Tudo começou em <strong>outubro de 1990</strong> com Dave Cooke levando 9 caminhões à Romênia. Nossa missão em três partes: <strong>01 Demonstrar</strong>, <strong>02 Juntos</strong> com a igreja local e <strong>03 Compartilhar</strong> João 3:16."
+      }
+    },
+    {
+      cat: "Videos",
+      route: "Galería Audiovisual",
+      kw: [
+        "video", "videos", "ver videos", "resena", "promo", "documental",
+        "adryana", "fernanda", "sardius", "ver", "pelicula", "clips", "audiovisual"
+      ],
+      src: [
+        { label: "Página de Videos OCC Chile", href: "videos.html" },
+        { label: "Samaritan's Purse Media", href: "https://video.samaritanspurse.org/", ext: true }
+      ],
+      links: [
+        { label: "Ir a Videos", href: "videos.html", icon: "film" },
+        { label: "Reseña Principal 2026", href: "videos.html#video-principal", icon: "play" },
+        { label: "Catálogo de 5 videos", href: "videos.html#mas-videos", icon: "tv" }
+      ],
+      a: {
+        es: "En nuestra página de <strong>Videos</strong> puedes reproducir la <strong>Reseña de Operation Christmas Child 2026</strong> y otros 5 videos oficiales (en español e inglés): cómo preparar una caja, impacto hispano, Fernanda en Valparaíso, Gaspar en Santiago y la historia de Adryana (+1.700 cajitas).",
+        en: "On our <strong>Videos</strong> page you can watch the <strong>2026 Operation Christmas Child Overview</strong> plus 5 official videos in Spanish and English (packing, Hispanic ministry impact, Valparaíso, Santiago and Adryana's story).",
+        pt: "Na página de <strong>Vídeos</strong> você pode assistir à resenha oficial 2026 e a mais 5 vídeos em espanhol e inglês."
+      }
+    },
+    {
+      cat: "Dirección y Contacto",
+      route: "Ubicación y Canales Oficiales",
+      kw: [
+        "direccion", "ubicacion", "donde estan", "donde quedan", "donde queda", "oficina",
+        "mapa", "maps", "google maps", "naciones unidas", "san joaquin", "santiago",
+        "contacto", "telefono", "whatsapp", "celular", "wsp", "numero", "correo", "email", "mail",
+        "hablar con alguien", "humano", "atencion", "llamar", "contact", "address", "location"
+      ],
+      src: [
+        { label: "Sede San Joaquín · Maps", href: "https://maps.google.com/maps?z=16&q=naciones+unidas+49+san+joaqu%C3%ADn+santiago,+chile", ext: true },
+        { label: "Postular / Contacto", href: "index.html#postular" }
+      ],
+      links: [
+        { label: "Naciones Unidas 49 (Maps)", href: "https://maps.google.com/maps?z=16&q=naciones+unidas+49+san+joaqu%C3%ADn+santiago,+chile", ext: true, icon: "map-pin" },
+        { label: "WhatsApp +56 9 37479835", href: "https://wa.me/56937479835", ext: true, icon: "message-circle" },
+        { label: "contacto@occchile.cl", href: "mailto:contacto@occchile.cl", ext: true, icon: "mail" }
+      ],
+      a: {
+        es: "Nuestra sede se ubica en <strong>Naciones Unidas 49 - San Joaquín, Santiago - Chile</strong>. Puedes escribirnos a <strong>contacto@occchile.cl</strong> o contactarnos directamente por WhatsApp al <strong>+56 9 37479835</strong>.",
+        en: "Our Chile headquarters is at <strong>Naciones Unidas 49 - San Joaquín, Santiago - Chile</strong>. Email us at <strong>contacto@occchile.cl</strong> or message WhatsApp <strong>+56 9 37479835</strong>.",
+        pt: "Nossa sede fica em <strong>Naciones Unidas 49 - San Joaquín, Santiago - Chile</strong>. E-mail: <strong>contacto@occchile.cl</strong> · WhatsApp: <strong>+56 9 37479835</strong>."
+      }
+    },
+    {
+      cat: "Organigrama y Regiones",
+      route: "Estructura Nacional",
+      kw: [
+        "organigrama", "estructura", "enl", "erle", "erl", "equipos regionales",
+        "metronorte", "metrosur", "v region", "valparaiso", "los lagos", "concepcion", "coquimbo",
+        "liderazgo", "regiones", "norte a sur", "hasta lo ultimo de la tierra", "ciudades", "regional"
+      ],
+      src: [
+        { label: "Organigrama de Chile", href: "index.html#organigrama" },
+        { label: "Hasta lo último de la tierra", href: "index.html#tierra" }
+      ],
+      links: [
+        { label: "Ver Organigrama de Chile", href: "index.html#organigrama", icon: "network" },
+        { label: "Hasta lo último de la tierra", href: "index.html#tierra", icon: "map" }
+      ],
+      a: {
+        es: "En Chile operamos bajo el <strong>ENL Chile</strong>, 6 coordinaciones regionales <strong>ERLE</strong> (Metronorte, Metrosur, V Región, Los Lagos, Concepción y Coquimbo) y equipos locales <strong>ERL</strong> desde Arica hasta Magallanes.",
+        en: "In Chile we coordinate through <strong>ENL Chile</strong>, 6 regional <strong>ERLE</strong> teams (Metronorte, Metrosur, V Región, Los Lagos, Concepción, Coquimbo) and local <strong>ERL</strong> teams nationwide.",
+        pt: "No Chile atuamos com o <strong>ENL Chile</strong>, 6 coordenações regionais <strong>ERLE</strong> e equipes locais <strong>ERL</strong> de norte a sul."
+      }
+    },
+    {
+      cat: "El viaje de una cajita",
+      route: "Paso a paso",
+      kw: [
+        "viaje de una cajita", "paso a paso", "etapas", "proceso", "recorrido",
+        "como llega", "como funciona", "journey of a shoebox", "steps"
+      ],
+      src: [
+        { label: "Sección El viaje de una cajita", href: "index.html#viaje" },
+        { label: "Operación OCC Chile", href: "quienes-somos.html" }
+      ],
+      links: [
+        { label: "Ver el viaje paso a paso", href: "index.html#viaje", icon: "route" },
+        { label: "Postular iglesia", href: "index.html#postular", icon: "church" }
+      ],
+      a: {
+        es: "En la sección <strong>El viaje de una cajita</strong> puedes recorrer las etapas completas: desde que la cajita se arma y entrega en centros de acopio, pasando por aduana/logística nacional y eventos en iglesias locales, hasta el discipulado <strong>La Gran Aventura</strong>.",
+        en: "In the <strong>Shoebox Journey</strong> section you can follow every stage from packing and collection week to regional logistics, church events and The Greatest Journey.",
+        pt: "Na seção <strong>A jornada da caixa</strong> você acompanha cada etapa até a entrega e o discipulado na igreja local."
       }
     },
     {
       cat: "Iglesias",
-      route: "Equipo regional",
+      route: "Postulación de iglesias",
       kw: [
-        "iglesia", "postular", "participar", "ser parte", "inscribir", "ministerio",
+        "iglesia", "postular", "participar", "ser parte", "inscribir", "companero de ministerio",
         "congregacion", "pastor", "pastora", "lider", "requisitos", "templo", "capilla",
         "comunidad", "anotar", "anotarme", "registrar", "recibir cajas", "como participo",
         "church", "join", "igreja"
       ],
-      src: ["Manual de Iglesias Participantes §2", "Página ¿Quieres ser parte?"],
+      src: [
+        { label: "Formulario ¿Tu Iglesia quiere ser parte?", href: "index.html#postular" },
+        { label: "Compañero de Ministerio", href: "index.html#cta" }
+      ],
+      links: [
+        { label: "Ir al formulario de postulación", href: "index.html#postular", icon: "church" },
+        { label: "Compañero de Ministerio", href: "index.html#cta", icon: "heart-handshake" }
+      ],
       a: {
-        es: "¡Qué alegría! Tu iglesia puede postular completando el formulario inteligente (sección '¿Quieres ser parte?'): solo necesitas nombre de la iglesia, contacto pastoral, dirección postal y de distribución, cantidad de niños estimada, email y celular. Te asignamos automáticamente al equipo regional correspondiente y te contactamos en minutos.",
-        en: "Wonderful! Your church can apply through the smart form (section 'Partner With Us'): church name, pastoral contact, postal and distribution addresses, estimated children count, email and phone. You will be assigned to your regional team right away.",
-        pt: "Que alegria! Sua igreja pode se inscrever pelo formulário inteligente: nome da igreja, contato pastoral, endereço postal e de distribuição, número estimado de crianças, e-mail e celular."
+        es: "¡Qué alegría! Tu iglesia puede postular en 3 sencillos pasos en el formulario <strong>¿Tu Iglesia quiere ser parte?</strong>: solo ingresas nombre de la iglesia, contacto pastoral, dirección, cantidad estimada de niños, email y celular. Te asignamos automáticamente al equipo regional correspondiente.",
+        en: "Wonderful! Your church can apply in 3 easy steps via <strong>Partner With Us</strong>: church name, pastoral contact, address, estimated children count, email and phone for instant regional team routing.",
+        pt: "Que alegria! Sua igreja pode se inscrever em 3 etapas no formulário inteligente da página inicial."
       }
     },
     {
       cat: "Armado de cajas",
-      route: "Resuelto por IA",
+      route: "Guía de armado",
       kw: [
         "caja", "cajita", "cajas", "cajitas", "armar", "poner", "echar", "meter", "llevar",
         "regalo", "regalos", "que va", "prohibido", "prohibiciones", "box", "pack", "caixa",
         "contenido", "articulos", "juguetes", "dulces", "comida", "ropa", "zapatos",
         "pasta de dientes", "cepillo", "jabon", "cuadernos", "lapices", "peluche", "pelota", "tamano", "medidas"
       ],
-      src: ["Guía de armado de cajas", "FAQ #4"],
+      src: [
+        { label: "Guía de armado · Paso a paso", href: "index.html#viaje" },
+        { label: "Video: Prepara una caja", href: "videos.html#mas-videos" }
+      ],
+      links: [
+        { label: "Video: Prepara una caja", href: "videos.html#mas-videos", icon: "play" },
+        { label: "El viaje de una cajita", href: "index.html#viaje", icon: "gift" }
+      ],
       a: {
-        es: "Elige si la cajita es para niño o niña y el rango etario (2–4, 5–9 o 10–14 años). Incluye un artículo destacado (peluche, muñeca, pelota con bombín), útiles escolares (cuadernos, lápices), artículos de higiene (cepillo, jabón, peineta) y un mensaje o foto personal. ⚠️ No incluyas: alimentos, dulces, líquidos, medicamentos, artículos usados ni juguetes bélicos.",
-        en: "Choose boy or girl and age range (2–4, 5–9, 10–14). Include a 'wow' item (stuffed animal, doll, soccer ball with pump), school supplies, hygiene items (toothbrush, bar soap, comb) and a personal note/photo. ⚠️ Do not include: food, candy, liquids, medicine, used items or war-related toys.",
-        pt: "Escolha menino ou menina e a faixa etária (2–4, 5–9, 10–14). Inclua um item especial, material escolar, higiene e um bilhete pessoal. ⚠️ Não inclua comida, doces, líquidos, remédios, itens usados ou brinquedos de guerra."
+        es: "Elige niño o niña y rango etario (<strong>2–4, 5–9 o 10–14 años</strong>). Incluye un artículo especial (peluche, muñeca, pelota con bombín), útiles escolares (cuadernos, lápices), higiene personal (cepillo, jabón, peineta) y un mensaje personal. ⚠️ <strong>No incluyas:</strong> alimentos, dulces, líquidos, medicamentos, artículos usados ni juguetes bélicos.",
+        en: "Pick boy or girl and age group (<strong>2–4, 5–9, or 10–14</strong>). Include a 'wow' item, school supplies, hygiene items and a personal note. ⚠️ <strong>Avoid:</strong> food, candy, liquids, medicine, used items or war toys.",
+        pt: "Escolha menino/menina (2–4, 5–9 ou 10–14 anos) e inclua brinquedo especial, material escolar, higiene e bilhete. ⚠️ Não envie comida, doces, líquidos, remédios ou itens usados."
       }
     },
     {
       cat: "Fechas y Acopio",
-      route: "Red logística",
+      route: "Calendario Nacional",
       kw: [
         "fechas", "cuando", "plazos", "calendario", "cronograma", "donde entregar",
         "donde dejar", "acopio", "punto de entrega", "recoleccion", "cuando entregan",
         "fecha limite", "donde se entregan", "donde se dejan", "entregar", "entregan",
         "dates", "when", "deadline", "schedule"
       ],
-      src: ["Cronograma Nacional OCC 2026", "Red de Puntos de Acopio"],
+      src: [
+        { label: "Cronograma Nacional OCC", href: "index.html#viaje" },
+        { label: "Red de Acopio · WhatsApp", href: "https://wa.me/56937479835", ext: true }
+      ],
+      links: [
+        { label: "WhatsApp centros de acopio", href: "https://wa.me/56937479835", ext: true, icon: "message-circle" },
+        { label: "Ver el viaje paso a paso", href: "index.html#viaje", icon: "calendar" }
+      ],
       a: {
-        es: "El calendario anual OCC Chile: las iglesias postulan entre marzo y agosto; la capacitación de coordinadores y maestros se realiza en septiembre y octubre; la Semana Nacional de Recolección es en noviembre (cuando se entregan las cajas a los centros de acopio regionales), y las celebraciones de distribución con los niños se realizan entre diciembre y enero. Escríbenos a WhatsApp (+56 9 37479835) para ubicar tu centro de acopio más cercano.",
-        en: "Annual OCC Chile schedule: Church applications open March to August; leader training runs September–October; National Collection Week is in November (drop-off at regional centers); and festive distributions occur December–January. Contact WhatsApp (+56 9 37479835) for your nearest drop-off point.",
-        pt: "O cronograma da OCC: inscrições de março a agosto, capacitação em setembro-outubro, coleta em novembro e distribuições entre dezembro e janeiro."
+        es: "Calendario anual OCC Chile: postulación de iglesias entre <strong>marzo y agosto</strong>; capacitación en <strong>septiembre y octubre</strong>; Semana Nacional de Recolección en <strong>noviembre</strong>; y eventos de entrega con los niños entre <strong>diciembre y enero</strong>. Escríbenos a WhatsApp (+56 9 37479835) para tu punto de acopio más cercano.",
+        en: "Annual OCC Chile calendar: church intake Mar–Aug; training Sep–Oct; National Collection Week in November; distribution celebrations Dec–Jan. Message WhatsApp +56 9 37479835 for your nearest drop-off center.",
+        pt: "Cronograma: inscrições mar–ago, capacitação set–out, coleta em novembro e eventos dez–jan. WhatsApp: +56 9 37479835."
       }
     },
     {
@@ -1254,95 +1439,124 @@
         "cuanto cuesta", "costo", "valor", "precio", "cobrar", "cobran", "gratis",
         "se pagan", "vender", "venta", "cuanto vale", "pago", "price", "free", "cost"
       ],
-      src: ["Código de Integridad OCC", "Política de Gratuidad"],
-      a: {
-        es: "¡Las cajitas son 100% gratuitas para los niños, sus familias y las comunidades! Son regalos de amor incondicional. Jamás se cobra dinero por recibir una cajita, por asistir a los eventos de entrega ni por participar en las clases de discipulado de 'El Gran Viaje'.",
-        en: "Shoeboxes are 100% free for children, families and communities! They are gifts of unconditional love. Nothing is ever charged to receive a box or join The Greatest Journey discipleship.",
-        pt: "As caixas são 100% gratuitas para crianças e famílias! São presentes de amor incondicional sem nenhum custo."
-      }
-    },
-    {
-      cat: "Contacto y Soporte",
-      route: "Canal oficial",
-      kw: [
-        "contacto", "telefono", "whatsapp", "celular", "wsp", "numero",
-        "hablar con alguien", "humano", "persona", "atencion", "llamar", "contact", "phone"
+      src: [
+        { label: "Nuestra Misión", href: "mision-e-historia.html#mision-tres-partes" },
+        { label: "Transparencia y Reportes", href: "admin.html" }
       ],
-      src: ["Canales de Atención Oficial", "WhatsApp OCC Chile"],
+      links: [
+        { label: "Misión en tres partes", href: "mision-e-historia.html#mision-tres-partes", icon: "shield-check" }
+      ],
       a: {
-        es: "Puedes comunicarte directamente con nuestro equipo a través de nuestro WhatsApp oficial: <a href='https://wa.me/56937479835' target='_blank' style='color:var(--gold);font-weight:700;text-decoration:underline'>+56 9 37479835</a> o dejarnos tus datos en el formulario de contacto. ¡Estaremos felices de orientarte!",
-        en: "You can reach our team directly via our official WhatsApp: <a href='https://wa.me/56937479835' target='_blank' style='color:var(--gold);font-weight:700;text-decoration:underline'>+56 9 37479835</a> or submit the website contact form. We'll be glad to help!",
-        pt: "Você pode falar diretamente com nossa equipe pelo WhatsApp oficial: +56 9 37479835."
+        es: "¡Las cajitas son <strong>100% gratuitas</strong> para los niños, sus familias y comunidades! Son regalos de amor incondicional. Jamás se cobra por recibir una cajita, asistir a eventos ni participar en La Gran Aventura.",
+        en: "Shoeboxes are <strong>100% free</strong> for children, families and communities! Nothing is ever charged to receive a box or join The Greatest Journey.",
+        pt: "As caixas são <strong>100% gratuitas</strong> para crianças e famílias, sem nenhum custo!"
       }
     },
     {
       cat: "Testimonios",
-      route: "Comunicaciones",
+      route: "Historias reales",
       kw: [
-        "testimonio", "testimonios", "historia", "historias", "video", "videos",
-        "experiencia", "milagro", "vidas transformadas", "relatos", "stories", "testimonies"
+        "testimonio", "testimonios", "agustin", "johan", "gaspar", "vidas transformadas",
+        "relatos", "experiencias", "milagro", "historias reales", "stories", "testimonies"
       ],
-      src: ["Historias de Vida OCC Chile", "Testimonios 2026"],
+      src: [
+        { label: "Historias reales del amor de Dios", href: "index.html#testimonios" },
+        { label: "Videos Samaritan's Purse", href: "videos.html#mas-videos" }
+      ],
+      links: [
+        { label: "Ver Testimonios", href: "index.html#testimonios", icon: "heart" },
+        { label: "Ver Videos de historias", href: "videos.html#mas-videos", icon: "play" }
+      ],
       a: {
-        es: "En la sección 'Historias reales del amor de Dios' puedes ver los testimonios de Agustín (Santiago), Johan (Viña del Mar) y Gaspar, con fotos y videos. Si tu iglesia o familia vivió una experiencia transformadora con OCC, puedes pulsar 'Compartir mi testimonio' o escribirnos al WhatsApp +56 9 37479835.",
-        en: "In our 'Real stories of God's love' section you can explore testimonies of Agustin, Johan and Gaspar with videos and photos. If you'd like to share your story, click 'Share my testimony' or message WhatsApp +56 9 37479835.",
-        pt: "Na seção de Testemunhos você pode conhecer histórias de vidas transformadas e vídeos de crianças no Chile."
+        es: "En <strong>Historias reales del amor de Dios</strong> puedes leer los testimonios de <strong>Agustín</strong> (Santiago), <strong>Johan</strong> (Viña del Mar) y <strong>Gaspar</strong>, además de ver videos de impacto en nuestra galería audiovisual.",
+        en: "In <strong>Real stories of God's love</strong> you can read testimonies from <strong>Agustín</strong> (Santiago), <strong>Johan</strong> (Viña del Mar) and <strong>Gaspar</strong>, and watch full impact videos.",
+        pt: "Na seção de <strong>Testemunhos</strong> você conhece histórias reais como Agustín, Johan e Gaspar."
       }
     },
     {
-      cat: "Reportes",
-      route: "Resuelto por IA",
+      cat: "Centro de Datos y Reportes",
+      route: "Transparencia y Métricas",
       kw: [
-        "reporte", "informe", "distribucion", "post", "planilla", "formulario",
-        "evidencia", "foto", "asistencia", "acta", "report"
+        "datos", "centro de datos", "metricas", "estadisticas", "cuantas cajas", "contenedores",
+        "228", "90 5", "42", "reporte", "reportes", "informe", "informes", "admin", "panel",
+        "transparencia", "distribucion", "planilla", "evidencia", "ocr", "acta", "report"
       ],
-      src: ["Instructivo Reporte Post-Distribución", "Módulo C"],
+      src: [
+        { label: "Centro de Datos OCC Chile", href: "index.html#datos" },
+        { label: "Panel Admin & Reportes", href: "admin.html" }
+      ],
+      links: [
+        { label: "Ver Centro de Datos", href: "index.html#datos", icon: "bar-chart-3" },
+        { label: "Ir a Reportes y Admin", href: "admin.html", icon: "layout-dashboard" }
+      ],
       a: {
-        es: "El reporte post-distribución se realiza desde el formulario inteligente de 3 pasos: subes la foto de la planilla de asistencia y la IA extrae automáticamente asistencia de niños, cajas entregadas y fecha. Si el sistema detecta inconsistencias (como más cajas que niños), te pedirá confirmación antes de guardar.",
-        en: "The post-distribution report is a 3-step native form: take a photo of your attendance sheet and AI extracts attendees, boxes delivered and date, checking for any inconsistencies before submitting.",
-        pt: "O relatório pós-distribuição é feito em 3 etapas com verificação de fotos e lista de presença por IA."
+        es: "En el <strong>Centro de Datos</strong> puedes seguir métricas nacionales en vivo (<strong>228.024</strong> cajas recibidas, <strong>90,5%</strong> entregadas y meta de <strong>42 contenedores</strong> para 2027 en 16 regiones). Para gestión de equipos, auditoría OCR y descarga/envío oficial de informes, ingresa al <strong>Panel Admin &amp; Reportes</strong>.",
+        en: "In our <strong>Data Center</strong> you can inspect live national metrics (<strong>228,024</strong> shoeboxes, <strong>90.5%</strong> delivered, <strong>42-container</strong> 2027 goal across 16 regions) or open the <strong>Admin &amp; Reports Panel</strong>.",
+        pt: "No <strong>Centro de Dados</strong> você acompanha métricas nacionais (228.024 caixas e 90,5% entregues) e no <strong>Painel Admin</strong> acessa relatórios oficiais."
       }
     },
     {
       cat: "Discipulado",
-      route: "Equipo de capacitación",
+      route: "La Gran Aventura",
       kw: [
-        "gran viaje", "discipulado", "maestro", "lecciones", "curso", "clases",
-        "12 lecciones", "material", "capacitacion", "journey", "teacher"
+        "gran aventura", "gran viaje", "discipulado", "evangelismo", "multiplicacion",
+        "enfoque", "maestro", "lecciones", "curso", "clases", "12 lecciones",
+        "material", "capacitacion", "journey", "teacher"
       ],
-      src: ["Guía del Maestro – El Gran Viaje", "Reporte del Maestro"],
+      src: [
+        { label: "Evangelismo y Discipulado", href: "index.html#enfoque" },
+        { label: "Quiénes Somos · La Gran Aventura", href: "quienes-somos.html" }
+      ],
+      links: [
+        { label: "Evangelismo y Discipulado", href: "index.html#enfoque", icon: "book-open" },
+        { label: "Misión en tres partes", href: "mision-e-historia.html#mision-tres-partes", icon: "compass" }
+      ],
       a: {
-        es: "El Gran Viaje es un discipulado de 12 lecciones bíblicas creado para los niños que reciben una cajita. Los maestros de las iglesias locales reciben capacitación presencial u online (con módulos y cuestionarios interactivos) y reportan el avance y graduación de los niños desde el celular.",
-        en: "The Greatest Journey is a 12-lesson discipleship program designed for children who receive a shoebox. Local church teachers receive training and submit class progress and graduations right from their phone.",
-        pt: "A Maior Jornada é o programa de discipulado em 12 lições bíblicas para as crianças que recebem uma caixa."
+        es: "Nuestro enfoque une <strong>Evangelismo, Discipulado y Multiplicación</strong>. A través de <strong>La Gran Aventura</strong> (curso de 12 lecciones bíblicas), los niños que reciben una cajita conocen a Jesús e invitan a sus amigos y familias a la iglesia local.",
+        en: "Our focus unites <strong>Evangelism, Discipleship, and Multiplication</strong> through <strong>The Greatest Journey</strong> (12 Bible lessons for children who receive a shoebox).",
+        pt: "Nosso enfoque une Evangelismo, Discipulado (<strong>A Maior Jornada</strong>, 12 lições bíblicas) e Multiplicação."
       }
     },
     {
       cat: "Voluntariado",
-      route: "Coordinación de voluntarios",
+      route: "Equipos y Servicio",
       kw: [
         "voluntario", "voluntariado", "ayudar", "servir", "rol", "equipo", "sumarme",
         "inscribirme", "colaborar", "volunteer", "help"
       ],
-      src: ["Manual del Voluntario", "Roles de equipos regionales"],
+      src: [
+        { label: "Organigrama de Chile", href: "index.html#organigrama" },
+        { label: "Postular ahora", href: "index.html#postular" }
+      ],
+      links: [
+        { label: "Ver Organigrama", href: "index.html#organigrama", icon: "users" },
+        { label: "Postular ahora", href: "index.html#postular", icon: "user-plus" }
+      ],
       a: {
-        es: "Hay 6 roles en los equipos regionales: coordinación general, relación con iglesias, logística y centros de acopio, comunicaciones y prensa, capacitación de discipulado y gestión de datos. Cuéntame qué habilidades tienes o tu región y te orientamos al rol ideal.",
-        en: "There are 6 roles on regional teams: coordination, church relations, logistics/drop-off, communications, discipleship training, and data management. Tell me your skills and region to connect you with the right team.",
-        pt: "Há 6 funções nas equipes regionais: coordenação, igrejas, logística, comunicação, capacitação e dados."
+        es: "Puedes servir en equipos regionales <strong>ERLE</strong> y locales <strong>ERL</strong> en áreas como coordinación, recursos, discipulado, logística, oración y movilización. Revisa la estructura en el organigrama o contáctanos para sumarte.",
+        en: "You can serve across regional <strong>ERLE</strong> and local <strong>ERL</strong> teams in coordination, resources, discipleship, logistics, prayer and mobilization.",
+        pt: "Você pode servir nas equipes regionais <strong>ERLE</strong> e locais <strong>ERL</strong> em diversas áreas ministeriais."
       }
     },
     {
       cat: "Donaciones",
-      route: "Equipo de donaciones",
+      route: "Apoyo al Ministerio",
       kw: [
-        "donar", "donacion", "dinero", "envio", "costo", "aporte", "pagar",
+        "donar", "donacion", "dinero", "envio", "aporte", "pagar",
         "transferencia", "cuenta", "banco", "donate", "doar"
       ],
-      src: ["FAQ Donaciones", "Política de transparencia"],
+      src: [
+        { label: "Centro de Datos", href: "index.html#datos" },
+        { label: "Contacto Oficial", href: "mailto:contacto@occchile.cl", ext: true }
+      ],
+      links: [
+        { label: "WhatsApp +56 9 37479835", href: "https://wa.me/56937479835", ext: true, icon: "message-circle" },
+        { label: "contacto@occchile.cl", href: "mailto:contacto@occchile.cl", ext: true, icon: "mail" }
+      ],
       a: {
-        es: "Puedes apoyar armando cajitas o realizando un aporte financiero para cubrir los costos de transporte marítimo, aduanas y el material de discipulado de El Gran Viaje. Para datos bancarios y certificados, te contactaremos con el equipo de donaciones.",
-        en: "You can support by packing shoeboxes or donating toward shipping logistics and discipleship booklets. For account details and tax receipts, we'll route you to the donations team.",
-        pt: "Você pode ajudar montando caixas ou contribuindo financeiramente para o transporte e material de discipulado."
+        es: "Puedes apoyar armando cajitas o realizando un aporte para transporte, logística nacional y el material de discipulado. Escríbenos a <strong>contacto@occchile.cl</strong> o al WhatsApp <strong>+56 9 37479835</strong> para orientarte.",
+        en: "You can help by packing shoeboxes or supporting shipping and discipleship materials. Contact <strong>contacto@occchile.cl</strong> or WhatsApp <strong>+56 9 37479835</strong>.",
+        pt: "Você pode apoiar montando caixas ou contribuindo para logística e discipulado via <strong>contacto@occchile.cl</strong>."
       }
     },
     {
@@ -1352,31 +1566,143 @@
         "prensa", "medio", "entrevista", "periodista", "noticia", "comunicado",
         "radio", "television", "press", "media"
       ],
-      src: ["Kit de prensa OCC Chile", "Sala de prensa"],
+      src: [
+        { label: "Correo Comunicaciones", href: "mailto:contacto@occchile.cl", ext: true },
+        { label: "Galería de Videos", href: "videos.html" }
+      ],
+      links: [
+        { label: "Ver Videos oficiales", href: "videos.html", icon: "film" },
+        { label: "contacto@occchile.cl", href: "mailto:contacto@occchile.cl", ext: true, icon: "mail" }
+      ],
       a: {
-        es: "Para entrevistas, notas de prensa o material audiovisual oficial, te conectamos con el equipo de comunicaciones. También puedes descargar el kit de prensa con estadísticas nacionales y fotografías autorizadas en alta resolución.",
-        en: "For interviews, press releases, or official media assets, we connect you with our communications team, where you can download our approved press kit.",
-        pt: "Para entrevistas ou notas de imprensa, conectamos você com nossa equipe de comunicação."
+        es: "Para entrevistas, notas de prensa o material audiovisual oficial, escribe a <strong>contacto@occchile.cl</strong> y revisa nuestra galería oficial de videos.",
+        en: "For interviews, press releases or official media assets, email <strong>contacto@occchile.cl</strong> and browse our official video gallery.",
+        pt: "Para imprensa e material audiovisual oficial, escreva para <strong>contacto@occchile.cl</strong>."
       }
     }
   ];
+
   const UI = {
     es: {
-      hi: "¡Hola! Bendiciones 🙏 Soy el asistente inteligente de OCC Chile. ¿En qué te puedo ayudar hoy?",
-      miss: "No encontré esa información exacta en los manuales oficiales. He derivado tu consulta a un coordinador del equipo regional para que te responda a la brevedad. También puedes escribirnos directamente a WhatsApp: +56 9 37479835. 🙏",
-      chips: ["¡Hola, bendiciones!", "¿Cómo postula mi iglesia?", "¿Qué pongo en una cajita?", "¿Cuándo y dónde se entregan?", "¿Las cajitas son gratis?", "¿Cómo hago el reporte?", "Quiero ser voluntario", "¿Qué es El Gran Viaje?"]
+      hi: "¡Hola! Bendiciones 🙏 Soy el asistente de OCC Chile. Pregúntame sobre el ministerio, el Equipo Nacional, videos, cajitas o dónde encontrarnos y te doy la info con enlaces directos.",
+      miss: "No encontré esa consulta exacta, pero puedes explorar estas secciones del sitio o escribirnos directo a WhatsApp (+56 9 37479835) o a contacto@occchile.cl. 🙏",
+      missLinks: [
+        { label: "Quiénes Somos", href: "quienes-somos.html", icon: "users" },
+        { label: "Misión e Historia", href: "mision-e-historia.html", icon: "book-open" },
+        { label: "Videos", href: "videos.html", icon: "play" },
+        { label: "Postular iglesia", href: "index.html#postular", icon: "church" }
+      ],
+      chips: [
+        "¿Quiénes somos?",
+        "¿Cuál es su misión e historia?",
+        "¿Quiénes forman el Equipo Nacional?",
+        "Quiero ver los videos",
+        "¿Dónde están ubicados?",
+        "¿Cómo postula mi iglesia?",
+        "¿Qué pongo en una cajita?",
+        "Organigrama y regiones"
+      ]
     },
     en: {
-      hi: "Hello! Blessings 🙏 I'm the OCC Chile smart assistant. How can I help you today?",
-      miss: "I couldn't find that exact information in official manuals. I've forwarded your query to our regional team. You can also message us directly on WhatsApp: +56 9 37479835. 🙏",
-      chips: ["Hello, blessings!", "How can my church join?", "What goes in a shoebox?", "When & where to drop off?", "Are shoeboxes free?", "How do I report?", "I want to volunteer"]
+      hi: "Hello! Blessings 🙏 I'm the OCC Chile assistant. Ask about who we are, mission & history, videos, shoeboxes or church applications and I'll share direct site links.",
+      miss: "I couldn't find that exact topic, but you can browse these sections or contact WhatsApp (+56 9 37479835) / contacto@occchile.cl. 🙏",
+      missLinks: [
+        { label: "Who We Are", href: "quienes-somos.html", icon: "users" },
+        { label: "Mission & History", href: "mision-e-historia.html", icon: "book-open" },
+        { label: "Videos", href: "videos.html", icon: "play" },
+        { label: "Apply as a church", href: "index.html#postular", icon: "church" }
+      ],
+      chips: [
+        "Who are you?",
+        "Mission & history",
+        "National leadership team",
+        "Watch videos",
+        "Location & contact",
+        "How can my church join?",
+        "What goes in a shoebox?"
+      ]
     },
     pt: {
-      hi: "Olá! Bênçãos 🙏 Sou o assistente inteligente da OCC Chile. Como posso te ajudar hoje?",
-      miss: "Não encontrei essa informação nos manuais oficiais. Encaminhei sua pergunta para nossa equipe. Você também pode nos contatar no WhatsApp: +56 9 37479835. 🙏",
-      chips: ["Olá, bênçãos!", "Como minha igreja participa?", "O que vai na caixa?", "Onde entregar?", "Quero ser voluntário"]
-    },
+      hi: "Olá! Bênçãos 🙏 Sou o assistente da OCC Chile. Pergunte sobre quem somos, missão e história, vídeos, caixas ou inscrição e envio os links do site.",
+      miss: "Não encontrei essa informação exata. Explore os links abaixo ou fale conosco pelo WhatsApp (+56 9 37479835). 🙏",
+      missLinks: [
+        { label: "Quem Somos", href: "quienes-somos.html", icon: "users" },
+        { label: "Missão e História", href: "mision-e-historia.html", icon: "book-open" },
+        { label: "Vídeos", href: "videos.html", icon: "play" }
+      ],
+      chips: [
+        "Quem somos?",
+        "Missão e história",
+        "Ver vídeos",
+        "Como minha igreja participa?",
+        "O que vai na caixa?"
+      ]
+    }
   };
+
+  function resolveChatHref(href) {
+    if (!href || /^(https?:|mailto:|tel:)/.test(href)) return href;
+    const file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    if ((file === "index.html" || file === "") && href.startsWith("index.html#")) {
+      return href.slice("index.html".length);
+    }
+    return href;
+  }
+
+  function scoreKB(q) {
+    const nq = norm(q);
+    const words = nq.split(" ").filter((w) => w.length > 2);
+    const scored = KB.map((k) => {
+      let s = k.kw.reduce((a, w) => {
+        const nw = norm(w);
+        if (!nw) return a;
+        if (nq === nw) return a + nw.length * 5;
+        if (nq.split(" ").includes(nw)) return a + nw.length * 3;
+        if (nq.includes(nw)) return a + nw.length * 1.6;
+        return a;
+      }, 0);
+      if (s === 0 && words.length) {
+        const hay = norm(k.kw.join(" "));
+        words.forEach((w) => {
+          if (hay.includes(w)) s += w.length * 0.8;
+        });
+      }
+      return { k, s };
+    }).sort((a, b) => b.s - a.s);
+    return scored[0] && scored[0].s >= 2.5 ? scored[0].k : null;
+  }
+
+  function renderBotLinks(links) {
+    if (!links || !links.length) return "";
+    return '<div class="chat-links">' + links.map((l) => {
+      const href = resolveChatHref(l.href);
+      const attrs = l.ext ? ' target="_blank" rel="noopener noreferrer"' : "";
+      const ic = l.icon || "arrow-up-right";
+      return `<a class="chat-link" href="${href}"${attrs}><i data-lucide="${ic}" style="width:13px;height:13px"></i><span>${l.label}</span></a>`;
+    }).join("") + "</div>";
+  }
+
+  function renderBotSrcLinks(srcList) {
+    if (!srcList || !srcList.length) return "";
+    return '<div class="src">' + srcList.map((s) => {
+      const item = typeof s === "string" ? { label: s, href: "index.html#inicio" } : s;
+      const href = resolveChatHref(item.href);
+      const attrs = item.ext ? ' target="_blank" rel="noopener noreferrer"' : "";
+      return `<a class="chat-src-link" href="${href}"${attrs}><i data-lucide="file-text" style="width:12px;height:12px"></i><span>${item.label}</span></a>`;
+    }).join("") + "</div>";
+  }
+
+  function renderBotHtml(hit, lang) {
+    const u = UI[lang] || UI.es;
+    if (!hit) {
+      return `${u.miss}${renderBotLinks(u.missLinks)}`;
+    }
+    const answer = hit.a[lang] || hit.a.es;
+    const linksHtml = renderBotLinks(hit.links);
+    const srcHtml = renderBotSrcLinks(hit.src);
+    return `${answer}${linksHtml}${srcHtml}`;
+  }
+
   function initChat() {
     const body = $("#chatBody"), form = $("#chatForm");
     if (!body || !form) return;
@@ -1388,41 +1714,31 @@
     };
     const chips = () => { $("#chatChips").innerHTML = UI[lang].chips.map((c) => `<button type="button">${c}</button>`).join(""); };
     const steps = $$("#ragSteps li");
-    const setStep = (i, txt) => { steps[i].classList.add("on"); steps[i].querySelector("span").textContent = txt; };
+    const setStep = (i, txt) => { if (steps[i]) { steps[i].classList.add("on"); steps[i].querySelector("span").textContent = txt; } };
     async function ask(q) {
       if (busy || !q.trim()) return; busy = true;
       add(q.replace(/</g, "&lt;"), "user");
       steps.forEach((s) => { s.classList.remove("on"); s.querySelector("span").textContent = "—"; });
       const t = add(`<span class="typing"><i></i><i></i><i></i></span>`, "bot");
-      const nq = norm(q);
-      const scored = KB.map((k) => ({
-        k,
-        s: k.kw.reduce((a, w) => {
-          const nw = norm(w);
-          if (!nw) return a;
-          if (nq === nw) return a + nw.length * 4;
-          if (nq.split(" ").includes(nw)) return a + nw.length * 2.5;
-          if (nq.includes(nw)) return a + nw.length;
-          return a;
-        }, 0),
-      })).sort((a, b) => b.s - a.s);
-      const hit = scored[0].s > 0 ? scored[0].k : null;
-      await sleep(350); setStep(0, hit ? `${hit.cat} · confianza ${(.82 + Math.random() * .15).toFixed(2)}` : "Sin categoría clara");
-      await sleep(450); setStep(1, hit ? `${hit.src.length} fragmentos · top-k=4` : "0 fragmentos relevantes");
-      await sleep(450); setStep(2, hit ? `Respuesta con ${hit.src.length} citas · ${lang.toUpperCase()}` : "Se evita inventar respuesta");
+      const hit = scoreKB(q);
+      await sleep(350); setStep(0, hit ? `${hit.cat} · confianza ${(.85 + Math.random() * .13).toFixed(2)}` : "Sin categoría clara");
+      await sleep(450); setStep(1, hit ? `${hit.src.length} fragmentos · enlaces ${hit.links ? hit.links.length : 0}` : "0 fragmentos relevantes");
+      await sleep(450); setStep(2, hit ? `Respuesta con ${hit.src.length} citas · ${lang.toUpperCase()}` : "Derivación segura con enlaces");
       await sleep(250); setStep(3, hit ? hit.route : "Humano · bandeja de atención");
       t.remove();
-      if (hit) add(`${hit.a[lang]}<div class="src">${hit.src.map((s) => `<span><i data-lucide="file-text" style="width:12px;height:12px"></i>${s}</span>`).join("")}</div>`, "bot");
-      else add(UI[lang].miss, "bot");
+      add(renderBotHtml(hit, lang), "bot");
       busy = false;
     }
     form.addEventListener("submit", (e) => { e.preventDefault(); const q = input.value; input.value = ""; ask(q); });
     $("#chatChips").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
-    langSel.addEventListener("change", () => { lang = langSel.value; chips(); add(UI[lang].hi, "bot"); toast("Idioma cambiado · traducción con IA", "languages"); });
+    langSel?.addEventListener("change", () => { lang = langSel.value; chips(); add(UI[lang].hi, "bot"); toast("Idioma cambiado · traducción con IA", "languages"); });
     add(UI.es.hi, "bot"); chips();
 
     const topics = [["Armado de cajas", 34], ["Fechas de recolección", 26], ["Postulación de iglesias", 18], ["Reportes", 12], ["Voluntariado", 10]];
-    $("#topics").innerHTML = topics.map(([n, v]) => `<div class="topic"><span>${n}</span><b>${v}%</b><i style="--w:${v * 2.5}%"></i></div>`).join("");
+    const topicsEl = $("#topics");
+    if (topicsEl) {
+      topicsEl.innerHTML = topics.map(([n, v]) => `<div class="topic"><span>${n}</span><b>${v}%</b><i style="--w:${v * 2.5}%"></i></div>`).join("");
+    }
   }
 
   /* ---------------- WIDGET FLOTANTE ASISTENTE OCC (IA) ---------------- */
@@ -1461,7 +1777,7 @@
     function startConversation() {
       if (initialized) return;
       initialized = true;
-      add(UI[lang].hi, "bot");
+      add(`${UI[lang].hi}${renderBotLinks(UI[lang].missLinks)}`, "bot");
       chips();
     }
 
@@ -1470,36 +1786,12 @@
       busy = true;
       add(q.replace(/</g, "&lt;"), "user");
       const t = add(`<span class="typing"><i></i><i></i><i></i></span>`, "bot");
-      const nq = norm(q);
-      const scored = KB.map((k) => ({
-        k,
-        s: k.kw.reduce((a, w) => {
-          const nw = norm(w);
-          if (!nw) return a;
-          if (nq === nw) return a + nw.length * 4;
-          if (nq.split(" ").includes(nw)) return a + nw.length * 2.5;
-          if (nq.includes(nw)) return a + nw.length;
-          return a;
-        }, 0),
-      })).sort((a, b) => b.s - a.s);
-      const hit = scored[0].s > 0 ? scored[0].k : null;
+      const hit = scoreKB(q);
 
-      await sleep(550);
+      await sleep(450);
       t.remove();
 
-      if (hit) {
-        add(
-          `${hit.a[lang]}<div class="src">${hit.src
-            .map(
-              (s) =>
-                `<span><i data-lucide="file-text" style="width:12px;height:12px"></i>${s}</span>`
-            )
-            .join("")}</div>`,
-          "bot"
-        );
-      } else {
-        add(UI[lang].miss, "bot");
-      }
+      add(renderBotHtml(hit, lang), "bot");
       busy = false;
     }
 
@@ -1537,7 +1829,7 @@
       closeWidget();
     });
 
-    expandBtn?.addEventListener("click", (e) => {
+    expandBtn?.addEventListener("click", () => {
       closeWidget();
       const chatTab = document.querySelector('.demo-tab[data-demo="chat"]');
       if (chatTab) {
@@ -1545,6 +1837,16 @@
         const demoChatEl = document.getElementById("demo-chat");
         if (demoChatEl) {
           demoChatEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    });
+
+    body?.addEventListener("click", (e) => {
+      const link = e.target.closest("a.chat-link, a.chat-src-link");
+      if (link) {
+        const href = link.getAttribute("href") || "";
+        if (href.startsWith("#")) {
+          closeWidget();
         }
       }
     });
@@ -1564,7 +1866,7 @@
     langSel?.addEventListener("change", () => {
       lang = langSel.value;
       chips();
-      add(UI[lang].hi, "bot");
+      add(`${UI[lang].hi}${renderBotLinks(UI[lang].missLinks)}`, "bot");
       toast("Idioma cambiado · traducción con IA", "languages");
       const mainLang = $("#lang");
       if (mainLang && mainLang.value !== lang) {

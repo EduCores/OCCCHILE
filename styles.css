@@ -11794,6 +11794,11 @@ h2.section-title--pine {
   color: #24372e;
 }
 
+.qs-story-card .enfoque__quote {
+  margin: 8px 0 0;
+  max-width: none;
+}
+
 .qs-side {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Misión e Historia · OCC Chile · Plataforma IA</title>
+  <meta name="description"
+    content="Misión e historia de Operación Niño de la Navidad Chile (Samaritan's Purse): cómo comenzó en 1990 y nuestra misión en tres partes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=265" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <div class="topbar__contact">
+          <a href="https://facebook.com/occ.en.chile" target="_blank" rel="noopener" aria-label="Facebook">
+            <i data-lucide="facebook"></i>
+          </a>
+          <a href="https://instagram.com/occchile" target="_blank" rel="noopener" aria-label="Instagram">
+            <i data-lucide="instagram"></i>
+          </a>
+          <a href="tel:+56912345678">
+            <i data-lucide="phone"></i> +56 9 1234 5678
+          </a>
+          <a href="mailto:contacto@occchile.cl">
+            <i data-lucide="mail"></i> contacto@occchile.cl
+          </a>
+        </div>
+
+        <nav class="topbar__links">
+          <a href="quienes-somos.html">Quiénes Somos</a>
+          <a href="mision-e-historia.html" class="is-active" aria-current="page">Misión e Historia</a>
+          <a href="index.html#postular">Contacto</a>
+        </nav>
+
+        <div class="topbar__extras">
+          <div class="lang-switch" role="group" aria-label="Idioma del sitio">
+            <button type="button" class="lang is-active" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" class="lang" data-lang="en" aria-pressed="false">EN</button>
+            <button type="button" class="lang" data-lang="pt" aria-pressed="false">PT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container nav__inner">
+      <a href="index.html#inicio" class="brand" aria-label="Inicio">
+        <img src="img/occchile-logo.png" alt="OCC Chile · Plataforma IA" class="brand__logo">
+      </a>
+
+      <div class="nav__links-wrap">
+        <nav class="nav__links nav__links--secondary" id="navLinks2">
+          <a href="index.html#viaje">El viaje de una cajita</a>
+          <a href="index.html#tierra">Hasta lo último de la tierra</a>
+          <a href="index.html#enfoque">Evangelismo y discipulado</a>
+          <a href="index.html#testimonios">Testimonios</a>
+          <a href="index.html#tierra">Videos</a>
+        </nav>
+      </div>
+
+      <div class="nav__actions">
+        <a class="btn btn--primary btn--sm btn--lc" href="admin.html" title="Panel de Administración">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            data-lucide="heart-handshake" aria-hidden="true" class="lucide lucide-heart-handshake">
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+            </path>
+            <path
+              d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66">
+            </path>
+            <path d="m18 15-2-2"></path>
+            <path d="m15 18-2-2"></path>
+          </svg> Reportes
+        </a>
+
+        <button class="icon-btn nav__burger" id="burger" aria-label="Menú">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO: MISIÓN E HISTORIA ============ -->
+    <section class="hero hero--subpage" id="inicio">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__bg-img hero__bg-img--mision"></div>
+        <div class="aurora a1"></div>
+        <div class="aurora a2"></div>
+        <div class="aurora a3"></div>
+        <canvas id="snow"></canvas>
+      </div>
+
+      <div class="container">
+        <div class="hero__copy">
+          <p class="eyebrow reveal">Misión e Historia · Samaritan's Purse</p>
+          <h1 class="reveal">Demostrar el <span class="hero__word--green">amor de Dios</span><br>de una manera
+            <em>tangible.</em>
+          </h1>
+          <p class="lead reveal">La misión de Operación Niño de la Navidad es demostrar el amor de Dios a niños
+            necesitados alrededor del mundo y, junto con la iglesia local, compartir las buenas nuevas de Jesucristo.
+          </p>
+
+          <div class="hero__cta reveal">
+            <a href="#como-comenzo" class="btn btn--primary btn--lc">
+              <i data-lucide="history"></i> Cómo comenzó
+            </a>
+            <a href="#mision-tres-partes" class="btn btn--ghost btn--lc">
+              <i data-lucide="compass"></i> Nuestra misión
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="#como-comenzo" class="scroll-cue" aria-label="Bajar a Cómo comenzó">
+        <i data-lucide="chevrons-down"></i>
+      </a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>1970 · Samaritan's Purse</span>
+          <i data-lucide="sparkle"></i>
+          <span>1990 · Rumania</span>
+          <i data-lucide="sparkle"></i>
+          <span>Más de 100 países</span>
+          <i data-lucide="sparkle"></i>
+          <span>Demostrar</span>
+          <i data-lucide="sparkle"></i>
+          <span>Juntos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Compartir</span>
+          <i data-lucide="sparkle"></i>
+          <span>Juan 3:16</span>
+          <i data-lucide="sparkle"></i>
+          <span>Chile · Norte a Sur</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+        <div class="marquee__group">
+          <span>1970 · Samaritan's Purse</span>
+          <i data-lucide="sparkle"></i>
+          <span>1990 · Rumania</span>
+          <i data-lucide="sparkle"></i>
+          <span>Más de 100 países</span>
+          <i data-lucide="sparkle"></i>
+          <span>Demostrar</span>
+          <i data-lucide="sparkle"></i>
+          <span>Juntos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Compartir</span>
+          <i data-lucide="sparkle"></i>
+          <span>Juan 3:16</span>
+          <i data-lucide="sparkle"></i>
+          <span>Chile · Norte a Sur</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BLOQUE 1: CÓMO COMENZÓ ============ -->
+    <section class="section mh-origin" id="como-comenzo">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow"><i data-lucide="history"></i> Orígenes de la obra</span>
+          <h2 class="section-title--pine">
+            <span class="title-glass-text">Cómo</span>
+            <em class="title-glass-text title-glass-text--red">comenzó</em>
+          </h2>
+          <p>De una caravana de nueve camiones en 1990 a una red mundial que alcanza millones de niños con esperanza.</p>
+        </header>
+
+        <div class="mh-origin__grid">
+          <!-- Relato histórico -->
+          <article class="mx-card mh-story-card reveal">
+            <div class="mh-story-card__body">
+              <div>
+                <span class="mx-eyebrow mx-eyebrow--sync"><i class="mx-dot mx-dot--ok"></i> Octubre 1990 · Reino Unido →
+                  Rumania</span>
+                <h3 class="mx-title" style="margin-top:6px;">Una respuesta compasiva que cruzó fronteras</h3>
+              </div>
+
+              <p>En octubre de 1990, Dave Cooke, un empresario del Reino Unido, vio un reportaje sobre la guerra en
+                Rumania y los niños abandonados en orfanatos. No podía detener la guerra, pero sí mostrarles que no
+                estaban olvidados.</p>
+
+              <p>Reunió a amigos y familiares para recolectar regalos. Así nació Operación Niño de la Navidad: una
+                caravana de nueve camiones y 17 voluntarios que condujeron hacia Rumania con cajitas de zapatos llenas
+                de regalos.</p>
+
+              <p>Hoy, como proyecto de Samaritan's Purse, las cajitas llegan a más de 100 países. En Chile, equipos de
+                voluntarios nacionales y regionales hacen posible cada temporada.</p>
+            </div>
+
+            <div class="mh-story-card__quote">
+              “No podía detener la guerra, pero sí mostrarles que no estaban olvidados.”
+            </div>
+          </article>
+
+          <!-- Hitos cronológicos -->
+          <ol class="mh-timeline reveal" aria-label="Hitos históricos de Operación Niño de la Navidad">
+            <li class="mx-card mh-milestone">
+              <span class="mh-milestone__year">1970</span>
+              <div class="mh-milestone__text">
+                <p>Nace Samaritan's Purse, ayuda espiritual y física a personas necesitadas.</p>
+              </div>
+            </li>
+
+            <li class="mx-card mh-milestone">
+              <span class="mh-milestone__year">1990</span>
+              <div class="mh-milestone__text">
+                <p>Primera caravana de cajitas hacia Rumania.</p>
+              </div>
+            </li>
+
+            <li class="mx-card mh-milestone">
+              <span class="mh-milestone__year">Hoy</span>
+              <div class="mh-milestone__text">
+                <p>Millones de niños en más de 100 países reciben una cajita y escuchan el Evangelio.</p>
+              </div>
+            </li>
+
+            <li class="mx-card mh-milestone">
+              <span class="mh-milestone__year">Chile</span>
+              <div class="mh-milestone__text">
+                <p>Equipos ENL, ERLE y ERL movilizan iglesias de norte a sur.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BLOQUE 2: NUESTRA MISIÓN EN TRES PARTES ============ -->
+    <section class="section mh-mission" id="mision-tres-partes">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="eyebrow"><i data-lucide="compass"></i> Propósito y Evangelio</span>
+          <h2 class="section-title--pine">
+            <span class="title-glass-text">Nuestra misión en</span>
+            <em class="title-glass-text title-glass-text--red">tres partes</em>
+          </h2>
+          <p>Demostrar el amor de Dios de una manera tangible a niños necesitados y, junto con la iglesia local,
+            compartir las buenas nuevas de Jesucristo.</p>
+        </header>
+
+        <div class="mh-mission__grid">
+          <article class="mx-card mh-pillar reveal">
+            <div class="mh-pillar__top">
+              <span class="mh-pillar__num title-glass-text title-glass-text--red">01</span>
+              <div class="mh-pillar__icon" aria-hidden="true">
+                <i data-lucide="gift"></i>
+              </div>
+            </div>
+            <h3>Demostrar</h3>
+            <p>La cajita de regalo es una muestra del amor de Jesús: los niños descubren que Dios los ama y no están
+              olvidados.</p>
+          </article>
+
+          <article class="mx-card mh-pillar reveal">
+            <div class="mh-pillar__top">
+              <span class="mh-pillar__num title-glass-text">02</span>
+              <div class="mh-pillar__icon" aria-hidden="true">
+                <i data-lucide="church"></i>
+              </div>
+            </div>
+            <h3>Juntos</h3>
+            <p>Trabajamos con iglesias locales y creyentes de distintas denominaciones para construir relaciones a largo
+              plazo con los niños y sus familias.</p>
+          </article>
+
+          <article class="mx-card mh-pillar reveal">
+            <div class="mh-pillar__top">
+              <span class="mh-pillar__num title-glass-text title-glass-text--red">03</span>
+              <div class="mh-pillar__icon" aria-hidden="true">
+                <i data-lucide="book-open-check"></i>
+              </div>
+            </div>
+            <h3>Compartir</h3>
+            <p>“Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él
+              cree no se pierda, sino que tenga vida eterna.”</p>
+            <div class="mh-pillar__verse">
+              <span class="mh-verse-ref"><i data-lucide="sparkles"></i> Juan 3:16</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE CTA ============ -->
+    <div class="marquee marquee--cta" aria-hidden="true">
+      <div class="marquee__track marquee__track--cta">
+        <div class="marquee__group marquee__group--cta">
+          <span>Multiplicación</span>
+          <i data-lucide="sparkle"></i>
+          <span>Discipulado</span>
+          <i data-lucide="sparkle"></i>
+          <span>Evangelismo</span>
+          <i data-lucide="sparkle"></i>
+          <span>Esperanza</span>
+          <i data-lucide="sparkle"></i>
+          <span>Equipos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Regalos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Logística</span>
+          <i data-lucide="sparkle"></i>
+          <span>Voluntarios</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+        <div class="marquee__group marquee__group--cta">
+          <span>Multiplicación</span>
+          <i data-lucide="sparkle"></i>
+          <span>Discipulado</span>
+          <i data-lucide="sparkle"></i>
+          <span>Evangelismo</span>
+          <i data-lucide="sparkle"></i>
+          <span>Esperanza</span>
+          <i data-lucide="sparkle"></i>
+          <span>Equipos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Regalos</span>
+          <i data-lucide="sparkle"></i>
+          <span>Logística</span>
+          <i data-lucide="sparkle"></i>
+          <span>Voluntarios</span>
+          <i data-lucide="sparkle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CTA ============ -->
+    <section class="section cta" id="cta">
+      <div class="container cta__inner reveal">
+        <h2>¿Tu iglesia quiere ser Compañero de Ministerio?</h2>
+        <div class="hero__cta">
+          <a href="index.html#postular" class="btn btn--light btn--lc">
+            <i data-lucide="play"></i> Quiero Participar
+          </a>
+          <a href="index.html#viaje" class="btn btn--outline-light btn--lc">
+            <i data-lucide="calendar"></i> Ver el viaje
+          </a>
+        </div>
+      </div>
+      <div class="cta-jesus" aria-hidden="true">
+        <img src="img/jesus.png" alt="Jesús" class="cta-jesus__img" loading="lazy">
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__main">
+      <div class="footer__brand">
+        <a href="index.html#inicio" class="brand" aria-label="Inicio">
+          <img src="img/occchile-logo.png" alt="OCC Chile · Plataforma IA" class="brand__logo">
+        </a>
+        <p>Para que cada cajita llegue a su destino y cada niño escuche las Buenas Nuevas.</p>
+      </div>
+
+      <nav class="footer__cols" aria-label="Enlaces del sitio">
+        <div class="footer__col">
+          <h4>Plataforma</h4>
+          <a href="admin.html">Panel Admin & IA</a>
+          <a href="quienes-somos.html">Quiénes Somos</a>
+          <a href="mision-e-historia.html">Misión e Historia</a>
+          <a href="index.html#organigrama">Organigrama</a>
+          <a href="index.html#datos">Centro de datos</a>
+          <a href="index.html#testimonios">Testimonios</a>
+          <a href="index.html#viaje">Paso a paso</a>
+          <a href="index.html#tierra">Norte a Sur</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>El viaje</h4>
+          <a href="index.html#viaje">El viaje de una cajita</a>
+          <a href="index.html#datos">Impacto</a>
+          <a href="index.html#enfoque">Evangelismo y discipulado</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Participa</h4>
+          <a href="index.html#postular">Quiero participar</a>
+          <a href="index.html#postular">Ser parte</a>
+          <a href="index.html#organigrama">Equipos de liderazgo</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer__bar">
+      <div class="container footer__bar-inner">
+        <p>© 2026 OCC Chile · Plataforma IA</p>
+        <a href="#inicio">Volver arriba <i data-lucide="arrow-up"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- ============ WIDGET FLOTANTE: ASISTENTE OCC (IA) ============ -->
+  <aside class="chat-widget" id="chatWidget" aria-hidden="true" role="dialog" aria-labelledby="chatWidgetTitle">
+    <div class="chat-widget__head">
+      <div class="chat-widget__title" id="chatWidgetTitle">
+        <div class="avatar avatar--sm">
+          <i data-lucide="gift"></i>
+        </div>
+        <div>
+          <strong>Asistente OCC <span class="chat-widget__badge">IA</span></strong>
+          <small><span class="dot"></span> En línea · RAG en vivo</small>
+        </div>
+      </div>
+      <div class="chat-widget__actions">
+        <select id="widgetLang" aria-label="Idioma" class="chat-widget__lang">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+          <option value="pt">PT</option>
+        </select>
+        <a href="index.html#postular" class="chat-widget__btn-icon" id="widgetExpand"
+          title="Ver en prototipo interactivo" aria-label="Ver demo completa">
+          <i data-lucide="maximize-2"></i>
+        </a>
+        <button type="button" class="chat-widget__btn-icon" id="widgetClose" aria-label="Cerrar asistente">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-widget__body" id="widgetChatBody"></div>
+    <div class="chat-widget__chips" id="widgetChatChips"></div>
+
+    <form class="chat-widget__input" id="widgetChatForm">
+      <input id="widgetChatIn" placeholder="Pregunta sobre cajas, iglesias, voluntariado…" autocomplete="off" />
+      <button class="btn btn--primary btn--icon btn--lc" aria-label="Enviar">
+        <i data-lucide="send"></i>
+      </button>
+    </form>
+  </aside>
+
+  <div class="fabs" aria-label="Ayuda y contacto">
+    <button type="button" class="fab fab--agent" id="fabAgent" aria-label="Abrir Asistente OCC" aria-expanded="false"
+      aria-controls="chatWidget">
+      <i data-lucide="bot"></i>
+    </button>
+
+    <a href="https://wa.me/56937479835" class="fab fab--wa" target="_blank" rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp (+56 9 37479835)">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+      </svg>
+    </a>
+  </div>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="app.js?v=61"></script>
+</body>
+
+</html>

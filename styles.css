@@ -4155,7 +4155,13 @@ input[type="range"] {
   position: absolute;
   bottom: clamp(-150px, -13vw, -80px);
   left: 50%;
-  transform: translateX(-40%);
+  transform: translateX(-50%);
+  width: min(1127px, 96vw);
+  align-items: flex-end;
+  background-image: url("img/footer_ninos.png");
+  background-repeat: no-repeat;
+  background-position: center calc(100% - clamp(16px, 3.6vw, 46px));
+  background-size: contain;
   z-index: 25;
   pointer-events: none;
   display: flex;
@@ -11386,4 +11392,620 @@ h2.section-title--pine {
 [data-mx-peak],
 #mxMetricLoadDelta {
   color: #0aa63a !important;
+}
+
+/* =========================================================
+   PÁGINA: MISIÓN E HISTORIA (mision-e-historia.html)
+   Reutiliza hero oscuro, marquee salvia, vidrio esmerilado y liquid glass
+   ========================================================= */
+.topbar__links a.is-active {
+  background: rgba(255, 255, 255, .14);
+  color: var(--gold, #f2b33d);
+  opacity: 1;
+}
+
+.hero--subpage {
+  min-height: 74svh;
+  padding: 150px 0 80px;
+}
+
+.hero__bg-img--mision {
+  background-image: url("img/discipleship.jpg");
+  background-position: center 30%;
+}
+
+.hero--subpage .hero__bg::after {
+  background: linear-gradient(105deg,
+      rgba(12, 19, 17, .84) 0%,
+      rgba(12, 19, 17, .58) 52%,
+      rgba(12, 19, 17, .28) 100%);
+}
+
+.hero--subpage .hero__copy {
+  max-width: 920px;
+}
+
+/* Bloque 1: Cómo comenzó (salvia #b9ceb9 + solape sobre marquee) */
+.mh-origin {
+  --viaje-solape: calc(14px + 1.05vw);
+  position: relative;
+  z-index: 1;
+  background: #b9ceb9;
+  color: #1e293b;
+  color-scheme: light;
+  margin-top: calc(-10px - var(--viaje-solape));
+  padding-top: calc(74px + var(--viaje-solape));
+  padding-bottom: 64px;
+  overflow-x: clip;
+}
+
+.mh-origin .section__head,
+.mh-mission .section__head {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 48px;
+}
+
+.mh-origin .section__head .eyebrow,
+.mh-mission .section__head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #b3122e;
+}
+
+.mh-origin .section__head p,
+.mh-mission .section__head p {
+  color: #3f4b45;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.58;
+  margin: 12px auto 0;
+}
+
+.mh-origin__grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.mh-story-card.mx-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mh-story-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mh-story-card__body p {
+  margin: 0;
+  font-size: 1.03rem;
+  line-height: 1.72;
+  color: #24372e;
+}
+
+.mh-story-card__quote {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .62);
+  border: 1px solid rgba(15, 77, 58, .15);
+  border-left: 4px solid var(--red);
+  color: #0f4d3a;
+  font-weight: 600;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+.mh-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding-left: 22px;
+}
+
+.mh-timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--red), #0aa63a, var(--red), #0aa63a);
+  opacity: .55;
+  border-radius: 2px;
+}
+
+.mh-milestone.mx-card {
+  position: relative;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.mh-milestone::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 26px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px rgba(214, 31, 60, .2);
+}
+
+.mh-milestone:nth-child(even)::after {
+  background: #0aa63a;
+  box-shadow: 0 0 0 3px rgba(10, 166, 58, .2);
+}
+
+.mh-milestone__year {
+  flex: 0 0 auto;
+  min-width: 78px;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #ece6d9;
+  background: linear-gradient(135deg, #d61f3c, #b3122e);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, .35),
+    inset 0 -3px 4px rgba(0, 0, 0, .2),
+    0 8px 16px -6px rgba(179, 18, 46, .55);
+}
+
+.mh-milestone:nth-child(even) .mh-milestone__year {
+  background: linear-gradient(135deg, #0aa63a, #047526);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, .35),
+    inset 0 -3px 4px rgba(0, 0, 0, .2),
+    0 8px 16px -6px rgba(4, 117, 38, .55);
+}
+
+.mh-milestone__text p {
+  margin: 0;
+  color: #24372e;
+  font-size: .96rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+/* Bloque 2: Nuestra misión en tres partes */
+.mh-mission {
+  position: relative;
+  z-index: 1;
+  background: #b9ceb9;
+  color: #1e293b;
+  color-scheme: light;
+  padding: 36px 0 130px;
+  overflow-x: clip;
+}
+
+.mh-mission__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.mh-pillar.mx-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mh-pillar__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.mh-pillar__num {
+  font-family: var(--display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mh-pillar__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #ece6d9;
+  background: linear-gradient(135deg, #d61f3c, #b3122e);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, .45),
+    inset 0 -3px 4px rgba(0, 0, 0, .2),
+    0 8px 16px -6px rgba(179, 18, 46, .55);
+}
+
+.mh-pillar:nth-child(2) .mh-pillar__icon {
+  background: linear-gradient(135deg, #0aa63a, #047526);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, .45),
+    inset 0 -3px 4px rgba(0, 0, 0, .2),
+    0 8px 16px -6px rgba(4, 117, 38, .55);
+}
+
+.mh-pillar__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.mh-pillar h3 {
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #0f4d3a;
+  margin: 0 0 12px;
+}
+
+.mh-pillar p {
+  margin: 0;
+  color: #2c3e35;
+  font-size: .98rem;
+  line-height: 1.68;
+}
+
+.mh-pillar__verse {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.mh-verse-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(15, 77, 58, .1);
+  border: 1px solid rgba(15, 77, 58, .22);
+  color: #0f4d3a;
+  font-size: .82rem;
+  font-weight: 800;
+}
+
+@media (max-width: 960px) {
+  .mh-origin__grid,
+  .mh-mission__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero--subpage {
+    min-height: 68svh;
+    padding: 136px 0 64px;
+  }
+
+  .mh-story-card.mx-card,
+  .mh-pillar.mx-card {
+    padding: 22px 20px;
+  }
+
+  .mh-milestone.mx-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mh-mission {
+    padding: 24px 0 96px;
+  }
+}
+
+/* =========================================================
+   PÁGINA: QUIÉNES SOMOS (quienes-somos.html)
+   Reutiliza hero oscuro, marquee salvia, vidrio esmerilado y liquid glass
+   ========================================================= */
+.hero__bg-img--quienes {
+  background-image: url("img/ends.jpg");
+  background-position: center 35%;
+}
+
+.qs-about {
+  --viaje-solape: calc(14px + 1.05vw);
+  position: relative;
+  z-index: 1;
+  background: #b9ceb9;
+  color: #1e293b;
+  color-scheme: light;
+  margin-top: calc(-10px - var(--viaje-solape));
+  padding-top: calc(74px + var(--viaje-solape));
+  padding-bottom: 64px;
+  overflow-x: clip;
+}
+
+.qs-about .section__head,
+.qs-team .section__head {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 48px;
+}
+
+.qs-about .section__head .eyebrow,
+.qs-team .section__head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #b3122e;
+}
+
+.qs-about .section__head p,
+.qs-team .section__head p {
+  color: #3f4b45;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.58;
+  margin: 12px auto 0;
+}
+
+.qs-about__grid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.qs-story-card.mx-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.qs-story-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.qs-story-card__body p {
+  margin: 0;
+  font-size: 1.01rem;
+  line-height: 1.72;
+  color: #24372e;
+}
+
+.qs-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.qs-media-card.mx-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qs-media-card__img {
+  width: 100%;
+  aspect-ratio: 1024 / 538;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+.qs-media-card__caption {
+  margin: 0;
+  font-size: .86rem;
+  color: #33443b;
+  font-weight: 600;
+  text-align: center;
+}
+
+.qs-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.qs-highlight.mx-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.qs-highlight__icon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #ece6d9;
+  background: linear-gradient(135deg, #d61f3c, #b3122e);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, .35),
+    inset 0 -3px 4px rgba(0, 0, 0, .2),
+    0 8px 16px -6px rgba(179, 18, 46, .55);
+}
+
+.qs-highlight:nth-child(even) .qs-highlight__icon {
+  background: linear-gradient(135deg, #0aa63a, #047526);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, .35),
+    inset 0 -3px 4px rgba(0, 0, 0, .2),
+    0 8px 16px -6px rgba(4, 117, 38, .55);
+}
+
+.qs-highlight__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.qs-highlight__body strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.08rem;
+  color: #0f4d3a;
+  line-height: 1.25;
+}
+
+.qs-highlight__body span {
+  display: block;
+  font-size: .86rem;
+  color: #33443b;
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+/* Sección 2: Equipo Nacional */
+.qs-team {
+  position: relative;
+  z-index: 1;
+  background: #b9ceb9;
+  color: #1e293b;
+  color-scheme: light;
+  padding: 36px 0 130px;
+  overflow-x: clip;
+}
+
+.qs-team__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.qs-member.mx-card {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.qs-member__avatar {
+  width: 196px;
+  height: 196px;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(135deg, #d61f3c, #b3122e);
+  box-shadow: 0 14px 28px -10px rgba(179, 18, 46, .55);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  flex: 0 0 auto;
+}
+
+.qs-member:hover .qs-member__avatar {
+  transform: scale(1.04);
+}
+
+.qs-member:nth-child(even) .qs-member__avatar {
+  background: linear-gradient(135deg, #0aa63a, #047526);
+  box-shadow: 0 14px 28px -10px rgba(4, 117, 38, .55);
+}
+
+.qs-member__avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+  border: 3px solid rgba(255, 255, 255, .92);
+  background: #e6efe6;
+}
+
+.qs-member h3 {
+  font-family: var(--display);
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: #0f4d3a;
+  margin: 4px 0 0;
+}
+
+.qs-member__role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .82rem;
+  font-weight: 700;
+  color: #2c3e35;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(15, 77, 58, .09);
+  border: 1px solid rgba(15, 77, 58, .16);
+}
+
+.qs-team__cta {
+  margin-top: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+@media (max-width: 960px) {
+  .qs-about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qs-team__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .qs-story-card.mx-card,
+  .qs-member.mx-card {
+    padding: 22px 20px;
+  }
+
+  .qs-member__avatar {
+    width: 168px;
+    height: 168px;
+  }
+
+  .qs-team {
+    padding: 24px 0 96px;
+  }
+}
+
+@media (max-width: 580px) {
+  .qs-team__grid {
+    grid-template-columns: 1fr;
+  }
 }

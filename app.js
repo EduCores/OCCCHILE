@@ -242,13 +242,16 @@
         }
       });
     }
-    const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) links.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
-    }), { rootMargin: "-45% 0px -50% 0px" });
-    ["procesos", "flujos", "demos", "arquitectura", "roadmap"].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
+    if (document.getElementById("viaje")) {
+      const spyLinks = [...links, ...$$(".topbar__links a")];
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) spyLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
+      }), { rootMargin: "-45% 0px -50% 0px" });
+      ["inicio", "viaje", "tierra", "testimonios", "enfoque", "postular"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) io.observe(el);
+      });
+    }
   }
 
   function initReveal() {

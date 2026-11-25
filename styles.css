@@ -11410,8 +11410,8 @@ h2.section-title--pine {
 }
 
 .hero__bg-img--mision {
-  background-image: url("img/discipleship.jpg");
-  background-position: center 30%;
+  background-image: url("img/ends.jpg");
+  background-position: center 35%;
 }
 
 .hero--subpage .hero__bg::after {
@@ -11723,7 +11723,7 @@ h2.section-title--pine {
    Reutiliza hero oscuro, marquee salvia, vidrio esmerilado y liquid glass
    ========================================================= */
 .hero__bg-img--quienes {
-  background-image: url("img/ends.jpg");
+  background-image: url("img/grupal.jpg");
   background-position: center 35%;
 }
 

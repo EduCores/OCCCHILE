@@ -2522,6 +2522,55 @@
     });
   }
 
+  /* ---------------- SKY FLEET (3 PLANOS GPU · 10 DISEÑOS) ---------------- */
+  function initSkyFleet() {
+    const flights = $$(".htl__sky .htl__flight");
+    if (!flights.length) return;
+    const FLEET_SRCS = [
+      { src: "img/mascota_avion_4.png?v=2", w: 383, h: 356 },
+      { src: "img/mascota_avion_5.png", w: 383, h: 355 },
+      { src: "img/mascota_avion_6.png", w: 384, h: 357 },
+      { src: "img/mascota_avion_7.png", w: 377, h: 350 },
+      { src: "img/mascota_avion_8.png", w: 377, h: 350 },
+      { src: "img/mascota_avion_9.png", w: 378, h: 350 },
+      { src: "img/mascota_avion_10.png", w: 378, h: 350 },
+      { src: "img/mascota_avion_11.png", w: 379, h: 350 },
+      { src: "img/mascota_avion_12.png", w: 379, h: 350 },
+      { src: "img/mascota_avion_13.png", w: 379, h: 350 }
+    ];
+    FLEET_SRCS.forEach((item) => {
+      const pre = new Image();
+      pre.src = item.src;
+    });
+    const activeIdx = flights.map((f, i) => {
+      const src = f.querySelector("img")?.getAttribute("src") || "";
+      const found = FLEET_SRCS.findIndex((x) => x.src === src);
+      return found >= 0 ? found : (i * 3) % FLEET_SRCS.length;
+    });
+    let cursor = 0;
+    flights.forEach((flight, slot) => {
+      const img = flight.querySelector("img");
+      if (!img) return;
+      flight.addEventListener("animationiteration", (e) => {
+        if (e.animationName !== "htlCross") return;
+        let pick = cursor % FLEET_SRCS.length;
+        for (let tries = 0; tries < FLEET_SRCS.length; tries++) {
+          const cand = (cursor + tries) % FLEET_SRCS.length;
+          if (!activeIdx.includes(cand)) {
+            pick = cand;
+            cursor = (cand + 1) % FLEET_SRCS.length;
+            break;
+          }
+        }
+        activeIdx[slot] = pick;
+        const next = FLEET_SRCS[pick];
+        img.src = next.src;
+        img.width = next.w;
+        img.height = next.h;
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const safeRun = (name, fn) => {
       try {
@@ -2536,6 +2585,7 @@
     safeRun("reveal", initReveal);
     safeRun("nav", initNav);
     safeRun("hero", initHero);
+    safeRun("skyFleet", initSkyFleet);
     safeRun("processes", initProcesses);
     safeRun("flows", initFlows);
     safeRun("arch", initArch);

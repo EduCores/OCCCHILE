@@ -1,0 +1,683 @@
+{
+  "common": {
+    "siteName": "OCC Chile · Plataforma IA",
+    "topbar": {
+      "phone": "+56 9 1234 5678",
+      "email": "contacto@occchile.cl",
+      "social": {
+        "facebookAria": "Facebook",
+        "instagramAria": "Instagram"
+      },
+      "links": {
+        "quienesSomos": "Quiénes Somos",
+        "misionHistoria": "Misión e Historia",
+        "contacto": "Contacto"
+      }
+    },
+    "nav": {
+      "homeAria": "Inicio",
+      "menuAria": "Menú",
+      "langGroupAria": "Idioma del sitio",
+      "links": {
+        "viaje": "El viaje de una cajita",
+        "tierra": "Hasta lo último de la tierra",
+        "enfoque": "Evangelismo y discipulado",
+        "testimonios": "Testimonios",
+        "videos": "Videos"
+      },
+      "reportes": "Reportes"
+    },
+    "cta": {
+      "title": "¿Tu iglesia quiere ser Compañero de Ministerio?",
+      "primary": "Quiero Participar",
+      "secondaryPhases": "Ver fases",
+      "secondaryJourney": "Ver el viaje"
+    },
+    "footer": {
+      "tagline": "Para que cada cajita llegue a su destino y cada niño escuche las Buenas Nuevas.",
+      "address": "Naciones Unidas 49 - San Joaquín, Santiago - Chile",
+      "email": "contacto@occchile.cl",
+      "navAria": "Enlaces del sitio",
+      "columns": {
+        "plataforma": {
+          "title": "Plataforma",
+          "links": {
+            "admin": "Panel Admin & IA",
+            "organigrama": "Organigrama",
+            "datos": "Centro de datos",
+            "testimonios": "Testimonios",
+            "misionHistoria": "Misión e Historia",
+            "quienesSomos": "Quiénes Somos",
+            "videos": "Videos"
+          }
+        },
+        "elViaje": {
+          "title": "El viaje",
+          "links": {
+            "norteSur": "Norte a Sur",
+            "pasoAPaso": "El viaje de una cajita",
+            "enfoque": "Impacto",
+            "comoComenzo": "Cómo comenzó",
+            "proposito": "Propósito & Llamado",
+            "videoPrincipal": "Video principal"
+          }
+        },
+        "participa": {
+          "title": "Participa",
+          "links": {
+            "quieroParticipar": "Quiero participar",
+            "postular": "Ser parte",
+            "equipoNacional": "Equipo Nacional",
+            "equiposLiderazgo": "Equipos de liderazgo",
+            "misionTresPartes": "Nuestra misión",
+            "masVideos": "Más videos"
+          }
+        }
+      },
+      "copyright": "© 2026 OCC Chile ·",
+      "backTop": "Volver arriba"
+    },
+    "fabs": {
+      "groupAria": "Ayuda y contacto",
+      "assistantAria": "Abrir Asistente OCC",
+      "whatsappAria": "Contactar por WhatsApp (+56 9 37479835)"
+    },
+    "chat": {
+      "title": "Asistente OCC",
+      "badge": "IA",
+      "status": "En línea · RAG en vivo",
+      "langAria": "Idioma",
+      "expandTitle": "Ver demo completa",
+      "closeAria": "Cerrar asistente",
+      "placeholder": "Pregunta sobre cajas, iglesias, voluntariado…",
+      "sendAria": "Enviar",
+      "greeting": "¡Hola! Bendiciones 🙏 Soy el asistente de OCC Chile. Pregúntame sobre el ministerio, el Equipo Nacional, videos, cajitas o dónde encontrarnos y te doy la info con enlaces directos.",
+      "fallback": "No encontré esa consulta exacta, pero puedes explorar estas secciones del sitio o escribirnos directo a WhatsApp (+56 9 37479835) o a contacto@occchile.cl. 🙏",
+      "fallbackLinks": [
+        { "label": "Quiénes Somos", "href": "/quienes-somos", "icon": "users" },
+        { "label": "Misión e Historia", "href": "/mision-e-historia", "icon": "book-open" },
+        { "label": "Videos", "href": "/videos", "icon": "play" },
+        { "label": "Postular iglesia", "href": "/#postular", "icon": "church" }
+      ],
+      "quickChips": [
+        "¿Quiénes somos?",
+        "¿Cuál es su misión e historia?",
+        "¿Quiénes forman el Equipo Nacional?",
+        "Quiero ver los videos",
+        "¿Dónde están ubicados?",
+        "¿Cómo postula mi iglesia?",
+        "¿Qué pongo en una cajita?",
+        "Organigrama y regiones"
+      ]
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "OCC Chile · Plataforma IA",
+      "description": "Propuesta de transformación digital con Inteligencia Artificial para la obra de las cajitas de Navidad en Chile."
+    },
+    "hero": {
+      "eyebrow": "Samaritan's Purse · Chile",
+      "titleLine1": "Una cajita de",
+      "titleGreen": "regalo",
+      "titleLine2": "Un mensaje",
+      "titleRed": "eterno.",
+      "subtitle": "Para que ningún niño quede sin su regalo y sin escuchar las Buenas Nuevas.",
+      "routeNote": "— desde el norte hasta el fin del mundo —",
+      "ctaPrimary": "Quiero Participar",
+      "ctaSecondary": "Explorar regiones",
+      "scrollAria": "Bajar",
+      "pills": [
+        "Jesús en el centro",
+        "Mobile-first",
+        "Multilingüe"
+      ],
+      "stats": {
+        "deliveringLabel": "Entregando",
+        "deliveringValue": "206.274",
+        "percentageLabel": "Porcentaje",
+        "percentageValue": "91,0%",
+        "goalLabel": "Meta 2027",
+        "goalValue": "42 contenedores"
+      }
+    },
+    "marquee": [
+      "Evangelismo",
+      "Discipulado",
+      "Multiplicación",
+      "Voluntarios",
+      "Logística",
+      "Regalos",
+      "Equipos",
+      "Esperanza"
+    ],
+    "viaje": {
+      "eyebrow": "Paso a paso",
+      "titleGreen": "El viaje de una",
+      "titleRed": "cajita",
+      "iframeTitle": "El viaje de una cajita — OCC Chile",
+      "steps": [
+        {
+          "badge": "Paso 1",
+          "title": "Se arma con amor",
+          "desc": "Niños y familias llenan una cajita con útiles escolares, juguetes, artículos de higiene, ropa y una nota personal."
+        },
+        {
+          "badge": "Paso 2",
+          "title": "Cruza fronteras",
+          "desc": "Las cajitas se envían a más de 100 países, pasan por aduana y se distribuyen en todo el país gracias al equipo de logística."
+        },
+        {
+          "badge": "Paso 3",
+          "title": "Llega a la iglesia local",
+          "desc": "Los Compañeros de Ministerio organizan Eventos de Distribución Evangelísticos en sus comunidades."
+        },
+        {
+          "badge": "Paso 4",
+          "title": "El Mejor Regalo",
+          "desc": "Los niños escuchan el Evangelio de forma amigable, reciben su cajita y el folleto “El Mejor Regalo”."
+        },
+        {
+          "badge": "Paso 5",
+          "title": "La Gran Aventura",
+          "desc": "Son invitados a 12 lecciones de discipulado. Al graduarse reciben un Nuevo Testamento y comparten su fe."
+        }
+      ]
+    },
+    "tierra": {
+      "eyebrow": "Norte a sur",
+      "titleGreen": "Hasta lo último",
+      "titleRed": "de la tierra",
+      "subtitle": "Del Altiplano a la Patagonia, las cajitas llegan a niños en comunidades remotas llevando las buenas nuevas.",
+      "stageAria": "Regiones de Chile",
+      "prevAria": "Panel anterior",
+      "nextAria": "Panel siguiente",
+      "videoPlayAria": "Reproducir video de Norte",
+      "videoAlt": "Video de Norte",
+      "panels": [
+        {
+          "id": "centro",
+          "title": "Centro",
+          "desc": "Campos, cerros y sectores vulnerables urbanos."
+        },
+        {
+          "id": "sur",
+          "title": "Sur",
+          "desc": "Comunidades mapuche, islas de Chiloé y zonas rurales."
+        },
+        {
+          "id": "austral",
+          "title": "Austral",
+          "desc": "Aysén y Magallanes: fiordos, estancias y caletas."
+        }
+      ]
+    },
+    "testimonios": {
+      "eyebrow": "Testimonios",
+      "titleGreen": "Historias reales del",
+      "titleRed": "amor de Dios",
+      "subtitle": "Una cajita, una iglesia y vidas transformadas en Chile.",
+      "videoBadgeAria": "Incluye video",
+      "readStory": "Leer historia",
+      "cta": "Compartir mi testimonio",
+      "items": [
+        {
+          "id": "agustin",
+          "location": "Santiago, Chile",
+          "title": "Una familia transformada",
+          "desc": "Una cajita recibida por Agustín abrió el camino para que su familia conociera a Jesús y comenzara una nueva vida junto a la iglesia local.",
+          "imageAlt": "Daniel, Carol y su familia agradecen la cajita de regalos que recibió Agustín."
+        },
+        {
+          "id": "johan",
+          "location": "Viña del Mar, Chile",
+          "title": "Las cajas de regalos comunican el amor de Dios en Chile",
+          "desc": "Johan recibió una cajita a los doce años, después de emigrar de Colombia. Hoy sirve con su iglesia para que otros niños conozcan el amor de Dios.",
+          "imageAlt": "Johan recibió una cajita a los doce años y ahora comparte el Evangelio con otros niños."
+        },
+        {
+          "id": "gaspar",
+          "location": "Santiago, Chile",
+          "title": "Bendecimos a los niños en Chile",
+          "desc": "Una cajita preparada con oración fue una bendición para Gaspar y su familia. Su historia muestra cómo las iglesias locales comparten el amor de Dios.",
+          "imageAlt": "La historia de Gaspar muestra la bendición de una cajita preparada con oración."
+        }
+      ]
+    },
+    "enfoque": {
+      "eyebrow": "Nuestro enfoque",
+      "titleStart": "Evangelismo · Discipulado ·",
+      "titleRed": "Multiplicación",
+      "subtitle": "El regalo abre la puerta; el discipulado forma seguidores de Jesucristo que comparten su fe.",
+      "pillars": [
+        {
+          "badge": "01 · Evangelismo",
+          "title": "Evangelismo",
+          "lead": "El regalo abre la puerta",
+          "desc": "Cada cajita de Navidad es una expresión tangible del amor incondicional de Dios. Los niños escuchan el mensaje de esperanza del Evangelio y reciben el folleto \"El Mejor Regalo\" en su propio idioma."
+        },
+        {
+          "badge": "02 · Discipulado",
+          "title": "Discipulado",
+          "lead": "La Gran Aventura",
+          "desc": "Tras recibir su cajita, los niños son invitados a 12 lecciones dinámicas de discipulado bíblico guiadas por líderes locales capacitados, aprendiendo a seguir fielmente a Jesucristo día a día."
+        },
+        {
+          "badge": "03 · Multiplicación",
+          "title": "Multiplicación",
+          "lead": "Seguidores que comparten su fe",
+          "desc": "Al graduarse, reciben su propio Nuevo Testamento y son equipados para compartir las Buenas Nuevas con familiares y amigos, multiplicando creyentes y plantando nuevas iglesias locales."
+        }
+      ],
+      "quote": "“Dejad a los niños venir a mí, y no se lo impidáis, porque de los tales es el reino de Dios.”",
+      "quoteCite": "Marcos 10:14"
+    },
+    "datos": {
+      "eyebrow": "En vivo",
+      "titleGreen": "Centro de",
+      "titleRed": "datos",
+      "syncBadge": "Sincronizado",
+      "deliveredPctTitle": "Porcentaje entregado",
+      "deliveredWord": "entregado",
+      "liveSync": "Sincronizado en vivo",
+      "statusCards": {
+        "delivered": { "badge": "91% Entregado", "note": "En destino" },
+        "inTransit": { "badge": "6% En ruta", "note": "Tránsito activo" },
+        "warehouse": { "badge": "3% Bodega", "note": "Centro acopio" }
+      },
+      "growthTitle": "Meta y Crecimiento",
+      "projectionPill": "+18% proyección",
+      "goalWord": "meta",
+      "yearOptions": ["'27 Meta", "'26", "'25", "'24"],
+      "containersNote": "Contenedores anuales",
+      "viewProjection": "Ver proyección",
+      "regionsEyebrow": "16 regiones / En vivo",
+      "regionsTitle": "Cajitas entregadas en vivo",
+      "regionsSubtitle": "Distribución activa por región de norte a sur",
+      "totalDelivering": "Total entregando:",
+      "boxesUnit": "cajitas",
+      "timeframes": ["Tiempo real", "1H", "24H", "7D"],
+      "barCaption": "Cada barra sube en vivo mientras las cajitas avanzan hacia cada comunidad y región",
+      "legend": {
+        "critical": "Carga Crítica",
+        "optimal": "Rendimiento Óptimo",
+        "high": "Umbral Alto",
+        "l2": "Procesamiento L2",
+        "concurrent": "Balance Concurrente",
+        "regionalAvg": "Promedio regional: 65.3%",
+        "availableCap": "Capacidad disponible: 34.7%"
+      },
+      "health": {
+        "efficiency": "Red de entrega operando al 99.98% de eficiencia",
+        "lastSync": "Última sincronización: hace 3 segundos",
+        "refreshBtn": "Actualizar datos",
+        "exportBtn": "Exportar reporte"
+      },
+      "modal": {
+        "statusBadge": "En Línea / Óptimo",
+        "title": "Detalle del Nodo",
+        "subtitle": "Telemetría individual de rendimiento y distribución regional.",
+        "currentLoad": "Carga actual",
+        "assignedCapacity": "Capacidad asignada",
+        "bandwidth": "Ancho de banda / Flujo",
+        "maxLabel": "Máx: 6.00 GB/s",
+        "latency": "Latencia actual",
+        "latencySlo": "Óptima (SLO < 20 ms)",
+        "packets": "Paquetes / Cajitas",
+        "window60m": "Ventana de 60 min",
+        "errorRate": "Tasa de errores",
+        "autoRecovery": "Cluster auto-recuperado",
+        "tempUptime": "Temp. / Uptime",
+        "passiveCooling": "Refrigeración pasiva",
+        "activity24h": "Distribución de actividad (últimas 24 h)",
+        "hourlySampling": "Muestreo horario",
+        "vsAvg": "Comparación vs. promedio general",
+        "efficiencyDelta": "+11.8% Eficiencia",
+        "avg16": "Promedio 16 regiones",
+        "optimalNote": "Umbral óptimo garantizado bajo balance dinámico.",
+        "pauseBtn": "Pausar Balanceo",
+        "logsBtn": "Descargar Logs",
+        "closeBtn": "Cerrar"
+      }
+    },
+    "organigrama": {
+      "eyebrow": "Equipos de liderazgo",
+      "titleGreen": "Organigrama de",
+      "titleRed": "Chile",
+      "subtitle": "Estructura nacional, regional y local de Operación Niño de la Navidad en Chile",
+      "badges": {
+        "enl": "ENL",
+        "erle": "ERLE",
+        "erl": "ERL",
+        "erlNew": "ERL Nuevo"
+      },
+      "toConfirm": "A confirmar según estrategia",
+      "groups": [
+        { "erle": "Metronorte", "locals": ["Santiago Norponiente", "O’Higgins"] },
+        { "erle": "Metrosur", "locals": ["Santiago Central", "Santiago Costa", "Santiago Suroriente"] },
+        { "erle": "V Región", "locals": ["Cordillera", "V Norte"] },
+        { "erle": "Los Lagos", "locals": ["Los Ríos", "La Araucanía"] },
+        { "erle": "Concepción", "locals": ["Los Ángeles", "Ñuble", "Maule"] },
+        { "erle": "Coquimbo", "locals": ["Atacama", "Antofagasta", "Tarapacá", "Arica"] }
+      ]
+    },
+    "postular": {
+      "eyebrow": "Postulación de iglesias",
+      "titleBefore": "¿Tu",
+      "titleRed": "Iglesia",
+      "titleAfter": "quiere ser parte?",
+      "subtitle": "Completa la postulación de tu congregación en 3 sencillos pasos. Nuestra IA clasifica en tiempo real, verifica duplicados y asigna de inmediato tu equipo regional.",
+      "cardTitle": "Formulario iglesias",
+      "steps": {
+        "step1Title": "1 · Tu iglesia",
+        "churchNameLabel": "Nombre de la iglesia o ministerio",
+        "churchNamePlaceholder": "Ej: Iglesia Evangélica Luz del Valle",
+        "contactNameLabel": "Persona de contacto",
+        "contactNamePlaceholder": "Nombre y apellido",
+        "emailLabel": "Email",
+        "emailPlaceholder": "pastor@iglesia.cl",
+        "phoneLabel": "Celular",
+        "phonePlaceholder": "+56 9 1234 5678",
+        "step2Title": "2 · Direcciones",
+        "postalAddrLabel": "Dirección postal",
+        "postalAddrPlaceholder": "Empieza a escribir… (ej: Calama, Valparaíso)",
+        "mapsHint": "Autocompletado tipo Google Maps (simulado)",
+        "sameAddressLabel": "La distribución es en la misma dirección",
+        "distAddrLabel": "Dirección de distribución",
+        "distAddrPlaceholder": "Lugar del evento de entrega",
+        "step3Title": "3 · Niños por rango etario",
+        "age2to4": "2–4 años",
+        "age5to9": "5–9 años",
+        "age10to14": "10–14 años",
+        "estimatedTotal": "Total estimado",
+        "childrenUnit": "niños",
+        "step4Title": "4 · Equipo de voluntarios y roles recomendados",
+        "step4Desc": "Conecta a los líderes de tu congregación con el equipo regional. La IA asigna roles según habilidades y disponibilidad estimada.",
+        "localTeamTitle": "Perfil del equipo local",
+        "livePill": "En vivo",
+        "assignedRegionLabel": "Región asignada",
+        "skillsLabel": "Habilidades del equipo",
+        "skills": [
+          "Conducción",
+          "Logística",
+          "Redes sociales",
+          "Enseñanza",
+          "Diseño",
+          "Excel / datos",
+          "Liderazgo",
+          "Fotografía",
+          "Oración",
+          "Inglés",
+          "Relación con iglesias"
+        ],
+        "hoursLabel": "Horas disponibles por semana:",
+        "recommendedRolesTitle": "Roles recomendados",
+        "matchingAiBadge": "Matching IA",
+        "checklistTitle": "Checklist de preparación",
+        "supportNetworkTitle": "Red regional de apoyo",
+        "supportNetworkSubtitle": "Voluntarios coordinados en tu zona"
+      },
+      "actions": {
+        "back": "Atrás",
+        "autofillDemo": "Autollenar demo",
+        "next": "Siguiente",
+        "submit": "Enviar postulación"
+      },
+      "aiPanel": {
+        "badge": "IA en vivo",
+        "subtitle": "Se actualiza mientras escribes",
+        "classificationTitle": "Clasificación automática",
+        "regionLabel": "Región",
+        "sizeLabel": "Tamaño",
+        "urgencyLabel": "Urgencia",
+        "assignedTeamLabel": "Equipo asignado",
+        "dedupTitle": "Deduplicación (fuzzy matching)",
+        "dedupEmpty": "Escribe el nombre de la iglesia…",
+        "qualityLabel": "Calidad de la postulación"
+      }
+    }
+  },
+  "quienesSomos": {
+    "meta": {
+      "title": "Quiénes Somos · OCC Chile · Plataforma IA",
+      "description": "OCC Chile es un ministerio usado por Dios para ayudar a las iglesias chilenas en su tarea evangelística infantil. Conoce al Equipo Nacional."
+    },
+    "hero": {
+      "eyebrow": "Quiénes Somos · Operation Christmas Child Chile",
+      "titleLine1": "Una herramienta de Dios para las",
+      "titleGreen": "iglesias de",
+      "titleRed": "Chile.",
+      "subtitle": "OCC Chile es un ministerio que es una herramienta que Dios usa para ayudar a las iglesias chilenas a llevar a cabo su tarea evangelística.",
+      "ctaAbout": "Conócenos",
+      "ctaTeam": "Equipo Nacional",
+      "scrollAria": "Bajar a Quiénes Somos"
+    },
+    "marquee": [
+      "+100 Países",
+      "+100 Millones de cajitas",
+      "Evangelización infantil",
+      "Iglesias de Chile",
+      "Servicio voluntario",
+      "Amor de Dios",
+      "Salvación"
+    ],
+    "about": {
+      "eyebrow": "Operation Christmas Child International",
+      "titleGreen": "Quiénes",
+      "titleRed": "Somos",
+      "lead": "Brazo ministerial de Operation Christmas Child International al servicio de cada iglesia cristiana en Chile.",
+      "subEyebrow": "Propósito & Llamado",
+      "subTitle": "Alcanzando a cada niño y su familia en Chile",
+      "paragraphs": [
+        "OCC Chile es un ministerio que es una herramienta que Dios usa para ayudar a las iglesias chilenas a llevar a cabo su tarea evangelística.",
+        "Creemos firmemente que empezando por la evangelización a los niños, es la manera en que toda la familia puede ser alcanzada con la Palabra de Dios. Por tal razón es que miles de creyentes en todo el mundo hacen un esfuerzo voluntario para llenar cajas con juguetes, ropa nueva, artículos de aseo personal, libros para colorear, lápices de colores, crayolas, stickers, y otras cosas simples que pueden hacer que un niño o una niña tengan una sonrisa en su rostro y una idea clara del amor de Dios en su corazón.",
+        "OCC Chile es un brazo del ministerio de Operation Christmas Child International (OCC), que se ha extendido hasta Chile. Actualmente Operation Christmas Child está presente en más de cien países y han distribuido más de cien millones de cajitas con regalos para niños y niñas del mundo.",
+        "En Chile se ha trabajado por siete años, y en esta nueva etapa de trabajo queremos llegar a los niños y niñas en cada ciudad a través del trabajo y servicio desinteresado y arduo de todas las iglesias cristianas, sus pastores, líderes y siervos en general. No hacemos distinción de personas, porque creemos que el evangelio debe ser predicado en toda circunstancia y por cada persona que dice ser un hijo o hija de Dios."
+      ],
+      "invitationQuote": "“Le hacemos la invitación a servir con nosotros. Si su deseo es trabajar para que el mensaje de salvación llegue a oídos de cada persona en Chile, entonces está en el lugar adecuado.”",
+      "mediaCaption": "Cada cajita abre una oportunidad para compartir las Buenas Nuevas con toda la familia.",
+      "highlights": [
+        {
+          "title": "+100 países",
+          "desc": "Presencia global de Operation Christmas Child International."
+        },
+        {
+          "title": "+100 millones de cajitas",
+          "desc": "Regalos preparados voluntariamente para llevar alegría y el amor de Dios."
+        },
+        {
+          "title": "Todas las iglesias de Chile",
+          "desc": "Servicio unido con pastores, líderes y voluntarios en cada ciudad."
+        }
+      ]
+    },
+    "team": {
+      "eyebrow": "Liderazgo Nacional",
+      "titleGreen": "Equipo",
+      "titleRed": "Nacional",
+      "subtitle": "Servidores comprometidos en la coordinación, recursos, discipulado, logística, oración y movilización en todo el país.",
+      "members": [
+        { "name": "Ramón Mercado", "role": "Coordinador Nacional" },
+        { "name": "Carolina Núñez", "role": "Coordinadora Nacional de Recursos" },
+        { "name": "Esmeralda Muñoz", "role": "Coordinadora Nacional de Discipulado" },
+        { "name": "Mireya Inostroza", "role": "Coordinadora Nacional de Logística" },
+        { "name": "Sandra Valdivia", "role": "Coordinadora Nacional de Oración" },
+        { "name": "Marcelo Herrera", "role": "Coordinador Nacional de Movilización" }
+      ],
+      "ctaJoin": "Quiero ser parte de un equipo regional",
+      "ctaOrg": "Ver Organigrama Nacional"
+    }
+  },
+  "misionHistoria": {
+    "meta": {
+      "title": "Misión e Historia · OCC Chile · Plataforma IA",
+      "description": "Misión e historia de Operación Niño de la Navidad Chile (Samaritan's Purse): cómo comenzó en 1990 y nuestra misión en tres partes."
+    },
+    "hero": {
+      "eyebrow": "Misión e Historia · Samaritan's Purse",
+      "titleBefore": "Demostrar el",
+      "titleGreen": "amor de Dios",
+      "titleMid": "de una manera",
+      "titleRed": "tangible.",
+      "subtitle": "La misión de Operación Niño de la Navidad es demostrar el amor de Dios a niños necesitados alrededor del mundo y, junto con la iglesia local, compartir las buenas nuevas de Jesucristo.",
+      "ctaOrigin": "Cómo comenzó",
+      "ctaMission": "Nuestra misión",
+      "scrollAria": "Bajar a Cómo comenzó"
+    },
+    "marquee": [
+      "1970 · Samaritan's Purse",
+      "1990 · Rumania",
+      "Más de 100 países",
+      "Demostrar",
+      "Juntos",
+      "Compartir",
+      "Juan 3:16",
+      "Chile · Norte a Sur"
+    ],
+    "origin": {
+      "eyebrow": "Orígenes de la obra",
+      "titleGreen": "Cómo",
+      "titleRed": "comenzó",
+      "subtitle": "De una caravana de nueve camiones en 1990 a una red mundial que alcanza millones de niños con esperanza.",
+      "cardEyebrow": "Octubre 1990 · Reino Unido → Rumania",
+      "cardTitle": "Una respuesta compasiva que cruzó fronteras",
+      "paragraphs": [
+        "En octubre de 1990, Dave Cooke, un empresario del Reino Unido, vio un reportaje sobre la guerra en Rumania y los niños abandonados en orfanatos. No podía detener la guerra, pero sí mostrarles que no estaban olvidados.",
+        "Reunió a amigos y familiares para recolectar regalos. Así nació Operación Niño de la Navidad: una caravana de nueve camiones y 17 voluntarios que condujeron hacia Rumania con cajitas de zapatos llenas de regalos.",
+        "Hoy, como proyecto de Samaritan's Purse, las cajitas llegan a más de 100 países. En Chile, equipos de voluntarios nacionales y regionales hacen posible cada temporada."
+      ],
+      "timelineAria": "Hitos históricos de Operación Niño de la Navidad",
+      "milestones": [
+        {
+          "year": "1970",
+          "text": "Nace Samaritan's Purse, ayuda espiritual y física a personas necesitadas."
+        },
+        {
+          "year": "1990",
+          "text": "Primera caravana de cajitas hacia Rumania."
+        },
+        {
+          "year": "Hoy",
+          "text": "Millones de niños en más de 100 países reciben una cajita y escuchan el Evangelio."
+        },
+        {
+          "year": "Chile",
+          "text": "Equipos ENL, ERLE y ERL movilizan iglesias de norte a sur."
+        }
+      ]
+    },
+    "mission": {
+      "eyebrow": "Propósito y Evangelio",
+      "titleGreen": "Nuestra misión en",
+      "titleRed": "tres partes",
+      "subtitle": "Demostrar el amor de Dios de una manera tangible a niños necesitados y, junto con la iglesia local, compartir las buenas nuevas de Jesucristo.",
+      "pillars": [
+        {
+          "num": "01",
+          "title": "Demostrar",
+          "desc": "La cajita de regalo es una muestra del amor de Jesús: los niños descubren que Dios los ama y no están olvidados."
+        },
+        {
+          "num": "02",
+          "title": "Juntos",
+          "desc": "Trabajamos con iglesias locales y creyentes de distintas denominaciones para construir relaciones a largo plazo con los niños y sus familias."
+        },
+        {
+          "num": "03",
+          "title": "Compartir",
+          "desc": "“Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree no se pierda, sino que tenga vida eterna.”",
+          "cite": "Juan 3:16"
+        }
+      ]
+    }
+  },
+  "videos": {
+    "meta": {
+      "title": "Videos · OCC Chile · Plataforma IA",
+      "description": "Videos oficiales de Operación Niño de la Navidad Chile (Samaritan's Purse): reseña 2026, testimonios e historias de impacto."
+    },
+    "hero": {
+      "eyebrow": "Operación Niño de la Navidad · Samaritan's Purse",
+      "titleBefore": "Historias y",
+      "titleGreen": "testimonios",
+      "titleAfter": "en",
+      "titleRed": "video.",
+      "subtitle": "Descubre cómo las cajitas de regalos llevan evangelismo, discipulado y esperanza a millones de niños y familias en Chile y el mundo.",
+      "ctaFeatured": "Ver video principal",
+      "ctaExplore": "Explorar 5 videos",
+      "scrollAria": "Bajar a Video principal"
+    },
+    "marquee": [
+      "Reseña 2026",
+      "Samaritan's Purse",
+      "Chile · Valparaíso & Santiago",
+      "Evangelismo",
+      "Discipulado",
+      "Multiplicación",
+      "Esperanza"
+    ],
+    "featured": {
+      "eyebrow": "Video principal",
+      "titleGreen": "Reseña de",
+      "titleRed": "Operation Christmas Child",
+      "subtitle": "El impacto global de cada cajita de regalo en la vida de millones de niños cada año.",
+      "langLabel": "Español",
+      "videoTitle": "Reseña de Operation Christmas Child",
+      "videoDesc": "Las cajas de regalos de Operation Christmas Child siguen llevando evangelismo, discipulado y la multiplicación de creyentes e iglesias por todo el mundo. Descubre por qué apoyarnos deja un impacto positivo en las vidas de millones de niños cada año.",
+      "watchOfficial": "Ver en Samaritan’s Purse"
+    },
+    "catalog": {
+      "eyebrow": "Samaritan’s Purse · 5 videos",
+      "titleGreen": "Más",
+      "titleRed": "videos",
+      "subtitle": "Haz clic en cualquier video para reproducirlo directamente aquí o abrir su ficha oficial en Samaritan’s Purse.",
+      "filterAria": "Filtrar videos por idioma",
+      "filters": {
+        "all": "Todos (5)",
+        "es": "Español (2)",
+        "en": "Inglés (3)"
+      },
+      "playBtn": "Reproducir",
+      "officialLink": "Fuente oficial",
+      "credits": "Videos y fotografías: Samaritan’s Purse.",
+      "items": [
+        {
+          "id": "prepara-una-caja",
+          "lang": "Español",
+          "playAria": "Reproducir: Prepara una caja y comparte el amor de Cristo",
+          "title": "Prepara una caja y comparte el amor de Cristo",
+          "desc": "Voluntarios e iglesias colaboran para llevar cajitas a más de cien países y compartir las buenas nuevas de Jesucristo con los niños."
+        },
+        {
+          "id": "impacto-caja-regalos",
+          "lang": "Español",
+          "playAria": "Reproducir: El impacto de una caja de regalos",
+          "title": "El impacto de una caja de regalos",
+          "desc": "Artistas y pastores hispanos comparten el impacto del discipulado de Operación Niño de la Navidad en sus congregaciones y en comunidades de otros países."
+        },
+        {
+          "id": "valparaiso-fernanda",
+          "lang": "Inglés",
+          "playAria": "Reproducir: Una cajita lleva alegría a una familia que lo perdió todo",
+          "title": "Una cajita lleva alegría a una familia que lo perdió todo",
+          "desc": "Tras el incendio que destruyó su hogar en Valparaíso, Fernanda recibió una cajita en un encuentro organizado por la iglesia local. El regalo llevó esperanza y alegría a su familia."
+        },
+        {
+          "id": "santiago-gaspar",
+          "lang": "Inglés",
+          "playAria": "Reproducir: Un niño recibe su cajita de regalos perfecta",
+          "title": "Un niño recibe su cajita de regalos perfecta",
+          "desc": "Gaspar recibió una cajita en un evento de una iglesia de Santiago. Cada regalo fue especial para él y una oportunidad de conocer el mensaje del Evangelio."
+        },
+        {
+          "id": "adryana-1000-cajitas",
+          "lang": "Inglés",
+          "playAria": "Reproducir: Por qué Adryana prepara cajitas cada año",
+          "title": "Por qué Adryana prepara cajitas cada año",
+          "desc": "Adryana se propuso preparar 1.000 cajitas en 2025. A pesar de las dificultades de salud, su familia logró reunir más de 1.700 regalos para compartir el amor de Dios con los niños."
+        }
+      ]
+    }
+  }
+}
+

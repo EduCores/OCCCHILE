@@ -1,0 +1,683 @@
+{
+  "common": {
+    "siteName": "OCC Chile · AI Platform",
+    "topbar": {
+      "phone": "+56 9 1234 5678",
+      "email": "contacto@occchile.cl",
+      "social": {
+        "facebookAria": "Facebook",
+        "instagramAria": "Instagram"
+      },
+      "links": {
+        "quienesSomos": "About Us",
+        "misionHistoria": "Mission & History",
+        "contacto": "Contact"
+      }
+    },
+    "nav": {
+      "homeAria": "Home",
+      "menuAria": "Menu",
+      "langGroupAria": "Site language",
+      "links": {
+        "viaje": "A Shoebox's Journey",
+        "tierra": "Ends of the Earth",
+        "enfoque": "Evangelism & Discipleship",
+        "testimonios": "Stories",
+        "videos": "Videos"
+      },
+      "reportes": "Reports"
+    },
+    "cta": {
+      "title": "Does your church want to be a Ministry Partner?",
+      "primary": "Get Involved",
+      "secondaryPhases": "View phases",
+      "secondaryJourney": "See the journey"
+    },
+    "footer": {
+      "tagline": "So that every shoebox reaches its destination and every child hears the Good News.",
+      "address": "Naciones Unidas 49 - San Joaquín, Santiago - Chile",
+      "email": "contacto@occchile.cl",
+      "navAria": "Site links",
+      "columns": {
+        "plataforma": {
+          "title": "Platform",
+          "links": {
+            "admin": "Admin & AI Panel",
+            "organigrama": "Org Chart",
+            "datos": "Data Center",
+            "testimonios": "Stories",
+            "misionHistoria": "Mission & History",
+            "quienesSomos": "About Us",
+            "videos": "Videos"
+          }
+        },
+        "elViaje": {
+          "title": "The Journey",
+          "links": {
+            "norteSur": "North to South",
+            "pasoAPaso": "A Shoebox's Journey",
+            "enfoque": "Impact",
+            "comoComenzo": "How It Began",
+            "proposito": "Purpose & Calling",
+            "videoPrincipal": "Featured Video"
+          }
+        },
+        "participa": {
+          "title": "Get Involved",
+          "links": {
+            "quieroParticipar": "Get involved",
+            "postular": "Join Us",
+            "equipoNacional": "National Team",
+            "equiposLiderazgo": "Leadership Teams",
+            "misionTresPartes": "Our Mission",
+            "masVideos": "More Videos"
+          }
+        }
+      },
+      "copyright": "© 2026 OCC Chile ·",
+      "backTop": "Back to top"
+    },
+    "fabs": {
+      "groupAria": "Help and contact",
+      "assistantAria": "Open OCC Assistant",
+      "whatsappAria": "Contact via WhatsApp (+56 9 37479835)"
+    },
+    "chat": {
+      "title": "OCC Assistant",
+      "badge": "AI",
+      "status": "Online · Live RAG",
+      "langAria": "Language",
+      "expandTitle": "Open full demo",
+      "closeAria": "Close assistant",
+      "placeholder": "Ask about shoeboxes, churches, volunteering…",
+      "sendAria": "Send",
+      "greeting": "Hello! Blessings 🙏 I'm the OCC Chile assistant. Ask about who we are, our National Team, videos, shoeboxes, or church applications and I'll share direct site links.",
+      "fallback": "I couldn't find that exact topic, but you can explore these sections or reach us on WhatsApp (+56 9 37479835) / contacto@occchile.cl. 🙏",
+      "fallbackLinks": [
+        { "label": "About Us", "href": "/quienes-somos", "icon": "users" },
+        { "label": "Mission & History", "href": "/mision-e-historia", "icon": "book-open" },
+        { "label": "Videos", "href": "/videos", "icon": "play" },
+        { "label": "Apply as a church", "href": "/#postular", "icon": "church" }
+      ],
+      "quickChips": [
+        "Who are you?",
+        "Mission & history",
+        "National leadership team",
+        "Watch videos",
+        "Location & contact",
+        "How can my church join?",
+        "What goes in a shoebox?",
+        "Org chart & regions"
+      ]
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "OCC Chile · AI Platform",
+      "description": "Digital transformation proposal with Artificial Intelligence for the Operation Christmas Child shoebox ministry in Chile."
+    },
+    "hero": {
+      "eyebrow": "Samaritan's Purse · Chile",
+      "titleLine1": "A gift-filled",
+      "titleGreen": "shoebox",
+      "titleLine2": "An eternal",
+      "titleRed": "message.",
+      "subtitle": "So no child goes without a gift and an opportunity to hear the Good News.",
+      "routeNote": "— from the north to the ends of the earth —",
+      "ctaPrimary": "Get Involved",
+      "ctaSecondary": "Explore regions",
+      "scrollAria": "Scroll down",
+      "pills": [
+        "Jesus at the center",
+        "Mobile-first",
+        "Multilingual"
+      ],
+      "stats": {
+        "deliveringLabel": "Delivering",
+        "deliveringValue": "206,274",
+        "percentageLabel": "Progress",
+        "percentageValue": "91.0%",
+        "goalLabel": "2027 Goal",
+        "goalValue": "42 containers"
+      }
+    },
+    "marquee": [
+      "Evangelism",
+      "Discipleship",
+      "Multiplication",
+      "Volunteers",
+      "Logistics",
+      "Gifts",
+      "Teams",
+      "Hope"
+    ],
+    "viaje": {
+      "eyebrow": "Step by step",
+      "titleGreen": "The journey of a",
+      "titleRed": "shoebox",
+      "iframeTitle": "The journey of a shoebox — OCC Chile",
+      "steps": [
+        {
+          "badge": "Step 1",
+          "title": "Packed with love",
+          "desc": "Children and families pack a shoebox with school supplies, toys, hygiene items, clothing, and a personal note."
+        },
+        {
+          "badge": "Step 2",
+          "title": "Crosses borders",
+          "desc": "Shoeboxes are shipped to over 100 countries, clear customs, and are distributed nationwide by our logistics team."
+        },
+        {
+          "badge": "Step 3",
+          "title": "Reaches the local church",
+          "desc": "Ministry Partners host Evangelistic Outreach Events in their communities."
+        },
+        {
+          "badge": "Step 4",
+          "title": "The Greatest Gift",
+          "desc": "Children hear the Gospel in a child-friendly way, receive their shoebox, and get “The Greatest Gift” booklet."
+        },
+        {
+          "badge": "Step 5",
+          "title": "The Greatest Journey",
+          "desc": "Children are invited to 12 discipleship lessons. Upon graduation they receive a New Testament and share their faith."
+        }
+      ]
+    },
+    "tierra": {
+      "eyebrow": "North to south",
+      "titleGreen": "To the ends",
+      "titleRed": "of the earth",
+      "subtitle": "From the Altiplano to Patagonia, shoeboxes reach children in remote communities sharing the Good News.",
+      "stageAria": "Regions of Chile",
+      "prevAria": "Previous panel",
+      "nextAria": "Next panel",
+      "videoPlayAria": "Play North region video",
+      "videoAlt": "North region video",
+      "panels": [
+        {
+          "id": "centro",
+          "title": "Central",
+          "desc": "Rural fields, hillsides, and underserved urban neighborhoods."
+        },
+        {
+          "id": "sur",
+          "title": "South",
+          "desc": "Mapuche communities, Chiloé islands, and rural areas."
+        },
+        {
+          "id": "austral",
+          "title": "Austral",
+          "desc": "Aysén and Magallanes: fjords, ranches, and coastal coves."
+        }
+      ]
+    },
+    "testimonios": {
+      "eyebrow": "Stories",
+      "titleGreen": "Real stories of",
+      "titleRed": "God's love",
+      "subtitle": "One shoebox, one local church, and transformed lives across Chile.",
+      "videoBadgeAria": "Includes video",
+      "readStory": "Read story",
+      "cta": "Share my story",
+      "items": [
+        {
+          "id": "agustin",
+          "location": "Santiago, Chile",
+          "title": "A transformed family",
+          "desc": "A shoebox received by Agustín opened the door for his family to come to know Jesus and start a new life alongside the local church.",
+          "imageAlt": "Daniel, Carol, and their family give thanks for the shoebox gift Agustín received."
+        },
+        {
+          "id": "johan",
+          "location": "Viña del Mar, Chile",
+          "title": "Shoebox gifts share God's love in Chile",
+          "desc": "Johan received a shoebox at age twelve after migrating from Colombia. Today he serves with his church so other children can know God's love.",
+          "imageAlt": "Johan received a shoebox at age twelve and now shares the Gospel with other children."
+        },
+        {
+          "id": "gaspar",
+          "location": "Santiago, Chile",
+          "title": "Blessing children in Chile",
+          "desc": "A prayerfully packed shoebox became a blessing for Gaspar and his family. His story shows how local churches share God's love.",
+          "imageAlt": "Gaspar's story highlights the blessing of a prayerfully packed shoebox gift."
+        }
+      ]
+    },
+    "enfoque": {
+      "eyebrow": "Our approach",
+      "titleStart": "Evangelism · Discipleship ·",
+      "titleRed": "Multiplication",
+      "subtitle": "The gift opens the door; discipleship raises followers of Jesus Christ who share their faith.",
+      "pillars": [
+        {
+          "badge": "01 · Evangelism",
+          "title": "Evangelism",
+          "lead": "The gift opens the door",
+          "desc": "Each shoebox gift is a tangible expression of God's unconditional love. Children hear the Gospel message of hope and receive \"The Greatest Gift\" booklet in their own language."
+        },
+        {
+          "badge": "02 · Discipleship",
+          "title": "Discipleship",
+          "lead": "The Greatest Journey",
+          "desc": "After receiving their shoebox, children are invited to 12 dynamic Bible discipleship lessons led by trained local leaders, learning to follow Jesus faithfully every day."
+        },
+        {
+          "badge": "03 · Multiplication",
+          "title": "Multiplication",
+          "lead": "Followers sharing their faith",
+          "desc": "At graduation, children receive their own New Testament and are equipped to share the Good News with family and friends, multiplying believers and planting new local churches."
+        }
+      ],
+      "quote": "“Let the little children come to me, and do not hinder them, for the kingdom of God belongs to such as these.”",
+      "quoteCite": "Mark 10:14"
+    },
+    "datos": {
+      "eyebrow": "Live",
+      "titleGreen": "Data",
+      "titleRed": "center",
+      "syncBadge": "Synced",
+      "deliveredPctTitle": "Percentage delivered",
+      "deliveredWord": "delivered",
+      "liveSync": "Synced live",
+      "statusCards": {
+        "delivered": { "badge": "91% Delivered", "note": "At destination" },
+        "inTransit": { "badge": "6% In route", "note": "Active transit" },
+        "warehouse": { "badge": "3% Warehouse", "note": "Collection hub" }
+      },
+      "growthTitle": "Goal & Growth",
+      "projectionPill": "+18% forecast",
+      "goalWord": "goal",
+      "yearOptions": ["'27 Goal", "'26", "'25", "'24"],
+      "containersNote": "Annual containers",
+      "viewProjection": "View forecast",
+      "regionsEyebrow": "16 regions / Live",
+      "regionsTitle": "Live shoebox deliveries",
+      "regionsSubtitle": "Active distribution by region from north to south",
+      "totalDelivering": "Total delivering:",
+      "boxesUnit": "shoeboxes",
+      "timeframes": ["Real time", "1H", "24H", "7D"],
+      "barCaption": "Each bar rises live as shoeboxes advance toward every community and region",
+      "legend": {
+        "critical": "Critical Load",
+        "optimal": "Optimal Performance",
+        "high": "High Threshold",
+        "l2": "L2 Processing",
+        "concurrent": "Concurrent Balance",
+        "regionalAvg": "Regional average: 65.3%",
+        "availableCap": "Available capacity: 34.7%"
+      },
+      "health": {
+        "efficiency": "Delivery network operating at 99.98% efficiency",
+        "lastSync": "Last sync: 3 seconds ago",
+        "refreshBtn": "Refresh data",
+        "exportBtn": "Export report"
+      },
+      "modal": {
+        "statusBadge": "Online / Optimal",
+        "title": "Node Details",
+        "subtitle": "Individual performance telemetry and regional distribution.",
+        "currentLoad": "Current load",
+        "assignedCapacity": "Assigned capacity",
+        "bandwidth": "Bandwidth / Throughput",
+        "maxLabel": "Max: 6.00 GB/s",
+        "latency": "Current latency",
+        "latencySlo": "Optimal (SLO < 20 ms)",
+        "packets": "Packets / Shoeboxes",
+        "window60m": "60-min window",
+        "errorRate": "Error rate",
+        "autoRecovery": "Auto-recovered cluster",
+        "tempUptime": "Temp. / Uptime",
+        "passiveCooling": "Passive cooling",
+        "activity24h": "Activity distribution (last 24 h)",
+        "hourlySampling": "Hourly sampling",
+        "vsAvg": "Comparison vs. overall average",
+        "efficiencyDelta": "+11.8% Efficiency",
+        "avg16": "16-region average",
+        "optimalNote": "Optimal threshold guaranteed under dynamic balancing.",
+        "pauseBtn": "Pause Balancing",
+        "logsBtn": "Download Logs",
+        "closeBtn": "Close"
+      }
+    },
+    "organigrama": {
+      "eyebrow": "Leadership teams",
+      "titleGreen": "Chile",
+      "titleRed": "Org Chart",
+      "subtitle": "National, regional, and local leadership structure of Operation Christmas Child in Chile",
+      "badges": {
+        "enl": "ENL",
+        "erle": "ERLE",
+        "erl": "ERL",
+        "erlNew": "New ERL"
+      },
+      "toConfirm": "To be confirmed per strategy",
+      "groups": [
+        { "erle": "Metronorte", "locals": ["Santiago Norponiente", "O’Higgins"] },
+        { "erle": "Metrosur", "locals": ["Santiago Central", "Santiago Costa", "Santiago Suroriente"] },
+        { "erle": "V Región", "locals": ["Cordillera", "V Norte"] },
+        { "erle": "Los Lagos", "locals": ["Los Ríos", "La Araucanía"] },
+        { "erle": "Concepción", "locals": ["Los Ángeles", "Ñuble", "Maule"] },
+        { "erle": "Coquimbo", "locals": ["Atacama", "Antofagasta", "Tarapacá", "Arica"] }
+      ]
+    },
+    "postular": {
+      "eyebrow": "Church application",
+      "titleBefore": "Does your",
+      "titleRed": "Church",
+      "titleAfter": "want to join?",
+      "subtitle": "Complete your congregation's application in 3 simple steps. Our AI classifies in real time, checks duplicates, and assigns your regional team immediately.",
+      "cardTitle": "Church application form",
+      "steps": {
+        "step1Title": "1 · Your church",
+        "churchNameLabel": "Church or ministry name",
+        "churchNamePlaceholder": "Ex: Iglesia Evangélica Luz del Valle",
+        "contactNameLabel": "Contact person",
+        "contactNamePlaceholder": "Full name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "pastor@church.cl",
+        "phoneLabel": "Mobile phone",
+        "phonePlaceholder": "+56 9 1234 5678",
+        "step2Title": "2 · Addresses",
+        "postalAddrLabel": "Postal address",
+        "postalAddrPlaceholder": "Start typing… (e.g., Calama, Valparaíso)",
+        "mapsHint": "Google Maps-style autocomplete (simulated)",
+        "sameAddressLabel": "Distribution takes place at the same address",
+        "distAddrLabel": "Distribution address",
+        "distAddrPlaceholder": "Outreach event venue",
+        "step3Title": "3 · Children by age group",
+        "age2to4": "2–4 years",
+        "age5to9": "5–9 years",
+        "age10to14": "10–14 years",
+        "estimatedTotal": "Estimated total",
+        "childrenUnit": "children",
+        "step4Title": "4 · Volunteer team & recommended roles",
+        "step4Desc": "Connect your congregation's leaders with the regional team. AI matches roles based on skills and estimated availability.",
+        "localTeamTitle": "Local team profile",
+        "livePill": "Live",
+        "assignedRegionLabel": "Assigned region",
+        "skillsLabel": "Team skills",
+        "skills": [
+          "Driving",
+          "Logistics",
+          "Social media",
+          "Teaching",
+          "Design",
+          "Excel / data",
+          "Leadership",
+          "Photography",
+          "Prayer",
+          "English",
+          "Church relations"
+        ],
+        "hoursLabel": "Available hours per week:",
+        "recommendedRolesTitle": "Recommended roles",
+        "matchingAiBadge": "AI Matching",
+        "checklistTitle": "Preparation checklist",
+        "supportNetworkTitle": "Regional support network",
+        "supportNetworkSubtitle": "Coordinated volunteers in your area"
+      },
+      "actions": {
+        "back": "Back",
+        "autofillDemo": "Autofill demo",
+        "next": "Next",
+        "submit": "Submit application"
+      },
+      "aiPanel": {
+        "badge": "Live AI",
+        "subtitle": "Updates as you type",
+        "classificationTitle": "Automatic classification",
+        "regionLabel": "Region",
+        "sizeLabel": "Size",
+        "urgencyLabel": "Urgency",
+        "assignedTeamLabel": "Assigned team",
+        "dedupTitle": "Deduplication (fuzzy matching)",
+        "dedupEmpty": "Type the church name…",
+        "qualityLabel": "Application completeness"
+      }
+    }
+  },
+  "quienesSomos": {
+    "meta": {
+      "title": "About Us · OCC Chile · AI Platform",
+      "description": "OCC Chile is a ministry used by God to equip Chilean churches for child evangelism. Meet our National Team."
+    },
+    "hero": {
+      "eyebrow": "About Us · Operation Christmas Child Chile",
+      "titleLine1": "A tool of God for",
+      "titleGreen": "churches in",
+      "titleRed": "Chile.",
+      "subtitle": "OCC Chile is a ministry used by God as a tool to help Chilean churches fulfill their evangelistic calling.",
+      "ctaAbout": "Learn more",
+      "ctaTeam": "National Team",
+      "scrollAria": "Scroll to About Us"
+    },
+    "marquee": [
+      "100+ Countries",
+      "100M+ Shoeboxes",
+      "Child Evangelism",
+      "Churches in Chile",
+      "Volunteer Service",
+      "God's Love",
+      "Salvation"
+    ],
+    "about": {
+      "eyebrow": "Operation Christmas Child International",
+      "titleGreen": "About",
+      "titleRed": "Us",
+      "lead": "Ministry arm of Operation Christmas Child International serving every Christian church across Chile.",
+      "subEyebrow": "Purpose & Calling",
+      "subTitle": "Reaching every child and family in Chile",
+      "paragraphs": [
+        "OCC Chile is a ministry that God uses as a tool to help Chilean churches carry out their evangelistic mission.",
+        "We firmly believe that starting with evangelism to children is the way an entire family can be reached with the Word of God. That is why thousands of believers around the world volunteer to pack shoeboxes with toys, new clothes, personal hygiene items, coloring books, colored pencils, crayons, stickers, and other simple items that put a smile on a child's face and a clear picture of God's love in their heart.",
+        "OCC Chile is an arm of Operation Christmas Child International (OCC) that has expanded into Chile. Today Operation Christmas Child operates in over one hundred countries and has distributed more than one hundred million shoebox gifts to boys and girls worldwide.",
+        "For seven years we have labored across Chile, and in this new season we want to reach boys and girls in every city through the dedicated, selfless service of all Christian churches, their pastors, leaders, and servants. We make no distinction among people, because we believe the Gospel must be preached in every circumstance and by everyone who calls themselves a son or daughter of God."
+      ],
+      "invitationQuote": "“We invite you to serve alongside us. If your desire is to work so that the message of salvation reaches the ears of every person in Chile, you are in the right place.”",
+      "mediaCaption": "Every shoebox opens a door to share the Good News with the whole family.",
+      "highlights": [
+        {
+          "title": "100+ countries",
+          "desc": "Global reach of Operation Christmas Child International."
+        },
+        {
+          "title": "100M+ shoeboxes",
+          "desc": "Gifts voluntarily packed to bring joy and share God's love."
+        },
+        {
+          "title": "Every church in Chile",
+          "desc": "United service with pastors, leaders, and volunteers in every city."
+        }
+      ]
+    },
+    "team": {
+      "eyebrow": "National Leadership",
+      "titleGreen": "National",
+      "titleRed": "Team",
+      "subtitle": "Committed servants leading coordination, resources, discipleship, logistics, prayer, and mobilization nationwide.",
+      "members": [
+        { "name": "Ramón Mercado", "role": "National Coordinator" },
+        { "name": "Carolina Núñez", "role": "National Resources Coordinator" },
+        { "name": "Esmeralda Muñoz", "role": "National Discipleship Coordinator" },
+        { "name": "Mireya Inostroza", "role": "National Logistics Coordinator" },
+        { "name": "Sandra Valdivia", "role": "National Prayer Coordinator" },
+        { "name": "Marcelo Herrera", "role": "National Mobilization Coordinator" }
+      ],
+      "ctaJoin": "Join a regional team",
+      "ctaOrg": "View National Org Chart"
+    }
+  },
+  "misionHistoria": {
+    "meta": {
+      "title": "Mission & History · OCC Chile · AI Platform",
+      "description": "Mission and history of Operation Christmas Child Chile (Samaritan's Purse): how it began in 1990 and our three-part mission."
+    },
+    "hero": {
+      "eyebrow": "Mission & History · Samaritan's Purse",
+      "titleBefore": "Demonstrate",
+      "titleGreen": "God's love",
+      "titleMid": "in a",
+      "titleRed": "tangible way.",
+      "subtitle": "The mission of Operation Christmas Child is to demonstrate God's love in a tangible way to children in need around the world, and together with the local church worldwide, to share the Good News of Jesus Christ.",
+      "ctaOrigin": "How it began",
+      "ctaMission": "Our mission",
+      "scrollAria": "Scroll to How it began"
+    },
+    "marquee": [
+      "1970 · Samaritan's Purse",
+      "1990 · Romania",
+      "100+ Countries",
+      "Demonstrate",
+      "Together",
+      "Share",
+      "John 3:16",
+      "Chile · North to South"
+    ],
+    "origin": {
+      "eyebrow": "Ministry origins",
+      "titleGreen": "How it",
+      "titleRed": "began",
+      "subtitle": "From a nine-truck convoy in 1990 to a global network reaching millions of children with hope.",
+      "cardEyebrow": "October 1990 · United Kingdom → Romania",
+      "cardTitle": "A compassionate response that crossed borders",
+      "paragraphs": [
+        "In October 1990, Dave Cooke, a businessman from the United Kingdom, watched a news report on the war in Romania and children abandoned in orphanages. He could not stop the war, but he could show them they were not forgotten.",
+        "He rallied friends and family to collect gifts. That is how Operation Christmas Child began: a convoy of nine trucks and 17 volunteers driving to Romania with shoeboxes filled with gifts.",
+        "Today, as a project of Samaritan's Purse, shoeboxes reach over 100 countries. In Chile, national and regional volunteer teams make every season possible."
+      ],
+      "timelineAria": "Historical milestones of Operation Christmas Child",
+      "milestones": [
+        {
+          "year": "1970",
+          "text": "Samaritan's Purse is founded, bringing spiritual and physical aid to hurting people."
+        },
+        {
+          "year": "1990",
+          "text": "First shoebox convoy sets out for Romania."
+        },
+        {
+          "year": "Today",
+          "text": "Millions of children in over 100 countries receive a shoebox and hear the Gospel."
+        },
+        {
+          "year": "Chile",
+          "text": "ENL, ERLE, and ERL teams mobilize churches from north to south."
+        }
+      ]
+    },
+    "mission": {
+      "eyebrow": "Purpose & Gospel",
+      "titleGreen": "Our mission in",
+      "titleRed": "three parts",
+      "subtitle": "To demonstrate God's love in a tangible way to children in need and, together with the local church, share the Good News of Jesus Christ.",
+      "pillars": [
+        {
+          "num": "01",
+          "title": "Demonstrate",
+          "desc": "The shoebox gift is a tangible expression of Jesus' love: children discover that God loves them and they are not forgotten."
+        },
+        {
+          "num": "02",
+          "title": "Together",
+          "desc": "We partner with local churches and believers across denominations to build lasting relationships with children and their families."
+        },
+        {
+          "num": "03",
+          "title": "Share",
+          "desc": "“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.”",
+          "cite": "John 3:16"
+        }
+      ]
+    }
+  },
+  "videos": {
+    "meta": {
+      "title": "Videos · OCC Chile · AI Platform",
+      "description": "Official videos of Operation Christmas Child Chile (Samaritan's Purse): 2026 review, testimonies, and impact stories."
+    },
+    "hero": {
+      "eyebrow": "Operation Christmas Child · Samaritan's Purse",
+      "titleBefore": "Stories and",
+      "titleGreen": "testimonies",
+      "titleAfter": "on",
+      "titleRed": "video.",
+      "subtitle": "Discover how shoebox gifts bring evangelism, discipleship, and hope to millions of children and families in Chile and around the world.",
+      "ctaFeatured": "Watch featured video",
+      "ctaExplore": "Explore 5 videos",
+      "scrollAria": "Scroll to Featured video"
+    },
+    "marquee": [
+      "2026 Review",
+      "Samaritan's Purse",
+      "Chile · Valparaíso & Santiago",
+      "Evangelism",
+      "Discipleship",
+      "Multiplication",
+      "Hope"
+    ],
+    "featured": {
+      "eyebrow": "Featured video",
+      "titleGreen": "Review of",
+      "titleRed": "Operation Christmas Child",
+      "subtitle": "The global impact of every shoebox gift in the lives of millions of children each year.",
+      "langLabel": "Spanish",
+      "videoTitle": "Operation Christmas Child Review",
+      "videoDesc": "Operation Christmas Child shoebox gifts continue bringing evangelism, discipleship, and the multiplication of believers and churches worldwide. See how your support makes a lasting impact on millions of children every year.",
+      "watchOfficial": "Watch on Samaritan’s Purse"
+    },
+    "catalog": {
+      "eyebrow": "Samaritan’s Purse · 5 videos",
+      "titleGreen": "More",
+      "titleRed": "videos",
+      "subtitle": "Click any video to watch directly here or open its official Samaritan’s Purse page.",
+      "filterAria": "Filter videos by language",
+      "filters": {
+        "all": "All (5)",
+        "es": "Spanish (2)",
+        "en": "English (3)"
+      },
+      "playBtn": "Play",
+      "officialLink": "Official source",
+      "credits": "Videos and photography: Samaritan’s Purse.",
+      "items": [
+        {
+          "id": "prepara-una-caja",
+          "lang": "Spanish",
+          "playAria": "Play: Pack a Shoebox and Share Christ's Love",
+          "title": "Pack a Shoebox and Share Christ's Love",
+          "desc": "Volunteers and churches partner to send shoeboxes to over one hundred countries and share the Good News of Jesus Christ with children."
+        },
+        {
+          "id": "impacto-caja-regalos",
+          "lang": "Spanish",
+          "playAria": "Play: The Impact of a Shoebox Gift",
+          "title": "The Impact of a Shoebox Gift",
+          "desc": "Hispanic artists and pastors share the discipleship impact of Operation Christmas Child in their congregations and communities abroad."
+        },
+        {
+          "id": "valparaiso-fernanda",
+          "lang": "English",
+          "playAria": "Play: When A Shoebox Brings Great Joy To A Family Who Lost Everything",
+          "title": "When a shoebox brings great joy to a family who lost everything",
+          "desc": "After a wildfire destroyed her home in Valparaíso, Fernanda received a shoebox at an outreach hosted by the local church. The gift brought hope and joy to her family."
+        },
+        {
+          "id": "santiago-gaspar",
+          "lang": "English",
+          "playAria": "Play: A Child Receives Their Perfect Shoebox Gift",
+          "title": "A child receives their perfect shoebox gift",
+          "desc": "Gaspar received a shoebox at a local church event in Santiago. Every gift felt special to him and became an opportunity to hear the Gospel message."
+        },
+        {
+          "id": "adryana-1000-cajitas",
+          "lang": "English",
+          "playAria": "Play: Why Adryana Packs Shoeboxes And Helps Kids In Need Every Year",
+          "title": "Why Adryana packs shoeboxes every year",
+          "desc": "Adryana set a goal to pack 1,000 shoeboxes in 2025. Despite health challenges, her family gathered over 1,700 gifts to share God's love with children."
+        }
+      ]
+    }
+  }
+}
+

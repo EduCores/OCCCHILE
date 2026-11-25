@@ -9078,6 +9078,7 @@ h2.section-title--pine {
 }
 
 .enfoque__mascot {
+  --enfoque-drift: clamp(14px, 2.2vw, 26px);
   position: relative;
   z-index: 1;
   display: flex;
@@ -9091,6 +9092,46 @@ h2.section-title--pine {
   display: block;
   width: clamp(230px, 32vw, 390px);
   height: auto;
+  transform-origin: center 55%;
+  will-change: transform, translate, rotate;
+  backface-visibility: hidden;
+  animation:
+    enfoqueSwayBank 9.5s cubic-bezier(.45, .05, .55, .95) -4.75s infinite alternate,
+    enfoqueFloat 4.4s cubic-bezier(.45, .05, .55, .95) infinite alternate;
+}
+
+@keyframes enfoqueSwayBank {
+  0% {
+    translate: calc(-1 * var(--enfoque-drift)) 0;
+    rotate: -26deg;
+  }
+
+  100% {
+    translate: var(--enfoque-drift) 0;
+    rotate: 5deg;
+  }
+}
+
+@keyframes enfoqueFloat {
+  0% {
+    transform: translate3d(0, 12px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 24px, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  .enfoque__mascot {
+    --enfoque-drift: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enfoque__mascot img {
+    animation: none;
+  }
 }
 
 .enfoque__grid {

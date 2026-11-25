@@ -10048,10 +10048,13 @@ h2.section-title--pine {
 }
 
 .chat-widget__head {
+  position: relative;
+  z-index: 3;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 12px 14px;
   background:
     radial-gradient(90% 70% at 32% 8%, rgba(255, 255, 255, .32), rgba(255, 255, 255, 0) 62%),
     linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0) 50%),
@@ -10068,7 +10071,7 @@ h2.section-title--pine {
 .chat-widget__title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -10093,6 +10096,18 @@ h2.section-title--pine {
   width: 19px;
   height: 19px;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .25));
+}
+
+.chat-widget__avatar-img {
+  width: 80px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 4;
+  margin: -6px 0 -40px -8px;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .28));
 }
 
 .chat-widget__title strong {
@@ -10198,9 +10213,11 @@ h2.section-title--pine {
 }
 
 .chat-widget__body {
+  position: relative;
+  z-index: 1;
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 36px 16px 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;

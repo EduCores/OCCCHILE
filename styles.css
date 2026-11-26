@@ -8741,7 +8741,7 @@ h2.section-title--pine {
   display: flex;
   justify-content: center;
   padding-top: 0px;
-  margin: 0 auto clamp(-84px, -2.4vw, -40px);
+  margin: -14px auto clamp(-22px, -1.1vw, -10px);
   pointer-events: none;
 }
 
@@ -8771,17 +8771,22 @@ h2.section-title--pine {
 
 @keyframes enfoqueFloat {
   0% {
-    transform: translate3d(0, 12px, 0);
+    transform: translate3d(0, -8px, 0);
   }
 
   100% {
-    transform: translate3d(0, 24px, 0);
+    transform: translate3d(0, 6px, 0);
   }
 }
 
 @media (max-width: 600px) {
   .enfoque__mascot {
-    --enfoque-drift: 14px;
+    --enfoque-drift: 12px;
+    margin: 10px auto -16px;
+  }
+
+  .enfoque__mascot img {
+    width: clamp(290px, 84vw, 360px);
   }
 }
 
@@ -12851,22 +12856,24 @@ h2.section-title--pine {
   .tierra-stage {
     perspective: none;
     min-height: 0;
-    margin-top: 8px;
-    padding: 0 16px 12px;
+    margin-top: 0;
+    padding: 0 16px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .tierra-avion {
     position: relative;
     inset: auto;
-    width: min(340px, 88vw);
-    max-width: 100%;
+    align-self: center;
+    flex-shrink: 0;
+    width: min(420px, 165vw);
+    max-width: none;
     height: auto;
-    margin: 8px auto -14px;
+    margin: -72px 0 -58px;
     translate: none;
     z-index: 2;
     animation: avionFlote 18s ease-in-out infinite;

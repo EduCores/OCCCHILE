@@ -2572,6 +2572,36 @@
     });
   }
 
+  /* ---------------- FOOTER NEWSLETTER ---------------- */
+  function initFooterNewsletter() {
+    const form = $("#footerNewsForm");
+    if (!form) return;
+    const input = $("#footerNewsEmail");
+    const msg = $("#footerNewsMsg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = (input?.value || "").trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+
+      if (!valid) {
+        if (msg) {
+          msg.textContent = "Ingresa un correo electrónico válido.";
+          msg.classList.add("is-error");
+        }
+        input?.focus();
+        return;
+      }
+
+      if (msg) {
+        msg.textContent = "¡Listo! Te avisaremos novedades de la temporada 2026.";
+        msg.classList.remove("is-error");
+      }
+      toast("¡Gracias! Te avisaremos novedades de la temporada 2026.", "mail-check");
+      form.reset();
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const safeRun = (name, fn) => {
       try {
@@ -2603,6 +2633,7 @@
     safeRun("dashboard", initDashboard);
     safeRun("chat", initChat);
     safeRun("chatWidget", initChatWidget);
+    safeRun("footerNewsletter", initFooterNewsletter);
     safeRun("icons", icons);
   });
 })();

@@ -23,7 +23,7 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=284" />
+  <link rel="stylesheet" href="styles.css?v=286" />
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='12' width='24' height='16' rx='3' fill='%23b3122e'/%3E%3Crect x='2' y='8' width='28' height='6' rx='2' fill='%23d61f3c'/%3E%3Crect x='14' y='8' width='4' height='20' fill='%23f2b33d'/%3E%3C/svg%3E" />
 
@@ -2421,112 +2421,102 @@
   </main>
 
   <footer class="footer">
-
-    <div class="container footer__main">
-
-      <div class="footer__brand">
-
-        <a href="#inicio" class="brand" aria-label="Inicio">
-          <img src="img/occchile-logo.png" alt="OCC Chile · Plataforma IA" class="brand__logo">
-        </a>
-        <p>Para que cada cajita llegue a su destino y cada niño escuche las Buenas Nuevas.
-
-        </p>
-        <div class="footer__contact">
-          <a href="https://maps.google.com/maps?z=16&q=naciones+unidas+49+san+joaqu%C3%ADn+santiago,+chile"
-            target="_blank" rel="noopener noreferrer" class="footer__contact-item">
-            <i data-lucide="map-pin"></i>
-            <span>Naciones Unidas 49 - San Joaquín<br>Santiago - Chile</span>
-          </a>
-          <a href="mailto:contacto@occchile.cl" class="footer__contact-item">
-            <i data-lucide="mail"></i>
-            <span>contacto@occchile.cl</span>
-          </a>
+    <div class="container">
+      <div class="footer__shell">
+        <div class="footer__news">
+          <div class="footer__news-copy">
+            <span class="footer__eyebrow"><i data-lucide="sparkles"></i> Temporada 2026</span>
+            <h3>Recibe noticias de la temporada 2026</h3>
+            <p>Fechas clave, centros de acopio y novedades para iglesias y voluntarios en todo Chile.</p>
+          </div>
+          <form class="footer__news-form" id="footerNewsForm" novalidate>
+            <div class="footer__news-group">
+              <label class="footer__sr-only" for="footerNewsEmail">Correo electrónico</label>
+              <input type="email" id="footerNewsEmail" name="email" placeholder="tu.correo@iglesia.cl" autocomplete="email" required />
+              <button type="submit" class="btn btn--primary btn--sm btn--lc">
+                <i data-lucide="send"></i> Suscribirme
+              </button>
+            </div>
+            <span class="footer__news-msg" id="footerNewsMsg" aria-live="polite"></span>
+          </form>
         </div>
 
+        <div class="footer__main">
+          <div class="footer__brand">
+            <a href="#inicio" class="brand" aria-label="Inicio">
+              <img src="img/occchile-logo.png" alt="OCC Chile · Plataforma IA" class="brand__logo">
+            </a>
+            <span class="footer__sp-badge">
+              <i data-lucide="globe-2"></i> Proyecto de Samaritan’s Purse
+            </span>
+            <p class="footer__tagline">Para que cada cajita llegue a su destino y cada niño escuche las Buenas Nuevas.</p>
+
+            <div class="footer__contact">
+              <a href="https://maps.google.com/maps?z=16&amp;q=naciones+unidas+49+san+joaqu%C3%ADn+santiago,+chile"
+                target="_blank" rel="noopener noreferrer" class="footer__contact-item">
+                <i data-lucide="map-pin"></i>
+                <span>Naciones Unidas 49 - San Joaquín<br>Santiago - Chile</span>
+              </a>
+              <a href="mailto:contacto@occchile.cl" class="footer__contact-item">
+                <i data-lucide="mail"></i>
+                <span>contacto@occchile.cl</span>
+              </a>
+              <a href="https://wa.me/56937479835" target="_blank" rel="noopener noreferrer" class="footer__contact-item">
+                <i data-lucide="message-circle"></i>
+                <span>+56 9 3747 9835 · WhatsApp</span>
+              </a>
+            </div>
+
+            <div class="footer__socials" aria-label="Redes y canales oficiales">
+              <a href="https://facebook.com/occ.en.chile" target="_blank" rel="noopener noreferrer" class="footer__social-btn" aria-label="Facebook OCC Chile" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 4v2.2H8v3h2.5V21h3z"/></svg>
+              </a>
+              <a href="https://instagram.com/occchile" target="_blank" rel="noopener noreferrer" class="footer__social-btn" aria-label="Instagram OCC Chile" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href="videos.html" class="footer__social-btn" aria-label="Videos OCC Chile" title="Videos">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.5 6.8v10.4L17.5 12 8.5 6.8z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <nav class="footer__cols" aria-label="Enlaces del sitio">
+            <div class="footer__col">
+              <h4>Ministerio</h4>
+              <a href="quienes-somos.html">Quiénes Somos</a>
+              <a href="mision-e-historia.html">Misión e Historia</a>
+              <a href="videos.html">Videos</a>
+              <a href="#testimonios">Testimonios</a>
+            </div>
+
+            <div class="footer__col">
+              <h4>La obra</h4>
+              <a href="#viaje">El viaje de una cajita</a>
+              <a href="#tierra">Hasta lo último de la tierra</a>
+              <a href="#enfoque">Evangelismo y discipulado</a>
+              <a href="#datos">Centro de datos</a>
+            </div>
+
+            <div class="footer__col">
+              <h4>Participa</h4>
+              <a href="#postular">Postular mi iglesia</a>
+              <a href="#organigrama">Organigrama nacional</a>
+              <a href="admin.html">Panel Admin &amp; IA</a>
+              <a href="https://wa.me/56937479835" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+            </div>
+          </nav>
+        </div>
       </div>
-
-      <nav class="footer__cols" aria-label="Enlaces del sitio">
-
-        <div class="footer__col">
-          <h4>Plataforma</h4>
-          <a href="admin.html">Panel Admin & IA</a>
-          <a href="#organigrama">Organigrama</a>
-          <a href="#datos">Centro de datos</a>
-          <a href="#testimonios">Testimonios</a>
-          <a href="#tierra">Norte a Sur</a>
-        </div>
-
-        <div class="footer__col">
-
-          <h4>El viaje
-
-          </h4>
-
-          <a href="#viaje">El viaje de una cajita
-
-          </a>
-
-          <a href="#datos">Impacto
-
-          </a>
-
-          <a href="#roadmap">Hoja de ruta
-
-          </a>
-
-        </div>
-
-        <div class="footer__col">
-
-          <h4>Participa
-
-          </h4>
-
-          <a href="#demos">Quiero participar
-
-          </a>
-
-          <a href="#procesos">Explorar rutas
-
-          </a>
-
-          <a href="#postular">Ser parte
-
-          </a>
-
-          <a href="#organigrama">Equipos de liderazgo
-
-          </a>
-
-        </div>
-
-      </nav>
-
     </div>
 
     <div class="footer__bar">
-
       <div class="container footer__bar-inner">
-
-        <p>© 2026 OCC Chile ·
-
-        </p>
-
-
-
-        <a href="#inicio">Volver arriba
-
-          <i data-lucide="arrow-up">
-
-          </i>
-
+        <p>© 2026 Operation Christmas Child Chile · <span>Proyecto de Samaritan’s Purse</span></p>
+        <a href="#inicio" class="btn btn--outline-light btn--sm btn--lc footer__top-btn">
+          Volver arriba <i data-lucide="arrow-up"></i>
         </a>
-
       </div>
-
     </div>
-
   </footer>
 
 
@@ -2601,7 +2591,7 @@
 
   </script>
 
-  <script src="app.js?v=67">
+  <script src="app.js?v=68">
 
   </script>
 

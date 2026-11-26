@@ -30,6 +30,33 @@
     toastT = setTimeout(() => t.classList.remove("is-on"), 3200);
   };
 
+
+  /* ---------------- CONFIGURACIÓN DE ENVÍO (WEBHOOK / API) ---------------- */
+  const OCC_CONFIG = {
+    formEndpoint: "",       // Ej: "https://formspree.io/f/xxxx" o webhook Apps Script / n8n
+    newsletterEndpoint: ""  // Ej: "https://formspree.io/f/yyyy"
+  };
+
+  async function postLead(endpoint, payload, storageKey) {
+    try {
+      const prev = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      prev.push({ ...payload, createdAt: new Date().toISOString() });
+      localStorage.setItem(storageKey, JSON.stringify(prev.slice(-20)));
+    } catch {}
+    if (!endpoint) return { delivered: false, local: true };
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload)
+      });
+      return { delivered: res.ok, status: res.status };
+    } catch (err) {
+      console.warn("[OCC Chile] Error enviando formulario al endpoint:", err);
+      return { delivered: false, error: true };
+    }
+  }
+
   /* ---------------- DATA ---------------- */
   const REGIONS = [
     { n: "Arica y Parinacota", s: "Arica", d: 92.1, b: 6120 },
@@ -50,138 +77,6 @@
     { n: "Magallanes", s: "Magallanes", d: 81.0, b: 4370 },
   ];
   REGIONS.forEach((r, i) => (r.i = i));
-
-  const PROCESSES_ES = [
-    { t: "Captación de iglesias", pain: "Email manual con 7 campos", sol: "Formulario inteligente + clasificación automática", imp: "alto", ic: "church", m: "A", e: 24, v: 94,
-      b: ["Autocompletado de direcciones", "Clasificación por región/tamaño", "Deduplicación fuzzy"] },
-    { t: "Onboarding de voluntarios", pain: "Manual, sin seguimiento", sol: "Chatbot + flujo automatizado + recordatorios", imp: "alto", ic: "user-plus", m: "B", e: 40, v: 76,
-      b: ["Checklist por rol", "Matching por habilidades", "Alertas de inactividad"] },
-    { t: "Reportes maestro / distribución", pain: "Google Forms gigantes en iframes", sol: "Formularios nativos + validación IA", imp: "alto", ic: "clipboard-check", m: "C", e: 46, v: 92,
-      b: ["UX móvil por pasos", "Detección de inconsistencias", "Consolidación automática"] },
-    { t: "Logística de cajas", pain: "Conteo y distribución manual", sol: "Visión por computador + OCR", imp: "medio-alto", ic: "package", m: "D", e: 82, v: 74,
-      b: ["Conteo por cámaras", "OCR de etiquetas", "Rutas con OR-Tools"] },
-    { t: "Métricas nacionales", pain: "Reporte manual en PPT", sol: "Dashboard con IA + alertas", imp: "alto", ic: "bar-chart-3", m: "E", e: 60, v: 84,
-      b: ["KPIs en tiempo real", "Alertas < 80%", "Resúmenes ejecutivos"] },
-    { t: "Capacitación", pain: "Solo eventos presenciales", sol: "Contenido IA (guías, videos, quiz)", imp: "medio", ic: "graduation-cap", m: "F", e: 45, v: 58,
-      b: ["Guías por rol", "Quiz con feedback", "Actas automáticas"] },
-    { t: "Comunicación", pain: "Redes gestionadas a mano", sol: "Generación de contenido + programación", imp: "medio", ic: "megaphone", m: "G", e: 25, v: 55,
-      b: ["Calendario editorial", "Posts por hito", "Newsletter regional"] },
-    { t: "Atención a consultas", pain: "Email lento", sol: "Chatbot RAG sobre FAQs/documentos", imp: "alto", ic: "message-circle-heart", m: "H", e: 31, v: 82,
-      b: ["Respuestas citadas", "Enrutamiento por tema", "Sugerencias al equipo"] },
-    { t: "Traducción / localización", pain: "Proceso manual", sol: "IA multilingüe", imp: "bajo-medio", ic: "languages", m: "F", e: 18, v: 32,
-      b: ["Materiales ES/EN/PT", "Revisión humana", "Glosario de la obra"] },
-  ];
-
-  const PROCESSES_EN = [
-    { t: "Church Application & Intake", pain: "Manual emails with 7 disconnected fields", sol: "Smart form + automated routing & classification", imp: "alto", ic: "church", m: "A", e: 24, v: 94,
-      b: ["Address autocomplete", "Region & size tier classification", "Fuzzy deduplication"] },
-    { t: "Volunteer Onboarding", pain: "Manual tracking with high drop-off", sol: "Chatbot + automated pathways + reminders", imp: "alto", ic: "user-plus", m: "B", e: 40, v: 76,
-      b: ["Role-specific checklists", "Skill-based AI matching", "Inactivity alerts"] },
-    { t: "Teacher & Distribution Reports", pain: "Bulky Google Forms embedded in iframes", sol: "Native mobile forms + AI validation", imp: "alto", ic: "clipboard-check", m: "C", e: 46, v: 92,
-      b: ["Step-by-step mobile UX", "Data inconsistency detection", "Offline mode (PWA)"] },
-    { t: "Physical Evidence OCR", pain: "Unclear photos, manual transcription", sol: "Vision AI OCR + assisted verification", imp: "medio-alto", ic: "scan", m: "C", e: 32, v: 88,
-      b: ["Key data & date extraction", "Roster normalization", "Secure cloud storage"] },
-    { t: "Last-Mile Logistics & Routing", pain: "Manual routing, elevated freight costs", sol: "Cluster optimization + geocoding", imp: "alto", ic: "truck", m: "D", e: 55, v: 82,
-      b: ["Cubic volume calculations", "Multi-stop routing", "Local carrier integration"] },
-    { t: "Teacher Training", pain: "100% in-person, limited reach", sol: "Micro-learning platform + dynamic quizzes", imp: "medio", ic: "graduation-cap", m: "E", e: 18, v: 70,
-      b: ["Short videos <5 min", "Downloadable progress", "Automated certificates"] },
-    { t: "Material Translation", pain: "Slow and costly manual translations", sol: "Generative AI + human editorial review", imp: "bajo-medio", ic: "languages", m: "F", e: 18, v: 32,
-      b: ["EN/ES/PT curriculum", "Human oversight", "Theological glossaries"] },
-    { t: "Donor Impact Dashboard", pain: "Quarterly static PDF reports", sol: "Real-time portal with multimedia storytelling", imp: "medio-alto", ic: "bar-chart-3", m: "G", e: 30, v: 65,
-      b: ["Live delivery metrics", "Geolocated photos", "Verified impact stories"] },
-    { t: "RAG Inquiry Support", pain: "Overcrowded inboxes, repetitive questions", sol: "RAG Assistant trained on official manuals", imp: "alto", ic: "message-square", m: "H", e: 38, v: 90,
-      b: ["Manuals vector embeddings", "Grounded citations", "Seamless human handoff"] },
-  ];
-  const PROCESSES = IS_EN ? PROCESSES_EN : PROCESSES_ES;
-  const IMP_LABEL = { alto: "Alto", "medio-alto": "Medio-Alto", medio: "Medio", "bajo-medio": "Bajo-Medio" };
-  const IMP_COLOR = { alto: "var(--red)", "medio-alto": "#e5662b", medio: "#d49112", "bajo-medio": "var(--pine-2)" };
-
-  const FLOWS_ES = [
-    { k: "A", t: "Captación y onboarding de iglesias", ic: "church",
-      before: "La iglesia envía un email a contacto con 7 datos (nombre, contacto, dirección postal, dirección de distribución, niños por rango etario, email, celular). El equipo procesa todo a mano.",
-      after: "Formulario guiado o chatbot que valida, clasifica y asigna la postulación al equipo regional en segundos.",
-      items: ["Formulario web con validación en tiempo real", "Autocompletado de direcciones (Google Maps API)", "Clasificación IA por región, tamaño y urgencia", "Chatbot en “¿Quieres ser parte?”", "Deduplicación por similitud de nombre/dirección", "Respuesta automática con próximos pasos y materiales"],
-      kpi: [["Tiempo de respuesta", "Días → minutos"], ["Conversión", "↑ postulaciones completas"]] },
-    { k: "B", t: "Onboarding y gestión de voluntarios", ic: "users",
-      before: "27 voluntarios nuevos y equipos regionales de 6 roles coordinados por email y redes, sin seguimiento.",
-      after: "Asistente que acompaña a cada voluntario según su rol y alerta cuando alguien se desconecta.",
-      items: ["Checklist, manuales y capacitaciones por rol", "Matching de voluntarios a roles por habilidades/ubicación", "Recordatorios automáticos de tareas", "Análisis de engagement con alertas proactivas", "Certificados y badges personalizados"],
-      kpi: [["Activación", "Onboarding en 7 días"], ["Retención", "↓ voluntarios inactivos"]] },
-    { k: "C", t: "Reportes post-distribución y del maestro", ic: "clipboard-check",
-      before: "Google Forms embebidos con iframes enormes, llenado manual y consolidación en planillas.",
-      after: "Formularios nativos móviles que validan, leen fotos de evidencia y consolidan solos.",
-      items: ["Formularios nativos con UX móvil", "Validación inteligente de inconsistencias y rangos", "OCR + visión sobre fotos de evidencia", "Detección de anomalías (duplicados, cajas no distribuidas)", "Resumen ejecutivo automático por región"],
-      kpi: [["Errores", "↓ 70% datos inválidos"], ["Consolidación", "Manual → automática"]] },
-    { k: "D", t: "Logística y distribución de cajitas", ic: "truck",
-      before: "Recepción, conteo y distribución manual de 228.024 cajas, con meta de 42 contenedores en 2027.",
-      after: "Cada caja contada y trazada por cámara, con rutas y stock optimizados por región.",
-      items: ["Conteo automático por visión en bodegas", "Optimización de rutas (OR-Tools + IA)", "Predicción de demanda regional", "Inventario con alertas de stock", "OCR de etiquetas para trazabilidad"],
-      kpi: [["Exactitud de conteo", "> 99%"], ["Kilómetros", "↓ 15–25%"]] },
-    { k: "E", t: "Métricas, monitoreo y decisiones", ic: "layout-dashboard",
-      before: "Métricas presentadas en PPT manual (228k cajas, 90,5% distribuidas…).",
-      after: "Dashboard vivo con alertas y reportes ejecutivos que se escriben solos.",
-      items: ["KPIs nacionales y regionales en tiempo real", "Alertas cuando una región baja de 80%", "Predicción de cumplimiento de 42 contenedores", "Reportes ejecutivos mensuales/trimestrales con IA", "Análisis de sentimiento de feedback"],
-      kpi: [["Visibilidad", "Semanal → tiempo real"], ["Preparación de reportes", "Horas → segundos"]] },
-    { k: "F", t: "Capacitación y discipulado", ic: "graduation-cap",
-      before: "Eventos presenciales (V Región 105, Metropolitana 190 asistentes) y materiales estáticos.",
-      after: "Aprendizaje continuo por rol, disponible 24/7 y en varios idiomas.",
-      items: ["Guías de capacitación por rol (IA + revisión humana)", "Chatbot de soporte operativo", "Quiz y evaluación con retroalimentación", "Traducción automática de materiales", "Transcripción y resumen de reuniones"],
-      kpi: [["Alcance", "Capacitación sin límite de aforo"], ["Actas", "Automáticas"]] },
-    { k: "G", t: "Comunicación y marketing digital", ic: "megaphone",
-      before: "Facebook/Instagram y web con contenido manual, sin calendario editorial.",
-      after: "Calendario editorial asistido por IA, alineado a los hitos de cada región.",
-      items: ["Posts, historias y guiones de reels por hito (Calama, Punta Arenas, Puerto Natales)", "Programación automática (Buffer/Hootsuite)", "Respuestas a DMs/comentarios frecuentes", "Newsletter personalizado por región", "SEO: noindex, páginas demo, velocidad"],
-      kpi: [["Frecuencia", "Publicación constante"], ["Alcance orgánico", "↑ con SEO técnico"]] },
-    { k: "H", t: "Atención y soporte", ic: "life-buoy",
-      before: "Formulario Contact Form 7 + email; respuesta manual y lenta.",
-      after: "Asistente RAG que responde con fuentes y deriva al equipo correcto.",
-      items: ["Chatbot RAG con FAQs, manuales y páginas del sitio", "Clasificación y enrutamiento (voluntariado, donaciones, iglesias, prensa)", "Respuestas sugeridas para el equipo", "Análisis de temas recurrentes"],
-      kpi: [["Primera respuesta", "< 5 segundos"], ["Consultas resueltas", "~70% sin intervención"]] },
-  ];
-
-  const FLOWS_EN = [
-    { k: "A", t: "Church Outreach & Onboarding", ic: "church",
-      before: "The church emails contact info with 7 fields (name, contact, postal address, delivery venue, children by age, email, phone). The team processes everything by hand.",
-      after: "Guided smart form or chatbot that validates, classifies, and routes applications to regional teams in seconds.",
-      items: ["Real-time validated web form", "Address autocomplete (Google Maps API)", "AI classification by region, size, and urgency", "Chatbot on 'Want to Join?'", "Fuzzy deduplication for church names and addresses", "Instant automated reply with next steps and materials"],
-      kpi: [["Response Time", "Days → minutes"], ["Conversion", "↑ complete applications"]] },
-    { k: "B", t: "Volunteer Onboarding & Leadership Matching", ic: "users",
-      before: "27 new volunteers and regional teams across 6 roles coordinated through loose emails and social messaging without follow-up.",
-      after: "AI assistant that guides volunteers by role and proactively flags inactive members.",
-      items: ["Role-specific checklists, handbooks, and trainings", "AI skill and location matching to ministry roles", "Automated task reminders", "Engagement analytics with early-warning alerts", "Personalized badges and service certificates"],
-      kpi: [["Activation", "7-day full onboarding"], ["Retention", "↓ volunteer drop-off"]] },
-    { k: "C", t: "Teacher & Post-Distribution Reporting", ic: "clipboard-check",
-      before: "Oversized Google Forms embedded in iframes, manual entry, and error-prone spreadsheet consolidation.",
-      after: "Native mobile step-by-step forms that validate, read photo rosters via OCR, and auto-consolidate data.",
-      items: ["Step-by-step mobile UX", "Smart range and consistency validation", "Vision OCR on attendance photos", "Anomaly detection (duplicate reports, undistributed boxes)", "Instant automated regional executive summaries"],
-      kpi: [["Error Reduction", "↓ 70% invalid entries"], ["Consolidation", "Manual → instantaneous"]] },
-    { k: "D", t: "Shoebox Logistics & Regional Distribution", ic: "truck",
-      before: "Manual intake, counting, and routing of 228,024 shoeboxes toward a 42-container goal in 2027.",
-      after: "Every shoebox verified and tracked by computer vision, with routes and inventory optimized by region.",
-      items: ["Automated camera tallying in warehouse docks", "Route optimization (OR-Tools + AI)", "Regional demand forecasting", "Real-time inventory alerts", "Label OCR for full supply-chain traceability"],
-      kpi: [["Count Accuracy", "> 99%"], ["Mileage / Freight", "↓ 15–25%"]] },
-    { k: "E", t: "Metrics, Real-time Monitoring & Decision Intelligence", ic: "layout-dashboard",
-      before: "Metrics compiled into manual PowerPoint presentations (228k boxes, 90.5% distributed).",
-      after: "Live interactive dashboard with smart anomaly alerts and auto-generated executive briefs.",
-      items: ["Real-time national and regional KPIs", "Alerts when a region drops below 80% coverage", "42-container predictive milestone tracking", "Monthly/quarterly automated AI executive reports", "Feedback sentiment and prayer request analysis"],
-      kpi: [["Visibility", "Weekly → real-time"], ["Report Preparation", "Hours → seconds"]] },
-    { k: "F", t: "Training & Discipleship Microlearning", ic: "graduation-cap",
-      before: "Strictly in-person workshops (Valparaíso 105, Santiago 190 attendees) with static paper materials.",
-      after: "Continuous 24/7 role-based learning accessible from any smartphone in multiple languages.",
-      items: ["Role-specific micro-guides (AI + human review)", "Operational support chatbot", "Interactive quizzes with instant feedback", "Automated curriculum translation", "Automated meeting minutes and action items"],
-      kpi: [["Reach", "Unlimited workshop capacity"], ["Records", "100% automated"]] },
-    { k: "G", t: "Digital Communication & Ministry Storytelling", ic: "megaphone",
-      before: "Social channels and web updated manually without a structured editorial calendar.",
-      after: "AI-assisted editorial calendar aligned with regional distribution milestones.",
-      items: ["Posts, stories, and reel scripts tailored to milestones (Calama, Punta Arenas, Puerto Natales)", "Automated scheduling integrations", "Instant FAQ responses to direct messages", "Personalized regional newsletters", "Technical SEO and speed optimization"],
-      kpi: [["Publishing Frequency", "Consistent weekly schedule"], ["Organic Reach", "↑ technical SEO"]] },
-    { k: "H", t: "Inquiry Support & Grounded RAG Copilot", ic: "life-buoy",
-      before: "Standard contact form with delayed manual email responses.",
-      after: "RAG Assistant that answers with verified manual citations and escalates when needed.",
-      items: ["RAG chatbot trained on official OCC Chile FAQs and handbooks", "Smart routing (volunteers, donations, churches, press)", "Suggested drafted replies for staff", "Recurring question trend analysis"],
-      kpi: [["First Response", "< 5 seconds"], ["Resolution Rate", "~70% autonomous"]] },
-  ];
-  const FLOWS = IS_EN ? FLOWS_EN : FLOWS_ES;
 
   /* ---------------- THEME (Dark por defecto permanente) ---------------- */
   function initTheme() {
@@ -289,104 +184,6 @@
   }
 
   /* ---------------- HERO ---------------- */
-  /* ---------------- ODÓMETRO: % entregado (tarjeta fc2) ---------------- */
-  function initOdometer() {
-    const host = $('[data-odo="pct"]');
-    if (!host) return;
-    const MS_RODILLO = 900;
-    let decimas = 905;         // 91,0 %
-    const piezas = [];         // columnas de dígitos y separadores
-
-    const formatear = (v) => (v / 10).toFixed(1).replace(".", ",");
-    const soloDigitos = (t) => t.replace(/\D/g, "");
-
-    const montar = () => {
-      host.textContent = "";
-      piezas.length = 0;
-      host.setAttribute("aria-label", formatear(decimas) + "%");
-      for (const ch of formatear(decimas)) {
-        if (ch >= "0" && ch <= "9") {
-          const col = document.createElement("span");
-          col.className = "odo__d";
-          col.setAttribute("aria-hidden", "true");
-          const strip = document.createElement("span");
-          strip.className = "odo__s";
-          for (let i = 0; i < 20; i++) {
-            const celda = document.createElement("span");
-            celda.textContent = String(i % 10);
-            strip.appendChild(celda);
-          }
-          col.appendChild(strip);
-          host.appendChild(col);
-          piezas.push({ tipo: "d", strip, idx: 0, timer: 0 });
-        } else {
-          const sep = document.createElement("span");
-          sep.className = "odo__sep";
-          sep.textContent = ch;
-          sep.setAttribute("aria-hidden", "true");
-          host.appendChild(sep);
-          piezas.push({ tipo: "s" });
-        }
-      }
-      const dig = soloDigitos(formatear(decimas));
-      let k = 0;
-      piezas.forEach((p) => {
-        if (p.tipo !== "d") return;
-        const d = Number(dig[k++]);
-        p.idx = d;
-        p.strip.style.transition = "none";
-        p.strip.style.setProperty("--i", d);
-      });
-      void host.offsetWidth;
-      piezas.forEach((p) => { if (p.tipo === "d") p.strip.style.transition = ""; });
-      document.dispatchEvent(new CustomEvent("occ:pct", { detail: { value: decimas / 10 } }));
-    };
-
-    const mostrar = (nuevo) => {
-      const antes = formatear(decimas);
-      decimas = nuevo;
-      const ahora = formatear(decimas);
-      host.setAttribute("aria-label", ahora + "%");
-      document.dispatchEvent(new CustomEvent("occ:pct", { detail: { value: decimas / 10 } }));
-      if (antes.length !== ahora.length) { montar(); return; }
-      const dig = soloDigitos(ahora);
-      let k = 0;
-      piezas.forEach((p) => {
-        if (p.tipo !== "d") return;
-        const objetivo = Number(dig[k++]);
-        if (objetivo === p.idx) return;
-        // siempre gira hacia adelante, como un odómetro real
-        const destino = objetivo > p.idx ? objetivo : objetivo + 10;
-        clearTimeout(p.timer);
-        p.strip.style.setProperty("--i", destino);
-        p.idx = objetivo;
-        p.timer = setTimeout(() => {
-          p.strip.style.transition = "none";
-          p.strip.style.setProperty("--i", objetivo);
-          void p.strip.offsetWidth;
-          p.strip.style.transition = "";
-        }, MS_RODILLO);
-      });
-    };
-
-    // qué tan probable es que el % reaccione a cada tipo de salto
-    const REACCION = {
-      5:    { prob: .06, paso: 1 },
-      10:   { prob: .15, paso: 1 },
-      50:   { prob: .40, paso: 1 },
-      100:  { prob: .65, paso: 2 },
-      1000: { prob: 1,   paso: 3 }
-    };
-
-    document.addEventListener("occ:entrega", (e) => {
-      const r = REACCION[e.detail && e.detail.delta];
-      if (!r || decimas >= 1000 || Math.random() > r.prob) return;
-      mostrar(Math.min(1000, decimas + r.paso));
-    });
-
-    montar();
-  }
-
   function initHero() {
     const gift = $("#gift");
     if (gift) {
@@ -494,103 +291,6 @@
       requestAnimationFrame(loop);
     })();
   }
-
-  /* ---------------- PROCESS MAP ---------------- */
-  function initProcesses() {
-    const grid = $("#processGrid");
-    if (!grid) return;
-    grid.innerHTML = PROCESSES.map((p, i) => `
-      <article class="pcard reveal" data-imp="${p.imp}" tabindex="0" aria-label="${p.t}">
-        <div class="pcard__inner">
-          <div class="pcard__face pcard__face--front">
-            <span class="pcard__num">${String(i + 1).padStart(2, "0")}</span>
-            <div class="pcard__icon"><i data-lucide="${p.ic}"></i></div>
-            <h3>${p.t}</h3>
-            <p class="pain"><i data-lucide="circle-alert"></i> ${p.pain}</p>
-            <div class="pcard__foot"><span class="impact impact--${p.imp}">${IMP_LABEL[p.imp]}</span><span>Ver solución <i data-lucide="rotate-cw"></i></span></div>
-          </div>
-          <div class="pcard__face pcard__face--back">
-            <h4>Solución IA · Módulo ${p.m}</h4>
-            <p>${p.sol}</p>
-            <ul>${p.b.map((x) => `<li>${x}</li>`).join("")}</ul>
-            <div class="pcard__foot"><span>Impacto ${IMP_LABEL[p.imp]}</span><span>Volver <i data-lucide="rotate-ccw"></i></span></div>
-          </div>
-        </div>
-      </article>`).join("");
-    $$(".pcard", grid).forEach((c) => {
-      const flip = () => c.classList.toggle("is-flipped");
-      c.addEventListener("click", flip);
-      c.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), flip()));
-    });
-    $$("#impactFilters .chip").forEach((b) => b.addEventListener("click", () => {
-      $$("#impactFilters .chip").forEach((x) => x.classList.toggle("is-active", x === b));
-      const f = b.dataset.filter;
-      $$(".pcard", grid).forEach((c) => c.classList.toggle("is-hidden", f !== "all" && c.dataset.imp !== f));
-    }));
-
-    const m = $("#matrix");
-    /* El bloque "Matriz esfuerzo/impacto" se quitó del HTML: si #matrix no
-       existe, salta solo esta parte (los pcards y filtros ya quedaron hechos). */
-    if (!m) return;
-    PROCESSES.forEach((p, i) => {
-      const d = document.createElement("span");
-      d.className = "mdot";
-      d.textContent = String(i + 1).padStart(2, "0");
-      d.title = `${p.t} — ${p.sol}`;
-      d.style.left = 6 + p.e * .88 + "%";
-      d.style.bottom = 4 + p.v * .86 + "%";
-      d.style.background = IMP_COLOR[p.imp];
-      d.style.transitionDelay = i * 80 + "ms";
-      m.appendChild(d);
-    });
-    const legend = document.createElement("ol");
-    legend.className = "matrix__legend";
-    legend.innerHTML = PROCESSES.map((p, i) => `<li><b style="background:${IMP_COLOR[p.imp]}">${String(i + 1).padStart(2, "0")}</b>${p.t}</li>`).join("");
-    m.after(legend);
-    new IntersectionObserver(([e], o) => { if (e.isIntersecting) { m.classList.add("is-in"); o.disconnect(); } }, { threshold: .3 }).observe(m);
-  }
-
-  /* ---------------- FLOWS ---------------- */
-  function initFlows() {
-    const tabs = $("#flowTabs"), panel = $("#flowPanel");
-    if (!tabs || !panel) return;
-    tabs.innerHTML = FLOWS.map((f, i) => `<button class="ftab${i ? "" : " is-active"}" role="tab" data-i="${i}"><b>${f.k}</b><span>${f.t}</span></button>`).join("");
-    const render = (i) => {
-      const f = FLOWS[i];
-      panel.classList.remove("swap"); void panel.offsetWidth; panel.classList.add("swap");
-      panel.innerHTML = `
-        <div class="fp__top"><div class="big"><i data-lucide="${f.ic}"></i></div><div><small>Flujo ${f.k}</small><h3>${f.t}</h3></div></div>
-        <div class="compare">
-          <div class="compare__col compare__col--before"><h5><i data-lucide="hourglass"></i> Flujo actual</h5><p>${f.before}</p></div>
-          <div class="compare__arrow"><i data-lucide="arrow-right"></i></div>
-          <div class="compare__col compare__col--after"><h5><i data-lucide="sparkles"></i> Con IA</h5><p>${f.after}</p></div>
-        </div>
-        <ul class="fp__list">${f.items.map((x, j) => `<li style="animation-delay:${j * 70}ms"><i data-lucide="check"></i><span>${x}</span></li>`).join("")}</ul>
-        <div class="fp__kpi">${f.kpi.map(([a, b]) => `<div><small>KPI · ${a}</small><strong>${b}</strong></div>`).join("")}</div>`;
-      icons();
-    };
-    tabs.addEventListener("click", (e) => {
-      const b = e.target.closest(".ftab"); if (!b) return;
-      $$(".ftab", tabs).forEach((x) => x.classList.toggle("is-active", x === b));
-      render(+b.dataset.i);
-      b.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
-    });
-    render(0);
-  }
-
-  /* ---------------- DEMO TABS ---------------- */
-  const demoHooks = {};
-  function initDemoTabs() {
-    const demoTabs = $("#demoTabs");
-    if (!demoTabs) return;
-    demoTabs.addEventListener("click", (e) => {
-      const b = e.target.closest(".demo-tab"); if (!b) return;
-      $$(".demo-tab").forEach((x) => x.classList.toggle("is-active", x === b));
-      $$(".demo").forEach((d) => d.classList.toggle("is-active", d.id === "demo-" + b.dataset.demo));
-      demoHooks[b.dataset.demo] && demoHooks[b.dataset.demo]();
-    });
-  }
-  const isDemoOn = (k) => $("#demo-" + k).classList.contains("is-active") && !document.hidden;
 
   /* ---------------- A · SMART FORM ---------------- */
   const ADDRESSES = [
@@ -813,6 +513,17 @@
           <p><b>Próximos pasos:</b> 1) Ver video de bienvenida · 2) Descargar guía de distribución · 3) Agendar capacitación de El Gran Viaje.</p>`;
       }
 
+      postLead(OCC_CONFIG.formEndpoint, {
+        type: "church_application",
+        church: F.name.value.trim(),
+        contact: F.contact.value.trim(),
+        email: F.email.value.trim(),
+        phone: F.phone.value.trim(),
+        address: F.addr.value.trim(),
+        region: reg,
+        childrenTotal: total,
+        volunteerHours: hours
+      }, "occ_church_leads");
       toast("¡Postulación y roles de voluntarios enviados con éxito! 🏅", "award");
       $("#nextStep").innerHTML = `<i data-lucide="check"></i> Postulación enviada`;
       $("#nextStep").disabled = true;
@@ -924,219 +635,6 @@
         toast(`Recordatorio personalizado enviado a ${b.dataset.n} por WhatsApp`, "send");
       });
     }
-    render();
-  }
-
-  /* ---------------- C · OCR ---------------- */
-  function initOCR() {
-    const stage = $("#ocrStage");
-    if (!stage) return;
-    const boxes = $("#ocrBoxes"), tbl = $("#ocrTable tbody"), flags = $("#ocrFlags");
-    let busy = false, userImg = false;
-    const FIELDS = [
-      ["Iglesia", "Comunidad Cristiana Esperanza", 97], ["Ciudad", "Calama → Antofagasta", 99], ["Fecha", "14-12-2026", 95],
-      ["Niños asistentes", "184", 93], ["Cajas entregadas", "197", 91], ["Inscritos El Gran Viaje", "63", 88], ["Firma", "Detectada (M. Rojas)", 84],
-    ];
-    async function run() {
-      if (busy) return; busy = true;
-      boxes.innerHTML = ""; flags.innerHTML = "";
-      tbl.innerHTML = `<tr><td colspan="3" class="muted">Analizando imagen…</td></tr>`;
-      stage.classList.add("is-scanning");
-      await sleep(1600);
-      if (!userImg) {
-        const sr = stage.getBoundingClientRect();
-        $$(".doc__row em", stage).forEach((em, i) => {
-          const r = em.getBoundingClientRect();
-          const b = document.createElement("i");
-          Object.assign(b.style, { left: r.left - sr.left - 4 + "px", top: r.top - sr.top - 3 + "px", width: r.width + 8 + "px", height: r.height + 6 + "px", animationDelay: i * 90 + "ms" });
-          boxes.appendChild(b);
-        });
-      }
-      await sleep(1800);
-      stage.classList.remove("is-scanning");
-      tbl.innerHTML = FIELDS.map(([k, v, c], i) => `<tr style="animation-delay:${i * 70}ms"><td>${k}</td><td>${v}</td><td><span class="conf"><i style="--w:${c}%"></i>${c}%</span></td></tr>`).join("");
-      await sleep(400);
-      flags.innerHTML = [
-        ["warn", "triangle-alert", "<b>Inconsistencia:</b> 197 cajas vs 184 niños (+13). ¿Hermanos ausentes o cajas de reserva? Se pidió confirmación al responsable."],
-        ["ok", "copy-check", "<b>Sin duplicados:</b> no existe otro reporte de esta iglesia para el 14-12-2026."],
-        ["ok", "map-pinned", "<b>Coherente:</b> Calama pertenece al Equipo Antofagasta (región en alerta: 76,2%)."],
-        ["info", "sparkles", `<b>Resumen IA:</b> Entrega exitosa con 34% de inscripción a El Gran Viaje (promedio nacional 29%).`],
-      ].map(([t, ic, x], i) => `<div class="flag flag--${t}" style="animation-delay:${i * 120}ms"><i data-lucide="${ic}"></i><span>${x}</span></div>`).join("")
-        + (userImg ? `<div class="flag flag--info"><i data-lucide="info"></i><span>Demo: la extracción de tu foto es simulada. En producción se usaría un modelo de visión/OCR en el servidor.</span></div>` : "");
-      icons(); busy = false;
-      toast("Reporte extraído y validado — listo para consolidar", "file-check-2");
-    }
-    $("#runOcr").addEventListener("click", run);
-    $("#ocrFile").addEventListener("change", (e) => {
-      const file = e.target.files[0]; if (!file) return;
-      const url = URL.createObjectURL(file);
-      let img = $("img.user-img", stage);
-      if (!img) { img = document.createElement("img"); img.className = "user-img"; img.alt = "Evidencia subida"; stage.prepend(img); }
-      img.src = url; userImg = true; $(".doc", stage).style.visibility = "hidden";
-      run();
-    });
-  }
-
-  /* ---------------- D · LOGÍSTICA ---------------- */
-  function initLogistics() {
-    // conteo por visión
-    const conv = $("#conveyor");
-    if (!conv) return;
-    let count = 0;
-    setInterval(() => {
-      if (!isDemoOn("logi")) return;
-      const b = document.createElement("div");
-      const tag = "CL-" + (Math.random() * 1e5 | 0).toString().padStart(5, "0");
-      b.className = "cbox" + (Math.random() < .35 ? " green" : "");
-      b.dataset.tag = tag;
-      b.style.transform = `scale(${.85 + Math.random() * .25})`;
-      conv.appendChild(b);
-      // momento exacto en que el centro de la caja cruza la línea del sensor (60%)
-      const W = conv.offsetWidth, tCross = 5000 * (0.6 * W + 80 - 31) / (W + 100);
-      setTimeout(() => {
-        const conf = (95 + Math.random() * 4.8).toFixed(1);
-        b.classList.add("det"); b.innerHTML = `<b>caja ${conf}%</b>`;
-        count++; $("#cvCount").textContent = fmt(count); $("#cvTag").textContent = tag; $("#cvConf").textContent = conf + "%";
-      }, tCross);
-      setTimeout(() => b.remove(), 5200);
-    }, 1300);
-
-    // rutas
-    const svg = $("#routes");
-    const CITIES = ["Iglesia A", "Iglesia B", "Iglesia C", "Iglesia D", "Iglesia E", "Iglesia F", "Iglesia G", "Iglesia H", "Iglesia I"];
-    const d = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
-    const len = (pts, ord) => ord.reduce((s, _, i) => s + d(pts[ord[i]], pts[ord[(i + 1) % ord.length]]), 0);
-    function solve(pts) {
-      // vecino más cercano + 2-opt (lo que OR-Tools hace mejor a escala)
-      const left = new Set(pts.map((_, i) => i).slice(1)); const ord = [0];
-      while (left.size) { const last = pts[ord.at(-1)]; let best = null; left.forEach((i) => { if (best === null || d(last, pts[i]) < d(last, pts[best])) best = i; }); ord.push(best); left.delete(best); }
-      let improved = true;
-      while (improved) {
-        improved = false;
-        for (let i = 1; i < ord.length - 1; i++) for (let k = i + 1; k < ord.length; k++) {
-          const nw = [...ord.slice(0, i), ...ord.slice(i, k + 1).reverse(), ...ord.slice(k + 1)];
-          if (len(pts, nw) < len(pts, ord) - .01) { ord.splice(0, ord.length, ...nw); improved = true; }
-        }
-      }
-      return ord;
-    }
-    function draw() {
-      const pts = [{ x: 200, y: 150, n: "Bodega" }, ...CITIES.map((n) => ({ x: 30 + Math.random() * 340, y: 25 + Math.random() * 250, n }))];
-      const naive = pts.map((_, i) => i), opt = solve(pts);
-      const path = (o) => "M" + o.map((i) => `${pts[i].x.toFixed(1)},${pts[i].y.toFixed(1)}`).join("L") + "Z";
-      svg.innerHTML = `<path class="naive" d="${path(naive)}"/><path class="opt" id="optPath" d="${path(opt)}"/>` +
-        pts.map((p, i) => i ? `<circle class="node" cx="${p.x}" cy="${p.y}" r="6"/><text x="${p.x + 9}" y="${p.y + 3}">${p.n.replace("Iglesia ", "")}</text>`
-          : `<circle class="depot" cx="${p.x}" cy="${p.y}" r="10"/><text x="${p.x + 13}" y="${p.y + 4}" font-weight="700">Bodega</text>`).join("");
-      const op = $("#optPath"), L = op.getTotalLength();
-      op.style.strokeDasharray = L; op.style.strokeDashoffset = L;
-      op.getBoundingClientRect();
-      op.style.transition = "stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)"; op.style.strokeDashoffset = 0;
-      const k = 1.9, a = len(pts, naive) * k, b = len(pts, opt) * k;
-      animateCount($("#dNaive"), a, 0, "", 900); animateCount($("#dOpt"), b, 0, "", 1400);
-      $("#dSave").textContent = `−${Math.round((1 - b / a) * 100)}% km`;
-    }
-    $("#reroute").addEventListener("click", draw);
-    demoHooks.logi = () => draw();
-    draw();
-
-    // demanda
-    $("#demand").innerHTML = REGIONS.map((r) => {
-      const hist = [.78, .84, .9, .95, 1].map((f) => r.b * f * (0.96 + Math.random() * .08));
-      const growth = r.d < 82 ? -2 + Math.random() * 4 : 3 + Math.random() * 6;
-      const pred = r.b * (1 + growth / 100);
-      const all = [...hist, pred], mx = Math.max(...all), mn = Math.min(...all);
-      const sp = all.map((v, i) => `${(i / 5) * 100},${26 - ((v - mn) / (mx - mn || 1)) * 22}`).join(" L");
-      return `<div class="dcell${r.d < 80 ? " alert" : ""}"><small>${r.s}</small><strong>${fmt(pred)}</strong><span class="delta ${growth >= 0 ? "up" : "dn"}">${growth >= 0 ? "+" : ""}${growth.toFixed(1)}%</span>
-        <svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none"><path d="M${sp}"/></svg></div>`;
-    }).join("");
-  }
-
-  /* ---------------- E · DASHBOARD ---------------- */
-  function initDashboard() {
-    const data = REGIONS.map((r) => ({ ...r }));
-    let sort = "geo";
-    const barsEl = $("#bars");
-    barsEl.innerHTML = data.map((r) => `<div class="bar" data-i="${r.i}"><span class="bar__name" title="${r.n}">${r.s}</span><div class="bar__track"><div class="bar__fill"></div></div><span class="bar__val"></span></div>`).join("");
-    const rowH = () => ($(".bar", barsEl)?.offsetHeight || 20) + 7;
-
-    function render() {
-      const order = [...data].sort((a, b) => (sort === "pct" ? b.d - a.d : a.i - b.i));
-      barsEl.style.position = "relative";
-      barsEl.style.height = order.length * rowH() + "px";
-      order.forEach((r, pos) => {
-        const el = $(`.bar[data-i="${r.i}"]`, barsEl);
-        el.style.position = "absolute"; el.style.left = 0; el.style.right = 0; el.style.top = 0;
-        el.style.transform = `translateY(${pos * rowH()}px)`;
-        el.className = "bar" + (r.d < 80 ? " low" : r.d < 88 ? " mid" : "");
-        $(".bar__fill", el).style.width = r.d + "%";
-        $(".bar__val", el).textContent = fmt(r.d, 1) + "%";
-      });
-      const total = data.reduce((a, r) => a + r.b, 0);
-      const dist = data.reduce((a, r) => a + r.b * r.d, 0) / total;
-      $("#kDist").textContent = fmt(dist, 1) + "%";
-      $("#ringDist").style.setProperty("--p", dist.toFixed(1));
-      $("#kTotal").textContent = fmt(total);
-      const low = data.filter((r) => r.d < 80);
-      $("#kAlerts").textContent = low.length;
-      $("#alerts").innerHTML = (low.length ? low.map((r) => `<li><i data-lucide="triangle-alert"></i><div><strong>${r.n}: ${fmt(r.d, 1)}%</strong>${fmt(Math.round(r.b * (1 - r.d / 100)))} cajas sin distribuir · equipo notificado</div></li>`).join("")
-        : `<li class="ok"><i data-lucide="party-popper"></i><div><strong>¡Todas las regiones sobre 80%!</strong>Meta de cumplimiento alcanzada.</div></li>`)
-        + `<li class="ok"><i data-lucide="trending-up"></i><div><strong>Metropolitana lidera</strong>${fmt(data[6].d, 1)}% distribuido</div></li>`;
-      icons();
-      return { dist, low, total };
-    }
-    $("#sortSeg").addEventListener("click", (e) => {
-      const b = e.target.closest("button"); if (!b) return;
-      $$("#sortSeg button").forEach((x) => x.classList.toggle("is-on", x === b)); sort = b.dataset.s; render();
-    });
-
-    // tiempo real: llegan reportes nuevos
-    setInterval(() => {
-      if (!isDemoOn("dash")) return;
-      const r = data[(Math.random() * data.length) | 0];
-      if (r.d < 99) r.d = Math.min(99.4, r.d + Math.random() * .9);
-      render();
-    }, 2500);
-
-    async function summary() {
-      const s = render(), el = $("#summary");
-      const sorted = [...data].sort((a, b) => b.d - a.d);
-      const txt = `Resumen ejecutivo (generado por IA · ${new Date().toLocaleDateString("es-CL")}): A nivel nacional se han distribuido el ${fmt(s.dist, 1)}% de ${fmt(s.total)} cajas. `
-        + `Las regiones con mejor desempeño son ${sorted[0].s} (${fmt(sorted[0].d, 1)}%) y ${sorted[1].s} (${fmt(sorted[1].d, 1)}%). `
-        + (s.low.length ? `Requieren apoyo inmediato: ${s.low.map((r) => `${r.s} (${fmt(r.d, 1)}%)`).join(", ")}; se recomienda reasignar voluntarios de logística y revisar rutas de entrega. ` : "Ninguna región está bajo el umbral de 80%. ")
-        + `Con la tendencia actual, la proyección indica 43 contenedores para 2027, superando la meta de 42.`;
-      el.innerHTML = ""; const span = document.createElement("span"); const caret = document.createElement("span"); caret.className = "caret";
-      el.append(span, caret);
-      for (const w of txt.split(" ")) { span.textContent += w + " "; await sleep(28); }
-      caret.remove();
-    }
-    $("#regen").addEventListener("click", summary);
-
-    // forecast
-    const years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027];
-    const real = [18, 22, 26, 29, 33, 36, 38];
-    const pred = 43, goal = 42;
-    $("#kCont").textContent = `${real.at(-1)} → ${goal}`;
-    $("#kContEta").textContent = `Predicción 2027: ${pred} ✓`;
-    $("#kContEta").className = "up";
-    const W = 800, H = 220, pl = 40, pr = 20, pt = 16, pb = 30;
-    const x = (i) => pl + (i / (years.length - 1)) * (W - pl - pr);
-    const y = (v) => pt + (1 - (v - 10) / 40) * (H - pt - pb);
-    const svg = $("#forecast");
-    let g = "";
-    [10, 20, 30, 40, 50].forEach((v) => (g += `<line class="grid" x1="${pl}" x2="${W - pr}" y1="${y(v)}" y2="${y(v)}"/><text x="6" y="${y(v) + 4}">${v}</text>`));
-    years.forEach((yr, i) => (g += `<text x="${x(i) - 15}" y="${H - 8}">${yr}</text>`));
-    const rp = real.map((v, i) => `${x(i)},${y(v)}`).join(" L");
-    const li = real.length - 1;
-    g += `<path class="band" d="M${x(li)},${y(real[li])} L${x(li + 1)},${y(pred + 3)} L${x(li + 1)},${y(pred - 3)} Z"/>`;
-    g += `<line class="goal" x1="${pl}" x2="${W - pr}" y1="${y(goal)}" y2="${y(goal)}"/><text x="${W - pr - 90}" y="${y(goal) - 6}" style="fill:#d49112;font-weight:700">Meta 42</text>`;
-    g += `<path class="real draw" style="--len:900" d="M${rp}"/>`;
-    g += `<path class="pred" d="M${x(li)},${y(real[li])} L${x(li + 1)},${y(pred)}"/>`;
-    g += real.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="var(--red)"><title>${years[i]}: ${v} contenedores</title></circle>`).join("");
-    g += `<circle cx="${x(li + 1)}" cy="${y(pred)}" r="6" fill="var(--pine-2)"><title>Predicción 2027: ${pred}</title></circle><text x="${x(li + 1) - 70}" y="${y(pred) - 10}" style="fill:var(--pine-2);font-weight:700">Pred. ${pred}</text>`;
-    svg.innerHTML = g;
-
-    let first = true;
-    demoHooks.dash = () => { render(); if (first) { first = false; summary(); } };
     render();
   }
 
@@ -1706,44 +1204,6 @@
     return `${answer}${linksHtml}${srcHtml}`;
   }
 
-  function initChat() {
-    const body = $("#chatBody"), form = $("#chatForm");
-    if (!body || !form) return;
-    const input = $("#chatIn"), langSel = $("#lang");
-    let lang = "es", busy = false;
-    const add = (html, who) => {
-      const m = document.createElement("div"); m.className = "msg msg--" + who; m.innerHTML = html; body.appendChild(m);
-      body.scrollTop = body.scrollHeight; icons(); return m;
-    };
-    const chips = () => { $("#chatChips").innerHTML = UI[lang].chips.map((c) => `<button type="button">${c}</button>`).join(""); };
-    const steps = $$("#ragSteps li");
-    const setStep = (i, txt) => { if (steps[i]) { steps[i].classList.add("on"); steps[i].querySelector("span").textContent = txt; } };
-    async function ask(q) {
-      if (busy || !q.trim()) return; busy = true;
-      add(q.replace(/</g, "&lt;"), "user");
-      steps.forEach((s) => { s.classList.remove("on"); s.querySelector("span").textContent = "—"; });
-      const t = add(`<span class="typing"><i></i><i></i><i></i></span>`, "bot");
-      const hit = scoreKB(q);
-      await sleep(350); setStep(0, hit ? `${hit.cat} · confianza ${(.85 + Math.random() * .13).toFixed(2)}` : "Sin categoría clara");
-      await sleep(450); setStep(1, hit ? `${hit.src.length} fragmentos · enlaces ${hit.links ? hit.links.length : 0}` : "0 fragmentos relevantes");
-      await sleep(450); setStep(2, hit ? `Respuesta con ${hit.src.length} citas · ${lang.toUpperCase()}` : "Derivación segura con enlaces");
-      await sleep(250); setStep(3, hit ? hit.route : "Humano · bandeja de atención");
-      t.remove();
-      add(renderBotHtml(hit, lang), "bot");
-      busy = false;
-    }
-    form.addEventListener("submit", (e) => { e.preventDefault(); const q = input.value; input.value = ""; ask(q); });
-    $("#chatChips").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
-    langSel?.addEventListener("change", () => { lang = langSel.value; chips(); add(UI[lang].hi, "bot"); toast("Idioma cambiado · traducción con IA", "languages"); });
-    add(UI.es.hi, "bot"); chips();
-
-    const topics = [["Armado de cajas", 34], ["Fechas de recolección", 26], ["Postulación de iglesias", 18], ["Reportes", 12], ["Voluntariado", 10]];
-    const topicsEl = $("#topics");
-    if (topicsEl) {
-      topicsEl.innerHTML = topics.map(([n, v]) => `<div class="topic"><span>${n}</span><b>${v}%</b><i style="--w:${v * 2.5}%"></i></div>`).join("");
-    }
-  }
-
   /* ---------------- WIDGET FLOTANTE ASISTENTE OCC (IA) ---------------- */
   function initChatWidget() {
     const widget = $("#chatWidget"),
@@ -1752,8 +1212,7 @@
       form = $("#widgetChatForm"),
       input = $("#widgetChatIn"),
       langSel = $("#widgetLang"),
-      closeBtn = $("#widgetClose"),
-      expandBtn = $("#widgetExpand");
+      closeBtn = $("#widgetClose");
 
     if (!widget || !fab) return;
 
@@ -1832,18 +1291,6 @@
       closeWidget();
     });
 
-    expandBtn?.addEventListener("click", () => {
-      closeWidget();
-      const chatTab = document.querySelector('.demo-tab[data-demo="chat"]');
-      if (chatTab) {
-        chatTab.click();
-        const demoChatEl = document.getElementById("demo-chat");
-        if (demoChatEl) {
-          demoChatEl.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }
-    });
-
     body?.addEventListener("click", (e) => {
       const link = e.target.closest("a.chat-link, a.chat-src-link");
       if (link) {
@@ -1892,15 +1339,6 @@
         closeWidget();
       }
     });
-  }
-
-  /* ---------------- ARQUITECTURA ---------------- */
-  function initArch() {
-    const matrix = $("#matrix");
-    if (!matrix) return;
-    const mods = [["A", "Iglesias", "church"], ["B", "Voluntarios", "users"], ["C", "Reportes", "clipboard-check"], ["D", "Logística", "truck"],
-      ["E", "Métricas", "layout-dashboard"], ["F", "Capacitación", "graduation-cap"], ["G", "Comunicación", "megaphone"], ["H", "Soporte", "life-buoy"]];
-    $("#archMods").innerHTML = mods.map(([k, n, ic]) => `<span><i data-lucide="${ic}"></i><b>${k}</b> ${n}</span>`).join("");
   }
 
   /* ---------------- CENTRO DE DATOS (gráficos en vivo) ---------------- */
@@ -2572,6 +2010,77 @@
     });
   }
 
+  /* ---------------- MODAL GUÍA ¿QUÉ PONER EN UNA CAJITA? ---------------- */
+  function initBoxGuide() {
+    const modal = $("#boxGuideModal");
+    if (!modal) return;
+    const openBtn = $("#openBoxGuideBtn");
+    const closeBtn = $("#boxGuideClose");
+    const ctaBtn = $("#boxGuideCta");
+    const yesList = $("#boxGuideYesList");
+    const tabs = $$(".bguide-tab", modal);
+
+    const AGE_IDEAS = {
+      "2-4": [
+        "<strong>Artículo “¡Wow!”:</strong> peluche suave, muñeca, pelota pequeña con bombín o camión de juguete.",
+        "<strong>Juguetes:</strong> bloques grandes, instrumentos musicales, libros para colorear y crayones gruesos.",
+        "<strong>Cuidado personal:</strong> cepillo de dientes, peineta, toalla pequeña y vaso plástico reutilizable.",
+        "<strong>Vestuario y accesorios:</strong> calcetines, gorro, polera o mochila ligera.",
+        "<strong>Nota personal:</strong> tarjeta cariñosa y foto de tu familia o iglesia."
+      ],
+      "5-9": [
+        "<strong>Artículo “¡Wow!”:</strong> pelota de fútbol desinflada con bombín, muñeca, auto de juguete o juego didáctico.",
+        "<strong>Útiles escolares:</strong> cuaderno, lápices de colores, sacapuntas, goma de borrar, regla y estuche.",
+        "<strong>Juguetes:</strong> cuerda para saltar, yo-yo, stickers, rompecabezas o libro de actividades.",
+        "<strong>Cuidado personal:</strong> cepillo de dientes, peineta, jabón en barra sellado y botella reutilizable.",
+        "<strong>Nota personal:</strong> carta de ánimo y foto de tu familia o iglesia."
+      ],
+      "10-14": [
+        "<strong>Artículo “¡Wow!”:</strong> balón deportivo con bombín, linterna solar/con pilas, mochila plegable o reloj.",
+        "<strong>Útiles escolares:</strong> cuadernos, bolígrafos, destacadores, calculadora solar y juego geométrico.",
+        "<strong>Accesorios:</strong> lentes de sol, gorra, pañuelo, kit de costura, pulseras o billetera.",
+        "<strong>Cuidado personal:</strong> cepillo de dientes, cepillo de pelo, toalla deportiva y botella reutilizable.",
+        "<strong>Nota personal:</strong> mensaje alentador, versículo bíblico y foto de tu grupo."
+      ]
+    };
+
+    const renderAge = (age) => {
+      const items = AGE_IDEAS[age] || AGE_IDEAS["5-9"];
+      if (yesList) yesList.innerHTML = items.map(i => `<li>${i}</li>`).join("");
+      tabs.forEach(t => {
+        const active = t.dataset.age === age;
+        t.classList.toggle("is-active", active);
+        t.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    };
+
+    const open = () => {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      icons();
+      closeBtn?.focus();
+    };
+
+    const close = () => {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    openBtn?.addEventListener("click", open);
+    closeBtn?.addEventListener("click", close);
+    ctaBtn?.addEventListener("click", close);
+    $$("[data-close-bguide]", modal).forEach(el => el.addEventListener("click", close));
+    tabs.forEach(tab => tab.addEventListener("click", () => renderAge(tab.dataset.age)));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+
+    renderAge("2-4");
+  }
+
   /* ---------------- FOOTER NEWSLETTER ---------------- */
   function initFooterNewsletter() {
     const form = $("#footerNewsForm");
@@ -2597,6 +2106,7 @@
         msg.textContent = "¡Listo! Te avisaremos novedades de la temporada 2026.";
         msg.classList.remove("is-error");
       }
+      postLead(OCC_CONFIG.newsletterEndpoint, { type: "newsletter_2026", email }, "occ_newsletter_leads");
       toast("¡Gracias! Te avisaremos novedades de la temporada 2026.", "mail-check");
       form.reset();
     });
@@ -2617,22 +2127,14 @@
     safeRun("nav", initNav);
     safeRun("hero", initHero);
     safeRun("skyFleet", initSkyFleet);
-    safeRun("processes", initProcesses);
-    safeRun("flows", initFlows);
-    safeRun("arch", initArch);
     safeRun("tierraPanels", initTierraPanels);
     safeRun("datosSection", initDatosSection);
     safeRun("metricsPanel", initMetricsPanel);
     safeRun("counters", initCounters);
-    safeRun("odometer", initOdometer);
-    safeRun("demoTabs", initDemoTabs);
     safeRun("form", initForm);
     safeRun("volunteers", initVolunteers);
-    safeRun("ocr", initOCR);
-    safeRun("logistics", initLogistics);
-    safeRun("dashboard", initDashboard);
-    safeRun("chat", initChat);
     safeRun("chatWidget", initChatWidget);
+    safeRun("boxGuide", initBoxGuide);
     safeRun("footerNewsletter", initFooterNewsletter);
     safeRun("icons", icons);
   });

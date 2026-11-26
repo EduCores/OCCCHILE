@@ -10,6 +10,17 @@ const { execSync } = require('child_process');
 const root = __dirname;
 let hasErrors = false;
 
+const HTML_FILES = [
+  'index.html',
+  'quienes-somos.html',
+  'mision-e-historia.html',
+  'videos.html',
+  'admin.html',
+];
+const PUBLIC_HTML_FILES = HTML_FILES.filter(f => f !== 'admin.html');
+const CSS_FILES = ['styles.css', 'admin.css'];
+const JS_FILES = ['app.js', 'admin.js'];
+
 function error(msg) {
   console.error("❌ ERROR:", msg);
   hasErrors = true;
@@ -78,7 +89,7 @@ function validateHtmlTree(filename) {
 
 // 2. Validador de codificación UTF-8 / Mojibake
 function validateEncoding(files) {
-  const suspicious = [/Ã¡|Ã©|Ã­|Ã³|Ãº|Ã±|Ã‘|â€|â€“|â€”|Â/g];
+  const suspicious = [/Ã¡|Ã©|Ã­|Ã³|Ãº|Ã±|Ã‘|â€|â€“|â€”|Â|àš/g];
   for (const f of files) {
     const filePath = path.join(root, f);
     if (!fs.existsSync(filePath)) continue;
@@ -99,6 +110,7 @@ function validateEncoding(files) {
 // 3. Validador de sintaxis JavaScript
 function validateJsSyntax(filename) {
   const filePath = path.join(root, filename);
+  if (!fs.existsSync(filePath)) return;
   try {
     execSync(`node --check "${filePath}"`, { stdio: 'pipe' });
     success(`${filename} -> Sintaxis JS válida.`);
@@ -125,32 +137,90 @@ function validateCss(filename) {
   }
 }
 
-// 5. Validador de Cache Busting
-function validateCacheBusting() {
-  const es = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+// 5. Validador de enlaces internos, imágenes existentes y cache-busting sincronizado
+function validateLinksAssetsAndVersions() {
+  const idsByFile = {};
+  const htmlByFile = {};
 
-  const esCss = (es.match(/styles\.css\?v=(\d+)/) || [])[1];
-  const esJs = (es.match(/app\.js\?v=(\d+)/) || [])[1];
-
-  if (!esCss) {
-    error("styles.css en index.html no tiene versión de cache busting (?v=N)");
-  } else {
-    success(`Cache busting styles.css activo: v=${esCss}`);
+  for (const f of HTML_FILES) {
+    const html = fs.readFileSync(path.join(root, f), 'utf8');
+    htmlByFile[f] = html;
+    idsByFile[f] = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
   }
 
-  if (!esJs) {
-    error("app.js en index.html no tiene versión de cache busting (?v=N)");
+  // Enlaces internos + imágenes
+  for (const f of HTML_FILES) {
+    const html = htmlByFile[f];
+    const brokenLinks = [];
+    const missingImgs = [];
+
+    for (const m of html.matchAll(/\bhref="([^"]+)"/g)) {
+      const h = m[1];
+      if (/^(https?:|mailto:|tel:|javascript:)/.test(h)) continue;
+      if (h === '#') {
+        brokenLinks.push('#');
+        continue;
+      }
+      if (h.startsWith('#')) {
+        if (!idsByFile[f].has(h.slice(1))) brokenLinks.push(h);
+      } else if (/\.html(#|$)/.test(h)) {
+        const [fp, hash] = h.split('#');
+        if (!fs.existsSync(path.join(root, fp))) brokenLinks.push(`${h} (archivo ausente)`);
+        else if (hash && idsByFile[fp] && !idsByFile[fp].has(hash)) brokenLinks.push(`${h} (ancla ausente)`);
+      }
+    }
+
+    for (const m of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)) {
+      const src = m[1].split('?')[0];
+      if (/^(https?:|data:)/.test(src)) continue;
+      if (!fs.existsSync(path.join(root, src))) missingImgs.push(src);
+    }
+
+    if (brokenLinks.length) error(`${f} -> Enlaces internos rotos: ${[...new Set(brokenLinks)].join(', ')}`);
+    else success(`${f} -> 0 enlaces internos rotos.`);
+
+    if (missingImgs.length) error(`${f} -> Imágenes faltantes: ${[...new Set(missingImgs)].join(', ')}`);
+    else success(`${f} -> Todas las imágenes locales existen.`);
+  }
+
+  // Sincronía de cache busting
+  const cssVersions = new Map();
+  const jsVersions = new Map();
+
+  for (const f of HTML_FILES) {
+    const html = htmlByFile[f];
+    const cssV = (html.match(/styles\.css\?v=(\d+)/) || [])[1];
+    if (!cssV) error(`${f} -> styles.css sin versión ?v=N`);
+    else cssVersions.set(f, cssV);
+
+    if (PUBLIC_HTML_FILES.includes(f)) {
+      const jsV = (html.match(/app\.js\?v=(\d+)/) || [])[1];
+      if (!jsV) error(`${f} -> app.js sin versión ?v=N`);
+      else jsVersions.set(f, jsV);
+    }
+  }
+
+  const uniqueCss = [...new Set(cssVersions.values())];
+  if (uniqueCss.length !== 1) {
+    error(`Desincronía de styles.css?v=N: ${JSON.stringify(Object.fromEntries(cssVersions))}`);
   } else {
-    success(`Cache busting app.js activo: v=${esJs}`);
+    success(`Cache busting styles.css sincronizado en 5 páginas: v=${uniqueCss[0]}`);
+  }
+
+  const uniqueJs = [...new Set(jsVersions.values())];
+  if (uniqueJs.length !== 1) {
+    error(`Desincronía de app.js?v=N: ${JSON.stringify(Object.fromEntries(jsVersions))}`);
+  } else {
+    success(`Cache busting app.js sincronizado en 4 páginas: v=${uniqueJs[0]}`);
   }
 }
 
 console.log("=== OCC CHILE · TEST DE INTEGRIDAD Y PREVENCIÓN ===");
-validateHtmlTree('index.html');
-validateEncoding(['index.html', 'styles.css', 'app.js']);
-validateJsSyntax('app.js');
-validateCss('styles.css');
-validateCacheBusting();
+HTML_FILES.forEach(validateHtmlTree);
+validateEncoding([...HTML_FILES, ...CSS_FILES, ...JS_FILES]);
+JS_FILES.forEach(validateJsSyntax);
+CSS_FILES.forEach(validateCss);
+validateLinksAssetsAndVersions();
 
 if (hasErrors) {
   console.log("\n❌ VERIFICACIÓN FALLIDA. Corregir los errores anteriores.");
@@ -159,4 +229,3 @@ if (hasErrors) {
   console.log("\n🎉 TODOS LOS CHEQUEOS PASARON EXITOSAMENTE.");
   process.exit(0);
 }
-

@@ -300,6 +300,7 @@ body.admin-body {
   color: var(--admin-red);
 }
 
+.admin-view-header h1,
 .admin-view-header h2 {
   font-family: var(--display, 'Philosopher', serif);
   font-size: clamp(2rem, 3.2vw, 2.6rem);

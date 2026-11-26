@@ -320,7 +320,7 @@ body.admin-body {
 /* ---------------- .mx-card Adapters & KPI Grid ---------------- */
 .admin-kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
   gap: 22px;
   margin-bottom: 28px;
 }
@@ -487,7 +487,7 @@ body.admin-body {
 /* ---------------- Grid de Automatizaciones ---------------- */
 .admin-automations-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 22px;
   margin-bottom: 26px;
 }
@@ -842,4 +842,116 @@ input:checked + .admin-slider:before {
   justify-content: center !important;
   padding: 9px 16px !important;
   font-size: 0.84rem !important;
+}
+
+
+/* ---------------- Smartphone & Tablet Fix (admin.html) ---------------- */
+.admin-layout,
+.admin-main,
+.admin-view,
+.admin-kpis,
+.admin-kpis .mx-card,
+.admin-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.admin-table-wrap,
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+@media (max-width: 960px) {
+  .admin-topbar {
+    padding: 0 16px;
+    height: 64px;
+    gap: 10px;
+  }
+
+  .admin-topbar__brand {
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .admin-topbar__brand a {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+  }
+
+  .admin-topbar__logo {
+    height: 30px;
+    width: auto;
+  }
+
+  .admin-topbar__pill,
+  .admin-topbar__status {
+    display: none;
+  }
+
+  .admin-topbar__actions {
+    gap: 8px;
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+
+  .admin-topbar__actions .btn {
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: .8rem;
+  }
+
+  .admin-sidebar {
+    gap: 8px;
+    scrollbar-width: none;
+  }
+
+  .admin-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .admin-view-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-topbar {
+    padding: 0 12px;
+    height: 60px;
+  }
+
+  .admin-topbar__logo {
+    height: 26px;
+  }
+
+  .admin-user {
+    padding: 3px;
+  }
+
+  .admin-user span {
+    display: none;
+  }
+
+  .admin-main {
+    padding: 18px 14px 40px;
+  }
+
+  .admin-kpis {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .admin-kpis .mx-card {
+    padding: 16px 14px;
+  }
+
+  .admin-kpis .mx-card__head,
+  .admin-kpis .mx-card__foot {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }

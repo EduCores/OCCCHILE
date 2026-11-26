@@ -120,21 +120,26 @@
     onScroll();
     const burger = $("#burger");
     const navMenu = $("#navMenu") || $(".nav__links-wrap");
+    const navList = $("#navLinks2");
     if (burger && navMenu) {
+      const setOpen = (open) => {
+        navMenu.classList.toggle("is-open", open);
+        navList?.classList.toggle("is-open", open);
+        burger.classList.toggle("is-open", open);
+        burger.setAttribute("aria-expanded", String(open));
+      };
       burger.addEventListener("click", (e) => {
         e.stopPropagation();
-        const isOpen = navMenu.classList.toggle("is-open");
-        burger.setAttribute("aria-expanded", String(isOpen));
+        setOpen(!navMenu.classList.contains("is-open"));
       });
-      $("a", navMenu).forEach((a) => a.addEventListener("click", () => {
-        navMenu.classList.remove("is-open");
-        burger.setAttribute("aria-expanded", "false");
-      }));
+      $$("a", navMenu).forEach((a) => a.addEventListener("click", () => setOpen(false)));
       document.addEventListener("click", (e) => {
         if (navMenu.classList.contains("is-open") && !navMenu.contains(e.target) && !burger.contains(e.target)) {
-          navMenu.classList.remove("is-open");
-          burger.setAttribute("aria-expanded", "false");
+          setOpen(false);
         }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && navMenu.classList.contains("is-open")) setOpen(false);
       });
     }
     if (document.getElementById("viaje")) {
@@ -1914,13 +1919,33 @@
       item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
     });
 
+    function syncActiveItem() {
+      const normAngle = ((currAngle % 360) + 360) % 360;
+      const activeIndex = Math.round(normAngle / angleStep) % items.length;
+      items.forEach((item, idx) => item.classList.toggle("is-active", idx === activeIndex));
+      return activeIndex;
+    }
+
     function rotateCarousel(direction) {
       currAngle += direction * angleStep;
       carousel.style.transform = `rotateY(${currAngle * -1}deg)`;
+      syncActiveItem();
     }
+
+    syncActiveItem();
 
     if (prevBtn) prevBtn.addEventListener("click", () => rotateCarousel(-1));
     if (nextBtn) nextBtn.addEventListener("click", () => rotateCarousel(1));
+
+    // Soporte touch swipe en móvil para cambiar de región deslizando
+    let touchStartX = 0;
+    carousel.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0]?.clientX || 0;
+    }, { passive: true });
+    carousel.addEventListener("touchend", (e) => {
+      const dx = (e.changedTouches[0]?.clientX || 0) - touchStartX;
+      if (Math.abs(dx) > 42) rotateCarousel(dx < 0 ? 1 : -1);
+    }, { passive: true });
 
     items.forEach((item, index) => {
       item.addEventListener("click", (e) => {

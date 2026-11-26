@@ -396,7 +396,19 @@ em {
 
 .nav.is-scrolled {
   padding: 8px 0;
-  background: rgb(12 19 17 / 23%);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: 0;
+}
+
+.nav.is-scrolled::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgb(12 19 17 / 28%);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   backdrop-filter: blur(14px) saturate(1.4);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
@@ -4895,7 +4907,9 @@ input[type="range"] {
   }
 
   .htl__dot {
-    position: static;
+    position: relative;
+    left: auto;
+    top: auto;
     transform: none;
     grid-row: 1 / span 2;
   }
@@ -5715,7 +5729,7 @@ input[type="range"] {
   /* centrado por layout: funciona con cualquier tamaño de PNG */
   width: auto;
   max-width: none;
-  z-index: 2147483647;
+  z-index: 5;
   pointer-events: none;
   filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .30));
   animation: avionFlote 18s ease-in-out infinite;
@@ -12603,5 +12617,347 @@ h2.section-title--pine {
     padding: 8px 6px;
     font-size: .78rem;
     text-align: center;
+  }
+}
+
+
+/* ============ SMARTPHONE POLISH (<= 760px / 360px-390px) ============ */
+#inicio,
+#tierra,
+#datos,
+.marquee {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.mx-grid > *,
+.mx-card,
+.mx-panel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    padding: 4px 0;
+    max-height: 220px;
+  }
+
+  .topbar__inner {
+    gap: 4px 10px;
+    justify-content: center;
+  }
+
+  .topbar__contact {
+    font-size: .74rem;
+    gap: 8px 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .topbar__links {
+    margin-left: 0;
+    justify-content: center;
+    gap: 2px 6px;
+  }
+
+  .topbar__links a {
+    padding: 4px 9px;
+    font-size: .76rem;
+  }
+
+  .hero {
+    padding: 186px 0 74px;
+  }
+
+  .hero--subpage {
+    padding: 178px 0 68px;
+  }
+
+  .hero__visual {
+    height: auto;
+    min-height: 360px;
+    padding-bottom: 24px;
+  }
+
+  .fc1 {
+    bottom: 22px;
+    left: 4px;
+    z-index: 6;
+  }
+
+  .mx-card {
+    padding: 18px 16px;
+  }
+
+  .mx-donut-pills {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .topbar__inner {
+    padding: 4px 0;
+    gap: 4px 8px;
+  }
+
+  .topbar__extras {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero {
+    padding-top: 224px;
+  }
+
+  .hero__cta {
+    gap: 10px;
+  }
+
+  .hero__cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* ============ FIXES MÓVIL: MENÚ BURGER, #TIERRA RESPONSIVE Y .FABS SIEMPRE VISIBLES ============ */
+/* Garantiza botones flotantes siempre visibles en smartphones y sobre cualquier sección */
+.fabs {
+  position: fixed !important;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 950 !important;
+  display: flex !important;
+  flex-direction: column;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateZ(0);
+}
+
+@media (max-width: 600px) {
+  .fabs {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+}
+
+/* Menú móvil hamburguesa (#burger -> .nav__links-wrap.is-open / #navLinks2.is-open) */
+@media (max-width: 960px) {
+  .nav {
+    z-index: 820;
+  }
+
+  .nav__burger {
+    position: relative;
+    z-index: 840;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0aa63a, #047526);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, .36);
+    box-shadow: 0 8px 18px -6px rgba(4, 117, 38, .65), inset 0 1px 0 rgba(255, 255, 255, .38);
+    transition: background .22s var(--ease), transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
+  }
+
+  .nav__burger:hover,
+  .nav__burger:focus-visible,
+  .nav__burger.is-open {
+    background: linear-gradient(135deg, #d61f3c, #b3122e);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, .52);
+    box-shadow: 0 10px 22px -6px rgba(179, 18, 46, .75), inset 0 1px 0 rgba(255, 255, 255, .42);
+    transform: translateY(-1px);
+  }
+
+  .nav__links-wrap {
+    position: static;
+  }
+
+  .nav__links--secondary {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 14px;
+    right: 14px;
+    z-index: 860;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .18);
+    border: 1px solid rgba(255, 255, 255, .34);
+    border-top-color: rgba(255, 255, 255, .52);
+    box-shadow: 0 20px 44px -10px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255, 255, 255, .38);
+    backdrop-filter: blur(24px) saturate(1.55);
+    -webkit-backdrop-filter: blur(24px) saturate(1.55);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(.98);
+    transition: opacity .24s var(--ease), transform .24s var(--ease), visibility .24s var(--ease);
+  }
+
+  .nav__links-wrap.is-open .nav__links--secondary,
+  .nav__links--secondary.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .nav__links--secondary a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: .95rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .45);
+    white-space: normal;
+    transition: background .18s var(--ease), color .18s var(--ease);
+  }
+
+  .nav__links--secondary a:hover,
+  .nav__links--secondary a.is-active {
+    background: rgba(255, 255, 255, .22);
+    color: #fde3a7;
+  }
+}
+
+/* Sección #tierra ("Norte a sur · Hasta lo último de la tierra") responsive móvil */
+@media (max-width: 768px) {
+  .last-earth {
+    --art-scale: 1.16;
+    padding: 58px 0 48px;
+  }
+
+  .last-earth .section__head {
+    margin-bottom: 10px;
+  }
+
+  .last-earth .tierra-art {
+    width: calc(100% * var(--art-scale));
+    margin: 18px 0 0;
+  }
+
+  .tierra-stage {
+    perspective: none;
+    min-height: 0;
+    margin-top: 8px;
+    padding: 0 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .tierra-avion {
+    position: relative;
+    inset: auto;
+    width: min(340px, 88vw);
+    max-width: 100%;
+    height: auto;
+    margin: 8px auto -14px;
+    translate: none;
+    z-index: 2;
+    animation: avionFlote 18s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .tierra-main.tierra-main--carousel {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+    translate: none;
+    transform: none !important;
+    transform-style: flat;
+  }
+
+  .tierra-main--carousel .tierra-carousel-container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    perspective: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 22px;
+    align-items: center;
+  }
+
+  .tierra-carousel-3d {
+    grid-column: 1 / -1;
+    order: 1;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    transform: none !important;
+    transform-style: flat;
+  }
+
+  .tierra-main--carousel .tierra-carousel-item {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 18px 34px -12px rgba(10, 42, 24, .42);
+    transition: opacity .32s var(--ease);
+  }
+
+  .tierra-main--carousel .tierra-carousel-item.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+  }
+
+  .tierra-panel__video,
+  .tierra-panel__video-thumb {
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+  }
+
+  .tierra-carousel-nav {
+    position: relative !important;
+    top: auto !important;
+    order: 2;
+    transform: none !important;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+  }
+
+  .tierra-carousel-nav--prev {
+    justify-self: end;
+    left: auto;
+  }
+
+  .tierra-carousel-nav--next {
+    justify-self: start;
+    right: auto;
   }
 }

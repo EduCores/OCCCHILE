@@ -2516,7 +2516,8 @@
         thumb.dataset.played = "1";
         const videoSrc = thumb.dataset.videoSrc || "https://www.youtube.com/embed/KOKtonyYIFs?rel=0";
         const embedUrl = videoSrc.includes("?") ? `${videoSrc}&autoplay=1` : `${videoSrc}?autoplay=1`;
-        thumb.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="Video de Norte" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:0;border-radius:inherit;display:block;"></iframe>`;
+        const videoTitle = thumb.dataset.videoTitle || thumb.getAttribute("aria-label") || "Video regional";
+        thumb.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="${videoTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width:100%;height:100%;border:0;border-radius:inherit;display:block;"></iframe>`;
         thumb.classList.add("tierra-panel__video-thumb--playing");
       });
     });

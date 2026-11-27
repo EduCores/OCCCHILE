@@ -16,8 +16,9 @@ const HTML_FILES = [
   'mision-e-historia.html',
   'videos.html',
   'admin.html',
+  '404.html',
 ];
-const PUBLIC_HTML_FILES = HTML_FILES.filter(f => f !== 'admin.html');
+const PUBLIC_HTML_FILES = HTML_FILES.filter(f => f !== 'admin.html' && f !== '404.html');
 const CSS_FILES = ['styles.css', 'admin.css'];
 const JS_FILES = ['app.js', 'admin.js'];
 

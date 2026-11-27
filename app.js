@@ -95,16 +95,32 @@
       requestAnimationFrame(() => window.scrollTo(0, 0));
     }
 
-    $(".lang-switch .lang").forEach((b) => b.addEventListener("click", (e) => {
-      e.preventDefault();
-      const target = b.dataset.lang || "es";
+    const btns = $$(".lang-switch .lang");
+    if (!btns.length) return;
+    const labels = { es: "Español", en: "English", pt: "Português" };
+
+    const applyLang = (target, notify = false) => {
       LANG = target;
-      $(".lang-switch .lang").forEach((x) => {
-        x.classList.remove("is-active");
-        x.setAttribute("aria-pressed", "false");
+      store.set("occ_lang", target);
+      btns.forEach((x) => {
+        const active = (x.dataset.lang || "es") === target;
+        x.classList.toggle("is-active", active);
+        x.setAttribute("aria-pressed", String(active));
       });
-      b.classList.add("is-active");
-      b.setAttribute("aria-pressed", "true");
+      const widgetSel = $("#widgetLang");
+      if (widgetSel && widgetSel.value !== target) {
+        widgetSel.value = target;
+        widgetSel.dispatchEvent(new Event("change"));
+      }
+      if (notify) toast(`Idioma activo: ${labels[target] || target.toUpperCase()}`, "globe");
+    };
+
+    const saved = store.get("occ_lang");
+    if (saved && labels[saved]) applyLang(saved, false);
+
+    btns.forEach((b) => b.addEventListener("click", (e) => {
+      e.preventDefault();
+      applyLang(b.dataset.lang || "es", true);
     }));
   }
 
@@ -1991,16 +2007,16 @@
     const flights = $$(".htl__sky .htl__flight");
     if (!flights.length) return;
     const FLEET_SRCS = [
-      { src: "img/mascota_avion_4.png?v=2", w: 383, h: 356 },
-      { src: "img/mascota_avion_5.png", w: 383, h: 355 },
-      { src: "img/mascota_avion_6.png", w: 384, h: 357 },
-      { src: "img/mascota_avion_7.png", w: 377, h: 350 },
-      { src: "img/mascota_avion_8.png", w: 377, h: 350 },
-      { src: "img/mascota_avion_9.png", w: 378, h: 350 },
-      { src: "img/mascota_avion_10.png", w: 378, h: 350 },
-      { src: "img/mascota_avion_11.png", w: 379, h: 350 },
-      { src: "img/mascota_avion_12.png", w: 379, h: 350 },
-      { src: "img/mascota_avion_13.png", w: 379, h: 350 }
+      { src: "img/mascota_avion_4.webp", w: 383, h: 356 },
+      { src: "img/mascota_avion_5.webp", w: 383, h: 355 },
+      { src: "img/mascota_avion_6.webp", w: 384, h: 357 },
+      { src: "img/mascota_avion_7.webp", w: 377, h: 350 },
+      { src: "img/mascota_avion_8.webp", w: 377, h: 350 },
+      { src: "img/mascota_avion_9.webp", w: 378, h: 350 },
+      { src: "img/mascota_avion_10.webp", w: 378, h: 350 },
+      { src: "img/mascota_avion_11.webp", w: 379, h: 350 },
+      { src: "img/mascota_avion_12.webp", w: 379, h: 350 },
+      { src: "img/mascota_avion_13.webp", w: 379, h: 350 }
     ];
     FLEET_SRCS.forEach((item) => {
       const pre = new Image();
@@ -2033,77 +2049,6 @@
         img.height = next.h;
       });
     });
-  }
-
-  /* ---------------- MODAL GUÍA ¿QUÉ PONER EN UNA CAJITA? ---------------- */
-  function initBoxGuide() {
-    const modal = $("#boxGuideModal");
-    if (!modal) return;
-    const openBtn = $("#openBoxGuideBtn");
-    const closeBtn = $("#boxGuideClose");
-    const ctaBtn = $("#boxGuideCta");
-    const yesList = $("#boxGuideYesList");
-    const tabs = $$(".bguide-tab", modal);
-
-    const AGE_IDEAS = {
-      "2-4": [
-        "<strong>Artículo “¡Wow!”:</strong> peluche suave, muñeca, pelota pequeña con bombín o camión de juguete.",
-        "<strong>Juguetes:</strong> bloques grandes, instrumentos musicales, libros para colorear y crayones gruesos.",
-        "<strong>Cuidado personal:</strong> cepillo de dientes, peineta, toalla pequeña y vaso plástico reutilizable.",
-        "<strong>Vestuario y accesorios:</strong> calcetines, gorro, polera o mochila ligera.",
-        "<strong>Nota personal:</strong> tarjeta cariñosa y foto de tu familia o iglesia."
-      ],
-      "5-9": [
-        "<strong>Artículo “¡Wow!”:</strong> pelota de fútbol desinflada con bombín, muñeca, auto de juguete o juego didáctico.",
-        "<strong>Útiles escolares:</strong> cuaderno, lápices de colores, sacapuntas, goma de borrar, regla y estuche.",
-        "<strong>Juguetes:</strong> cuerda para saltar, yo-yo, stickers, rompecabezas o libro de actividades.",
-        "<strong>Cuidado personal:</strong> cepillo de dientes, peineta, jabón en barra sellado y botella reutilizable.",
-        "<strong>Nota personal:</strong> carta de ánimo y foto de tu familia o iglesia."
-      ],
-      "10-14": [
-        "<strong>Artículo “¡Wow!”:</strong> balón deportivo con bombín, linterna solar/con pilas, mochila plegable o reloj.",
-        "<strong>Útiles escolares:</strong> cuadernos, bolígrafos, destacadores, calculadora solar y juego geométrico.",
-        "<strong>Accesorios:</strong> lentes de sol, gorra, pañuelo, kit de costura, pulseras o billetera.",
-        "<strong>Cuidado personal:</strong> cepillo de dientes, cepillo de pelo, toalla deportiva y botella reutilizable.",
-        "<strong>Nota personal:</strong> mensaje alentador, versículo bíblico y foto de tu grupo."
-      ]
-    };
-
-    const renderAge = (age) => {
-      const items = AGE_IDEAS[age] || AGE_IDEAS["5-9"];
-      if (yesList) yesList.innerHTML = items.map(i => `<li>${i}</li>`).join("");
-      tabs.forEach(t => {
-        const active = t.dataset.age === age;
-        t.classList.toggle("is-active", active);
-        t.setAttribute("aria-selected", active ? "true" : "false");
-      });
-    };
-
-    const open = () => {
-      modal.classList.add("is-open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      icons();
-      closeBtn?.focus();
-    };
-
-    const close = () => {
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    };
-
-    openBtn?.addEventListener("click", open);
-    closeBtn?.addEventListener("click", close);
-    ctaBtn?.addEventListener("click", close);
-    $$("[data-close-bguide]", modal).forEach(el => el.addEventListener("click", close));
-    tabs.forEach(tab => tab.addEventListener("click", () => renderAge(tab.dataset.age)));
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
-    });
-
-    renderAge("2-4");
   }
 
   /* ---------------- FOOTER NEWSLETTER ---------------- */
@@ -2159,7 +2104,6 @@
     safeRun("form", initForm);
     safeRun("volunteers", initVolunteers);
     safeRun("chatWidget", initChatWidget);
-    safeRun("boxGuide", initBoxGuide);
     safeRun("footerNewsletter", initFooterNewsletter);
     safeRun("icons", icons);
   });
